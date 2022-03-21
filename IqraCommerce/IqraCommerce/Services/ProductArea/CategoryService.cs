@@ -45,6 +45,24 @@ namespace IqraCommerce.Services.ProductArea
             }
         }
 
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> GetExceptByProduct(Page page, Guid productId)
+        {
+            page.filter.Add(new FilterModel()
+            {
+                Operation = Operations.NotIn,
+                field = "Id",
+                value = @"SELECT productcategory.CategoryId 
+                FROM ProductCategory productcategory
+                WHERE productcategory.ProductId = '" + productId + "'"
+
+            });
+            page.SortBy = page.SortBy ?? "[Level] asc";
+            using (var db = new DBService(this))
+            {
+                return await db.GetPages(page, CategoryQuery.GetExceptByProduct());
+            }
+        }
+
         public Response Create(CategoryModel categoryToCreate, Guid userId)
         {
             if (!categoryToCreate.IsRoot && categoryToCreate.ParentId == Guid.Empty)
@@ -129,6 +147,13 @@ namespace IqraCommerce.Services.ProductArea
 
     public class CategoryQuery
     {
+        public static string GetExceptByProduct()
+        {
+            return @"[Category].[Id]
+                    ,[Category].[Name]
+                    ,[Category].[Hierarchy] 
+            FROM Category category";
+        }
         public static string Get()
         {
             return @"[Id]

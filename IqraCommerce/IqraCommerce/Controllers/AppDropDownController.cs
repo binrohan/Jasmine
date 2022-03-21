@@ -46,7 +46,7 @@ namespace IqraCommerce.Controllers
             return Json(__service.Update(recordToUpdate, Guid.Empty));
         }
 
-        public JsonResult Remove([FromBody] DeleteDto deleteDto)
+        virtual public JsonResult Remove([FromBody] DeleteDto deleteDto)
         {
             __service.Remove(deleteDto, Guid.Empty);
 

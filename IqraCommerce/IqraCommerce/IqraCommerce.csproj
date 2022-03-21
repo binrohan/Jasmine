@@ -137,7 +137,6 @@
     <Compile Remove="Entities\ProductArea\SpecialProduct.cs" />
     <Compile Remove="Models\ProductArea\DealsOfTheWeekModel.cs" />
     <Compile Remove="Models\ProductArea\NewArrivalModel.cs" />
-    <Compile Remove="Models\ProductArea\ProductCategoryModel.cs" />
     <Compile Remove="Models\ProductArea\ProductCommentModel.cs" />
     <Compile Remove="Models\ProductArea\ProductContentModel.cs" />
     <Compile Remove="Models\ProductArea\ProductInfoModel.cs" />

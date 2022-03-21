@@ -29,5 +29,10 @@ namespace IqraCommerce.Controllers.ProductArea
         {
             return Json(___service.Update(recordToCreate, Guid.Empty));
         }
+
+        public ActionResult GetExceptByProduct([FromBody] Page page, [FromRoute]Guid productId)
+        {
+            return Json(___service.GetExceptByProduct(page, productId));
+        }
     }
 }

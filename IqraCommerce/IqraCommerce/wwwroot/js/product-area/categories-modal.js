@@ -1,29 +1,50 @@
 var Controller = new function () {
-    const filter = [{ "field": "IsDeleted", "value": 0, Operation: 0 },
-                { "field": "IsVisible", "value": 1, Operation: 0 }];
+    const filter = [{ "field": "IsDeleted", "value": 0, Operation: 0 }];
 
-    const commonGridConfig = (Header, Url, filter = [], ) => ({
-        Header,
-        Columns: [
-            { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
-            { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' }
-        ],
-        onDataBinding: function (response) {
-            response.Data.Data.each(function () {
+    const addToTheCategory = (categoryId, productId, grid) => {
+        const formData = new FormData();
+        formData.append('productId', productId);
+        formData.append('categoryId', categoryId);
 
-            });
-        },
-        selector: false,
-        Printable: {
-            container: $('void')
-        }
-    })
 
-    const addToTheCategory = () => {
+       fetch('/ProductCategory/Create', {
+           method: 'POST',
+           body: formData
+       }).then(res => res.json())
+       .then(data => {
+           if(data.IsError)
+            throw new Error(data.Msg)
 
+            // Toaster will be perfact here
+            grid.Reload();
+            alert("Successfully product added to the category");
+       }).catch((err) => {
+            alert(err);
+       });
+    }
+
+    const removeFromCategory = (id, grid) => {
+        const formData = new FormData();
+        formData.append('id', id);
+
+       fetch('/ProductCategory/Remove', {
+           method: 'PUT',
+           body: formData
+       }).then(res => res.json())
+       .then(data => {
+           if(data.IsError)
+            throw new Error(data.Msg)
+
+            // Toaster will be perfact here
+            grid.Reload();
+            alert("Successfully product remove from the category");
+       }).catch((err) => {
+            alert(err);
+       });
     }
 
     this.Show = function (options) {
+
         Global.Add({
             title: 'Add To Categories',
             selected: 0,
@@ -36,7 +57,7 @@ var Controller = new function () {
                             { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
                             { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' },
                         ],
-                        Url: '/Category/Get',
+                        Url: '/Category/Get/' + options.productId,
                         filter: [...filter],
                         onDataBinding: function (response) {
                             response.Data.Data.each(function () {
@@ -45,7 +66,7 @@ var Controller = new function () {
                         },
                         actions: [
                             {
-                                click: addToTheCategory,
+                                click: (row, grid) => addToTheCategory(row.Id, options.productId, grid),
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-plus" title="${"Add to this category"}"></i></a>`
                             }
                         ],
@@ -63,15 +84,21 @@ var Controller = new function () {
                             { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
                             { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' },
                         ],
-                        Url: '/Category/Get',
-                        filter: [...filter],
+                        Url: '/ProductCategory/GetProductCategory',
+                        filter: [...filter, { "field": "ProductId", "value": options.productId, Operation: 0 }],
                         onDataBinding: function (response) {
                             response.Data.Data.each(function () {
 
                             });
                         },
+                        actions: [
+                            {
+                                click: (row, grid) => removeFromCategory(row.Id, grid),
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="${"Remove from this category"}"></i></a>`
+                            }
+                        ],
                         selector: false,
-                        Printable: { container: $('void')}
+                        Printable: { container: $('void')},
                     }],
                 }
             ],
