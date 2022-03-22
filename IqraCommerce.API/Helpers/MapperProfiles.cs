@@ -1,7 +1,9 @@
 using System;
 using AutoMapper;
+using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Brand;
 using IqraCommerce.API.DTOs.Contact;
+using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Helpers
@@ -20,6 +22,16 @@ namespace IqraCommerce.API.Helpers
             #region Brand
             CreateMap<Brand, BrandReturnDto>();
             #endregion Brand
+
+            #region Banner
+            CreateMap<Banner, BannerReturnDto>()
+                .ForMember(dest => dest.ImageURL, 
+                            opt => opt.MapFrom(src => "/Contents/Images/Product/Icon/" + src.ImageURL));
+            #endregion Banner
+
+            #region Notice
+            CreateMap<Notice, NoticeReturnDto>();
+            #endregion Notice
         }
     }
 }

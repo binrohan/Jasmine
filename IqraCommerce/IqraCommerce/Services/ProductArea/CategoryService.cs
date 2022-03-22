@@ -108,6 +108,7 @@ namespace IqraCommerce.Services.ProductArea
             categoryFromRepo.IsRoot = categoryToUpdate.IsRoot;
             categoryFromRepo.Remarks = categoryToUpdate.Remarks;
             categoryFromRepo.IsVisible = categoryToUpdate.IsVisible;
+            categoryFromRepo.IsVisibleInHome = categoryToUpdate.IsVisibleInHome;
 
             if (!categoryToUpdate.IsRoot && categoryToUpdate.ParentId == Guid.Empty)
                 return new Response(-406, null, true, "Non root category without parent not acceptable");
@@ -141,8 +142,6 @@ namespace IqraCommerce.Services.ProductArea
 
             return new Response(204, categoryToUpdate, false, "Updated");
         }
-
-
     }
 
     public class CategoryQuery
@@ -171,6 +170,7 @@ namespace IqraCommerce.Services.ProductArea
                   ,[Level]
                   ,[IsVisible]
                   ,[Depth]
+                  ,[IsVisibleInHome]
                   ,[Hierarchy]
 	              ,0 [ChildrenCount]
                   ,0 [ProductCount]

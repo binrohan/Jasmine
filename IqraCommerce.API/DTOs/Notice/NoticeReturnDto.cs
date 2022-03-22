@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 
-namespace IqraCommerce.API.Entities
+namespace IqraCommerce.API.DTOs.Notice
 {
-    public partial class Notice : BaseEntity
+    public class NoticeReturnDto
     {
-        
         public string Content { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsVisible { get; set; }
         public int Rank { get; set; }
     }
 }

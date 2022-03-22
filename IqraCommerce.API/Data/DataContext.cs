@@ -18,6 +18,9 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Contact> Contact { get; set; } // ** Using
         public virtual DbSet<Brand> Brand { get; set; } // ** Using
         public virtual DbSet<Category> Category { get; set; } // ** Using
+        public virtual DbSet<Banner> Banner { get; set; } // ** Using
+        public virtual DbSet<Notice> Notice { get; set; } // ** Using
+
 
 
         
@@ -34,7 +37,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<AppPage> AppPage { get; set; }
         public virtual DbSet<AppReview> AppReview { get; set; }
         public virtual DbSet<AppScript> AppScript { get; set; }
-        public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<BlogCategory> BlogCategory { get; set; }
         public virtual DbSet<Career> Career { get; set; }
@@ -72,7 +74,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<MyCart> MyCart { get; set; }
         public virtual DbSet<MyWishlist> MyWishlist { get; set; }
         public virtual DbSet<NewArrival> NewArrival { get; set; }
-        public virtual DbSet<Notice> Notice { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<NotificationStatus> NotificationStatus { get; set; }
         public virtual DbSet<OrderPayment> OrderPayment { get; set; }

@@ -17,5 +17,6 @@ namespace IqraCommerce.Models.ProductArea
         public string Remarks { get; set; }
         public int Depth { get; set; }
         public string Hierarchy { get; set; }
+        public bool IsVisibleInHome { get; set; }
     }
 }

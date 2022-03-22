@@ -24,7 +24,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategores()
+        public async Task<IActionResult> GetCategories()
         {
             var categoriesFromRepo = await _repo.GetCategoriesAsync();
 

@@ -18,8 +18,9 @@ import { editBtn, plusBtn } from "../buttons.js";
         { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
         { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' },
         { field: 'Rank', title: 'Rank', add: { datatype: 'int|null' } },
-        { field: 'ChildrenCount', title: 'Children', add: { datatype: 'int|null' }, add: false },
-        { field: 'Number of Products', title: 'ProductCount', add: false },
+        { field: 'IsVisibleInHome', title: 'Visible on Home', add: false, bound: isVisibleInHomeBound },
+        // { field: 'ChildrenCount', title: 'Children', add: { datatype: 'int|null' }, add: false },
+        // { field: 'Number of Products', title: 'ProductCount', add: false },
         { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 } },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -37,6 +38,14 @@ import { editBtn, plusBtn } from "../buttons.js";
             dropdownList: [{
                 title: 'Show in client',
                 Id: 'IsVisible',
+                dataSource: [
+                    { text: 'Yes', value: true },
+                    { text: 'No', value: false },
+                ],
+                add: { sibling: 2 }
+            }, {
+                title: 'Visible on Home',
+                Id: 'IsVisibleInHome',
                 dataSource: [
                     { text: 'Yes', value: true },
                     { text: 'No', value: false },
@@ -166,6 +175,10 @@ import { editBtn, plusBtn } from "../buttons.js";
             save: `/${controller}/Create`,
             saveChange: `/${controller}/Create`,
         });
+    }
+
+    function isVisibleInHomeBound(td){
+        td.hmtl(`${this.isVisibleInHomeBound ? 'Yes' : 'No'}`);
     }
 
     function rowBound (row) {
