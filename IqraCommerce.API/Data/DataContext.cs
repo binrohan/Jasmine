@@ -20,6 +20,8 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Category> Category { get; set; } // ** Using
         public virtual DbSet<Banner> Banner { get; set; } // ** Using
         public virtual DbSet<Notice> Notice { get; set; } // ** Using
+        public virtual DbSet<Product> Product { get; set; } // ** Using
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; } // ** Using
 
 
 
@@ -83,7 +85,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<PaymentTracker> PaymentTracker { get; set; }
         public virtual DbSet<Perks> Perks { get; set; }
         public virtual DbSet<PrescriptionDocument> PrescriptionDocument { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
         public virtual DbSet<ProductComment> ProductComment { get; set; }
         public virtual DbSet<ProductContent> ProductContent { get; set; }
         public virtual DbSet<ProductImporter> ProductImporter { get; set; }

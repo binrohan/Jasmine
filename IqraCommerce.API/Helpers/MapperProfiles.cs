@@ -2,6 +2,7 @@ using System;
 using AutoMapper;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Brand;
+using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.DTOs.Contact;
 using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Entities;
@@ -32,6 +33,10 @@ namespace IqraCommerce.API.Helpers
             #region Notice
             CreateMap<Notice, NoticeReturnDto>();
             #endregion Notice
+
+            #region Category
+            CreateMap<Category, HomeCategoryDto>();
+            #endregion Category
         }
     }
 }

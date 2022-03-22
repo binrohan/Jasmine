@@ -9,6 +9,7 @@ using IqraCommerce.API.Extensions;
 using IqraCommerce.API.AppData;
 using Microsoft.AspNetCore.Mvc;
 using IqraCommerce.API.Helpers;
+using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Controllers.HomeArea
 {
@@ -38,9 +39,10 @@ namespace IqraCommerce.API.Controllers.HomeArea
             var noticesToReturn  = noticesFromRepo.ToArray();
 
             var homeCategories = await _productRepo.GetHomeCategoriesAsync();
+            var homeCategoriesToReturn = _mapper.Map<Category>(homeCategories);
 
 
-            return Ok(new ApiResponse(200, new { categoriesToReturn, bannersToReturn, noticesToReturn }, "Successed"));
+            return Ok(new ApiResponse(200, new { categoriesToReturn, bannersToReturn, noticesToReturn, homeCategories }, "Successed"));
         }
 
         [HttpGet("CreateAppData")]

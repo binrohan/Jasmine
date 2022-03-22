@@ -35,7 +35,7 @@ namespace IqraCommerce.API.Data.Repositories
         {
             return await _context.Category.Where(b => !b.IsDeleted && b.IsVisible && b.IsVisibleInHome)
                                           .OrderBy(c => c.Rank)
-                                          .ThenBy(c => c.Name)
+                                          .ThenBy(c => c.Name).Include(c => c.ProductCategories).ThenInclude(p => p.Product)
                                           .ToListAsync();
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace IqraCommerce.API.Entities
 {
@@ -12,5 +13,7 @@ namespace IqraCommerce.API.Entities
         public bool IsVisible { get; set; }
         public int Depth { get; set; }
         public bool IsVisibleInHome { get; set; }
+
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }

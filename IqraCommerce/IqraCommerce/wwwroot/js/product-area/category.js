@@ -87,6 +87,14 @@ import { editBtn, plusBtn } from "../buttons.js";
                 type: 'AutoComplete',
                 title: 'Parent Name',
                 position: 4,
+            },{
+                title: 'Visible on Home',
+                Id: 'IsVisibleInHome',
+                dataSource: [
+                    { text: 'Yes', value: true },
+                    { text: 'No', value: false },
+                ],
+                add: { sibling: 2 }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -123,6 +131,14 @@ import { editBtn, plusBtn } from "../buttons.js";
                 title: 'Parent Name',
                 position: 4,
                 required: false
+            },{
+                title: 'Visible on Home',
+                Id: 'IsVisibleInHome',
+                dataSource: [
+                    { text: 'Yes', value: true },
+                    { text: 'No', value: false },
+                ],
+                add: { sibling: 2 }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -163,6 +179,14 @@ import { editBtn, plusBtn } from "../buttons.js";
                 type: 'AutoComplete',
                 title: 'Parent Name',
                 position: 4,
+            },{
+                title: 'Visible on Home',
+                Id: 'IsVisibleInHome',
+                dataSource: [
+                    { text: 'Yes', value: true },
+                    { text: 'No', value: false },
+                ],
+                add: { sibling: 2 }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
