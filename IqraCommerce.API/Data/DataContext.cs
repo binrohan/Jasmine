@@ -33,7 +33,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AppCategory> AppCategory { get; set; }
         public virtual DbSet<AppCategoryProduct> AppCategoryProduct { get; set; }
-        public virtual DbSet<AppData> AppData { get; set; }
         public virtual DbSet<AppPage> AppPage { get; set; }
         public virtual DbSet<AppReview> AppReview { get; set; }
         public virtual DbSet<AppScript> AppScript { get; set; }
@@ -157,29 +156,6 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
             });
 
-            // modelBuilder.Entity<Address>(entity =>
-            // {
-            //     entity.Property(e => e.Id).ValueGeneratedNever();
-            // });
-
-            // modelBuilder.Entity<AppCategory>(entity =>
-            // {
-            //     entity.Property(e => e.Id).ValueGeneratedNever();
-            // });
-
-            // modelBuilder.Entity<AppCategoryProduct>(entity =>
-            // {
-            //     entity.Property(e => e.Id).ValueGeneratedNever();
-            // });
-
-            modelBuilder.Entity<AppData>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
-            });
 
             modelBuilder.Entity<AppPage>(entity =>
             {

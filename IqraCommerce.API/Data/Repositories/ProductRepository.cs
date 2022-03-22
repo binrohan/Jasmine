@@ -30,5 +30,13 @@ namespace IqraCommerce.API.Data.Repositories
                                           .ThenBy(c => c.Name)
                                           .ToListAsync();
         }
+
+        public async Task<IEnumerable<Category>> GetHomeCategoriesAsync()
+        {
+            return await _context.Category.Where(b => !b.IsDeleted && b.IsVisible && b.IsVisibleInHome)
+                                          .OrderBy(c => c.Rank)
+                                          .ThenBy(c => c.Name)
+                                          .ToListAsync();
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace IqraCommerce.API.DTOs.Category
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public IList<CategoryDto> ChildCategores { get; set; }
+        public IList<CategoryDto> ChildCategories { get; set; }
     }
 }

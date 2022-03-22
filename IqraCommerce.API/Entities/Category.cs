@@ -11,5 +11,6 @@ namespace IqraCommerce.API.Entities
         public string Level { get; set; }
         public bool IsVisible { get; set; }
         public int Depth { get; set; }
+        public bool IsVisibleInHome { get; set; }
     }
 }

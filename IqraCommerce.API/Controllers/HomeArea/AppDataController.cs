@@ -6,8 +6,9 @@ using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Extensions;
-using IqraCommerce.API.Helpers;
+using IqraCommerce.API.AppData;
 using Microsoft.AspNetCore.Mvc;
+using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Controllers.HomeArea
 {
@@ -28,16 +29,18 @@ namespace IqraCommerce.API.Controllers.HomeArea
         {
             // Category
             var categoriesFrompRepo = await _productRepo.GetCategoriesAsync();
-            var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder();
+            var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder().ToArray();
 
             var bannersFromRepo = await _uIRepo.GetBannersAsync();
-            var bannersToReturn  = _mapper.Map<IEnumerable<BannerReturnDto>>(bannersFromRepo);
+            var bannersToReturn  = bannersFromRepo.ToArray();
 
             var noticesFromRepo = await _uIRepo.GetNoticesAsync();
-            var noticesToReturn  = _mapper.Map<IEnumerable<NoticeReturnDto>>(noticesFromRepo);
+            var noticesToReturn  = noticesFromRepo.ToArray();
+
+            var homeCategories = await _productRepo.GetHomeCategoriesAsync();
 
 
-            return Ok(new ApiResponse(200, new { }, "Successed"));
+            return Ok(new ApiResponse(200, new { categoriesToReturn, bannersToReturn, noticesToReturn }, "Successed"));
         }
 
         [HttpGet("CreateAppData")]
