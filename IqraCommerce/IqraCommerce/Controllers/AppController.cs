@@ -14,6 +14,6 @@ namespace IqraCommerce.Controllers
          where TEntity : AppBaseEntity
         where TModel : AppBaseModel
     {
-        public IService<TEntity> _service;
+        public IService<TEntity> __service;
     }
 }

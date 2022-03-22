@@ -223,4 +223,9 @@
     <None Include="wwwroot\lib\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\BannerArea\" />
+    <Folder Include="Entities\ContactArea\" />
+  </ItemGroup>
+
 </Project>

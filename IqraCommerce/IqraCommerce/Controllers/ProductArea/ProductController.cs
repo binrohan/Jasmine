@@ -25,9 +25,7 @@ namespace IqraCommerce.Controllers.ProductArea
             service = __service = ___service = new ProductService();
         }
 
-        
-
-        public async Task<IActionResult> UploadImage([FromForm] ImageUploadDto imageUpload)
+        public ActionResult UploadImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
 

@@ -1,6 +1,5 @@
 ﻿using EBonik.Data.Entities.AddressArea;
 using EBonik.Data.Entities.AppDataArea;
-using EBonik.Data.Entities.BannerArea;
 using EBonik.Data.Entities.BlogArea;
 using EBonik.Data.Entities.CareerArea;
 using EBonik.Data.Entities.CheckoutArea;
@@ -19,6 +18,7 @@ using EBonik.Data.Entities.ProductOrderArea;
 using EBonik.Data.Entities.PromotionalArea;
 using EBonik.Data.Entities.RequestOrderArea;
 using EBonik.Data.Entities.ReviewArea;
+using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UrgentOrderArea;
 using EBonik.Data.Entities.WishListArea;
 using IqraCommerce.Entities.ProductArea;
@@ -52,13 +52,22 @@ namespace IqraCommerce.Entities
 
         }
 
-        #region ProductArea
+        #region Product Area
         public virtual DbSet<Brand> Brand { get; set; } // Used
         public virtual DbSet<Unit> Unit { get; set; } // Used
         public virtual DbSet<Category> Category { get; set; } // Used
         public virtual DbSet<Product> Product { get; set; } // Used
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // Used
         #endregion
+
+        #region Miscellaneous
+        public virtual DbSet<Contact> Contact { get; set; } // Used
+        #endregion
+
+        #region UI
+        public virtual DbSet<Banner> Banner { get; set; } // Used
+        #endregion
+
 
 
         #region HistoryArea
@@ -75,7 +84,6 @@ namespace IqraCommerce.Entities
         public virtual DbSet<DisplayCategory> DisplayCategory { get; set; }
         public virtual DbSet<AppCategory> AppCategory { get; set; }
         public virtual DbSet<AppCategoryProduct> AppCategoryProduct { get; set; }
-        public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<CategorySlider> CategorySlider { get; set; }
         #endregion
 
@@ -178,7 +186,6 @@ namespace IqraCommerce.Entities
         #endregion
 
         #region ContactArea
-        public virtual DbSet<Contact> Contact { get; set; } // Used
         #endregion
 
         #region NoticeArea
