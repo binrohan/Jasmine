@@ -36,4 +36,13 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="IqraService.DB">
+      <HintPath>Dlls\IqraService.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraService.Search">
+      <HintPath>Dlls\IqraService.Search.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
