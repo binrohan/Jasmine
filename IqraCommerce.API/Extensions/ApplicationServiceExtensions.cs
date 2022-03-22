@@ -17,6 +17,7 @@ namespace IqraCommerce.API.Extensions
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUIRepository, UIRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // services.AddScoped<IProductRepository, ProductRepository>();

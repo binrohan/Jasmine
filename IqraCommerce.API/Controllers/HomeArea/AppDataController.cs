@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -37,6 +38,17 @@ namespace IqraCommerce.API.Controllers.HomeArea
 
 
             return Ok(new ApiResponse(200, new { }, "Successed"));
+        }
+
+        [HttpGet("CreateAppData")]
+        public async Task<IActionResult> CreateAppData()
+        {
+            
+            
+            var data = await FileCreator.CreateAppData("");
+
+            return Ok(new ApiResponse(200, data, "Successed"));
+
         }
     }
 }
