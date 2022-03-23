@@ -69,13 +69,6 @@ namespace IqraCommerce.Services.ProductArea
 
             return new Response(200, null, false, "successed");
         }
-
-        //public Response Update(ProductModel ProductToUpdate, Guid userId)
-        //{
-
-        //}
-
-
     }
 
     public class ProductQuery
@@ -94,7 +87,7 @@ namespace IqraCommerce.Services.ProductArea
       ,[DisplayName]
       ,[Excerpt]
       ,[PackSize]
-      ,'/Contents/Images/Product/Icon/'+[ImageURL] [ImageURL]
+      ,'/Images/Product/Icon/'+[ImageURL] [ImageURL]
       ,[CurrentPrice]
       ,[OriginalPrice]
       ,[DiscountedPrice]

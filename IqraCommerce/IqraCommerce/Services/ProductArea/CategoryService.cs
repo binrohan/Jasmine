@@ -105,25 +105,16 @@ namespace IqraCommerce.Services.ProductArea
             if (categoryFromRepo is null) return new Response(404, null, true, "Category Not Found");
 
             categoryFromRepo.Name = categoryToUpdate.Name;
-            categoryFromRepo.IsRoot = categoryToUpdate.IsRoot;
             categoryFromRepo.Remarks = categoryToUpdate.Remarks;
             categoryFromRepo.IsVisible = categoryToUpdate.IsVisible;
             categoryFromRepo.IsVisibleInHome = categoryToUpdate.IsVisibleInHome;
 
-            if (!categoryToUpdate.IsRoot && categoryToUpdate.ParentId == Guid.Empty)
+            if (!categoryFromRepo.IsRoot && categoryToUpdate.ParentId == Guid.Empty)
                 return new Response(-406, null, true, "Non root category without parent not acceptable");
-
-            if (categoryToUpdate.IsRoot)
-            {
-                categoryFromRepo.ParentId = Guid.Empty;
-                categoryFromRepo.Depth = 0;
-            }
-
 
             categoryFromRepo.Rank = categoryToUpdate.Rank == 0 ? 999 : categoryToUpdate.Rank;
 
-
-            if (!categoryToUpdate.IsRoot)
+            if (!categoryFromRepo.IsRoot)
             {
                 var parentCategory = Entity.Find(categoryToUpdate.ParentId);
 
@@ -131,11 +122,14 @@ namespace IqraCommerce.Services.ProductArea
 
                 categoryFromRepo.Level = parentCategory.Level + "/" + categoryToUpdate.Rank.ToString();
                 categoryFromRepo.ParentName = parentCategory.Name;
+                categoryFromRepo.ParentId = parentCategory.ParentId;
                 categoryFromRepo.Depth = parentCategory.Depth + 1;
             }
             else
             {
                 categoryFromRepo.Level = categoryToUpdate.Rank.ToString();
+                categoryFromRepo.ParentId = Guid.Empty;
+                categoryFromRepo.Depth = 0;
             }
 
             SaveChange();

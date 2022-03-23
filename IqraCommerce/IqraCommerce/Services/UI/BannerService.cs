@@ -87,7 +87,7 @@ namespace IqraCommerce.Services.UI
                   ,[ActivityId]
                   ,[Rank]
                   ,[Size]
-                  ,'/Contents/Images/Product/Icon/' + [ImageURL] [ImageURL]
+                  ,'/Images/Product/Icon/' + [ImageURL] [ImageURL]
                   ,[IsVisible]
                   ,[Link]
               FROM [dbo].[Banner] banner";

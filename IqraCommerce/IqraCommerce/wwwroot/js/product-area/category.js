@@ -26,6 +26,7 @@ import { editBtn, plusBtn } from "../buttons.js";
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedBy', title: 'Updator', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
+        { field: 'IsRoot', title: 'Root Category', add: false },
     ];
 
     // add parent category popup config
@@ -110,6 +111,17 @@ import { editBtn, plusBtn } from "../buttons.js";
         });
     }
 
+    const getParentDropdown = (isRoot) => {
+        return isRoot ? [] : [{
+            Id: 'ParentId',
+            url: `/${controller}/AutoComplete`,
+            type: 'AutoComplete',
+            title: 'Parent Name',
+            position: 4,
+            required: false
+        }]
+    }
+
     function edit(row) {
         Global.Add({
             name: 'edit-category' + row.Id,
@@ -124,14 +136,7 @@ import { editBtn, plusBtn } from "../buttons.js";
                     { text: 'No', value: false },
                 ],
                 add: { sibling: 2 }
-            }, {
-                Id: 'ParentId',
-                url: `/${controller}/AutoComplete`,
-                type: 'AutoComplete',
-                title: 'Parent Name',
-                position: 4,
-                required: false
-            },{
+            },...getParentDropdown(row.IsRoot) ,{
                 title: 'Visible on Home',
                 Id: 'IsVisibleInHome',
                 dataSource: [
@@ -142,10 +147,12 @@ import { editBtn, plusBtn } from "../buttons.js";
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                console.log([formModel, data, model]);
+
                 formModel.Id = model.Id;
                 formModel.ActivityId = window.ActivityId;
-                formModel.ParentId = formModel.ParentId ? formModel.ParentId :"00000000-0000-0000-0000-000000000000";
-                formModel.IsRoot = formModel.ParentId ? false : true;
+                formModel.ParentId = formModel.ParentId ? formModel.ParentId : "00000000-0000-0000-0000-000000000000";
+                formModel.IsRoot = data.IsRoot;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -202,7 +209,7 @@ import { editBtn, plusBtn } from "../buttons.js";
     }
 
     function isVisibleInHomeBound(td){
-        td.hmtl(`${this.isVisibleInHomeBound ? 'Yes' : 'No'}`);
+        td.html(`${this.isVisibleInHomeBound ? 'Yes' : 'No'}`);
     }
 
     function rowBound (row) {

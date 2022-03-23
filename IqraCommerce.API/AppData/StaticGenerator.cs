@@ -26,16 +26,16 @@ namespace IqraCommerce.API.AppData
 
                 output = SetWebAppData(data, path, categories);
 
-                var bytes = File.ReadAllBytes(path + @"wwwroot/AppData.html");
+                var bytes = File.ReadAllBytes(path + @"wwwroot/StaticGenerated/AppData.html");
 
-                using (FileStream fs = new FileStream(path + @"wwwroot/AppData.zip", FileMode.Create))
+                using (FileStream fs = new FileStream(path + @"wwwroot/StaticGenerated/AppData.zip", FileMode.Create))
                 {
                     using (GZipStream zipStream = new GZipStream(fs, CompressionMode.Compress, false))
                     {
                         zipStream.Write(bytes, 0, bytes.Length);
                     }
                 }
-                using (FileStream fs = new FileStream(path + @"wwwroot/AppData.Iqra", FileMode.Create))
+                using (FileStream fs = new FileStream(path + @"wwwroot/StaticGenerated/AppData.Iqra", FileMode.Create))
                 {
                     using (DeflateStream zipStream = new DeflateStream(fs, CompressionMode.Compress, false))
                     {
@@ -49,34 +49,24 @@ namespace IqraCommerce.API.AppData
         {
             AppDataModel model = new AppDataModel() { };
             var homeCategories = ArrayGenerator.HomeCategories(data.Data.Data[2]);
-
-            var homeCateogriesFromRepo = data.Data.Data[2];
-
-            
-
-
-            
-
-
             List<object> Data = new List<object>() { 
                 categories, 
                 data.Data.Data[0], 
                 data.Data.Data[1], 
-                homeCategories, 
-                // data.Data.Data[3], 
-                // data.Data.Data[4],
-                // data.Data.Data[6],
-                // data.Data.Data[7],
-                // data.Data.Data[8]
+                homeCategories,
+                data.Data.Data[3],
             };
 
             var dataStr = "var appData = " + JsonConvert.SerializeObject(Data)+";";
-            var firstPart = System.IO.File.ReadAllText(path + @"wwwroot/FirstPart.html");
-            var lastPart = System.IO.File.ReadAllText(path + @"wwwroot/LastPart.html");
-            dataStr = firstPart + dataStr + lastPart;
-            System.IO.File.WriteAllText(path + @"index.html", dataStr);
 
-            return data.Data.Data[2];
+            System.IO.File.WriteAllText(path + @"wwwroot/StaticGenerated/appdata.txt", dataStr);
+
+            var firstPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/FirstPart.html");
+            var lastPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/LastPart.html");
+            dataStr = firstPart + dataStr + lastPart;
+            System.IO.File.WriteAllText(path + @"wwwroot/index.html", dataStr);
+
+            return Data;
         }
     }
     public class Query
@@ -90,7 +80,7 @@ namespace IqraCommerce.API.AppData
                     SELECT [Id]
                         ,[Rank]
                         ,[Size]
-                        ,[ImageURL]
+                        ,'/Images/Banner/Original/'+[ImageURL] [ImageURL]
                         ,[Link]
                     FROM [dbo].[Banner] banner
                     WHERE IsDeleted = 0 AND IsVisible = 1
@@ -112,7 +102,7 @@ namespace IqraCommerce.API.AppData
                     ,P.[Name]
                     ,P.[DisplayName]
                     ,P.[PackSize]
-                    ,P.[ImageURL]
+                    ,'/Images/Product/Original/'+ P.[ImageURL] [ImageURL]
                     ,P.[CurrentPrice]
                     ,P.[OriginalPrice]
                     ,P.[DiscountedPrice]
@@ -127,6 +117,25 @@ namespace IqraCommerce.API.AppData
                 WHERE C.[IsDeleted] = 0 AND C.[IsVisible] = 1 AND C.[IsVisibleInHome] = 1 AND
                         PC.IsDeleted = 0
                 ORDER BY C.[Rank], P.Rank
+
+
+                -- ### TOP 10 MOST DISCOUNTED PRODUCT ### [3]
+                SELECT TOP 10 [Id]
+                    ,[Name]
+                    ,[DisplayName]
+                    ,[PackSize]
+                    ,'/Images/Product/Original/'+[ImageURL] [ImageURL]
+                    ,[CurrentPrice]
+                    ,[OriginalPrice]
+                    ,[DiscountedPrice]
+                    ,[DiscountedPercentage]
+                    ,[StockUnit]
+                    ,[Rank]
+                    ,[BrandId]
+                    ,[UnitId]
+                FROM [dbo].[Product]
+                WHERE [IsDeleted] = 0 AND [IsVisible] = 1
+                ORDER BY [DiscountedPrice], [Rank]
                 ";
             }
         }

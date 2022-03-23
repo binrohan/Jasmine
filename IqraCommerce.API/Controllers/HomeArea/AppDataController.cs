@@ -31,7 +31,7 @@ namespace IqraCommerce.API.Controllers.HomeArea
         {
             // Category
             var categoriesFrompRepo = await _productRepo.GetCategoriesAsync();
-            var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder().ToArray();
+            var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder();
 
             var bannersFromRepo = await _uIRepo.GetBannersAsync();
             var bannersToReturn  = bannersFromRepo.ToArray();
@@ -39,11 +39,7 @@ namespace IqraCommerce.API.Controllers.HomeArea
             var noticesFromRepo = await _uIRepo.GetNoticesAsync();
             var noticesToReturn  = noticesFromRepo.ToArray();
 
-            var homeCategories = await _productRepo.GetHomeCategoriesAsync();
-            var homeCategoriesToReturn = _mapper.Map<HomeCategoryDto>(homeCategories);
-
-
-            return Ok(new ApiResponse(200, new { categoriesToReturn, bannersToReturn, noticesToReturn, homeCategories }, "Successed"));
+            return Ok(new ApiResponse(200, new { categoriesToReturn, categoriesFrompRepo, bannersToReturn, noticesToReturn }, "Successed"));
         }
 
         [HttpGet("CreateAppData")]
