@@ -117,7 +117,7 @@ import { url } from '../utils.js';
     const addToCategory = (row) => {
         Global.Add({
             productId: row.Id,
-            name: 'add-product-to-categories' + Math.random(),
+            name: 'add-product-to-categories' + row.Id,
             url: '/js/product-area/categories-modal.js',
         });
     }

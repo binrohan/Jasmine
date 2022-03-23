@@ -1,5 +1,7 @@
 var Controller = new function () {
-    const filter = [{ "field": "IsDeleted", "value": 0, Operation: 0 }];
+    const productFilter={ "field": "ProductId", "value": '', Operation: 0 }, 
+    filter = [{ "field": "IsDeleted", "value": 0, Operation: 0 }];
+    var callerOptions;
 
     const addToTheCategory = (categoryId, productId, grid) => {
         const formData = new FormData();
@@ -44,6 +46,8 @@ var Controller = new function () {
     }
 
     this.Show = function (options) {
+        callerOptions = options;
+        productFilter.value=callerOptions.productId;
 
         Global.Add({
             title: 'Add To Categories',
@@ -57,7 +61,7 @@ var Controller = new function () {
                             { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
                             { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' },
                         ],
-                        Url: '/Category/Get/' + options.productId,
+                        Url: '/Category/Get/' + callerOptions.productId,
                         filter: [...filter],
                         onDataBinding: function (response) {
                             response.Data.Data.each(function () {
@@ -66,7 +70,7 @@ var Controller = new function () {
                         },
                         actions: [
                             {
-                                click: (row, grid) => addToTheCategory(row.Id, options.productId, grid),
+                                click: (row, grid) => addToTheCategory(row.Id, callerOptions.productId, grid),
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-plus" title="${"Add to this category"}"></i></a>`
                             }
                         ],
@@ -85,7 +89,7 @@ var Controller = new function () {
                             { field: 'Hierarchy', title: 'Hierarchy', add: false, Width: '600px' },
                         ],
                         Url: '/ProductCategory/GetProductCategory',
-                        filter: [...filter, { "field": "ProductId", "value": options.productId, Operation: 0 }],
+                        filter: [...filter, productFilter],
                         onDataBinding: function (response) {
                             response.Data.Data.each(function () {
 
