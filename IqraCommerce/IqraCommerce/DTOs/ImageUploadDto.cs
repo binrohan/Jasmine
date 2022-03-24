@@ -12,10 +12,4 @@ namespace IqraCommerce.DTOs
         public IFormFile Img { get; set; }
         public Guid ActivityId { get; set; }
     }
-
-    public class FileDto
-    {
-        public bool IsFile { get; set; }
-        public IFormFile File { get; set; }
-    }
 }

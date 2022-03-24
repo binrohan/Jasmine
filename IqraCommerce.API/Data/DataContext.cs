@@ -22,6 +22,8 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Notice> Notice { get; set; } // ** Using
         public virtual DbSet<Product> Product { get; set; } // ** Using
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // ** Using
+        public virtual DbSet<Showcase> Showcase { get; set; } // ** Using
+
 
 
 

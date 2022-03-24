@@ -34,19 +34,28 @@ namespace IqraCommerce.Services.ProductArea
             return base.GetName(name);
         }
 
-        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> GetProductCategory(Page page)
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> GetCategoriesByProduct(Page page)
         {
             page.SortBy = page.SortBy ?? "[Name] asc";
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, ProductCategoryQuery.GetProductCategory());
+                return await db.GetPages(page, ProductCategoryQuery.GetCategoriesByProduct());
+            }
+        }
+
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> GetProductsByCategory(Page page)
+        {
+            page.SortBy = page.SortBy ?? "[Name] asc";
+            using (var db = new DBService(this))
+            {
+                return await db.GetPages(page, ProductCategoryQuery.GetProductsByCategory());
             }
         }
     }
 
     public class ProductCategoryQuery
     {
-        public static string GetProductCategory()
+        public static string GetCategoriesByProduct()
         {
             return @"[ProductCategory].[Id]
                   ,[Category].[Name]
@@ -55,6 +64,28 @@ namespace IqraCommerce.Services.ProductArea
 					[ProductCategory].CategoryId
                 FROM [dbo].[Category] category
                 INNER JOIN ProductCategory productcategory ON [Category].Id = productcategory.CategoryId";
+        }
+
+        public static string GetProductsByCategory()
+        {
+            return @"[ProductCategory].[Id],
+		            [ProductCategory].ProductId,
+		            [ProductCategory].CategoryId,
+		            product.Name,
+		            product.CurrentPrice,
+		            product.OriginalPrice,
+		            product.DiscountedPrice,
+		            product.DiscountedPercentage,
+		            product.StockUnit,
+		            product.PackSize,
+		            product.BrandId,
+		            product.UnitId,
+		            brand.Name [BrandName],
+		            unit.Name [UnitName]
+	            FROM [dbo].[Product] product
+	            INNER JOIN ProductCategory productcategory ON product.Id = productcategory.ProductId
+	            LEFT JOIN Brand brand ON brand.Id = product.BrandId
+	            LEFT JOIN Unit unit ON unit.Id = product.UnitId";
         }
 
     }

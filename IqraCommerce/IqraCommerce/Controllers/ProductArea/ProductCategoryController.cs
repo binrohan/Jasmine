@@ -27,9 +27,14 @@ namespace IqraCommerce.Controllers.ProductArea
             return View();
         }
 
-        public async Task<JsonResult> GetProductCategory([FromBody] Page page)
+        public async Task<JsonResult> GetCategoriesByProduct([FromBody] Page page)
         {
-            return Json(await ___service.GetProductCategory(page));
+            return Json(await ___service.GetCategoriesByProduct(page));
+        }
+
+        public async Task<JsonResult> GetProductsByCategory([FromBody] Page page)
+        {
+            return Json(await ___service.GetProductsByCategory(page));
         }
 
         public override JsonResult Remove([FromForm] DeleteDto delete)

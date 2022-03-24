@@ -1,4 +1,6 @@
-﻿using EBonik.Data.Models.ContactArea;
+﻿using EBonik.Data.Entities;
+using EBonik.Data.Entities.UI;
+using EBonik.Data.Models.ContactArea;
 using IqraBase.Data;
 using IqraBase.Service;
 using IqraCommerce.Entities;
@@ -12,9 +14,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IqraCommerce.Services.ProductArea
+namespace IqraCommerce.Services.UI
 {
-    public class ProductService : IqraCommerce.Services.AppBaseService<Product>
+    public class ShowcaseService : IqraCommerce.Services.AppBaseService<Showcase>
     {
         public override string GetName(string name)
         {
@@ -30,7 +32,7 @@ namespace IqraCommerce.Services.ProductArea
                     name = "cstmr.[Name]";
                     break;
                 default:
-                    name = "product." + name;
+                    name = "showcase." + name;
                     break;
             }
             return base.GetName(name);
@@ -38,13 +40,12 @@ namespace IqraCommerce.Services.ProductArea
 
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
         {
-            page.SortBy = page.SortBy ?? "[CreatedAt] desc";
+            page.SortBy = page.SortBy ?? "[Rank] asc";
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, ProductQuery.Get());
+                return await db.GetPages(page, ShowcaseQuery.Get());
             }
         }
-
 
         public Response UploadImage(string fileName, Guid id, Guid userId, Guid activityId)
         {
@@ -61,8 +62,8 @@ namespace IqraCommerce.Services.ProductArea
                                      new { FileName = fileName, UserId = userId, ProductId = id },
                                      temp,
                                      productFromRepo,
-                                     "Upload/Change product image",
-                                     "Image change",
+                                     "Upload/Change Showcase image",
+                                     "Image Upload",
                                      activityId,
                                      userId);
             SaveChange();
@@ -72,49 +73,23 @@ namespace IqraCommerce.Services.ProductArea
         }
     }
 
-    public class ProductQuery
+    public class ShowcaseQuery
     {
         public static string Get()
         {
-            return @"product.[Id]
-      ,product.[CreatedAt]
-      ,product.[CreatedBy]
-      ,product.[UpdatedAt]
-      ,product.[UpdatedBy]
-      ,product.[IsDeleted]
-      ,product.[Remarks]
-      ,product.[ActivityId]
-      ,product.[Name]
-      ,product.[DisplayName]
-      ,product.[Excerpt]
-      ,product.[PackSize]
-      ,'/Images/Product/Icon/'+product.[ImageURL] [ImageURL]
-      ,product.[CurrentPrice]
-      ,product.[OriginalPrice]
-      ,product.[DiscountedPrice]
-      ,product.[DiscountedPercentage]
-      ,product.[TradePrice]
-      ,product.[SoldTradePrice]
-      ,product.[Vat]
-      ,product.[IsVatFixedType]
-      ,product.[SoldPrice]
-      ,product.[Profit]
-      ,product.[StockUnit]
-      ,product.[SoldUnit]
-      ,product.[IsVisible]
-      ,product.[IsInHomePage]
-      ,product.[Rank]
-      ,product.[Rating]
-      ,product.[RatingCount]
-      ,product.[BrandId]
-      ,product.[IsUpComming]
-      ,product.[SearchQuery]
-      ,product.[UnitId]
-      ,brand.Name BrandName
-	  ,unit.Name UnitName
-      FROM [dbo].[Product] product
-      LEFT JOIN Brand brand ON brand.Id = product.BrandId
-      LEFT JOIN Unit unit ON unit.Id = product.UnitId";
+            return @" [Id]
+                  ,[CreatedAt]
+                  ,[CreatedBy]
+                  ,[UpdatedAt]
+                  ,[UpdatedBy]
+                  ,[IsDeleted]
+                  ,[Remarks]
+                  ,[ActivityId]
+                  ,[Name]
+                  ,[Rank]
+                  ,[IsVisible]
+                  ,'/Images/Showcase/Icon/' + [ImageURL] [ImageURL]
+              FROM [dbo].[Showcase] showcase";
         }
     }
 }

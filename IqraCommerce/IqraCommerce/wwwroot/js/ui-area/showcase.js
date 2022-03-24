@@ -1,21 +1,21 @@
-﻿import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
+import { editBtn, imageBtn } from "../buttons.js";
+import { url } from '../utils.js';
 
 (function () {
-    const controller = 'Brand';
+    const controller = 'Showcase';
 
     $(document).ready(() => {
         $('#add-record').click(add);
     });
 
     const columns = () => [
-        { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
-        { field: 'Description', title: 'Description', Width: '550px', add: { sibling: 2 } },
-        { field: 'Number of Products', title: 'ProductCount', add: false },
-        { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 } },
+        { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
+        { field: 'Rank', title: 'Rank', filter: true, position: 1 },
+        { field: 'Remarks', title: 'Remarks', Width: '320px', add: { sibling: 1 }, position: 5, },
         { field: 'CreatedBy', title: 'Creator', add: false },
-        { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date',  add: false },
-        { field: 'UpdatedBy', title: 'Updator',  add: false },
-        { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated',  add: false },
+        { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
+        { field: 'UpdatedBy', title: 'Updator', add: false },
+        { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
     // Add / Edit popup config
@@ -34,6 +34,7 @@
                         { text: 'No', value: false },
                     ],
                     add: { sibling: 2 },
+                    position: 3,
                 }
             ],
             additionalField: [],
@@ -50,20 +51,33 @@
     };
 
     function add() {
-        popup({ title: 'New Brand', action: 'add' });
+        popup({ title: 'New Brand Image', action: 'add' });
     };
 
     function edit(model) {
-        popup({ data: model, title: 'Edit Brand', action: 'edit' });
+        popup({ data: model, title: 'Edit Brand Image', action: 'edit' });
     };
 
-    const productsByBrand = (row) => {
+    const uploadImage = (row) => {
         Global.Add({
-            brandId: row.Id,
-            name: 'products-by-brand' + row.Id,
-            url: '/js/product-area/products-by-brand.js',
+            name: 'add-product-image',
+            url: '/js/utils/file-uploader.js',
+            save: `/${controller}/UploadImage`,
+            model: row,
+            ItemId: row.Id,
+            onAdd: function () {
+                tabs.gridModel?.Reload();
+            },
+            onDelete: function () {
+
+            }
         });
     }
+
+    function imageBound(td) {
+        td.html(`<img src="${url(this.ImageURL)}" style="max-height: 120px; max-width: 100%;" />`);
+    }
+
 
     //Tab config
     const tab = (id, title, status, isDeleted = 0) => {
@@ -79,12 +93,11 @@
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
             actions: isDeleted ? [] : [
                 {
-                    click: productsByBrand,
-                    html: menuBtn("View all product of this brand")
-                },
-                {
                     click: edit,
                     html: editBtn()
+                }, {
+                    click: uploadImage,
+                    html: imageBtn()
                 }],
             onDataBinding: () => { },
             rowBound: () => { },

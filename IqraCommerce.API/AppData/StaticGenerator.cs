@@ -55,6 +55,7 @@ namespace IqraCommerce.API.AppData
                 data.Data.Data[1], 
                 homeCategories,
                 data.Data.Data[3],
+                data.Data.Data[4],
             };
 
             var dataStr = "var appData = " + JsonConvert.SerializeObject(Data)+";";
@@ -86,6 +87,7 @@ namespace IqraCommerce.API.AppData
                     WHERE IsDeleted = 0 AND IsVisible = 1
                     ORDER BY [Rank]
 
+
                     -- ### Notice ### [1]
                     SELECT [Id]
                         ,[Rank]
@@ -93,6 +95,7 @@ namespace IqraCommerce.API.AppData
                     FROM [dbo].[Notice]
                     WHERE GETDATE() > StartDate AND GETDATE() < EndDate AND IsDeleted = 0 AND IsVisible = 1
                     ORDER BY [Rank]
+
 
                     -- ### Home Page Categories With Product ### [2]
                     SELECT C.[Id]
@@ -136,6 +139,15 @@ namespace IqraCommerce.API.AppData
                 FROM [dbo].[Product]
                 WHERE [IsDeleted] = 0 AND [IsVisible] = 1
                 ORDER BY [DiscountedPrice], [Rank]
+
+
+                -- ### Brand Images ### [4]
+                SELECT [Id]
+                    ,'/Images/Showcase/Original/'+[ImageURL] [ImageURL]
+                    ,[Rank]
+                FROM [dbo].[Showcase]
+                WHERE [IsDeleted] = 0 AND [IsVisible] = 1
+                ORDER BY [Rank], [Name]
                 ";
             }
         }

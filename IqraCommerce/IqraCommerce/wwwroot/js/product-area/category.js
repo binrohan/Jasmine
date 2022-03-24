@@ -4,7 +4,7 @@
 // TODO: Parent not binding while open modal for editing
 
 
-import { editBtn, plusBtn } from "../buttons.js";
+import { editBtn, plusBtn, menuBtn } from "../buttons.js";
 
 (function () {
     const controller = 'Category';
@@ -217,6 +217,15 @@ import { editBtn, plusBtn } from "../buttons.js";
         row.css({ color: 'red' });
     }
 
+    const addProduct = (row) => {
+        Global.Add({
+            categoryId: row.Id,
+            categoryName: row.Name,
+            name: 'add-product-to-categories' + row.Id,
+            url: '/js/product-area/products-modal.js',
+        });
+    }
+
     //Tab config
     const tab = (id, title, status, isDeleted = 0) => {
         return {
@@ -230,6 +239,10 @@ import { editBtn, plusBtn } from "../buttons.js";
                 { "field": "IsDeleted", "value": isDeleted, Operation: 0 }],
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
             actions: isDeleted ? [] : [
+                {
+                    click: addProduct,
+                    html: menuBtn("Add Product to this Category")
+                },
                 {
                     click: addDedicatedChildCategory,
                     html: plusBtn("Add Child Category")

@@ -66,6 +66,7 @@ namespace IqraCommerce.Entities
 
         #region UI
         public virtual DbSet<Banner> Banner { get; set; } // Used
+        public virtual DbSet<Showcase> Showcase { get; set; } // Used
         #endregion
 
 
