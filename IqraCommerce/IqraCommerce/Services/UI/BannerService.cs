@@ -90,6 +90,7 @@ namespace IqraCommerce.Services.UI
                   ,'/Images/Product/Icon/' + [ImageURL] [ImageURL]
                   ,[IsVisible]
                   ,[Link]
+                  ,[TypeOfBanner]
               FROM [dbo].[Banner] banner";
         }
     }

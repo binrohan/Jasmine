@@ -1,8 +1,10 @@
 import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
+import { bannerType } from "../dictionaries.js";
 import { url } from '../utils.js';
 
 (function () {
     const controller = 'Banner';
+    const bannerFilter = { "field": "TypeOfBanner", "value": bannerType.mainBanner, Operation: 0 };
 
     $(document).ready(() => {
         $('#add-record').click(add);
@@ -54,6 +56,7 @@ import { url } from '../utils.js';
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
+                formModel.TypeOfBanner = bannerType.mainBanner;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -99,10 +102,10 @@ import { url } from '../utils.js';
             Name: title.toLowerCase(),
             Title: title,
             filter: isDeleted ?
-                [{ "field": "IsDeleted", "value": isDeleted, Operation: 0 }]
+                [{ "field": "IsDeleted", "value": isDeleted, Operation: 0 }, bannerFilter]
                 :
                 [{ "field": "IsVisible", "value": status, Operation: 0 },
-                { "field": "IsDeleted", "value": isDeleted, Operation: 0 }],
+                { "field": "IsDeleted", "value": isDeleted, Operation: 0 }, bannerFilter],
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
             actions: isDeleted ? [] : [
                 {

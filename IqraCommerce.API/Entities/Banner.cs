@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IqraCommerce.API.Data;
 
 namespace IqraCommerce.API.Entities
 {
@@ -11,5 +12,6 @@ namespace IqraCommerce.API.Entities
         public double Rank { get; set; }
         public string Size { get; set; }
         public bool IsVisible { get; set; }
+        public BannerType TypeOfBanner { get; set; }
     }
 }

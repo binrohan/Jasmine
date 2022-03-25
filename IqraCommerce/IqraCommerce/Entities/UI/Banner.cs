@@ -1,5 +1,6 @@
 ﻿using IqraBase.Data;
 using IqraBase.Data.Entities;
+using IqraCommerce.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,6 @@ namespace EBonik.Data.Entities.UI
         /// </summary>
         public string Size { get; set; }
         public bool IsVisible { get; set; }
-
+        public BannerType TypeOfBanner { get; set; }
     }
 }

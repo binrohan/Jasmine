@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
+using IqraCommerce.API.Data;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.Services;
@@ -84,7 +85,7 @@ namespace IqraCommerce.API.AppData
                         ,'/Images/Banner/Original/'+[ImageURL] [ImageURL]
                         ,[Link]
                     FROM [dbo].[Banner] banner
-                    WHERE IsDeleted = 0 AND IsVisible = 1
+                    WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + BannerType.MainBanner + @"
                     ORDER BY [Rank]
 
 

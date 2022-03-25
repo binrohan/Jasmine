@@ -19,6 +19,13 @@ namespace IqraCommerce.Controllers.UIArea
             service = __service = ___service = new BannerService();
         }
 
+        public ActionResult Offer()
+        {
+            if (IsLoggedId) return View();
+
+            return View();
+        }
+
         public ActionResult UploadImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
