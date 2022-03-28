@@ -4,7 +4,7 @@
 // TODO: Category select
 // TODO: Remove vat [X]
 
-import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
+import { editBtn, imageBtn, menuBtn, plusBtn, starBtn } from "../buttons.js";
 import { url } from '../utils.js';
 
 (function () {
@@ -142,6 +142,22 @@ import { url } from '../utils.js';
 
     function imageBound(td) {
         td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
+    }
+
+    const markAsHighlighted = (row, grid) => {
+       fetch(`/${controller}/MarkAsHighlighted/` + row.Id, {
+           method: 'GET',
+       }).then(res => res.json())
+       .then(data => {
+           if(data.IsError)
+            throw new Error(data.Msg)
+
+            // Toaster will be perfact here
+            grid.Reload();
+            alert("Product Marked as highlighted successfully");
+       }).catch((err) => {
+            alert(err);
+       });
     }
 
 

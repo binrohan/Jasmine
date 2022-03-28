@@ -45,6 +45,34 @@ namespace IqraCommerce.Services.ProductArea
             }
         }
 
+        public Response MarkAsHighlighted(Guid productId)
+        {
+            var productFromRepo = Entity.Find(productId);
+
+            if(productFromRepo is null) return new Response(-404, null, true, "Product not found");
+
+            if(productFromRepo.IsHighlighted) return new Response(-403, null, true, "Product already marked as highlighted");
+
+            productFromRepo.IsHighlighted = true;
+
+            SaveChange();
+
+            return new Response(200, null, false, "successed");
+        }
+
+        public Response UnmarkAsHighlighted(Guid productId)
+        {
+            var productFromRepo = Entity.Find(productId);
+
+            if (productFromRepo is null) return new Response(-404, null, true, "Product not found");
+
+            productFromRepo.IsHighlighted = false;
+
+            SaveChange();
+
+            return new Response(200, null, false, "successed");
+        }
+
 
         public Response UploadImage(string fileName, Guid id, Guid userId, Guid activityId)
         {
@@ -70,6 +98,31 @@ namespace IqraCommerce.Services.ProductArea
 
             return new Response(200, null, false, "successed");
         }
+
+        public Response UploadHighlightedImage(string fileName, Guid id, Guid userId, Guid activityId)
+        {
+            var productFromRepo = Entity.Find(id);
+
+            var temp = productFromRepo;
+
+            productFromRepo.HighlightedImageURL = fileName;
+            productFromRepo.UpdatedAt = DateTime.Now;
+            productFromRepo.UpdatedBy = userId;
+
+            ChangeHistoryService.Set(this,
+                                     id,
+                                     new { FileName = fileName, UserId = userId, ProductId = id },
+                                     temp,
+                                     productFromRepo,
+                                     "Upload/Change product Hightlighted image",
+                                     "Hightlighted image change",
+                                     activityId,
+                                     userId);
+            SaveChange();
+
+
+            return new Response(200, null, false, "successed");
+        }
     }
 
     public class ProductQuery
@@ -77,44 +130,46 @@ namespace IqraCommerce.Services.ProductArea
         public static string Get()
         {
             return @"product.[Id]
-      ,product.[CreatedAt]
-      ,product.[CreatedBy]
-      ,product.[UpdatedAt]
-      ,product.[UpdatedBy]
-      ,product.[IsDeleted]
-      ,product.[Remarks]
-      ,product.[ActivityId]
-      ,product.[Name]
-      ,product.[DisplayName]
-      ,product.[Excerpt]
-      ,product.[PackSize]
-      ,'/Images/Product/Icon/'+product.[ImageURL] [ImageURL]
-      ,product.[CurrentPrice]
-      ,product.[OriginalPrice]
-      ,product.[DiscountedPrice]
-      ,product.[DiscountedPercentage]
-      ,product.[TradePrice]
-      ,product.[SoldTradePrice]
-      ,product.[Vat]
-      ,product.[IsVatFixedType]
-      ,product.[SoldPrice]
-      ,product.[Profit]
-      ,product.[StockUnit]
-      ,product.[SoldUnit]
-      ,product.[IsVisible]
-      ,product.[IsInHomePage]
-      ,product.[Rank]
-      ,product.[Rating]
-      ,product.[RatingCount]
-      ,product.[BrandId]
-      ,product.[IsUpComming]
-      ,product.[SearchQuery]
-      ,product.[UnitId]
-      ,brand.Name BrandName
-	  ,unit.Name UnitName
-      FROM [dbo].[Product] product
-      LEFT JOIN Brand brand ON brand.Id = product.BrandId
-      LEFT JOIN Unit unit ON unit.Id = product.UnitId";
+              ,product.[CreatedAt]
+              ,product.[CreatedBy]
+              ,product.[UpdatedAt]
+              ,product.[UpdatedBy]
+              ,product.[IsDeleted]
+              ,product.[Remarks]
+              ,product.[ActivityId]
+              ,product.[Name]
+              ,product.[DisplayName]
+              ,product.[Excerpt]
+              ,product.[PackSize]
+              ,'/wwwroot/Images/Products/Icon/'+product.[ImageURL] [ImageURL]
+              ,product.[CurrentPrice]
+              ,product.[OriginalPrice]
+              ,product.[DiscountedPrice]
+              ,product.[DiscountedPercentage]
+              ,product.[TradePrice]
+              ,product.[SoldTradePrice]
+              ,product.[Vat]
+              ,product.[IsVatFixedType]
+              ,product.[SoldPrice]
+              ,product.[Profit]
+              ,product.[StockUnit]
+              ,product.[SoldUnit]
+              ,product.[IsVisible]
+              ,product.[IsInHomePage]
+              ,product.[Rank]
+              ,product.[Rating]
+              ,product.[RatingCount]
+              ,product.[BrandId]
+              ,product.[IsUpComming]
+              ,product.[SearchQuery]
+              ,product.[UnitId]
+              ,product.[IsHighlighted]
+              ,'/wwwroot/Images/Products/Highlights/Icon/' + product.[HighlightedImageURL] [HighlightedImageURL]
+              ,brand.Name BrandName
+	          ,unit.Name UnitName
+              FROM [dbo].[Product] product
+              LEFT JOIN Brand brand ON brand.Id = product.BrandId
+              LEFT JOIN Unit unit ON unit.Id = product.UnitId";
         }
     }
 }

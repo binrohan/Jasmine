@@ -6,7 +6,7 @@ namespace IqraCommerce.API.Data.IRepositories
 {
     public interface IUIRepository
     {
-         Task<IEnumerable<Banner>> GetBannersAsync();
+         Task<IEnumerable<Banner>> GetBannersAsync(BannerType bannerType = BannerType.MainBanner);
          Task<IEnumerable<Notice>> GetNoticesAsync();
     }
 }

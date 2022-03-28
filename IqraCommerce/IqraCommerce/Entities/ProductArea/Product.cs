@@ -44,5 +44,7 @@ namespace IqraCommerce.Entities.ProductArea
 
         public string SearchQuery { get; set; }
 
+        public bool IsHighlighted { get; set; }
+        public string HighlightedImageURL { get; set; }
     }
 }

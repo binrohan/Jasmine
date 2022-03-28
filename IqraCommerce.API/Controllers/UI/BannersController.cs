@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using IqraCommerce.API.Data;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.Helpers;
@@ -19,9 +20,9 @@ namespace IqraCommerce.API.Controllers.UI
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBanners()
+        public async Task<IActionResult> GetBanners(BannerType bannerType = BannerType.MainBanner)
         {
-            var bannersFromRepo = await _repo.GetBannersAsync();
+            var bannersFromRepo = await _repo.GetBannersAsync(bannerType);
             var bannersToReturn  = _mapper.Map<IEnumerable<BannerReturnDto>>(bannersFromRepo);;
 
             return Ok(new ApiResponse(200, bannersToReturn, "Successed"));

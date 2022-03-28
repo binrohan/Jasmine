@@ -19,6 +19,13 @@ namespace IqraCommerce.Controllers.UIArea
             service = __service = ___service = new BannerService();
         }
 
+        public ActionResult Main()
+        {
+            if (IsLoggedId) return View();
+
+            return View();
+        }
+
         public ActionResult Offer()
         {
             if (IsLoggedId) return View();

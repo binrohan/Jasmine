@@ -1,5 +1,6 @@
 ﻿using IqraBase.Web.Controllers;
 using IqraCommerce.DTOs;
+using IqraCommerce.DTOs.Product;
 using IqraCommerce.Entities.ProductArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.ProductArea;
@@ -25,6 +26,13 @@ namespace IqraCommerce.Controllers.ProductArea
             service = __service = ___service = new ProductService();
         }
 
+        public ActionResult Highlighted()
+        {
+            if (IsLoggedId) return View();
+
+            return View();
+        }
+
         public ActionResult UploadImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
@@ -32,6 +40,25 @@ namespace IqraCommerce.Controllers.ProductArea
             var fileName = imageManager.Store(imageUpload.Img, "Product");
 
             return Json(___service.UploadImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
+        }
+
+        public ActionResult UploadHighlightedImage([FromForm] ImageUploadDto imageUpload)
+        {
+            ImageManager imageManager = new ImageManager(_config);
+
+            var fileName = imageManager.Store(imageUpload.Img, "ProductHighlight");
+
+            return Json(___service.UploadHighlightedImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
+        }
+
+        public ActionResult MarkAsHighlighted([FromForm] ProductHighlightDto highlightDto)
+        {
+            return Json(___service.MarkAsHighlighted(highlightDto.ProductId));
+        }
+
+        public ActionResult UnmarkAsHighlighted([FromForm] ProductHighlightDto highlightDto)
+        {
+            return Json(___service.UnmarkAsHighlighted(highlightDto.ProductId));
         }
     }
 }

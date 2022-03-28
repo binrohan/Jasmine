@@ -15,9 +15,9 @@ namespace IqraCommerce.API.Data.Repositories
             _context = context;
 
         }
-        public async Task<IEnumerable<Banner>> GetBannersAsync()
+        public async Task<IEnumerable<Banner>> GetBannersAsync(BannerType bannerType)
         {
-            return await _context.Banner.Where(b => !b.IsDeleted && b.IsVisible)
+            return await _context.Banner.Where(b => !b.IsDeleted && b.IsVisible && b.TypeOfBanner == bannerType)
                                           .OrderBy(c => c.Rank)
                                           .ToListAsync();
         }
