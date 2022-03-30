@@ -58,6 +58,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Category> Category { get; set; } // Used
         public virtual DbSet<Product> Product { get; set; } // Used
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // Used
+        public virtual DbSet<Festival> Festival { get; set; } // Used
         #endregion
 
         #region Miscellaneous
