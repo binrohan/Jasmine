@@ -1,14 +1,16 @@
 
 var Controller = new function () {
-    const filters = [{ "field": "IsDeleted", "value": 0, Operation: 0 }, 
-    { "field": "IsHighlighted", "value": 0, Operation: 0 }];
+    const liveRecord = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const festivalFilter = { "field": "FestivalId", "value": '', Operation: 0 }
+    
     let _callerOptions;
 
-    const addToFestival = (productId, grid) => {
+    const addToFestival = (productId, festivalId, grid) => {
         const formData = new FormData();
         formData.append('productId', productId);
+        formData.append('festivalId', festivalId);
 
-       fetch('/Product/MarkAsHighlighted', {
+       fetch('/FestivalProduct/Create', {
            method: 'POST',
            body: formData
        }).then(res => res.json())
@@ -18,20 +20,19 @@ var Controller = new function () {
             throw new Error(data.Msg)
 
             grid.Reload();
-            _callerOptions.onAddProduct();
             // Toaster will be perfact here
-            alert("Successfully product added to the category");
+            alert("Successfully product added to the festival");
 
        }).catch((err) => {
             alert(err);
         });
     }
 
-    const removeFromFestival = (productId, grid) => {
+    const removeFromFestival = (id, grid) => {
         const formData = new FormData();
-        formData.append('productId', productId);
+        formData.append('id', id);
 
-       fetch('/Product/UnmarkAsHighlighted', {
+       fetch('/FestivalProduct/Remove', {
            method: 'PUT',
            body: formData
        }).then(res => res.json())
@@ -43,7 +44,7 @@ var Controller = new function () {
             grid.Reload();
 
             // Toaster will be perfact here
-            alert("Successfully product remove from the category");
+            alert("Successfully product remove from the festival");
 
        }).catch((err) => {
             alert(err);
@@ -52,6 +53,7 @@ var Controller = new function () {
 
     this.Show = function (options) {
         _callerOptions = options;
+        festivalFilter.value = _callerOptions.festivalId;
 
         Global.Add({
             title: 'Products',
@@ -70,13 +72,13 @@ var Controller = new function () {
                             { field: 'UnitName', title: 'Unit', filter: true, add: false },
                             { field: 'BrandName', title: 'Brand', filter: true, add: false },
                         ],
-                        Url: '/Product/Get/',
-                        filter: [...filters],
+                        Url: '/FestivalProduct/GetProductsByFestival',
+                        filter: [liveRecord, festivalFilter],
                         onDataBinding: () => {},
                         actions: [
                             {
-                                click: (row, grid) => addToFestival(row.Id, grid),
-                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-plus" title="${"Mark As Highlighted"}"></i></a>`
+                                click: (row, grid) => removeFromFestival(row.Id, grid),
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="${"Remove From Festival"}"></i></a>`
                             }
                         ],
                         selector: false,
@@ -99,12 +101,12 @@ var Controller = new function () {
                             { field: 'BrandName', title: 'Brand', filter: true, add: false },
                         ],
                         Url: '/Product/Get/',
-                        filter: [...filters],
+                        filter: [liveRecord],
                         onDataBinding: () => {},
                         actions: [
                             {
-                                click: (row, grid) => removeFromFestival(row.Id, grid),
-                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="${"Mark As Highlighted"}"></i></a>`
+                                click: (row, grid) => addToFestival(row.Id, _callerOptions.festivalId, grid),
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-plus" title="${"Add to the Festival"}"></i></a>`
                             }
                         ],
                         selector: false,
