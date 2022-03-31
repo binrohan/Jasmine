@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IqraCommerce.API.Entities;
 
-namespace IqraCommerce.API.DTOs.Brand
+namespace IqraCommerce.API.DTOs
 {
     public class BrandsReturnDto
     {

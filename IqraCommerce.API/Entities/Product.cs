@@ -5,7 +5,7 @@ namespace IqraCommerce.API.Entities
 {
     public class Product : BaseEntity
     {
-         public string DisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string Excerpt { get; set; } 
         public string PackSize { get; set; }
 
@@ -41,9 +41,14 @@ namespace IqraCommerce.API.Entities
 
         public string SearchQuery { get; set; }
 
+        public bool IsHighlighted { get; set; }
+        public string HighlightedImageURL { get; set; }
 
-
+        // Navigation Props 
         public List<ProductCategory> ProductCategories { get; set; }
+        public Brand Brand { get; set; }
+        public Unit Unit { get; set; }
+        // public Category Category { get; set; }
 
     }
 }

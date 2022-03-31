@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using IqraCommerce.API.DTOs.Brand;
+using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
 

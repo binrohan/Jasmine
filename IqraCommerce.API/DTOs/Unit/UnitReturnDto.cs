@@ -2,7 +2,7 @@ using System;
 
 namespace IqraCommerce.API.DTOs
 {
-    public class BrandReturnDto
+    public class UnitReturnDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

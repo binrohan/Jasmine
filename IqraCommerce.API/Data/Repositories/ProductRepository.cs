@@ -38,5 +38,30 @@ namespace IqraCommerce.API.Data.Repositories
                                           .ThenBy(c => c.Name).Include(c => c.ProductCategories).ThenInclude(p => p.Product)
                                           .ToListAsync();
         }
+
+        public async Task<Product> GetProductAsync(Guid productId)
+        {
+            return await _context.Product.Include(p => p.Unit)
+                                         .Include(p => p.Brand)
+                                         .FirstOrDefaultAsync(p => !p.IsDeleted
+                                                                    && p.IsVisible
+                                                                    && p.Id == productId);
+                                                                    
+        }
+
+        public async Task<Product> GetProductAsyncEx(Guid productId)
+        {
+            return await _context.Product.Include(p => p.Unit)
+                                         .Include(p => p.Brand)
+                                         .Include(p => p.ProductCategories
+                                            .Join(_context.Category,
+                                                    pc => pc.CategoryId,
+                                                    c => c.Id,
+                                                    (pc, c) => c))
+                                         .Where(p => p.IsDeleted == false
+                                                     && p.IsVisible == true
+                                                     && p.Id == productId)
+                                         .FirstAsync();
+        }
     }
 }

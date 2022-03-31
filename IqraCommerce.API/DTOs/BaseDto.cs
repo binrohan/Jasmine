@@ -2,7 +2,8 @@ using System;
 
 namespace IqraCommerce.API.DTOs
 {
-    public class BaseDto
+
+    public class BaseDto : IBaseDto
     {
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }

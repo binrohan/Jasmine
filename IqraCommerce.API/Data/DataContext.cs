@@ -17,6 +17,7 @@ namespace IqraCommerce.API.Data
         }
         public virtual DbSet<Contact> Contact { get; set; } // ** Using
         public virtual DbSet<Brand> Brand { get; set; } // ** Using
+        public virtual DbSet<Unit> Unit { get; set; } // ** Using
         public virtual DbSet<Category> Category { get; set; } // ** Using
         public virtual DbSet<Banner> Banner { get; set; } // ** Using
         public virtual DbSet<Notice> Notice { get; set; } // ** Using

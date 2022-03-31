@@ -26,22 +26,6 @@ namespace IqraCommerce.API.Controllers.HomeArea
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GenerateStatic()
-        {
-            // Category
-            var categoriesFrompRepo = await _productRepo.GetCategoriesAsync();
-            var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder();
-
-            var bannersFromRepo = await _uIRepo.GetBannersAsync();
-            var bannersToReturn  = bannersFromRepo.ToArray();
-
-            var noticesFromRepo = await _uIRepo.GetNoticesAsync();
-            var noticesToReturn  = noticesFromRepo.ToArray();
-
-            return Ok(new ApiResponse(200, new { categoriesToReturn, categoriesFrompRepo, bannersToReturn, noticesToReturn }, "Successed"));
-        }
-
         [HttpGet("CreateAppData")]
         public async Task<IActionResult> CreateAppData()
         {

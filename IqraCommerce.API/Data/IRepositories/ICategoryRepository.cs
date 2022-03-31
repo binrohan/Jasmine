@@ -5,14 +5,11 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface IProductRepository
+    public interface ICategoryRepository
     {
-        Task<IEnumerable<Brand>> GetBrandsAsync();
         Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<IEnumerable<Category>> GetCategoriesByProductAsync(Guid productId);
         Task<IEnumerable<Category>> GetHomeCategoriesAsync();
-        Task<Product> GetProductAsync(Guid productId);
-        
-        Task<Product> GetProductAsyncEx(Guid productId);
-        
+
     }
 }

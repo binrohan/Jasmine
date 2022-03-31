@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs;
-using IqraCommerce.API.DTOs.Brand;
 using IqraCommerce.API.DTOs.Contact;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
