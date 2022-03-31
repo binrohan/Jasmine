@@ -5,8 +5,8 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface IProductRepository
+    public interface IBrandRepository
     {
-        Task<Product> GetProductAsync(Guid productId);
+        Task<IEnumerable<Brand>> GetBrandsAsync();
     }
 }

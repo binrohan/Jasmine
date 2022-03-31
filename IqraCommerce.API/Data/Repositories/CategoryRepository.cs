@@ -38,16 +38,29 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<IEnumerable<Category>> GetCategoriesByProductAsync(Guid productId)
         {
             return await _context.Category
-            .Join(_context.ProductCategory
-            .Where(pc => pc.IsDeleted == false
-                    && pc.ProductId == productId), 
-                    c => c.Id, 
-                    pc => pc.CategoryId, 
-                    (c, pc) => c)
-            .Where(c => !c.IsDeleted && c.IsVisible)
-            .ToListAsync();
+                .Join(_context.ProductCategory
+                .Where(pc => pc.IsDeleted == false
+                        && pc.ProductId == productId), 
+                        c => c.Id, 
+                        pc => pc.CategoryId, 
+                        (c, pc) => c)
+                .Where(c => !c.IsDeleted && c.IsVisible)
+                .ToListAsync();
 
 
+        }
+
+        public async Task<IEnumerable<Category>> GetChildCategoriesWithProductsAsync(Guid categoryId)
+        {
+            return await _context.Category
+                    .Where(c => c.ParentId == categoryId && !c.IsDeleted && c.IsVisible)
+                    .Include(c => c.ProductCategories
+                        .Where(pc => !pc.IsDeleted && !pc.Product.IsDeleted && pc.Product.IsVisible)
+                        .OrderBy(pc => pc.Product.Rank)
+                        .Take(10))
+                        .ThenInclude(pc => pc.Product)
+                    .OrderBy(c => c.Rank)
+                    .ToArrayAsync();
         }
 
     }

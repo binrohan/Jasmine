@@ -16,25 +16,23 @@ namespace IqraCommerce.API.Controllers.HomeArea
 {
     public class AppDataController : BaseApiController
     {
-        private readonly IUIRepository _uIRepo;
         private readonly IMapper _mapper;
-        private readonly IProductRepository _productRepo;
-        public AppDataController(IMapper mapper, IProductRepository productRepo, IUIRepository uIRepo)
+        private readonly ICategoryRepository _repo;
+        public AppDataController(IMapper mapper, ICategoryRepository repo)
         {
-            _uIRepo = uIRepo;
-            _productRepo = productRepo;
+            _repo = repo;
             _mapper = mapper;
         }
 
-        [HttpGet("CreateAppData")]
+        [HttpGet("Create")]
         public async Task<IActionResult> CreateAppData()
         {
-            var categoriesFrompRepo = await _productRepo.GetCategoriesAsync();
+            var categoriesFrompRepo = await _repo.GetCategoriesAsync();
             var categoriesToReturn = categoriesFrompRepo.CreateHierarchicalOrder().ToArray();
             
             var data = await FileCreator.CreateAppData("", categoriesToReturn);
 
-            return Ok(new ApiResponse(200, data, "Successed"));
+            return Ok(new ApiResponse(201, data, "App data created!"));
 
         }
     }

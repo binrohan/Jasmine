@@ -40,17 +40,5 @@ namespace IqraCommerce.API.Controllers.ProductArea
             return Ok(new ApiResponse(200, productToReturn, "Successed"));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetProductEx()
-        {
-            var productId = Guid.Parse("f0d9e008-2c4f-492e-90f3-cc14012fd6fe");
-            var productFromRepo = await _repo.GetProductAsyncEx(productId);
-            
-
-            // var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);
-           
-
-            return Ok(new ApiResponse(200, productFromRepo, "Successed"));
-        }
     }
 }

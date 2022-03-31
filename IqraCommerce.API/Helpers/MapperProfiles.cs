@@ -53,10 +53,6 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Product, ProductDetailsDto>()
             .ForMember(dest => dest.ImageURL, 
                             opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.ImageURL))
-            .ForMember(dest => dest.Unit, 
-                            opt => opt.MapFrom(src => src.Unit.Name))
-            .ForMember(dest => dest.Brand,
-                            opt => opt.MapFrom(src => src.Brand.Name))
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Product

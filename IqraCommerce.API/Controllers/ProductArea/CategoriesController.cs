@@ -33,10 +33,10 @@ namespace IqraCommerce.API.Controllers.ProductArea
             return Ok(new ApiResponse(200, categoriesToReturn));
         }
 
-        [HttpGet("{productId}")]
-        public async Task<IActionResult> GetCategories(Guid productId)
+        [HttpGet("ChildrenWithProductOf/{categroyId}")]
+        public async Task<IActionResult> GetChildCategoriesWithProducts(Guid categroyId)
         {
-            var categoriesFromRepo = await _repo.GetCategoriesByProductAsync(productId);
+            var categoriesFromRepo = await _repo.GetChildCategoriesWithProductsAsync(categroyId);
 
             return Ok(new ApiResponse(200, categoriesFromRepo));
         }

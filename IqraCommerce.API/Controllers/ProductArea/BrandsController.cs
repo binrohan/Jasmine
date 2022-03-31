@@ -14,8 +14,8 @@ namespace IqraCommerce.API.Controllers.ProductArea
     public class BrandsController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly IProductRepository _repo;
-        public BrandsController(IMapper mapper, IProductRepository repo)
+        private readonly IBrandRepository _repo;
+        public BrandsController(IMapper mapper, IBrandRepository repo)
         {
             _repo = repo;
             _mapper = mapper;
