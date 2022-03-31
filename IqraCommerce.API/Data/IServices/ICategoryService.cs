@@ -7,6 +7,6 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface ICategoryService
     {
-         Task<IEnumerable<Category>> GetChildrenWithProducts(Guid categoryId);
+         Task<List<List<Category>>> GetChildrenWithProducts(Guid categoryId);
     }
 }

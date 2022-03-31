@@ -12,6 +12,7 @@ namespace IqraCommerce.API.Data.Services
 {
     public class CategoryService : ICategoryService
     {
+        private List<Category> retrivedCategorise;
         private readonly ICategoryRepository _repo;
         private readonly IProductRepository _productRepo;
         private readonly IMapper _mapper;
@@ -23,45 +24,45 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<CategoryWithProductDto>> GetChildrenWithProducts(Guid categoryId)
+        public async Task<List<List<Category>>> GetChildrenWithProducts(Guid categoryId)
         {
             var categories = await _repo.GetChildCategoriesAsync(categoryId);
             var categoryToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categories);
 
-            // IList<Category> moreCategories = new List<Category>();
-            // if(categories.Count() > 0)
-            // {
-            //     IList<Category> existingCategories = new List<Category>();
-            //     moreCategories = await GetChildrenCategories(existingCategories, categories);
-            // }
-
-
+            
+            var output = new List<List<Category>>();
+            
             foreach (var category in categoryToReturn)
             {
-                var products = await _productRepo.GetProductsByCategoryAsync(category.Id);
-                var productsToReturn = _mapper.Map<IList<ProductShortDto>>(products);
-                category.Products = productsToReturn;
+                retrivedCategorise = new List<Category>();
+
+                GetChildrenCategory(category.Id);
+
+                output.Add(retrivedCategorise);
             }
 
 
 
 
 
-            return null;
+            return output;
         }
 
-        private async Task<IList<ProductShortDto>> GetProducts(Guid categoryId)
+        private async void GetChildrenCategory(Guid categoryId)
         {
-            var categories = await _repo.GetChildCategoriesAsync(categoryId);
-            var categoryToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categories);
+           var categories = await _repo.GetChildCategoriesAsync(categoryId);
 
-            return productsToReturn.Concat();
+        //    if(categories.Count() == 0)
+        //         return categories;
+            
+           retrivedCategorise = retrivedCategorise.Concat(categories).ToList();
 
-        }
+            foreach (var category in categories)
+            {
+                GetChildrenCategory(category.Id);
+            }
 
-        Task<IEnumerable<Category>> ICategoryService.GetChildrenWithProducts(Guid categoryId)
-        {
-            throw new NotImplementedException();
+        //    return retrivedCategorise;
         }
     }
 }

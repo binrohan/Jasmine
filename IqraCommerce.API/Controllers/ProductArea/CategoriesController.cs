@@ -55,7 +55,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
             var categoriesFromRepo = await _service.GetChildrenWithProducts(categoryId);
 
-            var categoriesToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categoriesFromRepo);
+            // var categoriesToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categoriesFromRepo);
 
             return Ok(new ApiResponse(200, categoriesFromRepo));
         }
