@@ -1,6 +1,8 @@
 using System.Linq;
 using IqraCommerce.API.Data.IRepositories;
+using IqraCommerce.API.Data.IServices;
 using IqraCommerce.API.Data.Repositories;
+using IqraCommerce.API.Data.Services;
 using IqraCommerce.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ namespace IqraCommerce.API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             // services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             // services.AddScoped<ITokenService, TokenService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();

@@ -5,7 +5,6 @@ using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.DTOs.Contact;
 using IqraCommerce.API.DTOs.Notice;
-using IqraCommerce.API.DTOs.Product;
 using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Helpers
@@ -31,7 +30,7 @@ namespace IqraCommerce.API.Helpers
 
             #region Banner
             CreateMap<Banner, BannerReturnDto>()
-                .ForMember(dest => dest.ImageURL, 
+                .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => "/Contents/Images/Product/Icon/" + src.ImageURL));
             #endregion Banner
 
@@ -41,17 +40,48 @@ namespace IqraCommerce.API.Helpers
 
             #region Category
             CreateMap<Category, HomeCategoryDto>();
+            
             CreateMap<ProductCategory, CategoryShortDto>()
-            .ForMember(dest => dest.Name,
-                            opt => opt.MapFrom(src => src.Category.Name))
-            .ForMember(dest => dest.Id,
-                            opt => opt.MapFrom(src => src.Category.Id));
+                .ForMember(dest => dest.Name,
+                                opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.Id,
+                                opt => opt.MapFrom(src => src.Category.Id));
+            
             CreateMap<Category, CategoryShortDto>();
+            
+            CreateMap<ProductCategory, ProductShortDto>()
+                .ForMember(dest => dest.Id,
+                                opt => opt.MapFrom(src => src.Product.Id))
+                .ForMember(dest => dest.Name,
+                                opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.DisplayName,
+                                opt => opt.MapFrom(src => src.Product.DisplayName))
+                .ForMember(dest => dest.PackSize,
+                                opt => opt.MapFrom(src => src.Product.PackSize))
+                .ForMember(dest => dest.ImageURL,
+                                opt => opt.MapFrom(src => "/Contents/Images/Product/Small/" + src.Product.ImageURL))
+                .ForMember(dest => dest.CurrentPrice,
+                                opt => opt.MapFrom(src => src.Product.CurrentPrice))
+                 .ForMember(dest => dest.OriginalPrice,
+                                opt => opt.MapFrom(src => src.Product.OriginalPrice))
+                 .ForMember(dest => dest.DiscountedPrice,
+                                opt => opt.MapFrom(src => src.Product.DiscountedPrice))
+                   .ForMember(dest => dest.DiscountedPercentage,
+                                opt => opt.MapFrom(src => src.Product.DiscountedPercentage))
+                 .ForMember(dest => dest.StockUnit,
+                                opt => opt.MapFrom(src => src.Product.StockUnit))
+                  .ForMember(dest => dest.Rank,
+                                opt => opt.MapFrom(src => src.Product.Rank));                                                                                        
+            
+            CreateMap<Category, CategoryWithProductDto>()
+                .ForMember(dest => dest.Products,
+                                opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Category
 
             #region Product
+            CreateMap<Product, ProductShortDto>();
             CreateMap<Product, ProductDetailsDto>()
-            .ForMember(dest => dest.ImageURL, 
+            .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.ImageURL))
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));

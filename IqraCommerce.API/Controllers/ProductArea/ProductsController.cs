@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs.Category;
-using IqraCommerce.API.DTOs.Product;
+using IqraCommerce.API.DTOs;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Helpers;
 using Microsoft.AspNetCore.Mvc;

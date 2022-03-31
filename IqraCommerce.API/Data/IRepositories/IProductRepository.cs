@@ -8,5 +8,6 @@ namespace IqraCommerce.API.Data.IRepositories
     public interface IProductRepository
     {
         Task<Product> GetProductAsync(Guid productId);
+        Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId);
     }
 }

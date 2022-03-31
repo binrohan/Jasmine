@@ -27,5 +27,16 @@ namespace IqraCommerce.API.Data.Repositories
 
         }
 
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId)
+        {
+           return await _context.ProductCategory
+                                .Where(pc => !pc.IsDeleted && pc.CategoryId == categoryId)
+                                .Join(_context.Product
+                                              .Where(p => !p.IsDeleted && p.IsVisible),
+                                     pc => pc.ProductId,
+                                     p => p.Id,
+                                     (pc, p) => p)
+                                .ToArrayAsync();
+        }
     }
 }
