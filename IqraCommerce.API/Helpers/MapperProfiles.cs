@@ -40,42 +40,46 @@ namespace IqraCommerce.API.Helpers
 
             #region Category
             CreateMap<Category, HomeCategoryDto>();
-            
+            CreateMap<Category, CategoryShortDto>();
+            CreateMap<Category, CategoryWithProductDto>()
+                .ForMember(dest => dest.Products,
+                                opt => opt.MapFrom(src => src.ProductCategories));
+            #endregion Category
+
+            #region ProductCategory
             CreateMap<ProductCategory, CategoryShortDto>()
                 .ForMember(dest => dest.Name,
                                 opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.Id,
                                 opt => opt.MapFrom(src => src.Category.Id));
-            
-            CreateMap<Category, CategoryShortDto>();
-            
+
             CreateMap<ProductCategory, ProductShortDto>()
                 .ForMember(dest => dest.Id,
-                                opt => opt.MapFrom(src => src.Product.Id))
+                            opt => opt.MapFrom(src => src.Product.Id))
                 .ForMember(dest => dest.Name,
-                                opt => opt.MapFrom(src => src.Product.Name))
+                            opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.DisplayName,
-                                opt => opt.MapFrom(src => src.Product.DisplayName))
+                            opt => opt.MapFrom(src => src.Product.DisplayName))
                 .ForMember(dest => dest.PackSize,
-                                opt => opt.MapFrom(src => src.Product.PackSize))
+                            opt => opt.MapFrom(src => src.Product.PackSize))
                 .ForMember(dest => dest.ImageURL,
-                                opt => opt.MapFrom(src => "/Contents/Images/Product/Small/" + src.Product.ImageURL))
+                            opt => opt.MapFrom(src => "/Contents/Images/Product/Small/" + src.Product.ImageURL))
                 .ForMember(dest => dest.CurrentPrice,
-                                opt => opt.MapFrom(src => src.Product.CurrentPrice))
-                 .ForMember(dest => dest.OriginalPrice,
-                                opt => opt.MapFrom(src => src.Product.OriginalPrice))
-                 .ForMember(dest => dest.DiscountedPrice,
-                                opt => opt.MapFrom(src => src.Product.DiscountedPrice))
-                   .ForMember(dest => dest.DiscountedPercentage,
-                                opt => opt.MapFrom(src => src.Product.DiscountedPercentage))
-                 .ForMember(dest => dest.StockUnit,
-                                opt => opt.MapFrom(src => src.Product.StockUnit))
-                  .ForMember(dest => dest.Rank,
-                                opt => opt.MapFrom(src => src.Product.Rank));                                                                                        
-            
-            CreateMap<Category, CategoryWithProductDto>()
-                .ForMember(dest => dest.Products,
-                                opt => opt.MapFrom(src => src.ProductCategories));
+                            opt => opt.MapFrom(src => src.Product.CurrentPrice))
+                .ForMember(dest => dest.OriginalPrice,
+                            opt => opt.MapFrom(src => src.Product.OriginalPrice))
+                .ForMember(dest => dest.DiscountedPrice,
+                            opt => opt.MapFrom(src => src.Product.DiscountedPrice))
+                .ForMember(dest => dest.DiscountedPercentage,
+                            opt => opt.MapFrom(src => src.Product.DiscountedPercentage))
+                .ForMember(dest => dest.StockUnit,
+                            opt => opt.MapFrom(src => src.Product.StockUnit))
+                .ForMember(dest => dest.Rank,
+                            opt => opt.MapFrom(src => src.Product.Rank));
+            #endregion ProductCategory
+
+            #region CategoryDto
+            CreateMap<CategoryDto, CategoryWithProductDto>();
             #endregion Category
 
             #region Product

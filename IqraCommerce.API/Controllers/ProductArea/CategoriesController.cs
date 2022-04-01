@@ -40,22 +40,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
         [HttpGet("ChildrenWithProducts/{categoryId}")]
         public async Task<IActionResult> GetChildCategoriesWithProducts(Guid categoryId)
         {
-            var categoriesFromRepo = await _repo.GetChildCategoriesWithProductsAsync(categoryId);
-
-            var categoriesToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categoriesFromRepo);
-
-            return Ok(new ApiResponse(200, categoriesToReturn));
-        }
-
-
-        [HttpGet("Test")]
-        public async Task<IActionResult> Test()
-        {
-            var categoryId = Guid.Parse("5b8aa954-8b13-4e7f-83eb-3c32841ea1ec");
-
-            var categoriesFromRepo = await _service.GetChildrenWithProducts(categoryId);
-
-            // var categoriesToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categoriesFromRepo);
+            var categoriesFromRepo = await _service.GetChildrenWithProductsAsync(categoryId);
 
             return Ok(new ApiResponse(200, categoriesFromRepo));
         }

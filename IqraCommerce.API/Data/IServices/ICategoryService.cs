@@ -7,6 +7,6 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface ICategoryService
     {
-         Task<List<List<Category>>> GetChildrenWithProducts(Guid categoryId);
+         Task<object> GetChildrenWithProductsAsync(Guid categoryId);
     }
 }

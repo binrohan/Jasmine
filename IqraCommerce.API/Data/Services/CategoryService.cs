@@ -6,63 +6,78 @@ using AutoMapper;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.Data.IServices;
 using IqraCommerce.API.DTOs;
+using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
+using IqraCommerce.API.Extensions;
 
 namespace IqraCommerce.API.Data.Services
 {
     public class CategoryService : ICategoryService
     {
         private List<Category> retrivedCategorise;
-        private readonly ICategoryRepository _repo;
+        private readonly ICategoryRepository _categoryRepo;
         private readonly IProductRepository _productRepo;
         private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository repo, IProductRepository productRepo, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepo, IProductRepository productRepo, IMapper mapper)
         {
             _mapper = mapper;
             _productRepo = productRepo;
-            _repo = repo;
+            _categoryRepo = categoryRepo;
         }
 
-        public async Task<List<List<Category>>> GetChildrenWithProducts(Guid categoryId)
+        public async Task<object> GetChildrenWithProductsAsync(Guid categoryId)
         {
-            var categories = await _repo.GetChildCategoriesAsync(categoryId);
-            var categoryToReturn = _mapper.Map<IEnumerable<CategoryWithProductDto>>(categories);
+            var categoriesFromRepo = await _categoryRepo.GetCategoriesAsync();
 
-            
-            var output = new List<List<Category>>();
-            
-            foreach (var category in categoryToReturn)
+            var categoriesToReturn = categoriesFromRepo.CreateHierarchicalOrder();
+
+            var categoryWithChildren = GetChildren(categoriesToReturn, categoryId);
+
+            if(categoryWithChildren is null)
+                return null;
+
+            IList<CategoryWithProductDto> categoriesWithProductsToReturn = new List<CategoryWithProductDto>();
+            foreach (var category in categoryWithChildren.ChildCategories)
             {
-                retrivedCategorise = new List<Category>();
+                var categoryWithProductDto = _mapper.Map<CategoryWithProductDto>(category);
 
-                GetChildrenCategory(category.Id);
+                var listOfCategories = ExtractListOfCategoriesId(category.ChildCategories);
 
-                output.Add(retrivedCategorise);
+                var productsFromRepo = await _productRepo.GetProductsByCategoriesAsync(listOfCategories); 
+                categoryWithProductDto.Products = _mapper.Map<IEnumerable<ProductShortDto>>(productsFromRepo);
+                 
+                categoriesWithProductsToReturn.Add(categoryWithProductDto);
             }
 
-
-
-
-
-            return output;
+            return categoriesWithProductsToReturn;
         }
 
-        private async void GetChildrenCategory(Guid categoryId)
+        private CategoryDto GetChildren(IList<CategoryDto> categories, Guid categoryId)
         {
-           var categories = await _repo.GetChildCategoriesAsync(categoryId);
-
-        //    if(categories.Count() == 0)
-        //         return categories;
-            
-           retrivedCategorise = retrivedCategorise.Concat(categories).ToList();
-
             foreach (var category in categories)
             {
-                GetChildrenCategory(category.Id);
+                if (category.Id == categoryId)
+                    return category;
+
+                GetChildren(category.ChildCategories, categoryId);
             }
 
-        //    return retrivedCategorise;
+            return null;
+        }
+
+
+        public IList<Guid> ExtractListOfCategoriesId(IList<CategoryDto> categories)
+        {
+            IList<Guid> listOfId = new List<Guid>();
+            foreach (var category in categories)
+            {
+                listOfId.Add(category.Id);
+                if(category.ChildCategories.Count() > 0)
+                listOfId = listOfId.Concat(ExtractListOfCategoriesId(category.ChildCategories)).ToList();
+            }
+
+            return listOfId;
         }
     }
 }

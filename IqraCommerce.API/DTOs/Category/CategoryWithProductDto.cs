@@ -8,7 +8,6 @@ namespace IqraCommerce.API.DTOs
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Rank { get; set; }
-        public IList<ProductShortDto> Products { get; set; }
+        public IEnumerable<ProductShortDto> Products { get; set; }
     }
 }
