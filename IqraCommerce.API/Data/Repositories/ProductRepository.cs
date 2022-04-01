@@ -18,6 +18,7 @@ namespace IqraCommerce.API.Data.Repositories
         {
             _context = context;
         }
+        
         public async Task<Product> GetProductAsync(Guid productId)
         {
             return await _context.Product.Include(p => p.Unit)
@@ -26,6 +27,20 @@ namespace IqraCommerce.API.Data.Repositories
                                                                     && p.IsVisible
                                                                     && p.Id == productId);
 
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsAsync()
+        {
+            return await _context.Product
+                                 .Where(p => !p.IsDeleted && p.IsVisible)
+                                 .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetHighlightedProductsAsync()
+        {
+            return await _context.Product
+                                 .Where(p => !p.IsDeleted && p.IsVisible && p.IsHighlighted)
+                                 .ToArrayAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId)

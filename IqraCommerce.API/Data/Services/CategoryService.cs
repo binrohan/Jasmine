@@ -15,7 +15,6 @@ namespace IqraCommerce.API.Data.Services
 {
     public class CategoryService : ICategoryService
     {
-        private List<Category> retrivedCategorise;
         private readonly ICategoryRepository _categoryRepo;
         private readonly IProductRepository _productRepo;
         private readonly IMapper _mapper;

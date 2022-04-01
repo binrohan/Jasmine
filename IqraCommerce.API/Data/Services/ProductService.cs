@@ -26,12 +26,18 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task<IEnumerable<ProductShortDto>> GetLatestProduct(int take)
         {
-            
             take = take > Config.MaxLatestProduct ? Config.MaxLatestProduct : take;
 
             var productsFromrepo = await _repo.GetLatestProducts(take);
 
             return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
+        }
+
+        public async Task<IEnumerable<HighlightedProductDto>> GetHighlightedProductsAsync()
+        {
+            var productsFromrepo = await _repo.GetHighlightedProductsAsync();
+
+            return _mapper.Map<IEnumerable<HighlightedProductDto>>(productsFromrepo);
         }
     }
 }

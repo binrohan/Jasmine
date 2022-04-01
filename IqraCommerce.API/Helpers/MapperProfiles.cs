@@ -84,6 +84,9 @@ namespace IqraCommerce.API.Helpers
 
             #region Product
             CreateMap<Product, ProductShortDto>();
+            CreateMap<Product, HighlightedProductDto>()
+            .ForMember(dest => dest.HighlightedImageURL,
+                            opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.HighlightedImageURL));
             CreateMap<Product, ProductDetailsDto>()
             .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.ImageURL))

@@ -52,5 +52,13 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
         return Ok(new ApiResponse(200, products, "Successed"));
     }
+
+    [HttpGet("Highlighted")]
+    public async Task<IActionResult> GetHighlightedProducts()
+    {
+        var products = await _service.GetHighlightedProductsAsync();
+
+        return Ok(new ApiResponse(200, products, "Successed"));
+    }
 }
 }
