@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IqraCommerce.API.Data;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.Entities;
+using IqraCommerce.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 using static IqraCommerce.API.Data.IRepositories.IGenericRepository;
 
@@ -39,7 +40,7 @@ namespace IqraCommerce.API.Data.Repositories
                                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByCategoriesAsync(IList<Guid> listOfCategoriesId)
+        public async Task<IEnumerable<Product>> GetProductsByCategoriesAsync(int take, IList<Guid> listOfCategoriesId)
         {
             return await _context.ProductCategory
                                 .Where(pc => !pc.IsDeleted && listOfCategoriesId.Contains(pc.CategoryId))
@@ -48,7 +49,17 @@ namespace IqraCommerce.API.Data.Repositories
                                      pc => pc.ProductId,
                                      p => p.Id,
                                      (pc, p) => p)
+                                .Take(take)
                                 .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetLatestProducts(int take)
+        {
+            return await _context.Product
+                                 .Where(p => !p.IsDeleted && p.IsVisible)
+                                 .OrderBy(p => p.CreatedAt)
+                                 .Take(take)
+                                 .ToArrayAsync();
         }
     }
 }

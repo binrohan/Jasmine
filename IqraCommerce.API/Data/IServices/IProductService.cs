@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using IqraCommerce.API.DTOs;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Data.IServices
 {
-    public interface ICategoryService
+    public interface IProductService
     {
-         Task<object> GetChildrenWithProductsAsync(int take, Guid categoryId);
+         Task<IEnumerable<ProductShortDto>> GetLatestProduct(int take);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IqraCommerce.API.Entities;
+using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
@@ -9,6 +10,7 @@ namespace IqraCommerce.API.Data.IRepositories
     {
         Task<Product> GetProductAsync(Guid productId);
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId);
-        Task<IEnumerable<Product>> GetProductsByCategoriesAsync(IList<Guid> listOfCategoriesId);
+        Task<IEnumerable<Product>> GetProductsByCategoriesAsync(int take, IList<Guid> listOfCategoriesId);
+        Task<IEnumerable<Product>> GetLatestProducts(int take);
     }
 }

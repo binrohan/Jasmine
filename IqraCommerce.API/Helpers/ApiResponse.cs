@@ -2,7 +2,16 @@ namespace IqraCommerce.API.Helpers
 {
     public class ApiResponse
     {
-        public ApiResponse(int statusCode, object data = null, string message = null)
+        public ApiResponse()
+        {
+
+        }
+        public ApiResponse(int statusCode, string message = null)
+        {
+            StatusCode = statusCode;
+            Message = message ?? GetDefaultMessageForStatusCode(statusCode);
+        }
+        public ApiResponse(int statusCode, object data, string message = null)
         {
             StatusCode = statusCode;
             Message = message ?? GetDefaultMessageForStatusCode(statusCode);
@@ -15,10 +24,7 @@ namespace IqraCommerce.API.Helpers
         public bool IsError { get; set; }
         public object Data { get; set; }
 
-        public ApiResponse()
-        {
 
-        }
 
         private string GetDefaultMessageForStatusCode(int statusCode)
         {
@@ -38,7 +44,7 @@ namespace IqraCommerce.API.Helpers
             };
         }
 
-         private bool DetectError(int DetectError)
+        private bool DetectError(int DetectError)
         {
             return DetectError > 299 || 200 > DetectError;
         }

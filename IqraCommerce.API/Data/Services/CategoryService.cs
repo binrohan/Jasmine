@@ -9,6 +9,7 @@ using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
+using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Data.Services
 {
@@ -26,7 +27,7 @@ namespace IqraCommerce.API.Data.Services
             _categoryRepo = categoryRepo;
         }
 
-        public async Task<object> GetChildrenWithProductsAsync(Guid categoryId)
+        public async Task<object> GetChildrenWithProductsAsync(int take, Guid categoryId)
         {
             var categoriesFromRepo = await _categoryRepo.GetCategoriesAsync();
 
@@ -44,7 +45,7 @@ namespace IqraCommerce.API.Data.Services
 
                 var listOfCategories = ExtractListOfCategoriesId(category.ChildCategories);
 
-                var productsFromRepo = await _productRepo.GetProductsByCategoriesAsync(listOfCategories); 
+                var productsFromRepo = await _productRepo.GetProductsByCategoriesAsync(take, listOfCategories); 
                 categoryWithProductDto.Products = _mapper.Map<IEnumerable<ProductShortDto>>(productsFromRepo);
                  
                 categoriesWithProductsToReturn.Add(categoryWithProductDto);
