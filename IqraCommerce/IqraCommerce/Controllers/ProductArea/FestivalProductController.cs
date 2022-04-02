@@ -1,4 +1,5 @@
-﻿using IqraBase.Web.Controllers;
+﻿using IqraBase.Data;
+using IqraBase.Web.Controllers;
 using IqraCommerce.DTOs;
 using IqraCommerce.Entities.ProductArea;
 using IqraCommerce.Models.ProductArea;
@@ -18,6 +19,7 @@ namespace IqraCommerce.Controllers.ProductArea
         public FestivalProductController()
         {
             service = __service = ___service = new FestivalProductService();
+            //var db = new AppDB();
         }
 
         public async Task<JsonResult> GetFestivalsByProduct([FromBody] Page page)

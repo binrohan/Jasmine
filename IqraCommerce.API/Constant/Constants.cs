@@ -2,7 +2,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace IqraCommerce.API.Constants
 {
-    public static class Dirs
+    public static class Supdirs
+    {
+        public readonly static string directories = "Directories";
+    }
+
+    public static class Subdirs
     {
         public readonly static string banner = "Banner";
         public readonly static string product = "Product";
@@ -10,7 +15,7 @@ namespace IqraCommerce.API.Constants
         public readonly static string productHighlight = "ProductHighlight";
     }
 
-    public static class ImageSize
+    public static class Key
     {
         public readonly static string original = "Original";
         public readonly static string small = "Small";

@@ -10,9 +10,9 @@ namespace IqraCommerce.API.Helpers
 
         public string appSettingValue { get; set; }
 
-        public static string AppSetting(string sub, string Key)
+        public static string AppSetting(string Superkey, string Subkey, string Key)
         {
-          _appSettings = GetCurrentSettings(sub, Key);
+          _appSettings = GetCurrentSettings(Superkey, Subkey, Key);
           return _appSettings.appSettingValue;
         }
 
@@ -21,7 +21,7 @@ namespace IqraCommerce.API.Helpers
             this.appSettingValue = config.GetValue<string>(Key);
         }
 
-        public static Config GetCurrentSettings(string sub, string Key)
+        public static Config GetCurrentSettings(string Superkey, string Subkey, string Key)
         {
             var builder = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory())
@@ -30,12 +30,12 @@ namespace IqraCommerce.API.Helpers
 
             IConfigurationRoot configuration = builder.Build();
 
-            if(string.IsNullOrEmpty(sub))
-                return new Config(configuration.GetSection("Directories"), Key);
+            if(string.IsNullOrEmpty(Subkey))
+                return new Config(configuration.GetSection(Superkey), Key);
             
 
 
-            return new Config(configuration.GetSection("Directories").GetSection(sub), Key);
+            return new Config(configuration.GetSection(Superkey).GetSection(Subkey), Key);
 
         }
     }

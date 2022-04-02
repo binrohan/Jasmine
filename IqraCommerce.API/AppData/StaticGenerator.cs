@@ -82,10 +82,10 @@ namespace IqraCommerce.API.AppData
                     SELECT [Id]
                         ,[Rank]
                         ,[Size]
-                        ,'/Images/Banner/Original/'+[ImageURL] [ImageURL]
+                        ,'"+ "" +@"'+[ImageURL] [ImageURL]
                         ,[Link]
                     FROM [dbo].[Banner] banner
-                    WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + BannerType.MainBanner + @"
+                    WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + ((int)BannerType.MainBanner) + @"
                     ORDER BY [Rank]
 
 
