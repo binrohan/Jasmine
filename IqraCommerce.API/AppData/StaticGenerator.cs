@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
+using IqraCommerce.API.Constants;
 using IqraCommerce.API.Data;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs;
+using IqraCommerce.API.Helpers;
 using IqraCommerce.Services;
 using IqraService.DB;
 using IqraService.Search;
@@ -59,9 +61,10 @@ namespace IqraCommerce.API.AppData
                 data.Data.Data[4],
             };
 
-            var dataStr = "var appData = " + JsonConvert.SerializeObject(Data)+";";
+            var appDataJSON = JsonConvert.SerializeObject(Data);
+            var dataStr = "var APP_DATA = " + appDataJSON +";";
 
-            System.IO.File.WriteAllText(path + @"wwwroot/StaticGenerated/appdata.txt", dataStr);
+            System.IO.File.WriteAllText(path + @"wwwroot/StaticGenerated/appdata.json", appDataJSON);
 
             var firstPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/FirstPart.html");
             var lastPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/LastPart.html");
@@ -82,10 +85,10 @@ namespace IqraCommerce.API.AppData
                     SELECT [Id]
                         ,[Rank]
                         ,[Size]
-                        ,'"+ "" +@"'+[ImageURL] [ImageURL]
+                        ,'"+ Config.AppSetting(Supdirs.directories, Subdirs.banner, Key.original) +@"'+[ImageURL] [ImageURL]
                         ,[Link]
                     FROM [dbo].[Banner] banner
-                    WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + ((int)BannerType.MainBanner) + @"
+                    WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + (int)BannerType.MainBanner + @"
                     ORDER BY [Rank]
 
 
@@ -106,7 +109,7 @@ namespace IqraCommerce.API.AppData
                     ,P.[Name]
                     ,P.[DisplayName]
                     ,P.[PackSize]
-                    ,'/Images/Product/Original/'+ P.[ImageURL] [ImageURL]
+                    ,'" + Config.AppSetting(Supdirs.directories, Subdirs.product, Key.small) + @"'+ P.[ImageURL] [ImageURL]
                     ,P.[CurrentPrice]
                     ,P.[OriginalPrice]
                     ,P.[DiscountedPrice]
@@ -128,7 +131,7 @@ namespace IqraCommerce.API.AppData
                     ,[Name]
                     ,[DisplayName]
                     ,[PackSize]
-                    ,'/Images/Product/Original/'+[ImageURL] [ImageURL]
+                    ,'" + Config.AppSetting(Supdirs.directories, Subdirs.product, Key.small) + @"'+[ImageURL] [ImageURL]
                     ,[CurrentPrice]
                     ,[OriginalPrice]
                     ,[DiscountedPrice]
@@ -144,7 +147,7 @@ namespace IqraCommerce.API.AppData
 
                 -- ### Brand Images ### [4]
                 SELECT [Id]
-                    ,'/Images/Showcase/Original/'+[ImageURL] [ImageURL]
+                    ,'" + Config.AppSetting(Supdirs.directories, Subdirs.showcase, Key.small) + @"'+[ImageURL] [ImageURL]
                     ,[Rank]
                 FROM [dbo].[Showcase]
                 WHERE [IsDeleted] = 0 AND [IsVisible] = 1

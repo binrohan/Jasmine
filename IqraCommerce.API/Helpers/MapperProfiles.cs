@@ -65,7 +65,7 @@ namespace IqraCommerce.API.Helpers
                 .ForMember(dest => dest.PackSize,
                             opt => opt.MapFrom(src => src.Product.PackSize))
                 .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src =>  Config.AppSetting(Supdirs.directories, Subdirs.banner, Key.small) + src.Product.ImageURL))
+                            opt => opt.MapFrom(src =>  Config.AppSetting(Supdirs.directories, Subdirs.product, Key.small) + src.Product.ImageURL))
                 .ForMember(dest => dest.CurrentPrice,
                             opt => opt.MapFrom(src => src.Product.CurrentPrice))
                 .ForMember(dest => dest.OriginalPrice,
