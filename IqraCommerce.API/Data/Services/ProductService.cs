@@ -10,6 +10,7 @@ using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.Helpers;
+using IqraCommerce.API.Params;
 
 namespace IqraCommerce.API.Data.Services
 {
@@ -24,20 +25,34 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<ProductShortDto>> GetLatestProduct(int take)
+        public async Task<IEnumerable<ProductShortDto>> GetLatestProductsAsync()
         {
-            take = take > Config.MaxLatestProduct ? Config.MaxLatestProduct : take;
+            ProductParam param = new ProductParam(OrderBy.CreationDate, 10, true);
 
-            var productsFromrepo = await _repo.GetLatestProducts(take);
+            var productsFromrepo = await _repo.GetProductsAsync(param);
 
             return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
         }
 
         public async Task<IEnumerable<HighlightedProductDto>> GetHighlightedProductsAsync()
         {
-            var productsFromrepo = await _repo.GetHighlightedProductsAsync();
+            ProductParam param = new ProductParam(OrderBy.Rank)
+            {
+                IsHighlighted = true
+            };
+
+            var productsFromrepo = await _repo.GetProductsAsync(param);
 
             return _mapper.Map<IEnumerable<HighlightedProductDto>>(productsFromrepo);
+        }
+
+        public async Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync()
+        {
+            ProductParam param = new ProductParam(OrderBy.Discount, 10, true);
+
+            var productsFromrepo = await _repo.GetProductsAsync(param);
+
+            return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
         }
     }
 }

@@ -46,9 +46,9 @@ namespace IqraCommerce.API.Controllers.ProductArea
     }
 
     [HttpGet("Latest")]
-    public async Task<IActionResult> GetLatestProducts([FromQuery] int take = 10)
+    public async Task<IActionResult> GetLatestProducts()
     {
-        var products = await _service.GetLatestProduct(take);
+        var products = await _service.GetLatestProductsAsync();
 
         return Ok(new ApiResponse(200, products, "Successed"));
     }
@@ -57,6 +57,14 @@ namespace IqraCommerce.API.Controllers.ProductArea
     public async Task<IActionResult> GetHighlightedProducts()
     {
         var products = await _service.GetHighlightedProductsAsync();
+
+        return Ok(new ApiResponse(200, products, "Successed"));
+    }
+
+    [HttpGet("TopDiscounted")]
+    public async Task<IActionResult> GetTopDiscountedProducts()
+    {
+        var products = await _service.GetTopDiscountedProductsAsync();
 
         return Ok(new ApiResponse(200, products, "Successed"));
     }

@@ -5,4 +5,12 @@ namespace IqraCommerce.API.Data
         MainBanner,
         OfferBanner
     }
+
+    public enum OrderBy
+    {
+        Rank,
+        Name,
+        Discount,
+        CreationDate
+    }
 }

@@ -1,11 +1,13 @@
 using System;
 using AutoMapper;
+using IqraCommerce.API.Constants;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.DTOs.Contact;
 using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace IqraCommerce.API.Helpers
 {
@@ -31,7 +33,7 @@ namespace IqraCommerce.API.Helpers
             #region Banner
             CreateMap<Banner, BannerReturnDto>()
                 .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => "/Contents/Images/Product/Icon/" + src.ImageURL));
+                            opt => opt.MapFrom(src =>  Config.AppSetting(Dirs.banner, ImageSize.original) + src.ImageURL));
             #endregion Banner
 
             #region Notice
@@ -63,7 +65,7 @@ namespace IqraCommerce.API.Helpers
                 .ForMember(dest => dest.PackSize,
                             opt => opt.MapFrom(src => src.Product.PackSize))
                 .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => "/Contents/Images/Product/Small/" + src.Product.ImageURL))
+                            opt => opt.MapFrom(src =>  Config.AppSetting(Dirs.banner, ImageSize.small) + src.Product.ImageURL))
                 .ForMember(dest => dest.CurrentPrice,
                             opt => opt.MapFrom(src => src.Product.CurrentPrice))
                 .ForMember(dest => dest.OriginalPrice,
@@ -83,13 +85,15 @@ namespace IqraCommerce.API.Helpers
             #endregion Category
 
             #region Product
-            CreateMap<Product, ProductShortDto>();
+            CreateMap<Product, ProductShortDto>()
+            .ForMember(dest => dest.ImageURL,
+                            opt => opt.MapFrom(src => Config.AppSetting(Dirs.product, ImageSize.small) + src.ImageURL));
             CreateMap<Product, HighlightedProductDto>()
             .ForMember(dest => dest.HighlightedImageURL,
-                            opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.HighlightedImageURL));
+                            opt => opt.MapFrom(src => Config.AppSetting(Dirs.productHighlight, ImageSize.small) + src.HighlightedImageURL));
             CreateMap<Product, ProductDetailsDto>()
             .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => "/Contents/Images/Product/Original/" + src.ImageURL))
+                            opt => opt.MapFrom(src => Config.AppSetting(Dirs.product, ImageSize.original) + src.ImageURL))
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Product
