@@ -38,9 +38,9 @@ namespace IqraCommerce.API.Controllers.ProductArea
         }
 
         [HttpGet("ChildrenWithProducts/{categoryId}")]
-        public async Task<IActionResult> GetChildCategoriesWithProducts(Guid categoryId, [FromQuery]int take = 10)
+        public async Task<IActionResult> GetChildCategoriesWithProducts(Guid categoryId)
         {
-            var categoriesFromRepo = await _service.GetChildrenWithProductsAsync(take, categoryId);
+            var categoriesFromRepo = await _service.GetChildrenWithProductsAsync(categoryId);
 
             if(categoriesFromRepo is null) return NotFound(new ApiResponse(404, "Category Not Found"));
 

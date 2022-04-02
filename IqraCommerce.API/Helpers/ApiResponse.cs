@@ -30,9 +30,9 @@ namespace IqraCommerce.API.Helpers
         {
             return statusCode switch
             {
-                200 => "Updated Successfully",
-                201 => "Created Successfully",
-                204 => "Resource Updated Successfully",
+                200 => "Success",
+                201 => "Creat Success",
+                204 => "Update Success",
                 400 => "Bad Request",
                 401 => "Unauthorize",
                 404 => "Not Found",
