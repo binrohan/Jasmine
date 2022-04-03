@@ -84,7 +84,6 @@ body {
 
 /*CUSTOM*/
 .button_container {
-  padding: 4px 16px;
   margin-top: 12px;
   margin-bottom: 12px;
 }
@@ -191,9 +190,24 @@ a.btn.primary:active {
 ul.nav.nav-tabs li {
   cursor: pointer;
 }
-/*.screen{
+.main-content{
+    display: flex;
+}
+.mb-0{
+    margin: 0 !important;
+}
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+.screen {
     max-height: 100vh;
-    max-width: 100vw;
-    min-height: 100vh;
-    min-width: 100vw;
-}*/
+    overflow: hidden;
+}
+aside.main-sidebar{
+    max-height: 100vh;
+    overflow: auto;
+}

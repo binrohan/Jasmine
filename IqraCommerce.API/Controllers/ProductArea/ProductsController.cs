@@ -42,15 +42,15 @@ namespace IqraCommerce.API.Controllers.ProductArea
         var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);
         productToReturn.Categories = _mapper.Map<IEnumerable<CategoryShortDto>>(categoriesFromRepo);
 
-        return Ok(new ApiResponse(200, productToReturn, "Successed"));
+        return Ok(new ApiResponse(200, productToReturn));
     }
 
-    [HttpGet("Latest")]
-    public async Task<IActionResult> GetLatestProducts()
+    [HttpGet("Latest({categoryId})")]
+    public async Task<IActionResult> GetLatestProducts(Guid categoryId)
     {
-        var products = await _service.GetLatestProductsAsync();
+        var products = await _service.GetLatestProductsAsync(categoryId);
 
-        return Ok(new ApiResponse(200, products, "Successed"));
+        return Ok(new ApiResponse(200, products));
     }
 
     [HttpGet("Highlighted")]
@@ -58,7 +58,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
     {
         var products = await _service.GetHighlightedProductsAsync();
 
-        return Ok(new ApiResponse(200, products, "Successed"));
+        return Ok(new ApiResponse(200, products));
     }
 
     [HttpGet("TopDiscounted")]
@@ -66,7 +66,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
     {
         var products = await _service.GetTopDiscountedProductsAsync();
 
-        return Ok(new ApiResponse(200, products, "Successed"));
+        return Ok(new ApiResponse(200, products));
     }
 }
 }

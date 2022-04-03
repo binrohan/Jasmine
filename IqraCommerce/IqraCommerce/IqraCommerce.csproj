@@ -226,6 +226,7 @@
     <None Include="Areas\MenuArea\Views\SubMenuItem\Index.cshtml" />
     <None Include="Areas\MenuArea\Views\web.config" />
     <None Include="Areas\MenuArea\Views\_ViewStart.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
     <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\CategoryAccess.js" />
     <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\MenuAccess.js" />
     <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\SetCategoryDesignationAccess.js" />

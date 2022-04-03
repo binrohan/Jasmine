@@ -25,7 +25,7 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<ProductShortDto>> GetLatestProductsAsync()
+        public async Task<IEnumerable<ProductShortDto>> GetLatestProductsAsync(Guid categoryId)
         {
             ProductParam param = new ProductParam(OrderBy.CreationDate, 10, true);
 

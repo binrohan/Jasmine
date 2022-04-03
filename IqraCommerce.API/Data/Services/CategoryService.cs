@@ -67,7 +67,6 @@ namespace IqraCommerce.API.Data.Services
                     this.category = category;
                     break;
                 }
-                    
 
                 GetChildren(category.ChildCategories, categoryId);
             }

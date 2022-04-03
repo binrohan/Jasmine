@@ -41,7 +41,8 @@ namespace IqraCommerce.Services.ProductArea
             page.SortBy = page.SortBy ?? "[Level] asc";
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, CategoryQuery.Get());
+                var data = await db.GetPages(page, CategoryQuery.Get());
+                return  data;
             }
         }
 
