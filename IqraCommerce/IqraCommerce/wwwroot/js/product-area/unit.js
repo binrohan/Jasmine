@@ -1,7 +1,5 @@
-﻿// TODO: clicked on brand name show all coresponding product list
-// TODO: CreatedBy name and Updated by name
-
-import { editBtn } from "../buttons.js";
+﻿import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
+import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
 
 (function () {
     const controller = 'Unit';
@@ -16,15 +14,15 @@ import { editBtn } from "../buttons.js";
         { field: 'Number of Products', title: 'ProductCount', add: false },
         { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 } },
         { field: 'CreatedBy', title: 'Creator', add: false },
-        { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date',  add: false },
-        { field: 'UpdatedBy', title: 'Updator',  add: false },
-        { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated',  add: false },
+        { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
+        { field: 'UpdatedBy', title: 'Updator', add: false },
+        { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
     // Add / Edit popup config
-    function popup(options, grid) {
+    function popup(options) {
         Global.Add({
-            name: 'edit-brand-record',
+            name: 'edit-banner-record',
             model: options.data,
             title: options.title,
             columns: columns(),
@@ -36,24 +34,16 @@ import { editBtn } from "../buttons.js";
                         { text: 'Yes', value: true },
                         { text: 'No', value: false },
                     ],
-                    add: { sibling: 2 }
+                    add: { sibling: 2 },
                 }
             ],
             additionalField: [],
-            /*
-            * Before submiting the form onSubmit callback is invoked
-            * By passing following argument
-            * 1 first: form submit dto
-            * 2 second: unknown
-            * 3 editing row data 
-            */
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
             },
-            // following callback function invoked after http request is successed
             onSaveSuccess: function () {
-                tabs.gridModel && tabs.gridModel.Reload();
+                tabs.gridModel?.Reload();
             },
             save: `/${controller}/Create`,
             saveChange: `/${controller}/Edit`,
@@ -61,13 +51,12 @@ import { editBtn } from "../buttons.js";
     };
 
     function add() {
-        popup({ title: 'Create New Unit', action: 'add' });
+        popup({ title: 'New Brand', action: 'add' });
     };
 
-    function edit(model, grid) {
-        popup({ data: model, title: 'Edit Unit', action: 'edit' }, grid);
+    function edit(model) {
+        popup({ data: model, title: 'Edit Brand', action: 'edit' });
     };
-
 
     //Tab config
     const tab = (id, title, status, isDeleted = 0) => {
@@ -76,19 +65,18 @@ import { editBtn } from "../buttons.js";
             Name: title.toLowerCase(),
             Title: title,
             filter: isDeleted ?
-                [{ "field": "IsDeleted", "value": isDeleted, Operation: 0 }]
-                :
-                [{ "field": "IsVisible", "value": status, Operation: 0 },
-                { "field": "IsDeleted", "value": isDeleted, Operation: 0 }],
+                [trashRecord] : [filter("IsVisible", status, operationType.equal), liveRecord],
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
-            actions: isDeleted ? [] : [{
-                click: edit,
-                html: editBtn
-            }],
+            actions: isDeleted ? [] : [
+                {
+                    click: edit,
+                    html: editBtn()
+                }],
             onDataBinding: () => { },
             rowBound: () => { },
             columns: columns(),
             Url: 'Get',
+            Printable: { container: $('void') },
         }
     }
 
