@@ -1,4 +1,7 @@
-﻿import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
+﻿// TODO: clicked on brand name show all coresponding product list
+// TODO: CreatedBy name and Updated by name
+
+import { editBtn } from "../buttons.js";
 import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
 
 (function () {
