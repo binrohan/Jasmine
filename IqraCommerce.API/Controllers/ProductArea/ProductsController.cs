@@ -45,10 +45,13 @@ namespace IqraCommerce.API.Controllers.ProductArea
         return Ok(new ApiResponse(200, productToReturn));
     }
 
-    [HttpGet("Latest({categoryId})")]
+    [HttpGet("Latest/{categoryId}")]
     public async Task<IActionResult> GetLatestProducts(Guid categoryId)
     {
         var products = await _service.GetLatestProductsAsync(categoryId);
+
+        if(products is null)
+            return NotFound(new ApiResponse(404));
 
         return Ok(new ApiResponse(200, products));
     }

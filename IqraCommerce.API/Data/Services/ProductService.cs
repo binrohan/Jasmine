@@ -18,18 +18,25 @@ namespace IqraCommerce.API.Data.Services
     {
         private readonly IProductRepository _repo;
         private readonly IMapper _mapper;
+        private readonly ICategoryRepository _categoryRepo;
 
-        public ProductService(IProductRepository repo, IMapper mapper)
+        public ProductService(IProductRepository repo, ICategoryRepository categoryRepo, IMapper mapper)
         {
+            _categoryRepo = categoryRepo;
             _mapper = mapper;
             _repo = repo;
         }
 
         public async Task<IEnumerable<ProductShortDto>> GetLatestProductsAsync(Guid categoryId)
         {
-            ProductParam param = new ProductParam(OrderBy.CreationDate, 10, true);
+            var categoriesFromRepo = await _categoryRepo.GetCategoriesAsync();
 
-            var productsFromrepo = await _repo.GetProductsAsync(param);
+            var allChildrenCategory = categoriesFromRepo.GetAllChidren(categoryId);
+
+            if(allChildrenCategory.Count() == 0)
+                return null;
+
+            var productsFromrepo = await _repo.GetProductsByCategoriesAsync(20, allChildrenCategory.ToList());
 
             return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
         }
