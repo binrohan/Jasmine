@@ -45,5 +45,8 @@ namespace IqraCommerce.Entities.ProductArea
 
         public bool IsHighlighted { get; set; }
         public string HighlightedImageURL { get; set; }
+
+        public string Description { get; set; }
+        public string DescriptionFileURL { get; set; }
     }
 }

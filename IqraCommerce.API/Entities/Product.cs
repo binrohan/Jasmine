@@ -41,6 +41,8 @@ namespace IqraCommerce.API.Entities
 
         public bool IsHighlighted { get; set; }
         public string HighlightedImageURL { get; set; }
+        public string Description { get; set; }
+        public string DescriptionFileURL { get; set; }
 
         // Navigation Props 
         public List<ProductCategory> ProductCategories { get; set; }
