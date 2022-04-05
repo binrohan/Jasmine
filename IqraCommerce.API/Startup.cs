@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using IqraCommerce.API.Data;
+using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +41,7 @@ namespace IqraCommerce.API
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultSqlServerConnection")));
 
-                
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
@@ -48,12 +50,12 @@ namespace IqraCommerce.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IqraCommerce.API", Version = "v1" });
             });
 
-            
+
 
             // SQL Server Health Check
             services.AddHealthChecks()
                     .AddSqlServer(Configuration.GetConnectionString("DefaultSqlServerConnection"));
-            
+
             // Cors Policy
             services.AddCors(options =>
             {
@@ -77,6 +79,14 @@ namespace IqraCommerce.API
             {
                 configuration.RootPath = "wwwroot";
             });
+
+            // services.AddIdentity<Customer, IdentityRole>(opt =>
+            // {
+            //     opt.Password.RequiredLength = 7;
+            //     opt.Password.RequireDigit = false;
+            //     opt.Password.RequireUppercase = false;
+            // })
+            // .AddEntityFrameworkStores<DataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,7 +115,7 @@ namespace IqraCommerce.API
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-                 endpoints.MapHealthChecks("/healthz");
+                endpoints.MapHealthChecks("/healthz");
             });
 
             app.UseSpa(spa =>
