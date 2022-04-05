@@ -24,85 +24,25 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Product> Product { get; set; } // ** Using
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // ** Using
         public virtual DbSet<Showcase> Showcase { get; set; } // ** Using
+        public virtual DbSet<Customer> Customer { get; set; } // ** Using
+        public virtual DbSet<CustomerAddress> Address { get; set; } // ** Using
+        public virtual DbSet<Upazila> Upazila { get; set; } // ** Using
+        public virtual DbSet<Province> Province { get; set; } // ** Using
+        public virtual DbSet<District> District { get; set; } // ** Using
+
+
+
+
 
 
 
 
         
-        public virtual DbSet<Access> Access { get; set; }
-        public virtual DbSet<AccessType> AccessType { get; set; }
-        public virtual DbSet<ActionController> ActionController { get; set; }
-        public virtual DbSet<ActionMethod> ActionMethod { get; set; }
-        public virtual DbSet<ActionMethodGroup> ActionMethodGroup { get; set; }
-        public virtual DbSet<ActionMethodGroupItem> ActionMethodGroupItem { get; set; }
-        public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<AppCategory> AppCategory { get; set; }
-        public virtual DbSet<AppCategoryProduct> AppCategoryProduct { get; set; }
-        public virtual DbSet<AppPage> AppPage { get; set; }
-        public virtual DbSet<AppReview> AppReview { get; set; }
-        public virtual DbSet<AppScript> AppScript { get; set; }
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<BlogCategory> BlogCategory { get; set; }
-        public virtual DbSet<CategorySlider> CategorySlider { get; set; }
-        public virtual DbSet<ChangeHistory> ChangeHistory { get; set; }
-        public virtual DbSet<Comment> Comment { get; set; }
-        
-        public virtual DbSet<Coupon> Coupon { get; set; }
-        public virtual DbSet<CouponHistory> CouponHistory { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<CustomerPic> CustomerPic { get; set; }
-        public virtual DbSet<DataImporter> DataImporter { get; set; }
-        public virtual DbSet<DealsOfTheWeek> DealsOfTheWeek { get; set; }
-        public virtual DbSet<DesignationAccess> DesignationAccess { get; set; }
-        public virtual DbSet<Device> Device { get; set; }
-        public virtual DbSet<DeviceAccess> DeviceAccess { get; set; }
-        public virtual DbSet<DeviceActivity> DeviceActivity { get; set; }
-        public virtual DbSet<DiscountOffer> DiscountOffer { get; set; }
-        public virtual DbSet<DiscountOfferPic> DiscountOfferPic { get; set; }
-        public virtual DbSet<DisplayCategory> DisplayCategory { get; set; }
-        public virtual DbSet<District> District { get; set; }
-        public virtual DbSet<ErrorOeder> ErrorOeder { get; set; }
-        public virtual DbSet<FindStore> FindStore { get; set; }
-        public virtual DbSet<IqraGrid> IqraGrid { get; set; }
-        public virtual DbSet<IqraGridChangeHistory> IqraGridChangeHistory { get; set; }
-        public virtual DbSet<Licence> Licence { get; set; }
-        public virtual DbSet<Liker> Liker { get; set; }
-        public virtual DbSet<MedProduct> MedProduct { get; set; }
-        public virtual DbSet<MedProductPriceChanged> MedProductPriceChanged { get; set; }
-        public virtual DbSet<MenuAccess> MenuAccess { get; set; }
-        public virtual DbSet<MenuCategory> MenuCategory { get; set; }
-        public virtual DbSet<MenuItem> MenuItem { get; set; }
-        public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
-        public virtual DbSet<MyCart> MyCart { get; set; }
-        public virtual DbSet<MyWishlist> MyWishlist { get; set; }
-        public virtual DbSet<NewArrival> NewArrival { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<NotificationStatus> NotificationStatus { get; set; }
-        public virtual DbSet<OrderPayment> OrderPayment { get; set; }
-        public virtual DbSet<OrderPaymentMethod> OrderPaymentMethod { get; set; }
-        public virtual DbSet<OrderShipping> OrderShipping { get; set; }
-        public virtual DbSet<OtpMessage> OtpMessage { get; set; }
-        public virtual DbSet<PaymentLog> PaymentLog { get; set; }
-        public virtual DbSet<PaymentTracker> PaymentTracker { get; set; }
-        public virtual DbSet<Perks> Perks { get; set; }
-        public virtual DbSet<PrescriptionDocument> PrescriptionDocument { get; set; }
-        public virtual DbSet<ProductComment> ProductComment { get; set; }
-        public virtual DbSet<ProductContent> ProductContent { get; set; }
-        public virtual DbSet<ProductImporter> ProductImporter { get; set; }
-        public virtual DbSet<ProductInfo> ProductInfo { get; set; }
-        public virtual DbSet<ProductOffer> ProductOffer { get; set; }
-        public virtual DbSet<ProductOrder> ProductOrder { get; set; }
-        public virtual DbSet<ProductOrderItem> ProductOrderItem { get; set; }
-        public virtual DbSet<SubMenuItemAccess> SubMenuItemAccess { get; set; }
-        public virtual DbSet<Thana> Thana { get; set; }
-        public virtual DbSet<Union> Union { get; set; }
-        public virtual DbSet<Upazila> Upazila { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("data source=DESKTOP-2T4KNKA;initial catalog=SHOPPERS_PERK_DB;persist security info=True;user id=sa;password=123;MultipleActiveResultSets=True");
             }
         }
@@ -118,16 +58,7 @@ namespace IqraCommerce.API.Data
             //     entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
             // });
 
-            modelBuilder.Entity<AccessType>(entity =>
-            {
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
-            });
 
             modelBuilder.Entity<ActionMethodGroup>(entity =>
             {
@@ -181,7 +112,7 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            
+
 
             modelBuilder.Entity<CategorySlider>(entity =>
             {
@@ -213,23 +144,7 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Otpid).HasColumnName("OTPId");
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Phone).IsRequired();
-            });
-
-            modelBuilder.Entity<CustomerPic>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
             modelBuilder.Entity<DataImporter>(entity =>
             {
@@ -450,121 +365,16 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<OrderShipping>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
-            modelBuilder.Entity<OtpMessage>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
-            modelBuilder.Entity<PaymentLog>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Apiconnect).HasColumnName("APIConnect");
-
-                entity.Property(e => e.BankTranId).HasColumnName("bank_tran_id");
-
-                entity.Property(e => e.CardBrand).HasColumnName("card_brand");
-
-                entity.Property(e => e.CardIssuer).HasColumnName("card_issuer");
-
-                entity.Property(e => e.CardIssuerCountry).HasColumnName("card_issuer_country");
-
-                entity.Property(e => e.CardIssuerCountryCode).HasColumnName("card_issuer_country_code");
-
-                entity.Property(e => e.CardNo).HasColumnName("card_no");
-
-                entity.Property(e => e.CardType).HasColumnName("card_type");
-
-                entity.Property(e => e.Currency).HasColumnName("currency");
-
-                entity.Property(e => e.CurrencyAmount).HasColumnName("currency_amount");
-
-                entity.Property(e => e.CurrencyRate).HasColumnName("currency_rate");
-
-                entity.Property(e => e.CurrencyType).HasColumnName("currency_type");
-
-                entity.Property(e => e.GwVersion).HasColumnName("gw_version");
-
-                entity.Property(e => e.RiskLevel).HasColumnName("risk_level");
-
-                entity.Property(e => e.RiskTitle).HasColumnName("risk_title");
-
-                entity.Property(e => e.Status).HasColumnName("status");
-
-                entity.Property(e => e.StoreAmount).HasColumnName("store_amount");
-
-                entity.Property(e => e.TranDate).HasColumnName("tran_date");
-
-                entity.Property(e => e.TranId).HasColumnName("tran_id");
-
-                entity.Property(e => e.ValId).HasColumnName("val_id");
-
-                entity.Property(e => e.ValidatedOn).HasColumnName("validated_on");
-            });
-
-            modelBuilder.Entity<PaymentTracker>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<Perks>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<PrescriptionDocument>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
             modelBuilder.Entity<ProductCategory>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<ProductComment>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
-            modelBuilder.Entity<ProductContent>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
-            modelBuilder.Entity<ProductImporter>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Html).HasColumnName("HTML");
-
-                entity.Property(e => e.Mrp).HasColumnName("MRP");
-            });
-
-            modelBuilder.Entity<ProductInfo>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<ProductOffer>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<ProductOrder>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<ProductOrderItem>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
 
             modelBuilder.Entity<Province>(entity =>
             {

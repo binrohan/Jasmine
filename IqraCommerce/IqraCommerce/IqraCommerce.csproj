@@ -30,7 +30,6 @@
     <Compile Remove="Controllers\RequestOrderArea\**" />
     <Compile Remove="Controllers\ReviewArea\**" />
     <Compile Remove="Controllers\UrgentOrderArea\**" />
-    <Compile Remove="Controllers\UserArea\**" />
     <Compile Remove="Controllers\WishListArea\**" />
     <Compile Remove="wwwroot\js\EmployeeArea\**" />
     <Content Remove="Controllers\AddressArea\**" />
@@ -57,7 +56,6 @@
     <Content Remove="Controllers\RequestOrderArea\**" />
     <Content Remove="Controllers\ReviewArea\**" />
     <Content Remove="Controllers\UrgentOrderArea\**" />
-    <Content Remove="Controllers\UserArea\**" />
     <Content Remove="Controllers\WishListArea\**" />
     <Content Remove="wwwroot\js\EmployeeArea\**" />
     <EmbeddedResource Remove="Controllers\AddressArea\**" />
@@ -84,7 +82,6 @@
     <EmbeddedResource Remove="Controllers\RequestOrderArea\**" />
     <EmbeddedResource Remove="Controllers\ReviewArea\**" />
     <EmbeddedResource Remove="Controllers\UrgentOrderArea\**" />
-    <EmbeddedResource Remove="Controllers\UserArea\**" />
     <EmbeddedResource Remove="Controllers\WishListArea\**" />
     <EmbeddedResource Remove="wwwroot\js\EmployeeArea\**" />
     <None Remove="Controllers\AddressArea\**" />
@@ -111,7 +108,6 @@
     <None Remove="Controllers\RequestOrderArea\**" />
     <None Remove="Controllers\ReviewArea\**" />
     <None Remove="Controllers\UrgentOrderArea\**" />
-    <None Remove="Controllers\UserArea\**" />
     <None Remove="Controllers\WishListArea\**" />
     <None Remove="wwwroot\js\EmployeeArea\**" />
   </ItemGroup>

@@ -13,4 +13,9 @@ namespace IqraCommerce.API.Data
         Discount,
         CreationDate
     }
+
+    public enum AddressType
+    {
+        Home, Office, HomeTown, Recent
+    }
 }

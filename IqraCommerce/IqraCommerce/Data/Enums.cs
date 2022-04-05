@@ -10,4 +10,9 @@ namespace IqraCommerce.Data
         MainBanner,
         OfferBanner
     }
+
+    public enum AddressType
+    {
+        Home, Office, HomeTown, Recent
+    }
 }

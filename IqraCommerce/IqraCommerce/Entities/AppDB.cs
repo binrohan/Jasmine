@@ -5,7 +5,6 @@ using EBonik.Data.Entities.CareerArea;
 using EBonik.Data.Entities.CheckoutArea;
 using EBonik.Data.Entities.CommonArea;
 using EBonik.Data.Entities.ContactArea;
-using EBonik.Data.Entities.CustomerArea;
 using EBonik.Data.Entities.DataArea;
 using EBonik.Data.Entities.DataCenterArea;
 using EBonik.Data.Entities.FindStoreArea;
@@ -20,6 +19,7 @@ using EBonik.Data.Entities.RequestOrderArea;
 using EBonik.Data.Entities.ReviewArea;
 using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UrgentOrderArea;
+using EBonik.Data.Entities.UserArea;
 using EBonik.Data.Entities.WishListArea;
 using IqraCommerce.Entities.ProductArea;
 using Microsoft.Data.SqlClient;
@@ -72,6 +72,21 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Showcase> Showcase { get; set; } // Used
         #endregion
 
+        #region AddressArea
+        public virtual DbSet<District> Distict { get; set; } // Used
+        public virtual DbSet<Province> Province { get; set; } // Used
+        public virtual DbSet<Union> Union { get; set; } // Used
+        public virtual DbSet<Upazila> Upazila { get; set; } // Used
+        public virtual DbSet<Thana> Thana { get; set; } // Used
+        #endregion
+
+        #region UserArea
+        public virtual DbSet<Customer> Customer { get; set; } // Used
+        public virtual DbSet<CustomerAddress> Address { get; set; } // Used
+
+
+        #endregion UserArea
+
 
 
         #region HistoryArea
@@ -122,12 +137,6 @@ namespace IqraCommerce.Entities
         //public virtual DbSet<ShippingCharge> ShippingCharge { get; set; }
         #endregion
 
-        #region CustomerArea
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<CustomerPic> CustomerPic { get; set; }
-        //public virtual DbSet<CustomerPayment> CustomerPayment { get; set; }
-
-        #endregion
 
         #region FindStoreArea
         public virtual DbSet<FindStore> MyFindStore { get; set; }
@@ -175,14 +184,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Liker> Liker { get; set; }
         #endregion
 
-        #region AddressArea
-        public virtual DbSet<District> Distict { get; set; }
-        public virtual DbSet<Province> Province { get; set; }
-        public virtual DbSet<Union> Union { get; set; }
-        public virtual DbSet<Upazila> Upazila { get; set; }
-        public virtual DbSet<Thana> Thana { get; set; }
-        public virtual DbSet<Address> Address { get; set; }
-        #endregion
+       
 
         #region CareerArea
         public virtual DbSet<Career> Career { get; set; }
