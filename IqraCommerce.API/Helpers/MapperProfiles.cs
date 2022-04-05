@@ -64,8 +64,6 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => src.Product.DisplayName))
                 .ForMember(dest => dest.PackSize,
                             opt => opt.MapFrom(src => src.Product.PackSize))
-                .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src =>  Config.AppSetting(Supdirs.directories, Subdirs.product, Key.small) + src.Product.ImageURL))
                 .ForMember(dest => dest.CurrentPrice,
                             opt => opt.MapFrom(src => src.Product.CurrentPrice))
                 .ForMember(dest => dest.OriginalPrice,
@@ -85,15 +83,12 @@ namespace IqraCommerce.API.Helpers
             #endregion Category
 
             #region Product
-            CreateMap<Product, ProductShortDto>()
-            .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.product, Key.small) + src.ImageURL));
+            CreateMap<Product, ProductShortDto>();
+            
             CreateMap<Product, HighlightedProductDto>()
             .ForMember(dest => dest.HighlightedImageURL,
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.productHighlight, Key.small) + src.HighlightedImageURL));
             CreateMap<Product, ProductDetailsDto>()
-            .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.product, Key.original) + src.ImageURL))
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Product

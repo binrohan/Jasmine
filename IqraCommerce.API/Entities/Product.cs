@@ -9,8 +9,6 @@ namespace IqraCommerce.API.Entities
         public string Excerpt { get; set; } 
         public string PackSize { get; set; }
 
-        public string ImageURL { get; set; }
-
         public double CurrentPrice { get; set; }
         public double OriginalPrice { get; set; }
         public double DiscountedPrice { get; set; }
@@ -46,9 +44,8 @@ namespace IqraCommerce.API.Entities
 
         // Navigation Props 
         public List<ProductCategory> ProductCategories { get; set; }
+        public IList<ProductImage> Images { get; set; }
         public Brand Brand { get; set; }
         public Unit Unit { get; set; }
-        // public Category Category { get; set; }
-
     }
 }

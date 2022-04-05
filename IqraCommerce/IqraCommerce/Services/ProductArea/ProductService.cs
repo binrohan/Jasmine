@@ -74,30 +74,30 @@ namespace IqraCommerce.Services.ProductArea
         }
 
 
-        public Response UploadImage(string fileName, Guid id, Guid userId, Guid activityId)
-        {
-            var productFromRepo = Entity.Find(id);
+        //public Response UploadImage(string fileName, Guid id, Guid userId, Guid activityId)
+        //{
+        //    var productFromRepo = Entity.Find(id);
 
-            var temp = productFromRepo;
+        //    var temp = productFromRepo;
 
-            productFromRepo.ImageURL = fileName;
-            productFromRepo.UpdatedAt = DateTime.Now;
-            productFromRepo.UpdatedBy = userId;
+        //    productFromRepo.ImageURL = fileName;
+        //    productFromRepo.UpdatedAt = DateTime.Now;
+        //    productFromRepo.UpdatedBy = userId;
 
-            ChangeHistoryService.Set(this,
-                                     id,
-                                     new { FileName = fileName, UserId = userId, ProductId = id },
-                                     temp,
-                                     productFromRepo,
-                                     "Upload/Change product image",
-                                     "Image change",
-                                     activityId,
-                                     userId);
-            SaveChange();
+        //    ChangeHistoryService.Set(this,
+        //                             id,
+        //                             new { FileName = fileName, UserId = userId, ProductId = id },
+        //                             temp,
+        //                             productFromRepo,
+        //                             "Upload/Change product image",
+        //                             "Image change",
+        //                             activityId,
+        //                             userId);
+        //    SaveChange();
 
 
-            return new Response(200, null, false, "successed");
-        }
+        //    return new Response(200, null, false, "successed");
+        //}
 
         public Response UploadHighlightedImage(string fileName, Guid id, Guid userId, Guid activityId)
         {
@@ -141,7 +141,6 @@ namespace IqraCommerce.Services.ProductArea
               ,product.[DisplayName]
               ,product.[Excerpt]
               ,product.[PackSize]
-              ,'/wwwroot/Images/Products/Icon/'+product.[ImageURL] [ImageURL]
               ,product.[CurrentPrice]
               ,product.[OriginalPrice]
               ,product.[DiscountedPrice]

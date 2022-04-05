@@ -13,7 +13,6 @@ namespace IqraCommerce.API.DTOs
         public string Excerpt { get; set; } 
         public string PackSize { get; set; }
 
-        public string ImageURL { get; set; }
 
         public double CurrentPrice { get; set; }
         public double OriginalPrice { get; set; }

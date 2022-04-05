@@ -43,8 +43,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<AppScript> AppScript { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<BlogCategory> BlogCategory { get; set; }
-        public virtual DbSet<Career> Career { get; set; }
-        public virtual DbSet<CareerDocument> CareerDocument { get; set; }
         public virtual DbSet<CategorySlider> CategorySlider { get; set; }
         public virtual DbSet<ChangeHistory> ChangeHistory { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
@@ -95,26 +93,10 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<ProductOffer> ProductOffer { get; set; }
         public virtual DbSet<ProductOrder> ProductOrder { get; set; }
         public virtual DbSet<ProductOrderItem> ProductOrderItem { get; set; }
-        public virtual DbSet<ProductRating> ProductRating { get; set; }
-        public virtual DbSet<ProductSubCategory> ProductSubCategory { get; set; }
-        public virtual DbSet<ProductSubCategoryItem> ProductSubCategoryItem { get; set; }
-        public virtual DbSet<Province> Province { get; set; }
-        public virtual DbSet<Rating> Rating { get; set; }
-        public virtual DbSet<RequestOrder> RequestOrder { get; set; }
-        public virtual DbSet<RewardPoint> RewardPoint { get; set; }
-        public virtual DbSet<RewardPointHistory> RewardPointHistory { get; set; }
-        public virtual DbSet<SafetyAdvice> SafetyAdvice { get; set; }
-        public virtual DbSet<SafetyItem> SafetyItem { get; set; }
-        public virtual DbSet<SafetyLabel> SafetyLabel { get; set; }
-        public virtual DbSet<SpecialProduct> SpecialProduct { get; set; }
-        public virtual DbSet<SubMenuItem> SubMenuItem { get; set; }
         public virtual DbSet<SubMenuItemAccess> SubMenuItemAccess { get; set; }
         public virtual DbSet<Thana> Thana { get; set; }
         public virtual DbSet<Union> Union { get; set; }
         public virtual DbSet<Upazila> Upazila { get; set; }
-        public virtual DbSet<UploadPrescription> UploadPrescription { get; set; }
-        public virtual DbSet<UrgentOrder> UrgentOrder { get; set; }
-        public virtual DbSet<WishList> WishList { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -199,17 +181,7 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<Career>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.ApplicantCv).HasColumnName("ApplicantCV");
-            });
-
-            modelBuilder.Entity<CareerDocument>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            
 
             modelBuilder.Entity<CategorySlider>(entity =>
             {
@@ -594,21 +566,6 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<ProductRating>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<ProductSubCategory>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<ProductSubCategoryItem>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
             modelBuilder.Entity<Province>(entity =>
             {
                 entity.Property(e => e.Xmax).HasColumnName("XMax");
@@ -618,55 +575,6 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Ymax).HasColumnName("YMax");
 
                 entity.Property(e => e.Ymin).HasColumnName("YMin");
-            });
-
-            modelBuilder.Entity<Rating>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<RequestOrder>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<RewardPoint>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<RewardPointHistory>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<SafetyAdvice>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<SafetyItem>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<SafetyLabel>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<SpecialProduct>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<SubMenuItem>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<SubMenuItemAccess>(entity =>
@@ -703,21 +611,6 @@ namespace IqraCommerce.API.Data
                 entity.Property(e => e.Ymax).HasColumnName("YMax");
 
                 entity.Property(e => e.Ymin).HasColumnName("YMin");
-            });
-
-            modelBuilder.Entity<UploadPrescription>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<UrgentOrder>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<WishList>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
             OnModelCreatingPartial(modelBuilder);

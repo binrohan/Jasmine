@@ -33,15 +33,6 @@ namespace IqraCommerce.Controllers.ProductArea
             return View();
         }
 
-        public ActionResult UploadImage([FromForm] ImageUploadDto imageUpload)
-        {
-            ImageManager imageManager = new ImageManager(_config);
-
-            var fileName = imageManager.Store(imageUpload.Img, "Product");
-
-            return Json(___service.UploadImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
-        }
-
         public ActionResult UploadHighlightedImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
