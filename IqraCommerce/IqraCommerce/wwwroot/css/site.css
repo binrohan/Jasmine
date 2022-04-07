@@ -123,21 +123,54 @@ td.action {
   margin-left: 8px;
 }
 
-a.btn.primary {
+a.btn.primary, .btn.primary {
   background: #673ab7 !important;
   color: white;
   box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
   border: 1px solid #673ab7;
   font-weight: bold;
 }
-a.btn.primary:hover {
+a.btn.primary:hover,  .btn.primary:hover{
   background: #683ab7d3 !important;
 }
-a.btn.primary:active {
+a.btn.primary:active, .btn.primary:active {
   background: #542e94 !important;
   box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
     0 3px 14px 2px #0000001f;
   color: white !important;
+}
+
+.btn.warn {
+  background: #f44336 !important;
+  color: white;
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+  border: 1px solid #f44336;
+  font-weight: bold;
+}
+.btn.warn:hover{
+  background: #f35a4f !important;
+}
+.btn.warn:active {
+  background: #f44336 !important;
+  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
+    0 3px 14px 2px #0000001f;
+  color: white !important;
+}
+.btn.caution {
+  background: #ffd740 !important;
+  color: rgb(37, 37, 37);
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+  border: 1px solid #ffd740;
+  font-weight: bold;
+}
+.btn.caution:hover{
+  background: #ffde69 !important;
+}
+.btn.caution:active {
+  background: #fccf2e !important;
+  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
+    0 3px 14px 2px #0000001f;
+  color: rgb(37, 37, 37) !important;
 }
 
 .btn_print {

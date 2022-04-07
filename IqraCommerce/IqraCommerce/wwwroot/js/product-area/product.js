@@ -4,7 +4,7 @@
 // TODO: Category select
 // TODO: Remove vat [X]
 
-import { editBtn, imageBtn, menuBtn, plusBtn, starBtn } from "../buttons.js";
+import { editBtn, imageBtn, menuBtn, fileBtn } from "../buttons.js";
 import { url } from '../utils.js';
 
 (function () {
@@ -144,20 +144,8 @@ import { url } from '../utils.js';
         td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
     }
 
-    const markAsHighlighted = (row, grid) => {
-       fetch(`/${controller}/MarkAsHighlighted/` + row.Id, {
-           method: 'GET',
-       }).then(res => res.json())
-       .then(data => {
-           if(data.IsError)
-            throw new Error(data.Msg)
-
-            // Toaster will be perfact here
-            grid.Reload();
-            alert("Product Marked as highlighted successfully");
-       }).catch((err) => {
-            alert(err);
-       });
+    const gotProductEditor = (row) => {
+        window.open(`/Product/Description?id=${row.Id}`, "_blank");
     }
 
 
@@ -183,6 +171,9 @@ import { url } from '../utils.js';
                 }, {
                     click: uploadImage,
                     html: imageBtn()
+                }, {
+                    click: gotProductEditor,
+                    html: fileBtn("Edit Product Description")
                 }],
             onDataBinding: () => { },
             rowBound: () => { },
@@ -211,38 +202,4 @@ import { url } from '../utils.js';
     //Initialize Tabs
     Global.Tabs(tabs);
     tabs.items[0].set(tabs.items[0]);
-
-
-    // Image Upload
-    // $('#file-input').change((e) => {
-    //     console.log(e.target.files);
-    //     $('#preview').html(`
-    //     <div class="preview-box">
-    //         <img src="${URL.createObjectURL(e.target.files[0])}" alt="Alternate Text" />
-    //     </div>
-    //     `)
-    // });
-
-    // $('#image-upload').click((e) => {
-    //     if($('#file-input')[0].files.length <= 0){
-    //         alert("No image found, Please select image");
-    //         return;
-    //     }
-
-    //     const formData = new FormData();
-    //     formData.append('id', selectedRow.Id);
-    //     formData.append('activityId', '00000000-0000-0000-0000-000000000000');
-    //     formData.append('image', $('#file-input')[0].files[0]);
-
-    //     fetch(`/${controller}/UploadImage`, {
-    //         method: "POST",
-    //         body: formData,
-    //     }).then(res => {
-    //         return json(res);
-    //     }).then(data => {
-    //         console.log(data.msg);
-    //     });
-
-    // })
-
 })();

@@ -48,5 +48,9 @@ namespace IqraCommerce.Entities.ProductArea
 
         public string Description { get; set; }
         public string DescriptionFileURL { get; set; }
+
+        public Unit Unit { get; set; }
+        public Brand Brand { get; set; }
+
     }
 }

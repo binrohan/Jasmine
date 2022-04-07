@@ -27,6 +27,8 @@ namespace IqraCommerce.API.DTOs
         public double Rating { get; set; }
         public int RatingCount { get; set; }
 
+        public string Description { get; set; }
+
         public BrandReturnDto Brand { get; set; }
         public UnitReturnDto Unit { get; set; }
         public IEnumerable<CategoryShortDto> Categories { get; set; }

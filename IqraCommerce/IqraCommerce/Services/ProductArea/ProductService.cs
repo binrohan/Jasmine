@@ -1,6 +1,7 @@
 ﻿using EBonik.Data.Models.ContactArea;
 using IqraBase.Data;
 using IqraBase.Service;
+using IqraCommerce.DTOs.Product;
 using IqraCommerce.Entities;
 using IqraCommerce.Entities.ProductArea;
 using IqraCommerce.Helpers;
@@ -99,6 +100,32 @@ namespace IqraCommerce.Services.ProductArea
 
 
             return new Response(200, null, false, "successed");
+        }
+
+        public Response Description(Guid productId)
+        {
+            var productFromRepo = Entity.Find(productId);
+
+            var productToReturn = new ProductDescriptionDto
+            {
+                Id = productFromRepo.Id,
+                Name = productFromRepo.Name,
+                CurrentPrice = productFromRepo.CurrentPrice,
+                Description = productFromRepo.Description,
+            };
+
+            return new Response(200, productToReturn, false, "Successed");
+        }
+
+        public Response SaveDescription(SaveDescriptionDto product)
+        {
+            var productFromRepo = Entity.Find(product.Id);
+
+            productFromRepo.Description = product.Description;
+
+            SaveChange();
+
+            return new Response(200, productFromRepo, false, "Successed");
         }
     }
 

@@ -7,3 +7,4 @@ export const imageBtn = (text = 'Upload image') => `<a class="action-button info
 export const menuBtn = (text = 'Add to category') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-menu-hamburger" title="${text}"></i></a>`;
 export const starBtn = (text = 'Mark as highlighted product') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-star" title="${text}"></i></a>`;
 export const crossBtn = (text = 'Remove From List') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="${text}"></i></a>`;
+export const fileBtn = (text = 'Edit Description') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-file" title="${text}"></i></a>`;

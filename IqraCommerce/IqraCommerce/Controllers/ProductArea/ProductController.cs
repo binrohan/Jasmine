@@ -33,6 +33,13 @@ namespace IqraCommerce.Controllers.ProductArea
             return View();
         }
 
+        public ActionResult Description()
+        {
+            if (IsLoggedId) return View();
+
+            return View();
+        }
+
         public ActionResult UploadHighlightedImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
@@ -50,6 +57,16 @@ namespace IqraCommerce.Controllers.ProductArea
         public ActionResult UnmarkAsHighlighted([FromForm] ProductHighlightDto highlightDto)
         {
             return Json(___service.UnmarkAsHighlighted(highlightDto.ProductId));
+        }
+    
+        public ActionResult ProductDescription([FromForm] ProductIdDto product)
+        {
+            return Json(___service.Description(product.Id));
+        }
+
+        public ActionResult SaveDescription([FromForm] SaveDescriptionDto product)
+        {
+            return Json(___service.SaveDescription(product));
         }
     }
 }
