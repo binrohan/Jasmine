@@ -74,30 +74,7 @@ namespace IqraCommerce.Services.ProductArea
         }
 
 
-        //public Response UploadImage(string fileName, Guid id, Guid userId, Guid activityId)
-        //{
-        //    var productFromRepo = Entity.Find(id);
-
-        //    var temp = productFromRepo;
-
-        //    productFromRepo.ImageURL = fileName;
-        //    productFromRepo.UpdatedAt = DateTime.Now;
-        //    productFromRepo.UpdatedBy = userId;
-
-        //    ChangeHistoryService.Set(this,
-        //                             id,
-        //                             new { FileName = fileName, UserId = userId, ProductId = id },
-        //                             temp,
-        //                             productFromRepo,
-        //                             "Upload/Change product image",
-        //                             "Image change",
-        //                             activityId,
-        //                             userId);
-        //    SaveChange();
-
-
-        //    return new Response(200, null, false, "successed");
-        //}
+        
 
         public Response UploadHighlightedImage(string fileName, Guid id, Guid userId, Guid activityId)
         {

@@ -45,9 +45,33 @@ namespace IqraCommerce.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IqraCommerce.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
             });
 
 
@@ -67,6 +91,9 @@ namespace IqraCommerce.API
             });
 
             services.AddApplicationServices();
+
+            services.AddIdentityServices(Configuration);
+
             services.AddControllersWithViews();
 
             services.AddControllersWithViews()
@@ -79,14 +106,6 @@ namespace IqraCommerce.API
             {
                 configuration.RootPath = "wwwroot";
             });
-
-            // services.AddIdentity<Customer, IdentityRole>(opt =>
-            // {
-            //     opt.Password.RequiredLength = 7;
-            //     opt.Password.RequireDigit = false;
-            //     opt.Password.RequireUppercase = false;
-            // })
-            // .AddEntityFrameworkStores<DataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,6 +127,7 @@ namespace IqraCommerce.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

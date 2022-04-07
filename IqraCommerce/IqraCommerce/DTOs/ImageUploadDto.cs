@@ -11,5 +11,7 @@ namespace IqraCommerce.DTOs
         public Guid Id { get; set; }
         public IFormFile Img { get; set; }
         public Guid ActivityId { get; set; }
+        public string ReferenceId { get; set; }
+
     }
 }

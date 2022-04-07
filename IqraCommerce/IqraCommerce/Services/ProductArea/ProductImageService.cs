@@ -43,13 +43,24 @@ namespace IqraCommerce.Services.ProductArea
             }
         }
 
-        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> GetProductsByCategory(Page page)
+        public ResponseJson UploadImage(ProductImageModel model,Guid userId)
         {
-            page.SortBy = page.SortBy ?? "[Name] asc";
-            using (var db = new DBService(this))
-            {
-                return await db.GetPages(page, ProductCategoryQuery.GetProductsByCategory());
-            }
+            return OnCreate(model, userId, true);
+        }
+        public ResponseJson SaveImage(ProductImageModel model, Guid userId)
+        {
+            return CallBack((response)=> {
+                var images = Entity.Where(i => i.ReferenceId == model.ReferenceId).ToList();
+                foreach(var image in images)
+                {
+                    image.ProductId = model.ProductId;
+                    if (image.Id == model.PrimaryId)
+                    {
+                        image.IsPrimary = true;
+                    }
+                }
+
+            });
         }
     }
 

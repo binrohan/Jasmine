@@ -92,6 +92,11 @@ namespace IqraCommerce.API.Helpers
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Product
+        
+            #region Customer
+            CreateMap<RegisterDto, Customer>();
+            CreateMap<Customer, CustomerReturnDto>();
+            #endregion Customer
         }
     }
 }

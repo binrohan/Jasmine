@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IqraCommerce.API.Entities
 {
-    public partial class Blog
+    public interface IBaseEntity
     {
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -14,7 +14,5 @@ namespace IqraCommerce.API.Entities
         public string Remarks { get; set; }
         public Guid ActivityId { get; set; }
         public string Name { get; set; }
-        public string PostContent { get; set; }
-        public string BlogCategoryId { get; set; }
     }
 }
