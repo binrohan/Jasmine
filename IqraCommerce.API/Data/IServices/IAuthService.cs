@@ -7,7 +7,7 @@ using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Data.IServices
 {
-    public interface ICustomerService
+    public interface IAuthService
     {
          Task<CustomerReturnDto> RegisterAsync(RegisterDto register);
 

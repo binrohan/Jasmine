@@ -8,14 +8,14 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.Services
 {
-    public class CustomerService : ICustomerService
+    public class AuthService : IAuthService
     {
         private readonly ICustomerRepository _repo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IOTPService _otpService;
-        public CustomerService(ICustomerRepository repo, IUnitOfWork unitOfWork, IMapper mapper, ITokenService tokenService, IOTPService otpService)
+        public AuthService(ICustomerRepository repo, IUnitOfWork unitOfWork, IMapper mapper, ITokenService tokenService, IOTPService otpService)
         {
             _otpService = otpService;
             _tokenService = tokenService;
@@ -44,6 +44,25 @@ namespace IqraCommerce.API.Data.Services
             
             registerFromRepo.CustomerId = customer.Id;
             registerFromRepo.IsPassed = true;
+
+            
+            _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
+            {
+                TypeOfAddress = AddressType.Home,
+                CustomerId = customer.Id
+            });
+            _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
+            {
+                TypeOfAddress = AddressType.HomeTown,
+                CustomerId = customer.Id
+            });
+            _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
+            {
+                TypeOfAddress = AddressType.Office,
+                CustomerId = customer.Id
+            });
+            
+
 
             var result = await _unitOfWork.Complete();
 

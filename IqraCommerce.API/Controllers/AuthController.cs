@@ -1,32 +1,26 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using IqraCommerce.API.Data;
 using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.Data.IServices;
 using IqraCommerce.API.DTOs;
-using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IqraCommerce.API.Controllers.UserArea
 {
-    public class CustomerController : BaseApiController
+    public class AuthController : BaseApiController
     {
-        private readonly DataContext _context;
-        private readonly ICustomerService _service;
+        private readonly IAuthService _service;
         private readonly ICustomerRepository _repo;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOTPService _otpService;
-        public CustomerController(DataContext context,
-                                  ICustomerService service,
+        public AuthController(IAuthService service,
                                   ICustomerRepository repo,
                                   IMapper mapper,
                                   ITokenService tokenService,
@@ -36,7 +30,6 @@ namespace IqraCommerce.API.Controllers.UserArea
             _mapper = mapper;
             _repo = repo;
             _service = service;
-            _context = context;
             _tokenService = tokenService;
             _unitOfWork = unitOfWork;
             _otpService = otpService;

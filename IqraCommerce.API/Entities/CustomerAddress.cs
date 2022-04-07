@@ -13,7 +13,6 @@ namespace IqraCommerce.API.Entities
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
         public int UpazilaId { get; set; }
-        public int UnionId { get; set; }
         public AddressType TypeOfAddress { get; set; }
         public bool IsPrimary { get; set; }
     }

@@ -17,7 +17,7 @@ namespace IqraCommerce.API.Extensions
             // services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IOTPService, OTPService>();
             // services.AddScoped<IOrderService, OrderService>();

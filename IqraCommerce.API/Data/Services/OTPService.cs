@@ -57,10 +57,14 @@ namespace IqraCommerce.API.Data.Services
         {
            var registerFromRepo = await _unitOfWork.Repository<Register>().GetByIdAsync(register.RequestId);
 
+           var timeSpan = (registerFromRepo.CreatedAt - DateTime.Now).TotalMinutes;
+
            return registerFromRepo.OTP == register.OTP
                 && registerFromRepo.Phone == register.Phone
-                && register.Password == registerFromRepo.Password;
-        } // 23f00c9e-a007-4f69-93eb-cf6426a980f5
+                && register.Password == registerFromRepo.Password
+                && timeSpan <= 5.00
+                && !registerFromRepo.IsPassed;
+        } 
 
         private string SMSURL(string phone, string code)
         {
