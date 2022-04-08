@@ -18,4 +18,14 @@ namespace IqraCommerce.API.Data
     {
         Home, Office, HomeTown, Recent
     }
+
+    public enum ComplainType
+    {
+        Website, Delivery, AgentBehaviors, Products, Others
+    }
+
+    public enum ComplainStatus
+    {
+        New, Read, XXX, OnHold
+    }
 }

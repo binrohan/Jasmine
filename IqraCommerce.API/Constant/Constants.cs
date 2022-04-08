@@ -23,19 +23,4 @@ namespace IqraCommerce.API.Constants
         public readonly static string icon = "Icon";
 
     }
-
-    public class Dir
-    {
-        private readonly IConfiguration _config;
-        public Dir(IConfiguration config)
-        {
-            _config = config;
-        }
-
-        public string Image(string dir, string size)
-        {
-            return _config.GetSection("Directories").GetSection(dir)[size];
-        }
-
-    }
 }

@@ -30,6 +30,7 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Province> Province { get; set; } // ** Using
         public virtual DbSet<District> District { get; set; } // ** Using
         public virtual DbSet<Register> Register { get; set; } // ** Using
+        public virtual DbSet<Complain> Complain { get; set; } // ** Using
 
 
 

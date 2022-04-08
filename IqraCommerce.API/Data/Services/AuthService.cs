@@ -33,8 +33,6 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task<CustomerAuthDto> RegisterAsync(RegisterDto register)
         {
-            
-
             var customer = _mapper.Map<Customer>(register);
 
             _unitOfWork.Repository<Customer>().Add(customer);
@@ -50,7 +48,7 @@ namespace IqraCommerce.API.Data.Services
             {
                 TypeOfAddress = AddressType.Home,
                 CustomerId = customer.Id,
-                IsDeleted = true
+                IsPrimary = true
             });
             _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
             {

@@ -106,6 +106,10 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.customer, Key.small) + src.ImageURL));
             #endregion Customer
 
+            #region Complain
+            CreateMap<ComplainCreateDto, Complain>();
+            CreateMap<Complain, ComplainReturnDto>();
+            #endregion Complain
             
         }
     }

@@ -66,6 +66,7 @@ namespace IqraCommerce.Entities
         #region Miscellaneous
         public virtual DbSet<Contact> Contact { get; set; } // Used
         public virtual DbSet<Register> Register { get; set; } // Used
+        public virtual DbSet<Complain> Complain { get; set; } // Used
         #endregion
 
         #region UI
@@ -84,8 +85,6 @@ namespace IqraCommerce.Entities
         #region UserArea
         public virtual DbSet<Customer> Customer { get; set; } // Used
         public virtual DbSet<CustomerAddress> Address { get; set; } // Used
-
-
         #endregion UserArea
 
 
