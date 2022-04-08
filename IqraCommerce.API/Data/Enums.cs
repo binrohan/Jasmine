@@ -28,4 +28,8 @@ namespace IqraCommerce.API.Data
     {
         New, Read, XXX, OnHold
     }
+    public enum OfferType
+    { 
+        Cashback, Coupon, Delivery
+    }
 }

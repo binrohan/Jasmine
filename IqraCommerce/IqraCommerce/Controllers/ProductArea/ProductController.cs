@@ -59,7 +59,7 @@ namespace IqraCommerce.Controllers.ProductArea
             return Json(___service.UnmarkAsHighlighted(highlightDto.ProductId));
         }
     
-        public ActionResult ProductDescription([FromForm] ProductIdDto product)
+        public ActionResult ProductDescription([FromForm] IdDto product)
         {
             return Json(___service.Description(product.Id));
         }

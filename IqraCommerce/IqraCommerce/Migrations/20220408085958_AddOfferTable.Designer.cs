@@ -4,14 +4,16 @@ using IqraCommerce.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IqraCommerce.Migrations
 {
     [DbContext(typeof(AppDB))]
-    partial class AppDBModelSnapshot : ModelSnapshot
+    [Migration("20220408085958_AddOfferTable")]
+    partial class AddOfferTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3454,9 +3456,6 @@ namespace IqraCommerce.Migrations
                     b.Property<DateTime>("EndingAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Headline")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
@@ -3472,14 +3471,17 @@ namespace IqraCommerce.Migrations
                     b.Property<int>("OfferType")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartingAt")
+                    b.Property<DateTime>("StartingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Temp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

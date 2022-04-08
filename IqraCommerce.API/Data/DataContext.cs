@@ -31,6 +31,7 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<District> District { get; set; } // ** Using
         public virtual DbSet<Register> Register { get; set; } // ** Using
         public virtual DbSet<Complain> Complain { get; set; } // ** Using
+        public virtual DbSet<Offer> Offer { get; set; } // ** Using
 
 
 

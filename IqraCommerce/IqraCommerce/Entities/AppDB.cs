@@ -22,6 +22,7 @@ using EBonik.Data.Entities.UrgentOrderArea;
 using EBonik.Data.Entities.UserArea;
 using EBonik.Data.Entities.WishListArea;
 using IqraCommerce.Entities.ProductArea;
+using IqraCommerce.Entities.PromotionArea;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,6 +87,10 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Customer> Customer { get; set; } // Used
         public virtual DbSet<CustomerAddress> Address { get; set; } // Used
         #endregion UserArea
+
+        #region Promotion
+        public virtual DbSet<Offer> Offer { get; set; } // Used
+        #endregion Promotion
 
 
 
