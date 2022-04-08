@@ -24,5 +24,14 @@ namespace IqraCommerce.API.Data.Repositories
                             .Where(c => c.Phone == phone)
                             .FirstOrDefaultAsync();
         }
+
+        public async Task<Customer> GetCustomerAsync(Guid id)
+        {
+            return await _context
+                            .Customer
+                            .Where(c => c.Id == id)
+                            .Include(c => c.Addresses)
+                            .FirstOrDefaultAsync();
+        }
     }
 }

@@ -10,7 +10,7 @@ using IqraCommerce.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IqraCommerce.API.Controllers.UserArea
+namespace IqraCommerce.API.Controllers
 {
     public class AuthController : BaseApiController
     {

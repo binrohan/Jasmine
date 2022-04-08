@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace IqraCommerce.API.DTOs
 {
@@ -12,5 +14,6 @@ namespace IqraCommerce.API.DTOs
         public string DueAmount { get; set; }
         public string Cashback { get; set; }
         public string Token { get; set; }
+        public IEnumerable<AddressReturnDto> Addresses { get; set; }
     }
 }

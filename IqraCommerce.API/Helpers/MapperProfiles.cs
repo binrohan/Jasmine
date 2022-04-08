@@ -93,10 +93,19 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => src.ProductCategories));
             #endregion Product
         
+            #region Address
+            CreateMap<CustomerAddress, AddressReturnDto>();
+            CreateMap<AddressUpdateDto, CustomerAddress>();
+            #endregion Address
+
             #region Customer
             CreateMap<RegisterDto, Customer>();
-            CreateMap<Customer, CustomerReturnDto>();
+            CreateMap<Customer, CustomerReturnDto>()
+            .ForMember(dest => dest.ImageURL,
+                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.customer, Key.small) + src.ImageURL));
             #endregion Customer
+
+            
         }
     }
 }

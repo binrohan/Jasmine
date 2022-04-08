@@ -13,6 +13,7 @@ namespace IqraCommerce.API.Constants
         public readonly static string product = "Product";
         public readonly static string showcase = "Showcase";
         public readonly static string productHighlight = "ProductHighlight";
+        public readonly static string customer = "Customer";
     }
 
     public static class Key
