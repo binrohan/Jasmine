@@ -9,7 +9,7 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface IAuthService
     {
-         Task<CustomerReturnDto> RegisterAsync(RegisterDto register);
+         Task<CustomerAuthDto> RegisterAsync(RegisterDto register);
 
          Task<bool> CheckPasswordSignInAsync(Customer customer, string password);
     }

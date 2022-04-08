@@ -11,9 +11,8 @@ namespace IqraCommerce.API.DTOs
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string DueAmount { get; set; }
-        public string Cashback { get; set; }
-        public string Token { get; set; }
+        public double DueAmount { get; set; }
+        public double Cashback { get; set; }
         public IEnumerable<AddressReturnDto> Addresses { get; set; }
     }
 }

@@ -43,7 +43,8 @@ namespace IqraCommerce.API.Controllers
 
             var customer = await _unitOfWork.Repository<Customer>().GetByIdAsync(customerId);
 
-            var customerToReturn = _mapper.Map<CustomerReturnDto>(customer);
+            var customerToReturn = _mapper.Map<CustomerAuthDto>(customer);
+            customerToReturn.Token = _tokenService.CreateToken(customer);
 
             return Ok(new ApiResponse(200, customerToReturn));
         }
@@ -75,7 +76,7 @@ namespace IqraCommerce.API.Controllers
 
             if (!result) return Unauthorized(new ApiResponse(401));
 
-            var customerToReturn = _mapper.Map<CustomerReturnDto>(customer);
+            var customerToReturn = _mapper.Map<CustomerAuthDto>(customer);
             customerToReturn.Token = _tokenService.CreateToken(customer);
 
             return Ok(new ApiResponse(200, customerToReturn, "Login Successed"));

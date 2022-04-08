@@ -91,9 +91,11 @@ namespace IqraCommerce.API.Controllers
         {
              var customerId = User.RetrieveIdFromPrincipal();
 
-             var addresses = await _service.GetAddressesAsync(customerId, addressType);
+             var address = await _service.GetAddressesAsync(customerId, addressType);
 
-             return Ok(new ApiResponse(200, addresses));
+             if(address is null) return NotFound(new ApiResponse(404, "Address Not Found"));
+
+             return Ok(new ApiResponse(200, address));
         }
 
         [HttpPut("Address")]

@@ -30,6 +30,7 @@ namespace IqraCommerce.API.Data.Repositories
             return await _context
                         .CustomerAddress
                         .Where(ca => ca.CustomerId == customerId)
+                        .OrderBy(ca =>  ca.TypeOfAddress)
                         .ToListAsync();
         }
     }

@@ -100,6 +100,7 @@ namespace IqraCommerce.API.Helpers
 
             #region Customer
             CreateMap<RegisterDto, Customer>();
+            CreateMap<Customer, CustomerAuthDto>();
             CreateMap<Customer, CustomerReturnDto>()
             .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.customer, Key.small) + src.ImageURL));

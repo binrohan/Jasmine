@@ -31,7 +31,7 @@ namespace IqraCommerce.API.Data.Services
             return customerFromRepo.Password == password && customerFromRepo.Phone == customer.Phone;
         }
 
-        public async Task<CustomerReturnDto> RegisterAsync(RegisterDto register)
+        public async Task<CustomerAuthDto> RegisterAsync(RegisterDto register)
         {
             
 
@@ -49,7 +49,8 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
             {
                 TypeOfAddress = AddressType.Home,
-                CustomerId = customer.Id
+                CustomerId = customer.Id,
+                IsDeleted = true
             });
             _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
             {
@@ -61,6 +62,11 @@ namespace IqraCommerce.API.Data.Services
                 TypeOfAddress = AddressType.Office,
                 CustomerId = customer.Id
             });
+            _unitOfWork.Repository<CustomerAddress>().Add(new CustomerAddress
+            {
+                TypeOfAddress = AddressType.Recent,
+                CustomerId = customer.Id
+            });
             
 
 
@@ -68,7 +74,7 @@ namespace IqraCommerce.API.Data.Services
 
             if (result == 0) return null;
 
-            var customerToReturn = _mapper.Map<CustomerReturnDto>(customer);
+            var customerToReturn = _mapper.Map<CustomerAuthDto>(customer);
             customerToReturn.Token = _tokenService.CreateToken(customer);
 
             return customerToReturn;
