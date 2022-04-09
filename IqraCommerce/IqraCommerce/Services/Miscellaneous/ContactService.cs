@@ -25,7 +25,7 @@ namespace IqraCommerce.Services.ContactArea
                     name = "cstmr.[Name]";
                     break;
                 default:
-                    name = "cntct." + name;
+                    name = "contact." + name;
                     break;
             }
             return base.GetName(name);
@@ -79,8 +79,7 @@ namespace IqraCommerce.Services.ContactArea
                   ,cntct.[Status]
                   ,cntct.[Remarks]
 	              ,cstmr.[Name] [Customer]
-                  FROM [dbo].[Contact] cntct
-                  left join [dbo].[Customer] cstmr on cntct.[CreatedBy]=cstmr.Id";
+                  FROM [dbo].[Contact] contact";
         }
     }
 }

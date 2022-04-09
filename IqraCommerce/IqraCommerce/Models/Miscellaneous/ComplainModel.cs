@@ -1,5 +1,6 @@
 ﻿using IqraBase.Data;
 using IqraBase.Data.Models;
+using IqraCommerce.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace EBonik.Data.Models.ContactArea
 {
-    public class ContactModel : DropDownBaseModel
+    public class ComplainModel : DropDownBaseModel
     {
-        public string Mobile { get; set; }
-        public string Email { get; set; }
-        public string Massege { get; set; }
-        public string Status { get; set; }
+        public ComplainType ComplainType { get; set; }
+        public string Message { get; set; }
+        public ComplainStatus ComplainStatus { get; set; }
         public string Remarks { get; set; }
+
     }
 }

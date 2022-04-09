@@ -23,7 +23,7 @@ namespace IqraCommerce.Data
 
     public enum ComplainStatus
     {
-        New, Read, XXX, OnHold
+        New, Seen, OnHold
     }
 
     public enum OfferType
