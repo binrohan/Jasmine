@@ -12,7 +12,14 @@ namespace IqraCommerce.API.Extensions
         {
             Dictionary<char, IList<BrandReturnDto>> dict = new();
 
+            // Pushing a to z in dictionary
             for (int i = 97; i <= 122; i++)
+            {
+                dict.Add((char)i, new List<BrandReturnDto>());
+            }
+
+            // Pushing 0 to 9 in dictionary
+            for (int i = 48; i <= 57; i++)
             {
                 dict.Add((char)i, new List<BrandReturnDto>());
             }

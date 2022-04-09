@@ -6,10 +6,12 @@ using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IqraCommerce.API.Controllers.UI
 {
+    [Authorize]
     public class OffersController : BaseApiController
     {
         private readonly IMapper _mapper;
