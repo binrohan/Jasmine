@@ -71,5 +71,13 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
         return Ok(new ApiResponse(200, products));
     }
+
+    [HttpGet("Brand/{brandId}")]
+    public async Task<IActionResult> GetProductsByBrand(Guid brandId)
+    {
+        var products = await _service.GetProductsByBrandAsync(brandId);
+
+        return Ok(new ApiResponse(200, products));
+    }
 }
 }

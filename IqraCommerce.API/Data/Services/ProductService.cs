@@ -61,5 +61,17 @@ namespace IqraCommerce.API.Data.Services
 
             return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
         }
+
+        public async Task<IEnumerable<ProductShortDto>> GetProductsByBrandAsync(Guid brandId)
+        {
+            ProductParam param = new ProductParam(OrderBy.Rank, 9999)
+            {
+                BrandId = brandId
+            };
+
+            var productsFromrepo = await _repo.GetProductsAsync(param);
+
+            return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
+        }
     }
 }

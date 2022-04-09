@@ -8,5 +8,6 @@ namespace IqraCommerce.API.Data.IRepositories
     public interface IBrandRepository
     {
         Task<IEnumerable<Brand>> GetBrandsAsync();
+        Task<Brand> GetBrandWithProductsAsync(Guid id);
     }
 }

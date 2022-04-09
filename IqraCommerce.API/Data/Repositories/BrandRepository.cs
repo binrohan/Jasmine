@@ -23,5 +23,17 @@ namespace IqraCommerce.API.Data.Repositories
                                  .Where(b => !b.IsDeleted && b.IsVisible)
                                  .ToListAsync();
         }
+
+        public async Task<Brand> GetBrandWithProductsAsync(Guid id)
+        {
+            return await _context
+                                .Brand
+                                .Where(b => !b.IsDeleted && b.IsVisible && b.Id == id)
+                                .Include(b => b.Products
+                                    .Where(p => !p.IsDeleted && p.IsVisible)
+                                    .OrderBy(p => p.Rank)
+                                    .ThenBy(p => p.Name))
+                                .SingleOrDefaultAsync();
+        }
     }
 }
