@@ -116,6 +116,31 @@ namespace IqraCommerce.API.Helpers
             .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.offer, Key.original) + src.ImageURL));
             #endregion Offer
+
+            #region Festival
+            CreateMap<Festival, FestivalReturnDto>();
+            CreateMap<FestivalProduct, ProductShortDto>()
+                .ForMember(dest => dest.Id,
+                            opt => opt.MapFrom(src => src.Product.Id))
+                .ForMember(dest => dest.Name,
+                            opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.DisplayName,
+                            opt => opt.MapFrom(src => src.Product.DisplayName))
+                .ForMember(dest => dest.PackSize,
+                            opt => opt.MapFrom(src => src.Product.PackSize))
+                .ForMember(dest => dest.CurrentPrice,
+                            opt => opt.MapFrom(src => src.Product.CurrentPrice))
+                .ForMember(dest => dest.OriginalPrice,
+                            opt => opt.MapFrom(src => src.Product.OriginalPrice))
+                .ForMember(dest => dest.DiscountedPrice,
+                            opt => opt.MapFrom(src => src.Product.DiscountedPrice))
+                .ForMember(dest => dest.DiscountedPercentage,
+                            opt => opt.MapFrom(src => src.Product.DiscountedPercentage))
+                .ForMember(dest => dest.StockUnit,
+                            opt => opt.MapFrom(src => src.Product.StockUnit))
+                .ForMember(dest => dest.Rank,
+                            opt => opt.MapFrom(src => src.Product.Rank));
+            #endregion Festival
             
             
         }

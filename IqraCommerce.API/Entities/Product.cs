@@ -46,6 +46,7 @@ namespace IqraCommerce.API.Entities
 
         // Navigation Props 
         public List<ProductCategory> ProductCategories { get; set; }
+        public IList<FestivalProduct> ProductFestivals { get; set; }
         public IList<ProductImage> Images { get; set; }
         public Brand Brand { get; set; }
         public Unit Unit { get; set; }
