@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace IqraCommerce.Services.UserArea
 {
-    public class CustomerService : IqraCommerce.Services.AppBaseService<Customer>
+    public class CustomerAddressService : IqraCommerce.Services.AppBaseService<CustomerAddress>
     {
         public override string GetName(string name)
         {
@@ -33,7 +33,7 @@ namespace IqraCommerce.Services.UserArea
                     name = "cstmr.[Name]";
                     break;
                 default:
-                    name = "customer." + name;
+                    name = "customeraddress." + name;
                     break;
             }
             return base.GetName(name);
@@ -44,16 +44,34 @@ namespace IqraCommerce.Services.UserArea
             page.SortBy = page.SortBy ?? "[Name] asc";
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, BannerQuery.Get());
+                return await db.GetPages(page, CustomerAddressQuery.Get());
             }
         }
     }
 
-    public class BannerQuery
+    public class CustomerAddressQuery
     {
         public static string Get()
         {
-            return @"";
+            return @"
+                        [Id]
+                      ,[CreatedAt]
+                      ,[CreatedBy]
+                      ,[UpdatedAt]
+                      ,[UpdatedBy]
+                      ,[IsDeleted]
+                      ,[Remarks]
+                      ,[ActivityId]
+                      ,[Name]
+                      ,[CustomerId]
+                      ,[Phone]
+                      ,[Email]
+                      ,[ProvinceId]
+                      ,[DistrictId]
+                      ,[UpazilaId]
+                      ,[TypeOfAddress]
+                      ,[IsPrimary]
+                  FROM [dbo].[CustomerAddress] customeraddress";
         }
     }
 }

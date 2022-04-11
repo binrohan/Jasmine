@@ -32,4 +32,9 @@ namespace IqraCommerce.API.Data
     { 
         Cashback, Coupon, Delivery
     }
+
+    public enum RegistrationBy
+    { 
+       Customer, Admin
+    }
 }

@@ -12,14 +12,14 @@ using System;
 
 namespace IqraCommerce.Controllers.UIArea
 {
-    public class CustomerController : AppDropDownController<Customer, CustomerModel>
+    public class CustomerAddressController : AppDropDownController<CustomerAddress, CustomerAddressModel>
     {
-        CustomerService ___service;
+        CustomerAddressService ___service;
         private readonly IConfiguration _config;
-        public CustomerController(IConfiguration config)
+        public CustomerAddressController(IConfiguration config)
         {
             _config = config;
-            service = __service = ___service = new CustomerService();
+            service = __service = ___service = new CustomerAddressService();
         }
     }
 }

@@ -12,15 +12,16 @@ using IqraCommerce.Data;
 
 namespace EBonik.Data.Models.UserArea
 {
-    public class CustomerModel : DropDownBaseModel
+    public class CustomerAddressModel : DropDownBaseModel
     {
-        public string ImageURL { get; set; }
+        public Guid CustomerId { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public string DueAmount { get; set; }
-        public string Cashback { get; set; }
+        public int ProvinceId { get; set; }
+        public int DistrictId { get; set; }
+        public int UpazilaId { get; set; }
+        public AddressType TypeOfAddress { get; set; }
+        public bool IsPrimary { get; set; }
         public string Remarks { get; set; }
-
     }
 }

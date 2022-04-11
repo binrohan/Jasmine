@@ -16,7 +16,6 @@
     <Compile Remove="Controllers\CommonArea\**" />
     <Compile Remove="Controllers\ComplainArea\**" />
     <Compile Remove="Controllers\ContactArea\**" />
-    <Compile Remove="Controllers\CustomerArea\**" />
     <Compile Remove="Controllers\DataArea\**" />
     <Compile Remove="Controllers\DataCenterArea\**" />
     <Compile Remove="Controllers\FindStoreArea\**" />
@@ -42,7 +41,6 @@
     <Content Remove="Controllers\CommonArea\**" />
     <Content Remove="Controllers\ComplainArea\**" />
     <Content Remove="Controllers\ContactArea\**" />
-    <Content Remove="Controllers\CustomerArea\**" />
     <Content Remove="Controllers\DataArea\**" />
     <Content Remove="Controllers\DataCenterArea\**" />
     <Content Remove="Controllers\FindStoreArea\**" />
@@ -68,7 +66,6 @@
     <EmbeddedResource Remove="Controllers\CommonArea\**" />
     <EmbeddedResource Remove="Controllers\ComplainArea\**" />
     <EmbeddedResource Remove="Controllers\ContactArea\**" />
-    <EmbeddedResource Remove="Controllers\CustomerArea\**" />
     <EmbeddedResource Remove="Controllers\DataArea\**" />
     <EmbeddedResource Remove="Controllers\DataCenterArea\**" />
     <EmbeddedResource Remove="Controllers\FindStoreArea\**" />
@@ -94,7 +91,6 @@
     <None Remove="Controllers\CommonArea\**" />
     <None Remove="Controllers\ComplainArea\**" />
     <None Remove="Controllers\ContactArea\**" />
-    <None Remove="Controllers\CustomerArea\**" />
     <None Remove="Controllers\DataArea\**" />
     <None Remove="Controllers\DataCenterArea\**" />
     <None Remove="Controllers\FindStoreArea\**" />
@@ -161,21 +157,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
-	<PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.15" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     
-    <!-- <PackageReference Include="JWT" Version="7.2.1" /> -->
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" /> -->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
-    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" /> -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.5" />
-    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" /> -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -186,8 +171,6 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="System.Management" Version="6.0.0" />
-    <!-- <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.7.1" /> -->
-    <!-- <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" /> -->
   </ItemGroup>
 
   <ItemGroup>

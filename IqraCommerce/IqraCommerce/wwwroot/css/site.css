@@ -107,6 +107,7 @@ td.action {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 2px;
 }
 .action a {

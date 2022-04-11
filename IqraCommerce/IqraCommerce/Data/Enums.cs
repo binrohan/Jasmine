@@ -31,4 +31,9 @@ namespace IqraCommerce.Data
         Cashback, Delivery
     }
 
+    public enum RegistrationBy
+    {
+        Customer, Admin
+    }
+
 }

@@ -17,6 +17,16 @@ export const complainStatus =
     new: 0, seen: 1, onHold: 2
 }
 
+export const registrationBy = 
+{
+    customer: 0, admin: 1
+}
+
+export const addressType =
+{
+    home: 0, Office: 1, HomeTown: 2, Recent: 3
+}
+
 export const dictionaryBound = (td, checkValue, dict) => {
     for(const [key, value] of Object.entries(dict)){
         if(this.ComplainType == value){

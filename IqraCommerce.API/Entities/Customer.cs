@@ -13,6 +13,7 @@ namespace IqraCommerce.API.Entities
         public string Email { get; set; }
         public double DueAmount { get; set; }
         public double Cashback { get; set; }
+        public RegistrationBy RegistrationBy { get; set; } = RegistrationBy.Customer;
         public IEnumerable<CustomerAddress> Addresses { get; set; }
     }
 }
