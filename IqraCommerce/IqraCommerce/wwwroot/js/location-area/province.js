@@ -63,7 +63,7 @@ import { visibleFieldDropdown } from "../utils.js";
             Title: title,
             filter: filters,
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
-            actions: [
+            actions: isDeleted ? [] : [
                 {
                     click: edit,
                     html: editBtn()

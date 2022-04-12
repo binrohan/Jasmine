@@ -60,9 +60,7 @@ namespace IqraCommerce.Entities
         #region LocationArea
         public virtual DbSet<District> Distict { get; set; } // Used
         public virtual DbSet<Province> Province { get; set; } // Used
-        public virtual DbSet<Union> Union { get; set; } // Used
         public virtual DbSet<Upazila> Upazila { get; set; } // Used
-        public virtual DbSet<Thana> Thana { get; set; } // Used
         #endregion LocationArea
 
         #region UserArea
