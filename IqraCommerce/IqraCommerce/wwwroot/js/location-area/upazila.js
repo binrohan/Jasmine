@@ -16,10 +16,10 @@ import { visibleFieldDropdown } from "../utils.js";
     });
 
     const columns = () => [
-        { field: 'Name', title: 'Upazila', Width: '200px', filter: true, position: 1 },
-        { field: 'District', title: 'District', Width: '200px', filter: true, add: false },
-        { field: 'Province', title: 'Province', Width: '200px', filter: true, add: false },
-        { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 }, position: 4, },
+        { field: 'Name', title: 'Upazila', Width: '220px', filter: true, position: 1 },
+        { field: 'District', title: 'District', Width: '220px', filter: true, add: false },
+        { field: 'Province', title: 'Province', Width: '220px', filter: true, add: false },
+        { field: 'Remarks', title: 'Remarks', Width: '240px', add: { sibling: 2 }, position: 4, },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedBy', title: 'Updator', add: false },

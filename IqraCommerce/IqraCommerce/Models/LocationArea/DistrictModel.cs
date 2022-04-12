@@ -22,7 +22,5 @@ namespace EBonik.Data.Models.LocationArea
         public double MinShippingCharge { get; set; }
         public bool IsVisible { get; set; }
         public string Remarks { get; set; }
-
-
     }
 }

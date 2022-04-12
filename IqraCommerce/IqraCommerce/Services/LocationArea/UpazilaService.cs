@@ -49,7 +49,7 @@ namespace IqraCommerce.Services.LocationArea
 
             var districtFromDb = GetEntity<District>().Find(recordToCreate.DistrictId);
 
-            recordToCreate.ProvinceId = districtFromDb.ProvinceId;
+            recordToCreate.ProvinceId = districtFromDb is null ? Guid.Empty : districtFromDb.ProvinceId;
 
             return base.OnCreate(recordToCreate, userId, isValid);
         }

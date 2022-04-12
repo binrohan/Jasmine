@@ -12,7 +12,10 @@ import { visibleFieldDropdown } from "../utils.js";
     const columns = () => [
         { field: 'Name', title: 'Name', Width: '200px', filter: true, position: 1 },
         { field: 'Province', title: 'Province', Width: '200px', filter: true, add: false },
-        { field: 'Remarks', title: 'Remarks', Width: '320px', add: { sibling: 2 }, position: 4, },
+        { field: 'ShippingCharge', title: 'ShippingCharge', Width: '200px', filter: true, add: { sibling: 3 }, position: 3 },
+        { field: 'MinShippingCharge', title: 'Min Shipping Charge', Width: '200px', filter: true, add: { sibling: 3 }, position: 5 },
+        { field: 'LowerBounderForMinShippingCharge', title: 'Required Order Amount To Get Min Shipping Charge', filter: true, add: { sibling: 3 }, position: 4 },
+        { field: 'Remarks', title: 'Remarks', Width: '320px', add: { sibling: 2 }, position: 7, },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedBy', title: 'Updator', add: false },
@@ -35,7 +38,7 @@ import { visibleFieldDropdown } from "../utils.js";
                     position: 2,
                     required: true
                 },
-                visibleFieldDropdown(3)
+                visibleFieldDropdown(6)
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
