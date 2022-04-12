@@ -6,8 +6,8 @@ namespace EBonik.Data.Entities.AddressArea
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("District")]
-    [Alias("dstct")]
-    public partial class District
+    [Alias("district")]
+    public class District
     {
         [Key]
         public int Id { get; set; }

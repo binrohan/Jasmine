@@ -57,13 +57,13 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Showcase> Showcase { get; set; } // Used
         #endregion
 
-        #region AddressArea
+        #region LocationArea
         public virtual DbSet<District> Distict { get; set; } // Used
         public virtual DbSet<Province> Province { get; set; } // Used
         public virtual DbSet<Union> Union { get; set; } // Used
         public virtual DbSet<Upazila> Upazila { get; set; } // Used
         public virtual DbSet<Thana> Thana { get; set; } // Used
-        #endregion
+        #endregion LocationArea
 
         #region UserArea
         public virtual DbSet<Customer> Customer { get; set; } // Used
