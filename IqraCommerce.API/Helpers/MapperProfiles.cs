@@ -142,7 +142,17 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => src.Product.Rank));
             #endregion Festival
             
-            
+            #region Province
+            CreateMap<Province, ProvinceReturnDto>();
+            #endregion Privince
+
+            #region District
+            CreateMap<District, DistrictReturnDto>();
+            #endregion District
+
+            #region Upazila
+            CreateMap<Upazila, UpazilaReturnDto>();
+            #endregion Upazila
         }
     }
 }

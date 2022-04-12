@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 namespace IqraCommerce.API.Entities
 {
-    public partial class Province
+    public class Province : BaseEntity
     {
-        public int Id { get; set; }
+        
+       public int ProvinceId { get; set; }
         public int AreaId { get; set; }
-        public string Name { get; set; }
-        public double Xmax { get; set; }
-        public double Xmin { get; set; }
-        public double Ymax { get; set; }
-        public double Ymin { get; set; }
-        public string Remarks { get; set; }
-        public Guid ActivityId { get; set; }
+        public double XMax { get; set; }
+        public double XMin { get; set; }
+        public double YMax { get; set; }
+        public double YMin { get; set; }
+        public bool IsVisible { get; set; }
     }
 }
