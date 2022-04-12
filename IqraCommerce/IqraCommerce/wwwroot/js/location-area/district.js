@@ -1,9 +1,3 @@
-// TODO: Search Content [X]
-// TODO: Dropdown not loading
-// TODO: Add textarea for excerpt
-// TODO: Category select
-// TODO: Remove vat [X]
-
 import { editBtn } from "../buttons.js";
 import { hiddenRecord, liveRecord, trashRecord, visibleRecord } from "../filters.js";
 import { visibleFieldDropdown } from "../utils.js";
@@ -57,11 +51,11 @@ import { visibleFieldDropdown } from "../utils.js";
     };
 
     function add() {
-        popup({ title: 'Add Province'});
+        popup({ title: 'Add District'});
     };
 
     function edit(model) {
-        popup({ data: model, title: 'Edit Province'});
+        popup({ data: model, title: 'Edit District'});
     };
 
     //Tab config

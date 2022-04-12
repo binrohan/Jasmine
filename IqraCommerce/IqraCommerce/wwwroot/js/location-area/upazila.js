@@ -9,15 +9,17 @@ import { hiddenRecord, liveRecord, trashRecord, visibleRecord } from "../filters
 import { visibleFieldDropdown } from "../utils.js";
 
 (function () {
-    const controller = 'Province';
+    const controller = 'Upazila';
 
     $(document).ready(() => {
         $('#add-record').click(add);
     });
 
     const columns = () => [
-        { field: 'Name', title: 'Name', Width: '320px', filter: true, position: 1 },
-        { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 1 }, position: 3, },
+        { field: 'Name', title: 'Upazila', Width: '200px', filter: true, position: 1 },
+        { field: 'District', title: 'District', Width: '200px', filter: true, add: false },
+        { field: 'Province', title: 'Province', Width: '200px', filter: true, add: false },
+        { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 }, position: 4, },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedBy', title: 'Updator', add: false },
@@ -32,7 +34,15 @@ import { visibleFieldDropdown } from "../utils.js";
             title: options.title,
             columns: columns(),
             dropdownList: [
-                visibleFieldDropdown(2)
+                {
+                    Id: 'DistrictId',
+                    url: `/District/AutoComplete`,
+                    type: 'AutoComplete',
+                    title: 'District',
+                    position: 2,
+                    required: true
+                },
+                visibleFieldDropdown(3)
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -63,7 +73,7 @@ import { visibleFieldDropdown } from "../utils.js";
             Title: title,
             filter: filters,
             remove: isDeleted ? false : { save: `/${controller}/Remove` },
-            actions: [
+            actions: isDeleted ? [] : [
                 {
                     click: edit,
                     html: editBtn()

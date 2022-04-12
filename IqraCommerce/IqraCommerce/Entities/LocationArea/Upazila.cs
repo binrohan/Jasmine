@@ -6,23 +6,16 @@ namespace EBonik.Data.Entities.AddressArea
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Upazila")]
-    [Alias("upzl")]
-    public partial class Upazila
+    [Alias("upazila")]
+    public partial class Upazila : DropDownBaseEntity
     {
-        public int Id { get; set; }
-        /// <summary>
-        /// AreaId is Used to calculate Relationship.
-        /// Because Sometime Id Column is auto created.
-        /// </summary>
-        public int AreaId { get; set; }
-        public int ProvinceId { get; set; }
-        public int DistrictId { get; set; }
-        public string Name { get; set; }
+        public int UpazilaId { get; set; }
+        public Guid ProvinceId { get; set; }
+        public Guid DistrictId { get; set; }
         public double XMax { get; set; }
         public double XMin { get; set; }
         public double YMax { get; set; }
         public double YMin { get; set; }
-        public string Remarks { get; set; }
-        public Guid ActivityId { get; set; }
+        public bool IsVisible { get; set; }
     }
 }
