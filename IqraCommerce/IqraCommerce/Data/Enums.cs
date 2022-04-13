@@ -36,4 +36,34 @@ namespace IqraCommerce.Data
         Customer, Admin
     }
 
+    public enum OrderStatus
+    {
+        Pending, Confirmed, Processing, Delivering, Delivered, Cancelled
+    }
+
+    public enum PaymentStatus
+    {
+        Pending, PartiallyPaid, Paid, PartiallyRefunded, Refunded 
+    }
+
+    public enum OrderAction
+    {
+        StatusChanged, PaymentStatusChanged, Cancelled
+    }
+
+    public enum PaymentMethod
+    {
+        CashOnDelivery
+    }
+
+    public enum PlatformType
+    {
+        Web, Mobile
+    }
+
+    public enum OrderAquiredOfferType
+    {
+        Cashback, Coupon, Delivery, Product
+    }
+
 }

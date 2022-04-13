@@ -3,6 +3,7 @@ using EBonik.Data.Entities.ContactArea;
 using EBonik.Data.Entities.HistoryArea;
 using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UserArea;
+using IqraCommerce.Entities.OrderArea;
 using IqraCommerce.Entities.ProductArea;
 using IqraCommerce.Entities.PromotionArea;
 using Microsoft.Data.SqlClient;
@@ -74,7 +75,14 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Offer> Offer { get; set; } // Used
         #endregion Promotion
 
+        #region Order
+        public virtual DbSet<Order> Order { get; set; } // Used
+        public virtual DbSet<OrderProduct> OrderProduct { get; set; } // Used
+        public virtual DbSet<OrderHistory> OrderHistory { get; set; } // Used
+        public virtual DbSet<ShippingAddress> ShippingAddress { get; set; } // Used
+        public virtual DbSet<OrderAquiredOffer> OrderAquiredOffer { get; set; } // Used
 
+        #endregion Order
 
         #region HistoryArea
         public virtual DbSet<ChangeHistory> ChangeHistory { get; set; }
