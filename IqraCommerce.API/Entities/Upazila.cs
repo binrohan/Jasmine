@@ -5,7 +5,6 @@ namespace IqraCommerce.API.Entities
 {
     public class Upazila : BaseEntity
     {
-         public int UpazilaId { get; set; }
         public Guid ProvinceId { get; set; }
         public Guid DistrictId { get; set; }
         public double XMax { get; set; }

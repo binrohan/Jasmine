@@ -33,5 +33,16 @@ namespace IqraCommerce.API.Data.Repositories
                         .OrderBy(ca =>  ca.TypeOfAddress)
                         .ToListAsync();
         }
+
+        public async Task<CustomerAddress> GetAddressAsync(Guid id)
+        {
+            return await _context
+                        .CustomerAddress
+                        .Where(ca => ca.Id == id)
+                        .Include(ca => ca.Province)
+                        .Include(ca => ca.District)
+                        .Include(ca => ca.Upazila)
+                        .SingleOrDefaultAsync();
+        }
     }
 }

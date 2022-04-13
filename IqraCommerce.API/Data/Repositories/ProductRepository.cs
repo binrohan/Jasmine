@@ -118,5 +118,15 @@ namespace IqraCommerce.API.Data.Repositories
                                  .Take(take)
                                  .ToArrayAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<Guid> ListOfProductId)
+        {
+            return await _context.Product
+                                 .Where(p => !p.IsDeleted
+                                             && p.IsVisible
+                                             && ListOfProductId.Contains(p.Id))
+                                 .OrderBy(p => p.CreatedAt)
+                                 .ToArrayAsync();
+        }
     }
 }

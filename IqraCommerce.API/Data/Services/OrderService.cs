@@ -24,13 +24,40 @@ namespace IqraCommerce.API.Data.Services
         private readonly SymmetricSecurityKey _key;
         private readonly IMapper _mapper;
         private readonly IOrderRepository _repo;
+        private readonly IProductRepository _productRepo;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IAddressRepository _addressRepo;
 
-        public OrderService(IConfiguration config, IMapper mapper, IOrderRepository repo)
+        public OrderService(IConfiguration config, IMapper mapper, IOrderRepository repo, IProductRepository productRepo, IUnitOfWork unitOfWork, IAddressRepository addressRepo)
         {
+            _addressRepo = addressRepo;
+            _unitOfWork = unitOfWork;
+            _productRepo = productRepo;
             _repo = repo;
             _mapper = mapper;
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
+        }
+
+        public async Task<object> CalculatePaymentAsync(OrderToCalcPaymentDto orderToCalcPayment)
+        {
+            var products = await _productRepo.GetProductsAsync(orderToCalcPayment.ListOfProductId);
+
+            var address = await _addressRepo.GetAddressAsync(orderToCalcPayment.AddressId);
+
+            if (address is null) return null;
+
+            var productAmount = products.Amount();
+            var productDiscount = products.Discount();
+            var orderValue = products.Value();
+            var shippingCharges = address.ShippingCharge(orderValue);
+
+            return new OrderPaymentDto(orderValue,
+                                       productAmount,
+                                       productDiscount,
+                                       0,
+                                       0,
+                                       shippingCharges);
         }
     }
 }

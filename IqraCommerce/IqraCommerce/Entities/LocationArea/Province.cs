@@ -9,7 +9,6 @@ namespace EBonik.Data.Entities.AddressArea
     [Alias("province")]
     public class Province : DropDownBaseEntity
     {
-        public int ProvinceId { get; set; }
         public int AreaId { get; set; }
         public double XMax { get; set; }
         public double XMin { get; set; }

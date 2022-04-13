@@ -24,5 +24,15 @@ namespace IqraCommerce.API.Controllers.ProductArea
             _repo = repo;
             _mapper = mapper;
         }
+
+        [HttpPost("/PaymentInfo")]
+        public async Task<IActionResult> GetPayment(OrderToCalcPaymentDto orderToCalcPaymentDto)
+        {
+            var paymentInfo = await _service.CalculatePaymentAsync(orderToCalcPaymentDto);
+
+            if(paymentInfo is null) return BadRequest(new ApiResponse(404, "Address Not Found"));
+            
+            return Ok(new ApiResponse(200, paymentInfo));
+        }
     }
 }

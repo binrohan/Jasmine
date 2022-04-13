@@ -9,5 +9,6 @@ namespace IqraCommerce.API.Data.IRepositories
     {
          Task<IEnumerable<CustomerAddress>> GetAddressesByCustomerAsync(Guid customerId);
           Task<CustomerAddress> GetAddressAsync(Guid customerId, AddressType addressType);
+          Task<CustomerAddress> GetAddressAsync(Guid addressId);
     }
 }

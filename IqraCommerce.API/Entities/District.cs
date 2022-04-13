@@ -5,7 +5,6 @@ namespace IqraCommerce.API.Entities
 {
     public class District : BaseEntity
     {
-        public int DistrictId { get; set; }
         public Guid ProvinceId { get; set; }
         public double ShippingCharge { get; set; }
         public double LowerBounderForMinShippingCharge { get; set; }

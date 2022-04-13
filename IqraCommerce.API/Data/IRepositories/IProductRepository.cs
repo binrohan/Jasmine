@@ -15,5 +15,6 @@ namespace IqraCommerce.API.Data.IRepositories
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId);
         Task<IEnumerable<Product>> GetProductsByCategoriesAsync(int take, IList<Guid> listOfCategoriesId);
         Task<IEnumerable<Product>> GetLatestProducts(int take);
+        Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<Guid> ListOfProductId);
     }
 }

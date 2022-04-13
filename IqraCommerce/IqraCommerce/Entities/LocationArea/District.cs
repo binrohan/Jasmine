@@ -10,7 +10,6 @@ namespace EBonik.Data.Entities.AddressArea
     [Alias("district")]
     public class District : DropDownBaseEntity
     {
-        public int DistrictId { get; set; }
         public Guid ProvinceId { get; set; }
         public double ShippingCharge { get; set; }
         public double LowerBounderForMinShippingCharge { get; set; }

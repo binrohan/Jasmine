@@ -9,7 +9,6 @@ namespace EBonik.Data.Entities.AddressArea
     [Alias("upazila")]
     public partial class Upazila : DropDownBaseEntity
     {
-        public int UpazilaId { get; set; }
         public Guid ProvinceId { get; set; }
         public Guid DistrictId { get; set; }
         public double XMax { get; set; }
