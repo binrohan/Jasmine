@@ -41,15 +41,16 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task<object> CalculatePaymentAsync(OrderToCalcPaymentDto orderToCalcPayment)
         {
-            var products = await _productRepo.GetProductsAsync(orderToCalcPayment.ListOfProductId);
+            var listOfProductId = orderToCalcPayment.Products.Select(p => p.Id);
+            var products = await _productRepo.GetProductsAsync(listOfProductId);
 
             var address = await _addressRepo.GetAddressAsync(orderToCalcPayment.AddressId);
 
             if (address is null) return null;
 
-            var productAmount = products.Amount();
-            var productDiscount = products.Discount();
-            var orderValue = products.Value();
+            var productAmount = products.Amount(orderToCalcPayment.Products);
+            var productDiscount = products.Discount(orderToCalcPayment.Products);
+            var orderValue = products.Value(orderToCalcPayment.Products);
             var shippingCharges = address.ShippingCharge(orderValue);
 
             return new OrderPaymentDto(orderValue,
