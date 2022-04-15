@@ -20,29 +20,33 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<CustomerAddress> GetAddressAsync(Guid customerId, AddressType addressType)
         {
            return await _context
-                        .CustomerAddress
-                        .Where(ca => ca.CustomerId == customerId && ca.TypeOfAddress == addressType)
-                        .SingleOrDefaultAsync();
+                            .CustomerAddress
+                            .Where(ca => ca.CustomerId == customerId
+                                         && ca.TypeOfAddress == addressType)
+                            .SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<CustomerAddress>> GetAddressesByCustomerAsync(Guid customerId)
         {
             return await _context
-                        .CustomerAddress
-                        .Where(ca => ca.CustomerId == customerId)
-                        .OrderBy(ca =>  ca.TypeOfAddress)
-                        .ToListAsync();
+                            .CustomerAddress
+                            .Where(ca => ca.CustomerId == customerId)
+                            .Include(ca => ca.Province)
+                            .Include(ca => ca.District)
+                            .Include(ca => ca.Upazila)
+                            .OrderBy(ca =>  ca.TypeOfAddress)
+                            .ToListAsync();
         }
 
         public async Task<CustomerAddress> GetAddressAsync(Guid id)
         {
             return await _context
-                        .CustomerAddress
-                        .Where(ca => ca.Id == id)
-                        .Include(ca => ca.Province)
-                        .Include(ca => ca.District)
-                        .Include(ca => ca.Upazila)
-                        .SingleOrDefaultAsync();
+                            .CustomerAddress
+                            .Where(ca => ca.Id == id)
+                            .Include(ca => ca.Province)
+                            .Include(ca => ca.District)
+                            .Include(ca => ca.Upazila)
+                            .SingleOrDefaultAsync();
         }
     }
 }
