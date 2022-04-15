@@ -39,10 +39,9 @@ namespace IqraCommerce.API.Data.Services
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
         }
 
-        public async Task<object> CalculatePaymentAsync(OrderToCalcPaymentDto orderToCalcPayment)
+        public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment)
         {
-            var listOfProductId = orderToCalcPayment.Products.Select(p => p.Id);
-            var products = await _productRepo.GetProductsAsync(listOfProductId);
+            var products = await GetProductsByListOfIdAsync(orderToCalcPayment.Products);
 
             var address = await _addressRepo.GetAddressAsync(orderToCalcPayment.AddressId);
 
@@ -59,6 +58,64 @@ namespace IqraCommerce.API.Data.Services
                                        0,
                                        0,
                                        shippingCharges);
+        }
+
+        public async Task<OrderReturnDto> PlaceOrder(OrderCreateDto orderCreateDto, Guid customerId)
+        {
+            var payment = await CalculatePaymentAsync(orderCreateDto);
+
+            var matched = payment
+               .PublicInstancePropertiesEqual<OrderPaymentDto>(orderCreateDto.Payment);
+
+            if (!matched) return null;
+
+
+            var order = orderCreateDto.GenerateNewOrder(payment,
+                                                        customerId,
+                                                        await GenerateOrderNumberAsync());
+
+            _unitOfWork.Repository<Order>().Add(order);
+
+            var productsFromRepo = await GetProductsByListOfIdAsync(orderCreateDto.Products);
+
+            var orderProducts = _mapper.Map<IEnumerable<OrderProduct>>(productsFromRepo);
+            orderProducts.ToList().ForEach(p => p.OrderId = order.Id);
+
+            var aquiredOffers = payment.AquiredOffers(order.Id);
+
+            var history = order.OrderInitiateHistory(payment, customerId, "Order Placed");
+
+            var addressFromRepo = await _unitOfWork
+                                .Repository<CustomerAddress>()
+                                .GetByIdAsync(orderCreateDto.AddressId);
+            
+            var shippingAddress = _mapper.Map<ShippingAddress>(addressFromRepo);
+            shippingAddress.OrderId = order.Id;
+
+            
+            _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
+            _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
+            _unitOfWork.Repository<OrderHistory>().Add(history);
+            _unitOfWork.Repository<ShippingAddress>().Add(shippingAddress);
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return _mapper.Map<OrderReturnDto>(order);
+        }
+
+        private async Task<string> GenerateOrderNumberAsync()
+        {
+            var orderCount = (await _unitOfWork.Repository<Order>().ListAllAsync()).Count();
+
+            return DateTime.Now.ToString("MMdd") + orderCount.ToString().PadLeft(3, '0');
+        }
+
+        private async Task<IEnumerable<Product>> GetProductsByListOfIdAsync(IEnumerable<OrderProductDto> products)
+        {
+            var listOfProductId = products.Select(p => p.Id);
+            return await _productRepo.GetProductsAsync(listOfProductId);
         }
     }
 }

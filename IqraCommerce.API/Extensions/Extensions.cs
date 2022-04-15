@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IqraCommerce.API.Data;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
@@ -36,6 +37,72 @@ namespace IqraCommerce.API.Extensions
                 return listOfChildren;
             else
                 return categories.GetAllChidrenRecursion(newChildren, ref listOfChildren);
+        }
+    
+        public static Order GenerateNewOrder(this OrderCreateDto order,
+                                             OrderPaymentDto payment,
+                                             Guid customerId,
+                                             string orderNumber)
+        {   
+            return new Order()
+            {
+                CreatedBy = customerId,
+                CustomerId = customerId,
+                OrderNumber = orderNumber,
+                OrderStatus = OrderStatus.Pending,
+                OrderValue = payment.OrderValue,
+                PaidAmount = 0,
+                PayableAmount = payment.PayableAmount,
+                PaymentLeft = payment.PayableAmount,
+                PaymentMethod = PaymentMethod.CashOnDelivery,
+                PaymentStatus = PaymentStatus.Pending,
+                Remarks = order.Remarks,
+                ShippingCharge = payment.ShippingCharge,
+                TotalProducts = order.Products.Count(),
+                TotalQuantity = order.Products.Sum(p => p.Quantity),
+                TypeOfPlatForm = PlatformType.Web,
+            };
+        }
+    
+        public static IEnumerable<OrderAquiredOffer> AquiredOffers(this OrderPaymentDto payment, Guid orderId)
+        {
+            IList<OrderAquiredOffer> aquiredOffers = new List<OrderAquiredOffer>();
+
+            if(payment.ProductDiscount > 0)
+            {
+                aquiredOffers.Add
+                (
+                    new OrderAquiredOffer()
+                    {
+                        OrderId = orderId,
+                        Description = "Product discounted price",
+                        IsRedeemed = true,
+                        RefOfferId = Guid.Empty,
+                        TypeOfOffer = OrderAquiredOfferType.Product,
+                        Discount = payment.ProductDiscount
+                    }
+                );
+            }
+
+            // TODO: CASHBACK
+            // TODO: COUPON
+
+            return aquiredOffers;
+        }
+    
+        public static OrderHistory OrderInitiateHistory(this Order order,
+                                             OrderPaymentDto payment,
+                                             Guid customerId,
+                                             string message)
+        {   
+            return new OrderHistory()
+            {
+               ActivityId = order.ActivityId,
+                CreatedBy = customerId,
+                OrderId = order.Id,
+                TypeOfAction = OrderAction.Created,
+                Remarks = message
+            };
         }
     }
 }

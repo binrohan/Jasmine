@@ -49,7 +49,6 @@ namespace IqraCommerce.Services.LocationArea
         public static string Get()
         {
             return @"district.[Id]
-                  ,district.[DistrictId]
                   ,district.[CreatedAt]
                   ,district.[CreatedBy]
                   ,district.[UpdatedAt]

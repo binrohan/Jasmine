@@ -4,11 +4,13 @@ using IqraCommerce.API.Data;
 
 namespace IqraCommerce.API.DTOs
 {
-    public class OrderCreateDto 
+    public class OrderCreateDto : IOrderToCalcPaymentDto
     {
-        public Guid CustomerId { get; set; }
         public Guid AddressId { get; set; }
         public string CouponCode { get; set; }
-        public IList<OrderProductDto> ListOfProductId { get; set; }
+        public IEnumerable<OrderProductDto> Products { get; set; }
+        public OrderPaymentDto Payment { get; set; }
+        public Guid ActivityId { get; set; }
+        public string Remarks { get; set; }
     }
 }

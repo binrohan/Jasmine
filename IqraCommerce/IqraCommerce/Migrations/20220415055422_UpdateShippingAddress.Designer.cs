@@ -4,14 +4,16 @@ using IqraCommerce.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IqraCommerce.Migrations
 {
     [DbContext(typeof(AppDB))]
-    partial class AppDBModelSnapshot : ModelSnapshot
+    [Migration("20220415055422_UpdateShippingAddress")]
+    partial class UpdateShippingAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -744,9 +746,6 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("RefOfferId")
                         .HasColumnType("uniqueidentifier");
 
@@ -882,8 +881,8 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -900,8 +899,8 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("RefAddressId")
                         .HasColumnType("uniqueidentifier");
@@ -915,8 +914,8 @@ namespace IqraCommerce.Migrations
                     b.Property<int>("TypeOfAddress")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UpazilaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UpazilaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

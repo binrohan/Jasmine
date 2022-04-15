@@ -2,6 +2,10 @@ namespace IqraCommerce.API.DTOs
 {
     public class OrderPaymentDto
     {
+        public OrderPaymentDto()
+        {
+            
+        }
         public OrderPaymentDto(double orderValue,
                                double productAmount,
                                double productDiscount,

@@ -37,7 +37,7 @@ namespace IqraCommerce.API.Extensions
 
         public static double[] ShippingCharge(this CustomerAddress address, double orderValue)
         {
-            double[] charges = new double[1];
+            double[] charges = new double[2];
             District district = address.District;
 
             charges[1] = district.ShippingCharge;

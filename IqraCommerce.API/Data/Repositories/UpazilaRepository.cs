@@ -23,7 +23,7 @@ namespace IqraCommerce.API.Data.Repositories
                         .Upazila
                         .Where(u => !u.IsDeleted
                                     && u.IsVisible
-                                    && u.ProvinceId == districtId)
+                                    && u.DistrictId == districtId)
                         .OrderBy(u => u.Name)
                         .ToListAsync();
         }

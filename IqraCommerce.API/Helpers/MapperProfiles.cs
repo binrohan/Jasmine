@@ -104,6 +104,13 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Customer, CustomerReturnDto>()
             .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.customer, Key.small) + src.ImageURL));
+            CreateMap<CustomerAddress, ShippingAddress>()
+                .ForMember(dest => dest.Id,
+                            opt => opt.Ignore())
+                .ForMember(dest => dest.RefAddressId,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.RefCustomerId,
+                            opt => opt.MapFrom(src => src.CustomerId));
             #endregion Customer
 
             #region Complain
@@ -153,6 +160,15 @@ namespace IqraCommerce.API.Helpers
             #region Upazila
             CreateMap<Upazila, UpazilaReturnDto>();
             #endregion Upazila
+
+            #region Order
+            CreateMap<Product, OrderProduct>()
+                .ForMember(dest => dest.RefProductId,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Id,
+                            opt => opt.Ignore());
+            
+            #endregion Order
         }
     }
 }

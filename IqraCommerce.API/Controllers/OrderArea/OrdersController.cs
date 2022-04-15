@@ -25,7 +25,7 @@ namespace IqraCommerce.API.Controllers.ProductArea
             _mapper = mapper;
         }
 
-        [HttpPost("/PaymentInfo")]
+        [HttpPost("PaymentInfo")]
         public async Task<IActionResult> GetPayment(OrderToCalcPaymentDto orderToCalcPaymentDto)
         {
             var paymentInfo = await _service.CalculatePaymentAsync(orderToCalcPaymentDto);
@@ -33,6 +33,18 @@ namespace IqraCommerce.API.Controllers.ProductArea
             if(paymentInfo is null) return BadRequest(new ApiResponse(404, "Address Not Found"));
             
             return Ok(new ApiResponse(200, paymentInfo));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PlaceOrder(OrderCreateDto orderCreateDto)
+        {
+            var userId = User.RetrieveIdFromPrincipal();
+
+            var order = await _service.PlaceOrder(orderCreateDto, userId);
+
+            if(order is null) return BadRequest(new ApiResponse(404, "Address Not Found"));
+            
+            return Ok(new ApiResponse(200, order));
         }
     }
 }

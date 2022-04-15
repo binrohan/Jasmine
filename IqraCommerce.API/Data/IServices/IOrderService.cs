@@ -9,6 +9,7 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface IOrderService
     {
-        Task<object> CalculatePaymentAsync(OrderToCalcPaymentDto orderToCalcPayment);
+        Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment);
+        Task<OrderReturnDto> PlaceOrder(OrderCreateDto orderCreateDto, Guid customerId);
     }
 }

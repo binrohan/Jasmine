@@ -14,12 +14,14 @@ namespace IqraCommerce.Entities.OrderArea
     {
         public Guid OrderId { get; set; }
         public Guid RefCustomerId { get; set; }
+        public Guid RefAddressId { get; set; }
+
 
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int ProvinceId { get; set; }
-        public int DistrictId { get; set; }
-        public int UpazilaId { get; set; }
+        public Guid ProvinceId { get; set; }
+        public Guid DistrictId { get; set; }
+        public Guid UpazilaId { get; set; }
         public AddressType TypeOfAddress { get; set; }
     }
 }

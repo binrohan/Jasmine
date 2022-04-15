@@ -20,6 +20,7 @@ namespace IqraCommerce.API.Data.IRepositories
             // Task<int> CountAsync(ISpecification<T> spec);
             
             void Add(T entity);
+            void AddRange(IEnumerable<T> entities);
             void Update(T entity);
             void Delete(T entity);
         }

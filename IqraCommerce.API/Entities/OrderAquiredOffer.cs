@@ -6,6 +6,7 @@ namespace IqraCommerce.API.Entities
 {
     public class OrderAquiredOffer : BaseEntity
     {
+        public Guid OrderId { get; set; }
         public Guid RefOfferId { get; set; }
         public OrderAquiredOfferType TypeOfOffer { get; set; }
         public string Description { get; set; }

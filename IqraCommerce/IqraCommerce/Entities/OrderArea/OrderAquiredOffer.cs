@@ -12,6 +12,7 @@ namespace IqraCommerce.Entities.OrderArea
     [Alias("orderaquiredoffer")]
     public class OrderAquiredOffer : DropDownBaseEntity
     {
+        public Guid OrderId { get; set; }
         public Guid RefOfferId { get; set; }
         public OrderAquiredOfferType TypeOfOffer { get; set; }
         public string Description { get; set; }

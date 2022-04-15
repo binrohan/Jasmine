@@ -51,7 +51,7 @@ namespace IqraCommerce.API.Data
 
     public enum OrderAction
     {
-        StatusChanged, PaymentStatusChanged, Cancelled
+        StatusChanged, PaymentStatusChanged, Cancelled, Created
     }
 
     public enum PaymentMethod
