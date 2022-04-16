@@ -68,18 +68,18 @@ namespace IqraCommerce.Services.ContactArea
     {
         public static string Get()
         {
-            return @"[Id]
-                  ,[CreatedAt]
-                  ,[CreatedBy]
-                  ,[UpdatedAt]
-                  ,[UpdatedBy]
-                  ,[IsDeleted]
-                  ,[Remarks]
-                  ,[ActivityId]
-                  ,[Name]
-                  ,[ComplainType]
-                  ,[Message]
-                  ,[ComplainStatus]
+            return @"complain.[Id]
+                  ,complain.[CreatedAt]
+                  ,complain.[CreatedBy]
+                  ,complain.[UpdatedAt]
+                  ,complain.[UpdatedBy]
+                  ,complain.[IsDeleted]
+                  ,ISNULL(complain.[Remarks], '') [Remarks]
+                  ,complain.[ActivityId]
+                  ,ISNULL(complain.[Name], '') [Name]
+                  ,complain.[ComplainType]
+                  ,ISNULL(complain.[Message], '') [Message]
+                  ,complain.[ComplainStatus]
               FROM [dbo].[Complain] complain";
         }
     }

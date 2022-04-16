@@ -79,7 +79,6 @@ namespace IqraCommerce.Services.LocationArea
                   ,ISNULL(upazila.[Remarks], '') [Remarks]
                   ,upazila.[ActivityId]
                   ,ISNULL(upazila.[Name], '') [Name]
-                  ,upazila.[UpazilaId]
                   ,upazila.[ProvinceId]
 	              ,ISNULL(province.[Name], '') [Province]
                   ,upazila.[DistrictId]

@@ -10,7 +10,7 @@ export const visibleFieldDropdown = (position, sibling = 2 ) => ({
 })
 
 export const url = (endpoint) => {
-    return window.location.origin + endpoint;
+    return endpoint ? window.location.origin + endpoint : null;
 }
 
 export function dateBound(el, date) {

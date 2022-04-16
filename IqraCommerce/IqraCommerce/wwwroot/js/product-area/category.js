@@ -256,6 +256,7 @@ import { editBtn, plusBtn, menuBtn } from "../buttons.js";
             rowBound: rowBound,
             columns: columns(),
             Url: 'Get',
+            Printable: { container: $('void')},
         }
     }
 
@@ -269,11 +270,7 @@ import { editBtn, plusBtn, menuBtn } from "../buttons.js";
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Visibile', true),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Invisibile', false),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB76', 'Deleted', '', 1)
-        ],
-        periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
+        ]
     };
 
     //Initialize Tabs

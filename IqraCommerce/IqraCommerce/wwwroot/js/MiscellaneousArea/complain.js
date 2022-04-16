@@ -150,7 +150,7 @@ import { complainType, complainStatus } from '../dictionaries.js';
         },
         items: [
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'New', newFilter),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB75', 'On Hold', onHoldFilter),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB75', 'Onhold', onHoldFilter),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Seen', seenFilter),
         ],
         periodic: {

@@ -83,13 +83,13 @@ namespace IqraCommerce.Services.UI
                   ,[UpdatedAt]
                   ,[UpdatedBy]
                   ,[IsDeleted]
-                  ,[Remarks]
+                  ,ISNULL(banner.[Remarks], '') [Remarks]
                   ,[ActivityId]
                   ,[Rank]
                   ,[Size]
-                  ,'/Images/Product/Icon/' + [ImageURL] [ImageURL]
+                  ,ISNULL('/Images/Product/Icon/'+banner.[ImageURL], '') [ImageURL]
                   ,[IsVisible]
-                  ,[Link]
+                  ,ISNULL(banner.[Link], '') [Link]
                   ,[TypeOfBanner]
               FROM [dbo].[Banner] banner";
         }

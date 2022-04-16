@@ -10,6 +10,11 @@ namespace IqraCommerce.Controllers
     {
         public IActionResult Index()
         {
+            return View("Login");
+        }
+
+        public IActionResult Login()
+        {
             return View();
         }
     }

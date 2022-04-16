@@ -68,18 +68,20 @@ namespace IqraCommerce.Services.ContactArea
     {
         public static string Get()
         {
-            return @"cntct.[Id]
-                  ,cntct.[Name]
-                  ,cntct.[CreatedAt]
-                  ,cntct.[IsDeleted]
-                  ,cntct.[Mobile]
-                  ,cntct.[Email]
-                  ,cntct.[Massege]
-                  ,cntct.[ActivityId]
-                  ,cntct.[Status]
-                  ,cntct.[Remarks]
-	              ,cstmr.[Name] [Customer]
-                  FROM [dbo].[Contact] contact";
+            return @"contact.[Id]
+                  ,contact.[CreatedAt]
+                  ,contact.[CreatedBy]
+                  ,contact.[UpdatedAt]
+                  ,contact.[UpdatedBy]
+                  ,contact.[IsDeleted]
+                  ,ISNULL(contact.[Remarks], '') [Remarks]
+                  ,contact.[ActivityId]
+                  ,ISNULL(contact.[Name], '') [Name]
+                  ,ISNULL(contact.[Mobile], '') [Mobile]
+                  ,ISNULL(contact.[Email], '') [Email]
+                  ,ISNULL(contact.[Massege], '') [Massege]
+                  ,contact.[Status]
+              FROM [dbo].[Contact] contact";
         }
     }
 }

@@ -25,10 +25,6 @@ namespace IqraCommerce.Controllers.UIArea
             _config = config;
             service = __service = ___service = new CustomerService();
         }
-        public ActionResult Login()
-        {
-            return View();
-        }
 
         public ActionResult Update([FromForm] CustomerUpdateDto recordToUpdate)
         {

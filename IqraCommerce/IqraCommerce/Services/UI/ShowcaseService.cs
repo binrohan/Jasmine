@@ -77,19 +77,19 @@ namespace IqraCommerce.Services.UI
     {
         public static string Get()
         {
-            return @" [Id]
-                  ,[CreatedAt]
-                  ,[CreatedBy]
-                  ,[UpdatedAt]
-                  ,[UpdatedBy]
-                  ,[IsDeleted]
-                  ,[Remarks]
-                  ,[ActivityId]
-                  ,[Name]
-                  ,[Rank]
-                  ,[IsVisible]
-                  ,'/Images/Showcase/Icon/' + [ImageURL] [ImageURL]
-              FROM [dbo].[Showcase] showcase";
+            return @"          showcase.[Id]
+							  ,showcase.[CreatedAt]
+							  ,showcase.[CreatedBy]
+							  ,showcase.[UpdatedAt]
+							  ,showcase.[UpdatedBy]
+							  ,showcase.[IsDeleted]
+							  ,ISNULL(showcase.[Remarks], '') [Remarks]
+							  ,showcase.[ActivityId]
+							  ,ISNULL(showcase.[Name], '') [Name]
+							  ,showcase.[Rank]
+							  ,showcase.[IsVisible]
+							  ,ISNULL('/Images/Showcase/Icon/' + [ImageURL], '') [ImageURL]
+						  FROM [dbo].[Showcase] showcase";
         }
     }
 }

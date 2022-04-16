@@ -57,12 +57,6 @@ namespace IqraCommerce.Services.LocationArea
                   ,ISNULL(province.[Remarks], '') [Remarks]
                   ,province.[ActivityId]
                   ,ISNULL(province.[Name], '') [Name]
-                  ,province.[ProvinceId]
-                  ,province.[AreaId]
-                  ,province.[XMax]
-                  ,province.[XMin]
-                  ,province.[YMax]
-                  ,province.[YMin]
                   ,province.[IsVisible]
               FROM [dbo].[Province] province";
         }

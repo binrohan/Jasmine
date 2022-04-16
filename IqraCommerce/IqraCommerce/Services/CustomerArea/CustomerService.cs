@@ -98,21 +98,21 @@ namespace IqraCommerce.Services.UserArea
         public static string Get()
         {
             return @"
-                customer.[Id]
+                	   customer.[Id]
                       ,customer.[CreatedAt]
                       ,customer.[CreatedBy]
                       ,customer.[UpdatedAt]
                       ,customer.[UpdatedBy]
                       ,customer.[IsDeleted]
-                      ,customer.[Remarks]
+                      ,ISNULL(customer.[Remarks], '') [Remarks]
                       ,customer.[ActivityId]
-                      ,customer.[Name]
+                      ,ISNULL(customer.[Name], '') [Name]
                       ,customer.[Phone]
-                      ,customer.[Email]
+                      ,ISNULL(customer.[Email], '') [Email]
                       ,customer.[Cashback]
                       ,customer.[Password]
                       ,customer.[DueAmount]
-                      ,customer.[ImageURL]
+                      ,ISNULL('/Contents/Images/Customer/Profile/Icon/'+customer.[ImageURL], '') [ImageURL]
                       ,customer.[RegistrationBy]
                   FROM [dbo].[Customer] customer";
         }

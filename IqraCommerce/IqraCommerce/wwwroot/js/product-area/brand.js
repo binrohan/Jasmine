@@ -10,7 +10,6 @@
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, add: { sibling: 2 } },
         { field: 'Description', title: 'Description', Width: '550px', add: { sibling: 2 } },
-        { field: 'Number of Products', title: 'ProductCount', add: false },
         { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 2 } },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date',  add: false },

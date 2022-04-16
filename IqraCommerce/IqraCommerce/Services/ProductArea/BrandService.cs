@@ -47,17 +47,17 @@ namespace IqraCommerce.Services.ProductArea
         public static string Get()
         {
             return @"[Id]
-                      ,[CreatedAt]
-                      ,[CreatedBy]
-                      ,[UpdatedAt]
-                      ,[UpdatedBy]
-                      ,[IsDeleted]
-                      ,[Remarks]
-                      ,[ActivityId]
-                      ,[Name]
-                      ,[Description]
-                      ,[IsVisible]
-                  FROM [dbo].[Brand] brand";
+                    ,[CreatedAt]
+                    ,[CreatedBy]
+                    ,[UpdatedAt]
+                    ,[UpdatedBy]
+                    ,[IsDeleted]
+                    ,ISNULL(brand.[Remarks], '') [Remarks]
+                    ,[ActivityId]
+                    ,ISNULL(brand.[Name], '') [Name]
+                    ,ISNULL(brand.[Description], '') [Description]
+                    ,[IsVisible]
+                FROM [dbo].[Brand] brand";
         }
     }
 }
