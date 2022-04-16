@@ -10,5 +10,6 @@ namespace IqraCommerce.API.Data.IRepositories
     {
          Task<int> CountAsync(OrderParam param);
          Task<IReadOnlyList<Order>> GetOrdersAsync(OrderParam param);
+         Task<Order> GetOrderAsync(Guid userId, Guid id);
     }
 }

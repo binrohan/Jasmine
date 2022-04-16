@@ -28,6 +28,16 @@ namespace IqraCommerce.API.Data.Repositories
             return await OrderParamExvaluator(param).Skip(param.Skip).Take(param.Take).ToListAsync();
         }
 
+        public async Task<Order> GetOrderAsync(Guid userId, Guid id)
+        {
+            return await _context
+                        .Order
+                        .Where(o => o.Id == id && o.CustomerId == userId)
+                        .Include(o => o.Address)
+                        .Include(o => o.Products)
+                        .FirstOrDefaultAsync();
+        }
+
         private IQueryable<Order> OrderParamExvaluator(OrderParam param)
         {
             var query = _context

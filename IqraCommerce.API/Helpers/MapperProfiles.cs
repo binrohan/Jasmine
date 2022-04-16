@@ -169,12 +169,17 @@ namespace IqraCommerce.API.Helpers
 
             #region Order
             CreateMap<Order, OrderShortDto>();
+            CreateMap<Order, OrderDetailsDto>();
             CreateMap<Order, OrderReturnDto>();
             #endregion Order
 
             #region ShippingAddress
             CreateMap<ShippingAddress, ShippingAddressDto>();
             #endregion ShippingAddress
+
+             #region OrderProduct
+            CreateMap<OrderProduct, OrderProductReturnDto>();
+            #endregion OrderProduct
         }
     }
 }

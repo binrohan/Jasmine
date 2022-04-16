@@ -57,5 +57,19 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
             return Ok(new ApiResponse(200, orders));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrders(Guid id)
+        {
+            var userId = User.RetrieveIdFromPrincipal();
+
+            var order = await _repo.GetOrderAsync(userId, id);
+
+            if(order is null) return NotFound(new ApiResponse(404, id, "Order not found"));
+
+            var orderToReturn = _mapper.Map<OrderDetailsDto>(order);
+
+            return Ok(new ApiResponse(200, orderToReturn));
+        }
     }
 }
