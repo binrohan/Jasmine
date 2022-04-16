@@ -19,5 +19,7 @@ namespace IqraCommerce.API.Entities
         public int TotalQuantity { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public PlatformType TypeOfPlatForm { get; set; }
+
+        public ShippingAddress Address { get; set; }
     }
 }

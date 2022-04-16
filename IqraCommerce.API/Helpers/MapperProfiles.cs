@@ -91,6 +91,12 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Product, ProductDetailsDto>()
             .ForMember(dest => dest.Categories,
                             opt => opt.MapFrom(src => src.ProductCategories));
+
+            CreateMap<Product, OrderProduct>()
+                .ForMember(dest => dest.RefProductId,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Id,
+                            opt => opt.Ignore());
             #endregion Product
         
             #region Address
@@ -162,13 +168,13 @@ namespace IqraCommerce.API.Helpers
             #endregion Upazila
 
             #region Order
-            CreateMap<Product, OrderProduct>()
-                .ForMember(dest => dest.RefProductId,
-                            opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Id,
-                            opt => opt.Ignore());
-            
+            CreateMap<Order, OrderShortDto>();
+            CreateMap<Order, OrderReturnDto>();
             #endregion Order
+
+            #region ShippingAddress
+            CreateMap<ShippingAddress, ShippingAddressDto>();
+            #endregion ShippingAddress
         }
     }
 }

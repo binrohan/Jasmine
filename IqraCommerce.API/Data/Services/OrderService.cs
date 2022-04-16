@@ -13,6 +13,7 @@ using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.Helpers;
+using IqraCommerce.API.Params;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -28,7 +29,12 @@ namespace IqraCommerce.API.Data.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAddressRepository _addressRepo;
 
-        public OrderService(IConfiguration config, IMapper mapper, IOrderRepository repo, IProductRepository productRepo, IUnitOfWork unitOfWork, IAddressRepository addressRepo)
+        public OrderService(IConfiguration config,
+                            IMapper mapper,
+                            IOrderRepository repo,
+                            IProductRepository productRepo,
+                            IUnitOfWork unitOfWork,
+                            IAddressRepository addressRepo)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -88,11 +94,11 @@ namespace IqraCommerce.API.Data.Services
             var addressFromRepo = await _unitOfWork
                                 .Repository<CustomerAddress>()
                                 .GetByIdAsync(orderCreateDto.AddressId);
-            
+
             var shippingAddress = _mapper.Map<ShippingAddress>(addressFromRepo);
             shippingAddress.OrderId = order.Id;
 
-            
+
             _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
             _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
             _unitOfWork.Repository<OrderHistory>().Add(history);
@@ -100,9 +106,25 @@ namespace IqraCommerce.API.Data.Services
 
             var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return null;
+            if (result <= 0) return null;
 
             return _mapper.Map<OrderReturnDto>(order);
+        }
+
+        public async Task<Pagination<OrderShortDto>> GetOrdersAsync(OrderParamsDto paramDto, Guid customerId)
+        {
+            OrderParam param = new OrderParam(customerId, paramDto.Index, paramDto.Search, paramDto.IsDecending);
+
+            var totalOrders = await _repo.CountAsync(param);
+
+            var ordersFromRepo = await _repo.GetOrdersAsync(param);
+
+            var ordersToReturn = _mapper.Map<IReadOnlyList<OrderShortDto>>(ordersFromRepo);
+
+            return new Pagination<OrderShortDto>(param.Index,
+                                                                param.Take,
+                                                                totalOrders,
+                                                                ordersToReturn);
         }
 
         private async Task<string> GenerateOrderNumberAsync()

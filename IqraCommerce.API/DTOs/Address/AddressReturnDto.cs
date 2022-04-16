@@ -16,5 +16,6 @@ namespace IqraCommerce.API.DTOs
         public UpazilaReturnDto Upazila { get; set; }
         public AddressType TypeOfAddress { get; set; }
         public bool IsPrimary { get; set; }
+        public string Remarks { get; set; }
     }
 }

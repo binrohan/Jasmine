@@ -9,6 +9,7 @@ using IqraCommerce.API.DTOs.Contact;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.Helpers;
+using IqraCommerce.API.Params;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IqraCommerce.API.Controllers.ProductArea
@@ -42,9 +43,19 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
             var order = await _service.PlaceOrder(orderCreateDto, userId);
 
-            if(order is null) return BadRequest(new ApiResponse(404, "Address Not Found"));
+            if(order is null) return BadRequest(new ApiResponse(400, "Bad Request"));
             
             return Ok(new ApiResponse(200, order));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders([FromQuery] OrderParamsDto param)
+        {
+            var userId = User.RetrieveIdFromPrincipal();
+
+            var orders = await _service.GetOrdersAsync(param, userId);
+
+            return Ok(new ApiResponse(200, orders));
         }
     }
 }

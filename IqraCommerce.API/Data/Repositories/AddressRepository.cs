@@ -23,6 +23,9 @@ namespace IqraCommerce.API.Data.Repositories
                             .CustomerAddress
                             .Where(ca => ca.CustomerId == customerId
                                          && ca.TypeOfAddress == addressType)
+                            .Include(ca => ca.Province)
+                            .Include(ca => ca.District)
+                            .Include(ca => ca.Upazila)
                             .SingleOrDefaultAsync();
         }
 
