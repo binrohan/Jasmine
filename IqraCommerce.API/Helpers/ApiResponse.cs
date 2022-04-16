@@ -33,6 +33,7 @@ namespace IqraCommerce.API.Helpers
                 200 => "Success",
                 201 => "Creat Success",
                 204 => "Update Success",
+                205 => "Patch Success",
                 400 => "Bad Request",
                 401 => "Unauthorize",
                 404 => "Not Found",

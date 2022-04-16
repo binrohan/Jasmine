@@ -136,5 +136,20 @@ namespace IqraCommerce.API.Data.Services
             var listOfProductId = products.Select(p => p.Id);
             return await _productRepo.GetProductsAsync(listOfProductId);
         }
+
+        public void AddOrderCancelHistory(Order order)
+        {
+            OrderHistory history = new OrderHistory()
+            {
+                CreatedAt = DateTime.Now,
+                CreatedBy = order.CustomerId,
+                ActivityId = order.ActivityId,
+                OrderId = order.Id,
+                TypeOfAction = OrderAction.CancelledByCustomer,
+                Remarks = "Order Cancelled By Customer"
+            };
+
+            _unitOfWork.Repository<OrderHistory>().Add(history);
+        }
     }
 }
