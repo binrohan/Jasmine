@@ -83,13 +83,15 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork.Repository<Order>().Add(order);
 
             var productsFromRepo = await GetProductsByListOfIdAsync(orderCreateDto.Products);
+            var orderProducts = productsFromRepo.Order(orderCreateDto.Products, order.Id);
+            _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
 
-            var orderProducts = _mapper.Map<IEnumerable<OrderProduct>>(productsFromRepo);
-            orderProducts.ToList().ForEach(p => p.OrderId = order.Id);
 
             var aquiredOffers = payment.AquiredOffers(order.Id);
+            _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
 
             var history = order.OrderInitiateHistory(payment, customerId, "Order Placed");
+            _unitOfWork.Repository<OrderHistory>().Add(history);
 
             var addressFromRepo = await _unitOfWork
                                 .Repository<CustomerAddress>()
@@ -97,11 +99,6 @@ namespace IqraCommerce.API.Data.Services
 
             var shippingAddress = _mapper.Map<ShippingAddress>(addressFromRepo);
             shippingAddress.OrderId = order.Id;
-
-
-            _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
-            _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
-            _unitOfWork.Repository<OrderHistory>().Add(history);
             _unitOfWork.Repository<ShippingAddress>().Add(shippingAddress);
 
             var result = await _unitOfWork.Complete();

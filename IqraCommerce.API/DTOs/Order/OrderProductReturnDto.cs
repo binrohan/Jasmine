@@ -7,11 +7,9 @@ namespace IqraCommerce.API.DTOs
         public Guid Id { get; set; }
         public Guid RefProductId { get; set; }
         public string DisplayName { get; set; }
-        public string Name { get; set; }
-        public string PackSize { get; set; }
         public double CurrentPrice { get; set; }
-        public double OriginalPrice { get; set; }
-        public double DiscountedPrice { get; set; }
-        public double DiscountedPercentage { get; set; }
+        public int Quantity { get; set; }
+        public double Amount { get; set; }
+        public double Discount { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using IqraCommerce.API.Data;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Category;
@@ -10,6 +11,7 @@ namespace IqraCommerce.API.Extensions
 {
     public static class Extensions
     {
+        
         public static IEnumerable<Guid> GetAllChidren(this IEnumerable<Category> list, Guid categoryId)
         {
             IList<Guid> listOfChildren = new List<Guid>();
@@ -103,6 +105,33 @@ namespace IqraCommerce.API.Extensions
                 TypeOfAction = OrderAction.Created,
                 Remarks = message
             };
+        }
+    
+        public static IList<OrderProduct> Order(this IEnumerable<Product> products,
+                                                IEnumerable<OrderProductDto> orderedProducts,
+                                                Guid orderId)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, OrderProduct>());
+            IMapper _mapper =  new Mapper(config);
+
+            var orderProducts = new List<OrderProduct>();
+            
+            foreach (var product in products)
+            {
+                var orderProduct = _mapper.Map<OrderProduct>(product);
+
+                orderProduct.OrderId = orderId;
+
+                var orderedPRoduct = orderedProducts.First(p => p.Id == product.Id);
+
+                orderProduct.Quantity = orderedPRoduct.Quantity;
+                orderProduct.Amount = orderedPRoduct.Quantity * product.CurrentPrice;
+                orderProduct.Discount = orderedPRoduct.Quantity * product.DiscountedPrice;
+
+                orderProducts.Add(orderProduct);
+            }
+
+            return orderProducts;
         }
     }
 }

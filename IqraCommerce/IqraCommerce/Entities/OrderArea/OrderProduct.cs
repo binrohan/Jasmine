@@ -20,5 +20,11 @@ namespace IqraCommerce.Entities.OrderArea
         public double OriginalPrice { get; set; }
         public double DiscountedPrice { get; set; }
         public double DiscountedPercentage { get; set; }
+
+        public int Quantity { get; set; }
+
+        //Following Method Breaking the rules of Normalization
+        public double Amount { get; set; }
+        public double Discount { get; set; }
     }
 }

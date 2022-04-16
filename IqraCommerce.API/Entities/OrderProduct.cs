@@ -15,5 +15,8 @@ namespace IqraCommerce.API.Entities
         public double OriginalPrice { get; set; }
         public double DiscountedPrice { get; set; }
         public double DiscountedPercentage { get; set; }
+        public int Quantity { get; set; }
+        public double Amount { get; set; }
+        public double Discount { get; set; }
     }
 }
