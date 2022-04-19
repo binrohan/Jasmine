@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using App.Setup.Connection;
 
 namespace IqraCommerce.API
 {
@@ -28,7 +29,7 @@ namespace IqraCommerce.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            ConnectionString = Configuration.GetConnectionString("DefaultSqlServerConnection");
+            ConnectionString = Connection.ConnectionString;
         }
 
         public IConfiguration Configuration { get; }

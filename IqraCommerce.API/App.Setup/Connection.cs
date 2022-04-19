@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Setup
+namespace App.Setup.Connection
 {
     public class Connection
     {
