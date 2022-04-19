@@ -40,7 +40,7 @@ namespace IqraCommerce.API
 
             // DataContext Injectable registraion
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultSqlServerConnection")));
+                options.UseSqlServer(Connection.ConnectionString));
 
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

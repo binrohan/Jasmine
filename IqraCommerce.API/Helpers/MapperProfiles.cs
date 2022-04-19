@@ -180,6 +180,11 @@ namespace IqraCommerce.API.Helpers
              #region OrderProduct
             CreateMap<OrderProduct, OrderProductReturnDto>();
             #endregion OrderProduct
+
+            #region Device
+            CreateMap<Device, DeviceReturnDto>();
+            CreateMap<DeviceSetDto, Device>();
+            #endregion Device
         }
     }
 }

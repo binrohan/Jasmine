@@ -84,6 +84,11 @@ namespace IqraCommerce.Entities
 
         #endregion Order
 
+        #region DeviceArea
+        public virtual DbSet<Device> Device { get; set; } // Used
+        public virtual DbSet<Activity> Activity { get; set; } // Used
+        #endregion DeviceArea
+
         #region HistoryArea
         public virtual DbSet<ChangeHistory> ChangeHistory { get; set; }
         #endregion

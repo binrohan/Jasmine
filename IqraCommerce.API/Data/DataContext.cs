@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using IqraCommerce.API.Entities;
+using App.Setup.Connection;
 
 namespace IqraCommerce.API.Data
 {
@@ -40,13 +41,14 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<OrderHistory> OrderHistory { get; set; } // Used
         public virtual DbSet<ShippingAddress> ShippingAddress { get; set; } // Used
         public virtual DbSet<OrderAquiredOffer> OrderAquiredOffer { get; set; } // Used
+        public virtual DbSet<Device> Device { get; set; } // Used
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("data source=DESKTOP-2T4KNKA;initial catalog=SHOPPERS_PERK_DB;persist security info=True;user id=sa;password=123;MultipleActiveResultSets=True");
+                optionsBuilder.UseSqlServer(Connection.ConnectionString);
             }
         }
 

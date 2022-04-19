@@ -39,6 +39,7 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IUpazilaRepository, UpazilaRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IDeviceRepository, DeviceRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

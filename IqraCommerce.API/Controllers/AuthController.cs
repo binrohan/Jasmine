@@ -82,7 +82,7 @@ namespace IqraCommerce.API.Controllers
             return Ok(new ApiResponse(200, customerToReturn, "Login Successed"));
         }
 
-        [HttpGet("emailexists")]
+        [HttpGet("PhoneExists")]
         public async Task<IActionResult> CheckEmailExistsAsync([FromQuery] string phone)
         {
             if(string.IsNullOrEmpty(phone))
