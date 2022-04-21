@@ -10,6 +10,7 @@ using IqraCommerce.Services.UserArea;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Threading.Tasks;
 
 namespace IqraCommerce.Controllers.UIArea
 {
@@ -34,6 +35,11 @@ namespace IqraCommerce.Controllers.UIArea
         public ActionResult ChangePassword([FromForm] CustomerPasswordChangeDto recordToUpdate)
         {
             return Json(___service.ChangePassword(recordToUpdate, Guid.Empty));
+        }
+
+        public async Task<JsonResult> BasicInfo([FromQuery] Guid id)
+        {
+            return Json(await ___service.BasicInfo(id));
         }
     }
 }

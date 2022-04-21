@@ -38,7 +38,7 @@ namespace IqraCommerce.Data
 
     public enum OrderStatus
     {
-        Pending, Confirmed, Processing, Delivering, Delivered, Cancelled
+        Pending, Confirmed, Processing, Delivering, Delivered, CancelledByAdmin, CanclledByCustomer, Returned
     }
 
     public enum PaymentStatus

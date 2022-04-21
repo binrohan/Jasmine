@@ -109,11 +109,11 @@ import { url } from '../utils.js';
     };
 
     function add() {
-        popup({ title: 'Create New Brand', action: 'add' });
+        popup({ title: 'Create New Product', action: 'add' });
     };
 
     function edit(model, grid) {
-        popup({ data: model, title: 'Edit Brand', action: 'edit' }, grid);
+        popup({ data: model, title: 'Edit Product', action: 'edit' }, grid);
     };
 
     const addToCategory = (row) => {

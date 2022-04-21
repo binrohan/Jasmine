@@ -15,12 +15,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace IqraCommerce.API.Controllers
 {
-    public class DeviceAreaController : BaseApiController
+    public class DeviceController : BaseApiController
     {
         private readonly IDeviceRepository _repo;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public DeviceAreaController(
+        public DeviceController(
                                   IDeviceRepository repo,
                                   IMapper mapper,
                                   IUnitOfWork unitOfWork

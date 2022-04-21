@@ -91,7 +91,17 @@ namespace IqraCommerce.Services.UserArea
 
             return new Response(204, customerFromRepo, false, "Updated");
         }
+
+        public async Task<ResponseList<Dictionary<string, object>>> BasicInfo(Guid Id)
+        {
+            using (var db = new DBService(this))
+            {
+                return await db.FirstOrDefault(CustomerQuery.BasicInfo + Id + "'");
+            }
+        }
     }
+
+    
 
     public class CustomerQuery
     {
@@ -116,5 +126,7 @@ namespace IqraCommerce.Services.UserArea
                       ,customer.[RegistrationBy]
                   FROM [dbo].[Customer] customer";
         }
+
+        public static string BasicInfo { get { return @"SELECT " + Get() + " Where customer.Id = '"; } }
     }
 }
