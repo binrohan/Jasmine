@@ -92,7 +92,6 @@ namespace IqraCommerce.API.AppData
                     SELECT D.[Id]
                     ,D.[Name] [DisplayName]
                     ,P.[Id] [DisplayId]
-                    ,P.[Name] [ProductName]
                     ,P.[DisplayName] [ProductDisplayName]
                     ,P.[PackSize]
                     ,'PRIMARY IMAGE URL GOES HERE' [ImageURL]

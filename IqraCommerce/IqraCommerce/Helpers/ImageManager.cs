@@ -26,11 +26,12 @@ namespace IqraCommerce.Helpers
             var path = _config.GetSection(rootDirectory).GetSection(directory);
             var splitedName = image.FileName.Split('.');
             var imageName = Guid.NewGuid().ToString() + "." + splitedName[splitedName.Length - 1];
+            var rootPath = _config.GetSection(rootDirectory)["ROOT_PATH"];
 
             for (int i = 0; i < 3; ++i)
             {
-                if (!Directory.Exists(path[sizeNames[i]]))
-                    Directory.CreateDirectory(path[sizeNames[i]]);
+                if (!Directory.Exists(rootPath + path[sizeNames[i]]))
+                    Directory.CreateDirectory(rootPath + path[sizeNames[i]]);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -60,7 +61,7 @@ namespace IqraCommerce.Helpers
                         }
                     }
 
-                    transformedImage.Save(_config.GetSection(rootDirectory)["ROOT_PATH"] + path[sizeNames[i]] + imageName);
+                    transformedImage.Save(rootPath + path[sizeNames[i]] + imageName);
                 }
             }
 

@@ -27,8 +27,7 @@ namespace IqraCommerce.API.AppData
                                                  item[9],
                                                  item[10],
                                                  item[11],
-                                                 item[12],
-                                                 item[13]));
+                                                 item[12]));
             }
 
             foreach (var x in d)
@@ -40,7 +39,6 @@ namespace IqraCommerce.API.AppData
                     p.Add(new List<object>()
                     {
                         pr.Id,
-                        pr.Name,
                         pr.DisplayName,
                         pr.PackSize,
                         pr.PackSize,
@@ -82,7 +80,6 @@ namespace IqraCommerce.API.AppData
     public class HomeProduct
     {
         public HomeProduct(object id,
-                           object name,
                            object displayName,
                            object packSize,
                            object imageURL,
@@ -95,7 +92,6 @@ namespace IqraCommerce.API.AppData
                            object unitName)
         {
             Id = id;
-            Name = name;
             DisplayName = displayName;
             PackSize = packSize;
             ImageURL = imageURL;
@@ -109,7 +105,6 @@ namespace IqraCommerce.API.AppData
 
         }
         public object Id { get; set; }
-        public object Name { get; set; }
         public object DisplayName { get; set; }
         public object PackSize { get; set; }
         public object ImageURL { get; set; }
