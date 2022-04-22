@@ -60,7 +60,7 @@ namespace IqraCommerce.Helpers
                         }
                     }
 
-                    transformedImage.Save(path[sizeNames[i]] + imageName);
+                    transformedImage.Save(_config.GetSection(rootDirectory)["ROOT_PATH"] + path[sizeNames[i]] + imageName);
                 }
             }
 

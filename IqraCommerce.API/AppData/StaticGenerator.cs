@@ -90,27 +90,26 @@ namespace IqraCommerce.API.AppData
 
                     -- ### Home Page Display With Product ### [2]
                     SELECT D.[Id]
-                    ,D.[Name]
-                    ,D.[Rank]
-                    ,P.[Id]
-                    ,P.[Name]
-                    ,P.[DisplayName]
+                    ,D.[Name] [DisplayName]
+                    ,P.[Id] [DisplayId]
+                    ,P.[Name] [ProductName]
+                    ,P.[DisplayName] [ProductDisplayName]
                     ,P.[PackSize]
-                    , 'PRIMARY IMAGE URL GOES HERE' [ImageURL]
+                    ,'PRIMARY IMAGE URL GOES HERE' [ImageURL]
                     ,P.[CurrentPrice]
                     ,P.[OriginalPrice]
                     ,P.[DiscountedPrice]
                     ,P.[DiscountedPercentage]
                     ,P.[StockUnit]
-                    ,P.[Rank]
-                    ,P.[BrandId]
-                    ,P.[UnitId]
-                FROM [dbo].[Display] D
-                RIGHT JOIN [DisplayProduct] DP ON DP.DisplayId = D.Id
-                LEFT JOIN [Product] P ON DP.ProductId = P.Id
-                WHERE D.[IsDeleted] = 0 AND D.[IsVisible] = 1 AND
-                        DP.IsDeleted = 0
-                ORDER BY D.[Rank], P.Rank
+                    ,P.[UnitId] [UnitId]
+					,U.Name [UnitName]
+                    FROM [dbo].[Display] D
+                    RIGHT JOIN [DisplayProduct] DP ON DP.DisplayId = D.Id
+                    LEFT JOIN [Product] P ON DP.ProductId = P.Id
+                    LEFT JOIN [Unit] U ON U.Id = P.UnitId
+                    WHERE D.[IsDeleted] = 0 AND D.[IsVisible] = 1 AND
+                            DP.IsDeleted = 0
+                    ORDER BY D.[Rank], P.Rank
 
                 
                 ";

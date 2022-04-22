@@ -14,10 +14,21 @@ namespace IqraCommerce.API.AppData
                var id = item[0].ToString();
                if(!d.ContainsKey(id))
                {
-                   d.Add(id, new HomeCategory(item[0], item[1], item[2]));
+                   d.Add(id, new HomeCategory(item[0], item[1]));
                }
 
-               d[id].Product.Add(new HomeProduct(item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10], item[11], item[12], item[13], item[14], item[15]));
+               d[id].Product.Add(new HomeProduct(item[2],
+                                                 item[3],
+                                                 item[4],
+                                                 item[5],
+                                                 item[6],
+                                                 item[7],
+                                                 item[8],
+                                                 item[9],
+                                                 item[10],
+                                                 item[11],
+                                                 item[12],
+                                                 item[13]));
             }
 
             foreach (var x in d)
@@ -28,12 +39,24 @@ namespace IqraCommerce.API.AppData
                 {
                     p.Add(new List<object>()
                     {
-                        pr.Id, pr.Name, pr.DisplayName, pr.PackSize, pr.PackSize, pr.ImageURL, pr.CurrentPrice, pr.OriginalPrice, pr.DiscountedPrice, pr.DiscountedPercentage, pr.StockUnit, pr.Rank, pr.BrandId, pr.UnitId
+                        pr.Id,
+                        pr.Name,
+                        pr.DisplayName,
+                        pr.PackSize,
+                        pr.PackSize,
+                        pr.ImageURL,
+                        pr.CurrentPrice,
+                        pr.OriginalPrice,
+                        pr.DiscountedPrice,
+                        pr.DiscountedPercentage,
+                        pr.StockUnit,
+                        pr.UnitId,
+                        pr.UnitName
                     });
                 }
                 IList<object> c = new List<object>()
                 {
-                    v.Id, v.Name, v.Rank, p
+                    v.Id, v.Name, p
                 };
 
                 output.Add(c);
@@ -45,16 +68,14 @@ namespace IqraCommerce.API.AppData
 
     public class HomeCategory
     {
-        public HomeCategory(object id, object name, object rank)
+        public HomeCategory(object id, object name)
         {
             Id = id;
             Name = name;
-            Rank = rank;
             Product = new List<HomeProduct>();
         }
         public object Id { get; set; }
         public object Name { get; set; }
-        public object Rank { get; set; }
         public IList<HomeProduct> Product { get; set; }
     }
 
@@ -70,9 +91,8 @@ namespace IqraCommerce.API.AppData
                            object discountedPrice,
                            object discountedPercentage,
                            object stockUnit,
-                           object rank,
-                           object brandId,
-                           object unitId)
+                           object unitId,
+                           object unitName)
         {
             Id = id;
             Name = name;
@@ -84,9 +104,8 @@ namespace IqraCommerce.API.AppData
             DiscountedPrice = discountedPrice;
             DiscountedPercentage = discountedPercentage;
             StockUnit = stockUnit;
-            Rank = rank;
-            BrandId = brandId;
             UnitId = unitId;
+            UnitName = unitName;
 
         }
         public object Id { get; set; }
@@ -99,8 +118,7 @@ namespace IqraCommerce.API.AppData
         public object DiscountedPrice { get; set; }
         public object DiscountedPercentage { get; set; }
         public object StockUnit { get; set; }
-        public object Rank { get; set; }
-        public object BrandId { get; set; }
         public object UnitId { get; set; }
+        public object UnitName { get; set; }
     }
 }
