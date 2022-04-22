@@ -101,10 +101,10 @@ namespace IqraCommerce.API.AppData
                     ORDER BY [Rank]
 
 
-                    -- ### Home Page Categories With Product ### [2]
-                    SELECT C.[Id]
-                    ,C.[Name]
-                    ,C.[Rank]
+                    -- ### Home Page Display With Product ### [2]
+                    D.[Id]
+                    ,D.[Name]
+                    ,D.[Rank]
                     ,P.[Id]
                     ,P.[Name]
                     ,P.[DisplayName]
@@ -118,12 +118,12 @@ namespace IqraCommerce.API.AppData
                     ,P.[Rank]
                     ,P.[BrandId]
                     ,P.[UnitId]
-                FROM [dbo].[Category] C
-                RIGHT JOIN [ProductCategory] PC ON PC.CategoryId = C.Id
-                LEFT JOIN [Product] P ON PC.ProductId = P.Id
-                WHERE C.[IsDeleted] = 0 AND C.[IsVisible] = 1 AND C.[IsVisibleInHome] = 1 AND
-                        PC.IsDeleted = 0
-                ORDER BY C.[Rank], P.Rank
+                FROM [dbo].[Display] D
+                RIGHT JOIN [DisplayProduct] DP ON DP.DisplayId = D.Id
+                LEFT JOIN [Product] P ON DP.ProductId = P.Id
+                WHERE D.[IsDeleted] = 0 AND D.[IsVisible] = 1 AND
+                        DP.IsDeleted = 0
+                ORDER BY D.[Rank], P.Rank
 
 
                 -- ### TOP 10 MOST DISCOUNTED PRODUCT ### [3]

@@ -56,6 +56,8 @@ namespace IqraCommerce.Entities
         #region UI
         public virtual DbSet<Banner> Banner { get; set; } // Used
         public virtual DbSet<Showcase> Showcase { get; set; } // Used
+        public virtual DbSet<Display> Display { get; set; } // Used
+        public virtual DbSet<DisplayProduct> DisplayProduct { get; set; } // Used
         #endregion
 
         #region LocationArea
@@ -85,8 +87,8 @@ namespace IqraCommerce.Entities
         #endregion Order
 
         #region DeviceArea
-        public virtual DbSet<Device> Device { get; set; } // Used
-        public virtual DbSet<Activity> Activity { get; set; } // Used
+        //public virtual DbSet<Device> Device { get; set; } // Used
+        //public virtual DbSet<Activity> Activity { get; set; } // Used
         #endregion DeviceArea
 
         #region HistoryArea

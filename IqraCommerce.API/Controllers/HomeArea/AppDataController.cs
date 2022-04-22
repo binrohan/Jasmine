@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using IqraCommerce.API.Helpers;
 using IqraCommerce.API.Entities;
 using IqraCommerce.API.DTOs.Category;
+using Microsoft.AspNetCore.Hosting;
 
 namespace IqraCommerce.API.Controllers.HomeArea
 {
@@ -18,10 +19,12 @@ namespace IqraCommerce.API.Controllers.HomeArea
     {
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _repo;
-        public AppDataController(IMapper mapper, ICategoryRepository repo)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public AppDataController(IMapper mapper, ICategoryRepository repo, IWebHostEnvironment environment)
         {
             _repo = repo;
             _mapper = mapper;
+            _hostEnvironment = environment;
         }
 
         [HttpGet("Create")]
@@ -34,6 +37,12 @@ namespace IqraCommerce.API.Controllers.HomeArea
 
             return Ok(new ApiResponse(201, data, "App data created!"));
 
+        }
+
+        [HttpGet("WebRootPath")]
+        public string BasePath()
+        {
+            return _hostEnvironment.WebRootPath;
         }
     }
 }

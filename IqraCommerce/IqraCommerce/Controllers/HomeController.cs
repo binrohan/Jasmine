@@ -25,7 +25,7 @@ namespace IqraCommerce.Controllers
         {
             return View();
         }
-        public string BasePath()
+        public string WebRootPath()
         {
             return _hostEnvironment.WebRootPath;
         }
