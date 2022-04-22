@@ -1,10 +1,10 @@
 import { editBtn, imageBtn } from "../buttons.js";
 import { url } from '../utils.js';
 import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
-import { offerType } from '../dictionaries.js';
+import { promotionType } from '../dictionaries.js';
 
 (function () {
-    const controller = 'Offer';
+    const controller = 'Promotion';
 
     $(document).ready(() => {
         $('#add-record').click(add);
@@ -12,7 +12,7 @@ import { offerType } from '../dictionaries.js';
 
     const columns = () => [
         { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
-        { field: 'OfferType', title: 'Offer Type', filter: true, add: false, bound: offerTypeBound },
+        { field: 'PromotionType', title: 'Promotion Type', filter: true, add: false, bound: promotionTypeBound },
         { field: 'Rank', title: 'Rank', filter: true, position: 2 },
         { field: 'IsVisible', title: 'Published', filter: true, add: false, bound: invisibleRowBound },
         { field: 'Headline', title: 'Title', Width: '200px', add: { sibling: 1 }, position: 3, },
@@ -45,8 +45,8 @@ import { offerType } from '../dictionaries.js';
                     position: 7,
                 },
                 {
-                    title: 'Offer Type',
-                    Id: 'OfferType',
+                    title: 'Promotion Type',
+                    Id: 'PromotionType',
                     dataSource: [
                         { text: 'Cashback', value: 0 },
                         { text: 'Delivery Discount', value: 1 },
@@ -69,11 +69,11 @@ import { offerType } from '../dictionaries.js';
     };
 
     function add() {
-        popup({ title: 'New Offer', action: 'add' });
+        popup({ title: 'New Promotion', action: 'add' });
     };
 
     function edit(model) {
-        popup({ data: model, title: 'Edit Offer', action: 'edit' });
+        popup({ data: model, title: 'Edit Promotion', action: 'edit' });
     };
 
     const uploadImage = (row) => {
@@ -96,12 +96,15 @@ import { offerType } from '../dictionaries.js';
         td.html(`<img src="${url(this.ImageURL)}" style="max-height: 120px; max-width: 100%;" />`);
     }
 
-    function offerTypeBound(td) {
-        switch (this.OfferType) {
-            case offerType.Cashback:
+    function promotionTypeBound(td) {
+        switch (this.PromotionType) {
+            case promotionType.cashback:
                 td.html(`Cashback`);
                 break;
-            case offerType.Delivery:
+            case promotionType.coupon:
+                td.html(`Coupon`);
+                break;
+            case promotionType.delivery:
                 td.html(`Delivery Discount`);
                 break;
             default:

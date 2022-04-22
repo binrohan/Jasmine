@@ -8,6 +8,7 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface IAddressService
     {
-        
+        Task<IEnumerable<AddressReturnDto>> GetAddressesByCustomerAsync(Guid customerId);
+        Task<AddressReturnDto> GetAddressAsync(Guid customerId, AddressType addressType);
     }
 }

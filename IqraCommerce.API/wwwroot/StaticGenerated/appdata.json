@@ -69,6 +69,11 @@
             "8cb25cd7-31c0-462c-800c-0d3159efdc1b",
             "Working",
             []
+        ],
+        [
+            "1d69dbdf-2d62-4bc3-bb12-9e5396930132",
+            "XXXX",
+            []
         ]
     ],
     [
@@ -80,20 +85,51 @@
             "XC"
         ]
     ],
-    [],
     [
         [
-            "af0c048e-80a9-4147-aadb-5c4da6c30994",
-            "Keyboard",
+            "5301f111-12b0-4a3e-b04a-29f4e3903177",
+            "Spices",
             1,
             [
                 [
-                    "af0c048e-80a9-4147-aadb-5c4da6c30994",
-                    "Keyboard",
+                    "5301f111-12b0-4a3e-b04a-29f4e3903177",
+                    "Spices",
+                    "LG LED VA CURVE Monitor",
+                    "1",
+                    "1",
+                    "PRIMARY IMAGE URL GOES HERE",
+                    73000.0,
+                    75000.0,
+                    2000.0,
+                    5.0,
+                    5,
+                    1,
+                    "9402e7f5-7471-4fff-9d8c-849c817c486d",
+                    "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
+                ],
+                [
+                    "5301f111-12b0-4a3e-b04a-29f4e3903177",
+                    "Spices",
                     "Maybelline",
                     "0.125",
                     "0.125",
-                    "/Contents/Images/Products/Small/d49c465e-2d24-461e-98e9-13ac30607134.png",
+                    "PRIMARY IMAGE URL GOES HERE",
+                    800.0,
+                    100.0,
+                    200.0,
+                    20.0,
+                    100,
+                    1,
+                    "39ae71c4-40fe-4075-a8c8-d9b5a4edf68f",
+                    "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
+                ],
+                [
+                    "5301f111-12b0-4a3e-b04a-29f4e3903177",
+                    "Spices",
+                    "Maybelline",
+                    "0.125",
+                    "0.125",
+                    "PRIMARY IMAGE URL GOES HERE",
                     800.0,
                     100.0,
                     200.0,
@@ -106,17 +142,17 @@
             ]
         ],
         [
-            "8cb25cd7-31c0-462c-800c-0d3159efdc1b",
-            "Working",
+            "6ad5afe0-3214-4618-85a5-e0094bc2c5a5",
+            "Premium",
             2,
             [
                 [
-                    "8cb25cd7-31c0-462c-800c-0d3159efdc1b",
-                    "Working",
+                    "6ad5afe0-3214-4618-85a5-e0094bc2c5a5",
+                    "Premium",
                     "Maybelline",
                     "0.125",
                     "0.125",
-                    "/Contents/Images/Products/Small/d49c465e-2d24-461e-98e9-13ac30607134.png",
+                    "PRIMARY IMAGE URL GOES HERE",
                     800.0,
                     100.0,
                     200.0,
@@ -127,60 +163,29 @@
                     "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
                 ]
             ]
-        ]
-    ],
-    [
-        [
-            "f0d9e008-2c4f-492e-90f3-cc24012fd6fe",
-            "Maybelline 2",
-            "Maybelline",
-            "0.125",
-            "/Contents/Images/Products/Small/d49c465e-2d24-461e-98e9-13ac30607134.png",
-            800.0,
-            100.0,
-            200.0,
-            20.0,
-            100,
-            1,
-            "39ae71c4-40fe-4075-a8c8-d9b5a4edf68f",
-            "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
         ],
         [
-            "f0d9e008-2c4f-492e-90f3-cc14012fd6fe",
-            "Maybelline",
-            "Maybelline",
-            "0.125",
-            "/Contents/Images/Products/Small/d49c465e-2d24-461e-98e9-13ac30607134.png",
-            800.0,
-            100.0,
-            200.0,
-            20.0,
-            100,
-            1,
-            "39ae71c4-40fe-4075-a8c8-d9b5a4edf68f",
-            "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
-        ],
-        [
-            "cd090487-b88b-4947-9e03-a8a3e3eb146d",
-            "LG LED VA CURVE Monitor",
-            "LG LED VA CURVE Monitor",
-            "1",
-            null,
-            73000.0,
-            75000.0,
-            2000.0,
-            5.0,
-            5,
-            1,
-            "9402e7f5-7471-4fff-9d8c-849c817c486d",
-            "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
-        ]
-    ],
-    [
-        [
-            "89011f30-c3e6-4f62-a5ad-8dc3e1a3095d",
-            null,
-            1.0
+            "721209c5-e8e1-4257-9b36-d9505f823e9a",
+            "Random",
+            3,
+            [
+                [
+                    "721209c5-e8e1-4257-9b36-d9505f823e9a",
+                    "Random",
+                    "Maybelline",
+                    "0.125",
+                    "0.125",
+                    "PRIMARY IMAGE URL GOES HERE",
+                    800.0,
+                    100.0,
+                    200.0,
+                    20.0,
+                    100,
+                    3,
+                    "39ae71c4-40fe-4075-a8c8-d9b5a4edf68f",
+                    "55d5f570-9b0d-4101-866d-6d61fc3dd8e0"
+                ]
+            ]
         ]
     ]
 ]

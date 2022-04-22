@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace IqraCommerce.Models.PromotionArea
 {
-    public class OfferModel : DropDownBaseModel
+    public class PromotionModel : DropDownBaseModel
     {
-        public OfferType OfferType { get; set; }
+        public PromotionType OfferType { get; set; }
         public string Headline { get; set; }
         public string Content { get; set; }
         public DateTime StartingAt { get; set; }
@@ -17,7 +17,5 @@ namespace IqraCommerce.Models.PromotionArea
         public bool IsVisible { get; set; }
         public string Remarks { get; set; }
         public int Rank { get; set; }
-
-
     }
 }

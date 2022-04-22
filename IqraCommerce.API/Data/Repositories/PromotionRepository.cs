@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore;
 namespace IqraCommerce.API.Data.Repositories
 {
 
-    public class OfferRepository : IOfferRepository
+    public class PromotionRepository : IPromotionRepository
     {
         private readonly DataContext _context;
-        public OfferRepository(DataContext context)
+        public PromotionRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Offer>> GetOffersAsync()
+        public async Task<IEnumerable<Promotion>> GetPromotionsAsync()
         {
             return await _context
-                        .Offer
+                        .Promotion
                         .Where(o => !o.IsDeleted
                                     && o.IsVisible
                                     && o.StartingAt <= DateTime.Now

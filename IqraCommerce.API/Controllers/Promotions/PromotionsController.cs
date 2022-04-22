@@ -11,24 +11,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IqraCommerce.API.Controllers.UI
 {
-    [Authorize]
-    public class OffersController : BaseApiController
+    public class PromotionsController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly IOfferRepository _repo;
-        public OffersController(IMapper mapper, IOfferRepository repo)
+        private readonly IPromotionRepository _repo;
+        public PromotionsController(IMapper mapper, IPromotionRepository repo)
         {
             _repo = repo;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOffers()
+        public async Task<IActionResult> GetPromotions()
         {
-            var offersFromRepo = await _repo.GetOffersAsync();
-            var offersToReturn  = _mapper.Map<IEnumerable<OfferReturnDto>>(offersFromRepo);;
+            var PromotionsFromRepo = await _repo.GetPromotionsAsync();
+            var PromotionsToReturn  = _mapper.Map<IEnumerable<PromotionReturnDto>>(PromotionsFromRepo);;
 
-            return Ok(new ApiResponse(200, offersToReturn, "Successed"));
+            return Ok(new ApiResponse(200, PromotionsToReturn, "Successed"));
         }
     }
     

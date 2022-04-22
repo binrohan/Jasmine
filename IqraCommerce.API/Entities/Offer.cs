@@ -3,9 +3,9 @@ using IqraCommerce.API.Data;
 
 namespace IqraCommerce.API.Entities
 {
-    public class Offer : BaseEntity
+    public class Promotion : BaseEntity
     {
-        public OfferType OfferType { get; set; }
+        public PromotionType PromotionType { get; set; }
         public string Headline { get; set; }
         public string Content { get; set; }
         public DateTime StartingAt { get; set; }

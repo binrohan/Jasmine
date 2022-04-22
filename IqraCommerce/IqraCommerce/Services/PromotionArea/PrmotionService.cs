@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace IqraCommerce.Services.UI
 {
-    public class OfferService : IqraCommerce.Services.AppBaseService<Offer>
+    public class PromotionService : IqraCommerce.Services.AppBaseService<Promotion>
     {
         public override string GetName(string name)
         {
@@ -34,7 +34,7 @@ namespace IqraCommerce.Services.UI
                     name = "cstmr.[Name]";
                     break;
                 default:
-                    name = "offer." + name;
+                    name = "promotion." + name;
                     break;
             }
             return base.GetName(name);
@@ -45,7 +45,7 @@ namespace IqraCommerce.Services.UI
             page.SortBy = page.SortBy ?? "[Rank] asc";
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, OfferQuery.Get());
+                return await db.GetPages(page, PromotionQuery.Get());
             }
         }
 
@@ -75,7 +75,7 @@ namespace IqraCommerce.Services.UI
         }
     }
 
-    public class OfferQuery
+    public class PromotionQuery
     {
         public static string Get()
         {
@@ -88,15 +88,15 @@ namespace IqraCommerce.Services.UI
                   ,[Remarks]
                   ,[ActivityId]
                   ,[Name]
-                  ,[OfferType]
+                  ,[PromotionType]
                   ,[Headline]
                   ,[Content]
                   ,[StartingAt]
                   ,[EndingAt]
-                  ,ISNULL('/Images/Offer/Icon/' + [ImageURL], '') [ImageURL]
+                  ,ISNULL('/Images/Promotion/Icon/' + [ImageURL], '') [ImageURL]
                   ,[IsVisible]
                   ,[Rank]
-              FROM [dbo].[Offer] offer";
+              FROM [dbo].[Promotion] promotion";
         }
     }
 }

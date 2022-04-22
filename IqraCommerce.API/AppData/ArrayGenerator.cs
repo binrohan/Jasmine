@@ -5,7 +5,7 @@ namespace IqraCommerce.API.AppData
 {
     public static class ArrayGenerator
     {
-        public static List<object> HomeCategories(List<List<object>> list)
+        public static List<object> HomeDisplay(List<List<object>> list)
         {
             var output = new List<object>();
             var d = new Dictionary<string, HomeCategory>();

@@ -32,7 +32,7 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Upazila> Upazila { get; set; } // ** Using
         public virtual DbSet<Register> Register { get; set; } // ** Using
         public virtual DbSet<Complain> Complain { get; set; } // ** Using
-        public virtual DbSet<Offer> Offer { get; set; } // ** Using
+        public virtual DbSet<Promotion> Promotion { get; set; } // ** Using
         public virtual DbSet<Festival> Festival { get; set; } // ** Using
         public virtual DbSet<FestivalProduct> FestivalProduct { get; set; } // ** Using
         public virtual DbSet<Wishlist> Wishlist { get; set; } // ** Using

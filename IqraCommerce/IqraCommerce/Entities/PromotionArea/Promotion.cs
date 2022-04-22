@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace IqraCommerce.Entities.PromotionArea
 {
-    [Table("Offer")]
-    [Alias("offer")]
-    public class Offer : DropDownBaseEntity
+    [Table("Promotion")]
+    [Alias("promotion")]
+    public class Promotion : DropDownBaseEntity
     {
-        public OfferType OfferType { get; set; }
+        public PromotionType PromotionType { get; set; }
         public string Headline { get; set; }
         public string Content { get; set; }
         public DateTime StartingAt { get; set; }

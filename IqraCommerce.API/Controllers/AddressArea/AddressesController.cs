@@ -44,11 +44,9 @@ namespace IqraCommerce.API.Controllers
         {
             var customerId = User.RetrieveIdFromPrincipal();
 
-            var addressesFromRepo = await _repo.GetAddressesByCustomerAsync(customerId);
+            var addresses = await _service.GetAddressesByCustomerAsync(customerId);
 
-            var addressesToReturn = _mapper.Map<IEnumerable<AddressReturnDto>>(addressesFromRepo);
-
-            return Ok(new ApiResponse(200, addressesToReturn));
+            return Ok(new ApiResponse(200, addresses));
         }
 
         [HttpGet("{addressType}")]
@@ -56,14 +54,11 @@ namespace IqraCommerce.API.Controllers
         {
             var customerId = User.RetrieveIdFromPrincipal();
 
-            var addressFromRepo = await _repo.GetAddressAsync(customerId, addressType);
+            var address = await _service.GetAddressAsync(customerId, addressType);
 
-            if (addressFromRepo is null) return NotFound(new ApiResponse(404, "Address Not Found"));
+            if (address is null) return NotFound(new ApiResponse(404, "Address Not Found"));
 
-            var addressToReturn = _mapper.Map<AddressReturnDto>(addressFromRepo);
-
-
-            return Ok(new ApiResponse(200, addressToReturn));
+            return Ok(new ApiResponse(200, address));
         }
 
         [HttpPut]

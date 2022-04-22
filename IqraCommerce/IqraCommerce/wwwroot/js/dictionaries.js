@@ -3,8 +3,8 @@ export const bannerType = {
     offerBanner: 1
 }
 
-export const offerType = {
-    cashback: 0, delivery: 1
+export const promotionType = {
+    cashback: 0, coupon: 1, delivery: 2
 }
 
 export const complainType =

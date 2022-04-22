@@ -5,8 +5,8 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface IOfferRepository
+    public interface IPromotionRepository
     {
-         Task<IEnumerable<Offer>> GetOffersAsync();
+         Task<IEnumerable<Promotion>> GetPromotionsAsync();
     }
 }

@@ -26,9 +26,9 @@ namespace IqraCommerce.Data
         New, Seen, OnHold
     }
 
-    public enum OfferType
-    { 
-        Cashback, Delivery
+    public enum PromotionType
+    {
+        Cashback, Coupon, Delivery
     }
 
     public enum RegistrationBy

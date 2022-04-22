@@ -124,11 +124,11 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Complain, ComplainReturnDto>();
             #endregion Complain
 
-            #region Offer
-            CreateMap<Offer, OfferReturnDto>()
+            #region Promotion
+            CreateMap<Promotion, PromotionReturnDto>()
             .ForMember(dest => dest.ImageURL,
-                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.offer, Key.original) + src.ImageURL));
-            #endregion Offer
+                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.Promotion, Key.original) + src.ImageURL));
+            #endregion Promotion
 
             #region Festival
             CreateMap<Festival, FestivalReturnDto>();

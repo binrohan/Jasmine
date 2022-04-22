@@ -11,21 +11,21 @@ using System;
 
 namespace IqraCommerce.Controllers.UIArea
 {
-    public class OfferController : AppDropDownController<Offer, OfferModel>
+    public class PromotionController : AppDropDownController<Promotion, PromotionModel>
     {
-        OfferService ___service;
+        PromotionService ___service;
         private readonly IConfiguration _config;
-        public OfferController(IConfiguration config)
+        public PromotionController(IConfiguration config)
         {
             _config = config;
-            service = __service = ___service = new OfferService();
+            service = __service = ___service = new PromotionService();
         }
 
         public ActionResult UploadImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
 
-            var fileName = imageManager.Store(imageUpload.Img, "Offer");
+            var fileName = imageManager.Store(imageUpload.Img, "Promotion");
 
             return Json(___service.UploadImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
         }

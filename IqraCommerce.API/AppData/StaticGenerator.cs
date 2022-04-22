@@ -51,14 +51,11 @@ namespace IqraCommerce.API.AppData
         private static object SetWebAppData(ResponseList<MultiListArrayModel> data, string path, IList<object> categories)
         {
             AppDataModel model = new AppDataModel() { };
-            var homeCategories = ArrayGenerator.HomeCategories(data.Data.Data[2]);
+            var homeDisplay = ArrayGenerator.HomeDisplay(data.Data.Data[1]);
             List<object> Data = new List<object>() { 
-                categories, 
-                data.Data.Data[0], 
-                data.Data.Data[1], 
-                homeCategories,
-                data.Data.Data[3],
-                data.Data.Data[4],
+                categories, // Display
+                data.Data.Data[0], // Notice
+                homeDisplay, // Home Display
             };
 
             var appDataJSON = JsonConvert.SerializeObject(Data);
@@ -92,7 +89,7 @@ namespace IqraCommerce.API.AppData
                     ORDER BY [Rank]
 
                     -- ### Home Page Display With Product ### [2]
-                    D.[Id]
+                    SELECT D.[Id]
                     ,D.[Name]
                     ,D.[Rank]
                     ,P.[Id]

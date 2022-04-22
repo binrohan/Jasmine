@@ -23,9 +23,6 @@ namespace IqraCommerce.API.Data.Repositories
                             .CustomerAddress
                             .Where(ca => ca.CustomerId == customerId
                                          && ca.TypeOfAddress == addressType)
-                            .Include(ca => ca.Province)
-                            .Include(ca => ca.District)
-                            .Include(ca => ca.Upazila)
                             .SingleOrDefaultAsync();
         }
 
@@ -34,9 +31,6 @@ namespace IqraCommerce.API.Data.Repositories
             return await _context
                             .CustomerAddress
                             .Where(ca => ca.CustomerId == customerId)
-                            .Include(ca => ca.Province)
-                            .Include(ca => ca.District)
-                            .Include(ca => ca.Upazila)
                             .OrderBy(ca =>  ca.TypeOfAddress)
                             .ToListAsync();
         }
@@ -46,9 +40,6 @@ namespace IqraCommerce.API.Data.Repositories
             return await _context
                             .CustomerAddress
                             .Where(ca => ca.Id == id)
-                            .Include(ca => ca.Province)
-                            .Include(ca => ca.District)
-                            .Include(ca => ca.Upazila)
                             .SingleOrDefaultAsync();
         }
     }
