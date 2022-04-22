@@ -91,16 +91,6 @@ namespace IqraCommerce.API.AppData
                     WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + (int)BannerType.MainBanner + @"
                     ORDER BY [Rank]
 
-
-                    -- ### Notice ### [1]
-                    SELECT [Id]
-                        ,[Rank]
-                        ,[Content]
-                    FROM [dbo].[Notice]
-                    WHERE GETDATE() > StartDate AND GETDATE() < EndDate AND IsDeleted = 0 AND IsVisible = 1
-                    ORDER BY [Rank]
-
-
                     -- ### Home Page Display With Product ### [2]
                     D.[Id]
                     ,D.[Name]
@@ -125,33 +115,7 @@ namespace IqraCommerce.API.AppData
                         DP.IsDeleted = 0
                 ORDER BY D.[Rank], P.Rank
 
-
-                -- ### TOP 10 MOST DISCOUNTED PRODUCT ### [3]
-                SELECT TOP 10 [Id]
-                    ,[Name]
-                    ,[DisplayName]
-                    ,[PackSize]
-                    , 'PRIMARY IMAGE URL GOES HERE' [ImageURL]
-                    ,[CurrentPrice]
-                    ,[OriginalPrice]
-                    ,[DiscountedPrice]
-                    ,[DiscountedPercentage]
-                    ,[StockUnit]
-                    ,[Rank]
-                    ,[BrandId]
-                    ,[UnitId]
-                FROM [dbo].[Product]
-                WHERE [IsDeleted] = 0 AND [IsVisible] = 1
-                ORDER BY [DiscountedPrice], [Rank]
-
-
-                -- ### Brand Images ### [4]
-                SELECT [Id]
-                    ,'" + Config.AppSetting(Supdirs.directories, Subdirs.showcase, Key.small) + @"'+[ImageURL] [ImageURL]
-                    ,[Rank]
-                FROM [dbo].[Showcase]
-                WHERE [IsDeleted] = 0 AND [IsVisible] = 1
-                ORDER BY [Rank], [Name]
+                
                 ";
             }
         }
