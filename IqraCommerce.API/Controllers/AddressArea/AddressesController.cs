@@ -66,9 +66,9 @@ namespace IqraCommerce.API.Controllers
         {
             var customerId = User.RetrieveIdFromPrincipal();
 
-            var addressFromRepo = await _repo.GetAddressesByCustomerAsync(customerId);
+            var addressesFromRepo = await _repo.GetAddressesByCustomerAsync(customerId);
 
-            foreach (var address in addressFromRepo)
+            foreach (var address in addressesFromRepo)
             {
                 if (addressUpdateDto.IsPrimary && address.Id != addressUpdateDto.Id)
                     address.IsPrimary = false;
@@ -79,14 +79,14 @@ namespace IqraCommerce.API.Controllers
 
             var result = await _unitOfWork.Complete();
 
-            if (result <= 0) return BadRequest(400);
+            if (result <= 0) return BadRequest(new ApiResponse(400));
 
             var addresFromRepo = await _unitOfWork
                                             .Repository<CustomerAddress>()
                                             .GetByIdAsync(addressUpdateDto.Id);
 
 
-            var addressToReturn = _mapper.Map<AddressReturnDto>(addressFromRepo);
+            var addressToReturn = _mapper.Map<IEnumerable<AddressReturnDto>>(addressesFromRepo);
 
 
             return Ok(new ApiResponse(204, addressToReturn));

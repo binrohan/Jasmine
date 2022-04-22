@@ -22,9 +22,9 @@ namespace IqraCommerce.API.Data.Services
             _addressRepo = addressRepo;
         }
 
-        public async Task<IEnumerable<AddressReturnDto>> GetAddressesByCustomerAsync(Guid customerId)
+        public async Task<IEnumerable<AddressDetailsDto>> GetAddressesByCustomerAsync(Guid customerId)
         {
-            var addresses = new List<AddressReturnDto>();
+            var addresses = new List<AddressDetailsDto>();
             var addressesFromRepo = await _addressRepo.GetAddressesByCustomerAsync(customerId);
 
             foreach (var address in addressesFromRepo)
@@ -35,20 +35,20 @@ namespace IqraCommerce.API.Data.Services
             return addresses;
         }
 
-        public async Task<AddressReturnDto> GetAddressAsync(Guid customerId, AddressType addressType)
+        public async Task<AddressDetailsDto> GetAddressAsync(Guid customerId, AddressType addressType)
         {
             var addressFromRepo = await _addressRepo.GetAddressAsync(customerId, addressType);
 
             return await GenerateAddressReturnDto(addressFromRepo);
         }
 
-        private async Task<AddressReturnDto> GenerateAddressReturnDto(CustomerAddress address)
+        private async Task<AddressDetailsDto> GenerateAddressReturnDto(CustomerAddress address)
         {
             var provinceFromRepo = await _unitOfWork.Repository<Province>().GetByIdAsync(address.ProvinceId);
             var districtFromRepo = await _unitOfWork.Repository<District>().GetByIdAsync(address.DistrictId);
             var upazilaFromRepo = await _unitOfWork.Repository<Upazila>().GetByIdAsync(address.UpazilaId);
 
-            var addressReturnDto = _mapper.Map<AddressReturnDto>(address);
+            var addressReturnDto = _mapper.Map<AddressDetailsDto>(address);
 
             if(provinceFromRepo is not null)
             {

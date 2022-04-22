@@ -101,6 +101,7 @@ namespace IqraCommerce.API.Helpers
         
             #region Address
             CreateMap<CustomerAddress, AddressReturnDto>();
+            CreateMap<CustomerAddress, AddressDetailsDto>();
             CreateMap<AddressUpdateDto, CustomerAddress>();
             #endregion Address
 

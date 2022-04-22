@@ -50,7 +50,7 @@ namespace IqraCommerce.API.Controllers
             return Ok(new ApiResponse(200, customerToReturn));
         }
         
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdateCustomer([FromForm]CustomerUpdateDto customerUpdate)
         {
             var customerId = User.RetrieveIdFromPrincipal();
