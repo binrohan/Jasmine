@@ -41,7 +41,6 @@ namespace IqraCommerce.API.AppData
                         pr.Id,
                         pr.DisplayName,
                         pr.PackSize,
-                        pr.PackSize,
                         pr.ImageURL,
                         pr.CurrentPrice,
                         pr.OriginalPrice,
