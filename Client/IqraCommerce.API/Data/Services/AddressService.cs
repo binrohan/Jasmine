@@ -68,9 +68,9 @@ namespace IqraCommerce.API.Data.Services
                                 || !upazilaFromRepo.IsVisible) ? null : upazilaFromRepo;
             }
             
-            addressReturnDto.Province = _mapper.Map<ProvinceReturnDto>(provinceFromRepo);
-            addressReturnDto.District = _mapper.Map<DistrictReturnDto>(districtFromRepo);
-            addressReturnDto.Upazila = _mapper.Map<UpazilaReturnDto>(upazilaFromRepo);
+            addressReturnDto.Province = new ProvinceReturnDto(provinceFromRepo);
+            addressReturnDto.District = new DistrictReturnDto(districtFromRepo);
+            addressReturnDto.Upazila = new UpazilaReturnDto(upazilaFromRepo);
 
             return addressReturnDto;
         }

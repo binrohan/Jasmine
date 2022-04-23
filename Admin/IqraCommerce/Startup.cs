@@ -32,13 +32,8 @@ namespace IqraCommerce
         {
             services.AddControllersWithViews();
 
-
-
             IqraConfiguration.ConfigureServices(services);
             services.AddControllersWithViews();
-
-            //services.AddDbContext<DataContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultSqlServerConnection")));
 
             services.AddDbContext<AppDB>(options =>
                 options.UseSqlServer(Connection.ConnectionString));
