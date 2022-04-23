@@ -44,6 +44,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
+  </ItemGroup>
+
   <!-- <ItemGroup>
     <ProjectReference Include="App.Setup\App.Setup.csproj" />
   </ItemGroup> -->
