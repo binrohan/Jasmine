@@ -29,7 +29,7 @@ namespace IqraCommerce.API.Controllers.Miscellaneous
             var complain = _mapper.Map<Complain>(complainToCreate);
 
             complain.CreatedAt = DateTime.Now;
-            complain.Id = User.RetrieveIdFromPrincipal();
+            complain.CreatedBy = User.RetrieveIdFromPrincipal();
 
             _unitOfWork.Repository<Complain>().Add(complain);
 

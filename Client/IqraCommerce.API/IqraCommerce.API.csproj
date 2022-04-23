@@ -43,9 +43,8 @@
       <HintPath>Dlls\IqraService.Search.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <!-- <ItemGroup>
-    <ProjectReference Include="App.Setup\App.Setup.csproj" />
-  </ItemGroup> -->
-
+  <ItemGroup>
+    <!-- <ProjectReference Include="app.csproj" /> -->
+    <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
+  </ItemGroup>
 </Project>
