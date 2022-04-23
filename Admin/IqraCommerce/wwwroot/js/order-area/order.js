@@ -35,16 +35,37 @@ import { url } from '../utils.js';
 
     // Add / Edit popup config
     function popup(options) {
+        
+    };
+
+    function add() {
+        popup({ title: 'Create New Brand', action: 'add' });
+    };
+
+    function changeStatus(row) {
+        row.Remarks = '';
         Global.Add({
-            name: 'edit-product-record',
-            title: 'Add Product',
-            model: options.data,
-            title: options.title,
-            columns: columns(),
+            name: 'change-order-status',
+            title: 'Order Status',
+            model: row,
+            columns: [],
             dropdownList: [
+                {
+                    title: 'Change Status',
+                    Id: 'IsVisible',
+                    dataSource: [
+                        { text: 'Pending', value: 0 },
+                        { text: 'Confirmed', value: 1 },
+                        { text: 'Processing', value: 2 },
+                        { text: 'Delivering', value: 3 },
+                        { text: 'Delived', value: 4 },
+                        { text: 'Cancel', value: 5 }
+                    ],
+                    position: 1
+                }
             ],
             additionalField: [
-
+                { field: 'Remarks', title: 'Remarks', position: 2 }
             ],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
@@ -53,17 +74,8 @@ import { url } from '../utils.js';
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
-            save: `/${controller}/Create`,
-            saveChange: `/${controller}/Edit`,
+            saveChange: `/${controller}/ChangeStatus`,
         });
-    };
-
-    function add() {
-        popup({ title: 'Create New Brand', action: 'add' });
-    };
-
-    function edit(model, grid) {
-        popup({ data: model, title: 'Edit Brand', action: 'edit' }, grid);
     };
 
     const orderDetails = (row) => {
@@ -130,7 +142,7 @@ import { url } from '../utils.js';
     }
 
     const changeStatusAction = {
-        click: ()=>{},
+        click: changeStatus,
         html: flashBtn()
     }
 

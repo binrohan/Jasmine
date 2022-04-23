@@ -1,5 +1,8 @@
 ﻿using IqraBase.Service;
+using IqraCommerce.Data;
+using IqraCommerce.DTOs;
 using IqraCommerce.Entities.OrderArea;
+using IqraCommerce.Helpers;
 using IqraCommerce.Models.OrderArea;
 using IqraService.Search;
 using System;
@@ -40,17 +43,34 @@ namespace IqraCommerce.Services.OrderArea
             }
         }
 
-        public async Task<ResponseJson> ChangeStatus(OrderModel model, Guid userId)
+        public async Task<ResponseJson> ChangeStatus(OrderStatusChangeDto order, Guid userId)
         {
             return await CallbackAsync((response) =>
             {
-                var Order = GetById(model.Id);
-                if (Order != null)
+                var orderFromRepo = GetById(order.Id);
+
+                var prevStatus = orderFromRepo.OrderStatus;
+
+                if (orderFromRepo != null)
                 {
-                    Order.Remarks = model.Remarks;
-                    Order.OrderStatus = model.OrderStatus;
-                    Order.UpdatedAt = DateTime.Now;
-                    Order.UpdatedBy = userId;
+                    orderFromRepo.OrderStatus = order.Status;
+                    orderFromRepo.UpdatedAt = DateTime.Now;
+                    orderFromRepo.UpdatedBy = userId;
+
+
+                    OrderHistory history = new OrderHistory()
+                    {
+                        ActivityId = order.ActivityId,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = userId,
+                        Remarks = order.Remarks,
+                        OrderId = order.Id,
+                        TypeOfAction = order.Status == OrderStatus.CancelledByAdmin ? OrderAction.CancelledByAdmin : OrderAction.CancelledByAdmin,
+                        Name = OrderHistoryHelper.GenerateHistoryMessage(prevStatus, order.Status)
+                    };
+
+                    GetEntity<OrderHistory>().Add(history);
+
                     SaveChange();
                 }
                 else

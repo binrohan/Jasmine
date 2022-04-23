@@ -27,5 +27,10 @@ namespace IqraCommerce.Controllers.MiscellaneousArea
             return View();
 
         }
+
+        public async Task<IActionResult> ChangeStatus([FromForm]OrderStatusChangeDto order)
+        {
+            return Json(await ___service.ChangeStatus(order, AppUser.Id));
+        }
     }
 }

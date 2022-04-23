@@ -12,5 +12,6 @@ namespace IqraCommerce.API.DTOs
         public Guid DistrictId { get; set; }
         public Guid UpazilaId { get; set; }
         public bool IsPrimary { get; set; }
+        public string Remarks { get; set; }
     }
 }
