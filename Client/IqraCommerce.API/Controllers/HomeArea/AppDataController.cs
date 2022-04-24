@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using IqraCommerce.API.Data.IRepositories;
-using IqraCommerce.API.DTOs.Banner;
-using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Extensions;
 using IqraCommerce.API.AppData;
 using Microsoft.AspNetCore.Mvc;
 using IqraCommerce.API.Helpers;
-using IqraCommerce.API.Entities;
-using IqraCommerce.API.DTOs.Category;
 using Microsoft.AspNetCore.Hosting;
 
 namespace IqraCommerce.API.Controllers.HomeArea

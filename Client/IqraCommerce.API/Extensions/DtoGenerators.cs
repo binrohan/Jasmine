@@ -101,24 +101,5 @@ namespace IqraCommerce.API.Extensions
 
             return banners;
         }
-
-        public static IList<object> ToArray(this IEnumerable<Notice> list)
-        {
-            IList<object> banners = new List<object>();
-
-            foreach (var item in list)
-            {
-                banners.Add(new List<object>()
-                {
-                    item.Id,
-                    item.Content,
-                    item.StartDate,
-                    item.EndDate,
-                    item.Rank
-                });
-            }
-
-            return banners;
-        }
     }
 }

@@ -21,13 +21,5 @@ namespace IqraCommerce.API.Data.Repositories
                                           .OrderBy(c => c.Rank)
                                           .ToListAsync();
         }
-
-        public async Task<IEnumerable<Notice>> GetNoticesAsync()
-        {
-            return await _context.Notice.Where(b => !b.IsDeleted && b.IsVisible)
-                                          .OrderBy(c => c.Rank)
-                                          .ThenBy(b => b.Content)
-                                          .ToListAsync();
-        }
     }
 }

@@ -5,7 +5,6 @@ using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.DTOs.Contact;
-using IqraCommerce.API.DTOs.Notice;
 using IqraCommerce.API.Entities;
 using Microsoft.Extensions.Configuration;
 
@@ -31,10 +30,6 @@ namespace IqraCommerce.API.Helpers
                 .ForMember(dest => dest.ImageURL,
                             opt => opt.MapFrom(src =>  Config.AppSetting(Supdirs.directories, Subdirs.banner, Key.original) + src.ImageURL));
             #endregion Banner
-
-            #region Notice
-            CreateMap<Notice, NoticeReturnDto>();
-            #endregion Notice
 
             #region Category
             CreateMap<Category, HomeCategoryDto>();

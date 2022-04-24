@@ -20,7 +20,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Unit> Unit { get; set; } // ** Using
         public virtual DbSet<Category> Category { get; set; } // ** Using
         public virtual DbSet<Banner> Banner { get; set; } // ** Using
-        public virtual DbSet<Notice> Notice { get; set; } // ** Using
         public virtual DbSet<Product> Product { get; set; } // ** Using
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // ** Using
         public virtual DbSet<Customer> Customer { get; set; } // ** Using
