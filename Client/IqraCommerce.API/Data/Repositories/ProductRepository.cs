@@ -37,7 +37,6 @@ namespace IqraCommerce.API.Data.Repositories
                                  .AsQueryable();
             
             query = param.IsHighlighted is null ? query : query.Where(p => p.IsHighlighted == param.IsHighlighted);
-            query = param.BrandId is null ? query : query.Where(p => p.BrandId == param.BrandId);
 
             switch (param.OrderBy)
             {

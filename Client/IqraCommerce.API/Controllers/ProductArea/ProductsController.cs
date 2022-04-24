@@ -33,51 +33,32 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
         }
 
-    [HttpGet("{productId}")]
-    public async Task<IActionResult> GetProduct(Guid productId)
-    {
-        var productFromRepo = await _repo.GetProductAsync(productId);
-        var categoriesFromRepo = await _categoryRepo.GetCategoriesByProductAsync(productId);
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> GetProduct(Guid productId)
+        {
+            var productFromRepo = await _repo.GetProductAsync(productId);
+            var categoriesFromRepo = await _categoryRepo.GetCategoriesByProductAsync(productId);
 
-        var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);
-        productToReturn.Categories = _mapper.Map<IEnumerable<CategoryShortDto>>(categoriesFromRepo);
+            var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);
+            productToReturn.Categories = _mapper.Map<IEnumerable<CategoryShortDto>>(categoriesFromRepo);
 
-        return Ok(new ApiResponse(200, productToReturn));
+            return Ok(new ApiResponse(200, productToReturn));
+        }
+
+        [HttpGet("Highlighted")]
+        public async Task<IActionResult> GetHighlightedProducts()
+        {
+            var products = await _service.GetHighlightedProductsAsync();
+
+            return Ok(new ApiResponse(200, products));
+        }
+
+        [HttpGet("TopDiscounted")]
+        public async Task<IActionResult> GetTopDiscountedProducts()
+        {
+            var products = await _service.GetTopDiscountedProductsAsync();
+
+            return Ok(new ApiResponse(200, products));
+        }
     }
-
-    [HttpGet("Latest/{categoryId}")]
-    public async Task<IActionResult> GetLatestProducts(Guid categoryId)
-    {
-        var products = await _service.GetLatestProductsAsync(categoryId);
-
-        if(products is null)
-            return NotFound(new ApiResponse(404));
-
-        return Ok(new ApiResponse(200, products));
-    }
-
-    [HttpGet("Highlighted")]
-    public async Task<IActionResult> GetHighlightedProducts()
-    {
-        var products = await _service.GetHighlightedProductsAsync();
-
-        return Ok(new ApiResponse(200, products));
-    }
-
-    [HttpGet("TopDiscounted")]
-    public async Task<IActionResult> GetTopDiscountedProducts()
-    {
-        var products = await _service.GetTopDiscountedProductsAsync();
-
-        return Ok(new ApiResponse(200, products));
-    }
-
-    [HttpGet("Brand/{brandId}")]
-    public async Task<IActionResult> GetProductsByBrand(Guid brandId)
-    {
-        var products = await _service.GetProductsByBrandAsync(brandId);
-
-        return Ok(new ApiResponse(200, products));
-    }
-}
 }

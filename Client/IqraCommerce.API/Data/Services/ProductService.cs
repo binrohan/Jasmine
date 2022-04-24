@@ -27,20 +27,6 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<ProductShortDto>> GetLatestProductsAsync(Guid categoryId)
-        {
-            var categoriesFromRepo = await _categoryRepo.GetCategoriesAsync();
-
-            var allChildrenCategory = categoriesFromRepo.GetAllChidren(categoryId);
-
-            if(allChildrenCategory.Count() == 0)
-                return null;
-
-            var productsFromrepo = await _repo.GetProductsByCategoriesAsync(20, allChildrenCategory.ToList());
-
-            return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
-        }
-
         public async Task<IEnumerable<HighlightedProductDto>> GetHighlightedProductsAsync()
         {
             ProductParam param = new ProductParam(OrderBy.Rank)
@@ -56,18 +42,6 @@ namespace IqraCommerce.API.Data.Services
         public async Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync()
         {
             ProductParam param = new ProductParam(OrderBy.Discount, 10, true);
-
-            var productsFromrepo = await _repo.GetProductsAsync(param);
-
-            return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
-        }
-
-        public async Task<IEnumerable<ProductShortDto>> GetProductsByBrandAsync(Guid brandId)
-        {
-            ProductParam param = new ProductParam(OrderBy.Rank, 9999)
-            {
-                BrandId = brandId
-            };
 
             var productsFromrepo = await _repo.GetProductsAsync(param);
 

@@ -25,7 +25,6 @@ namespace IqraCommerce.API.Params
         public int Take { get; private set; } = 10;
         public OrderBy OrderBy { get; set; }
         public bool? IsHighlighted { get; set; } = null;
-        public Guid? BrandId { get; set; } = null;
         public bool IsDeleted { get; set; }
         public bool IsVisible { get; set; } = true;
         public bool IsDecending { get; set; }
