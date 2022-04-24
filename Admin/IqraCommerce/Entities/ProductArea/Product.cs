@@ -35,9 +35,6 @@ namespace IqraCommerce.Entities.ProductArea
         public double Rating { get; set; }
         public int RatingCount { get; set; }
 
-
-        //public bool IsUpComming { get; set; }
-
         public Guid UnitId { get; set; }
 
         public string SearchQuery { get; set; }
