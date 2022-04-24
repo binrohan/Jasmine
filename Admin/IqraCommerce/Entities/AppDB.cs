@@ -72,6 +72,8 @@ namespace IqraCommerce.Entities
 
         #region Promotion
         public virtual DbSet<Promotion> Promotion { get; set; } // Used
+        public virtual DbSet<Coupon> Coupon { get; set; } // Used
+        public virtual DbSet<CouponRedeemHistory> CouponRedeemHistory { get; set; } // Used
         #endregion Promotion
 
         #region Order

@@ -28,13 +28,15 @@ namespace IqraCommerce.API.Data.Services
         private readonly IProductRepository _productRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAddressRepository _addressRepo;
+        private readonly ICouponService _couponService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
                             IOrderRepository repo,
                             IProductRepository productRepo,
                             IUnitOfWork unitOfWork,
-                            IAddressRepository addressRepo)
+                            IAddressRepository addressRepo,
+                            ICouponService couponService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -42,10 +44,11 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
             _mapper = mapper;
             _config = config;
+            _couponService = couponService;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
         }
 
-        public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment)
+        public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
         {
             var products = await GetProductsByListOfIdAsync(orderToCalcPayment.Products);
 
@@ -57,18 +60,23 @@ namespace IqraCommerce.API.Data.Services
             var productDiscount = products.Discount(orderToCalcPayment.Products);
             var orderValue = products.Value(orderToCalcPayment.Products);
             var shippingCharges = address.ShippingCharge(orderValue);
+            var couponRedeemtion = String.IsNullOrEmpty(orderToCalcPayment.CouponCode) ? 
+                                        new CouponRedemtionDto().SetDiscount(0.0, "No Coupon") : 
+                                        await _couponService.DiscountAsync(orderValue,
+                                                                            orderToCalcPayment.CouponCode,
+                                                                            customerId);
 
             return new OrderPaymentDto(orderValue,
                                        productAmount,
                                        productDiscount,
-                                       0,
+                                       couponRedeemtion,
                                        0,
                                        shippingCharges);
         }
 
         public async Task<OrderReturnDto> PlaceOrder(OrderCreateDto orderCreateDto, Guid customerId)
         {
-            var payment = await CalculatePaymentAsync(orderCreateDto);
+            var payment = await CalculatePaymentAsync(orderCreateDto, customerId);
 
             var matched = payment
                .PublicInstancePropertiesEqual<OrderPaymentDto>(orderCreateDto.Payment);

@@ -87,7 +87,22 @@ namespace IqraCommerce.API.Extensions
             }
 
             // TODO: CASHBACK
-            // TODO: COUPON
+            
+            if(payment.Coupon.IsLegit)
+            {
+                aquiredOffers.Add
+                (
+                    new OrderAquiredOffer()
+                    {
+                        OrderId = orderId,
+                        Description = $"Coupon Code Redemmed: {payment.Coupon.Code}",
+                        IsRedeemed = true,
+                        RefOfferId = payment.Coupon.Id,
+                        TypeOfOffer = OrderAquiredOfferType.Coupon,
+                        Discount = payment.Coupon.Discount
+                    }
+                );
+            }
 
             return aquiredOffers;
         }
