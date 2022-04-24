@@ -250,7 +250,8 @@ var Controller = new function () {
                         Columns: [
                             { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', Width: '200px', title: 'Created On', add: false },
                             { field: 'TypeOfAction', Width: '200px', title: 'Action Type', bound: typeOfActionBound },
-                            { field: 'Remarks', Width: '500px', title: 'Remarks' },
+                            { field: 'Name', title: 'Action Details', Width: '400px' },
+                            { field: 'Remarks', Width: '400px', title: 'Remarks' },
                             { field: 'Actor', Width: '200px', title: 'Actor' },
                         ],
                         Url: 'OrderHistory/Get/',

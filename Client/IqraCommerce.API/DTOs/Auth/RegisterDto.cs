@@ -2,7 +2,7 @@ using System;
 
 namespace IqraCommerce.API.DTOs
 {
-    public class RegisterDto
+    public class RegisterDto : IAuthCustomer
     {
         public string Phone { get; set; }
         public string Password { get; set; }

@@ -12,10 +12,6 @@ import { url } from '../utils.js';
 (function () {
     const controller = 'Order';
 
-    $(document).ready(() => {
-        $('#add-record').click(add);
-    });
-
     const columns = () => [
         { field: 'OrderNumber', filter: true, add: false },
         { field: 'OrderStatus', filter: true, add: false, bound: orderStatusBound },
@@ -33,15 +29,6 @@ import { url } from '../utils.js';
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
-    // Add / Edit popup config
-    function popup(options) {
-        
-    };
-
-    function add() {
-        popup({ title: 'Create New Brand', action: 'add' });
-    };
-
     function changeStatus(row) {
         row.Remarks = '';
         Global.Add({
@@ -52,7 +39,7 @@ import { url } from '../utils.js';
             dropdownList: [
                 {
                     title: 'Change Status',
-                    Id: 'IsVisible',
+                    Id: 'OrderStatus',
                     dataSource: [
                         { text: 'Pending', value: 0 },
                         { text: 'Confirmed', value: 1 },

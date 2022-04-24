@@ -60,9 +60,24 @@ namespace IqraCommerce.API.Controllers
 
             if (customer is null) return BadRequest(new ApiResponse(400));
 
-            
-
             return Ok(new ApiResponse(201, customer, "Registration Successed"));
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var result = await _otpService.ValidateAsync(resetPasswordDto);
+
+            if(!result) return BadRequest(new ApiResponse(406, resetPasswordDto, "Wrong OTP"));
+
+            var resetPasswordResult = await _service.ResetPasswordAsync(resetPasswordDto.Phone,
+                                                             resetPasswordDto.Password);
+
+            if (resetPasswordResult == -1) return NotFound(new ApiResponse(404, "Not Found"));
+
+            if (resetPasswordResult <= 0) return NotFound(new ApiResponse(400));
+
+            return Ok(new ApiResponse(201, "Passowrd Reset Successfully"));
         }
 
         [HttpPost("Login")]
@@ -83,7 +98,7 @@ namespace IqraCommerce.API.Controllers
         }
 
         [HttpGet("PhoneExists")]
-        public async Task<IActionResult> CheckEmailExistsAsync([FromQuery] string phone)
+        public async Task<IActionResult> CheckPhoneExistsAsync([FromQuery] string phone)
         {
             if(string.IsNullOrEmpty(phone))
                 return BadRequest(new ApiResponse(400));
@@ -94,7 +109,6 @@ namespace IqraCommerce.API.Controllers
 
             return Ok(new ApiResponse(200, true, "Phone already used"));
         }
-
         
         [HttpPost("RequestOTP")]
         public async Task<IActionResult> RequestOTP(RequestOTPDto requestDto)
@@ -123,7 +137,6 @@ namespace IqraCommerce.API.Controllers
 
            return BadRequest(new ApiResponse(200, register.Id));
         }
-
     }
 
 }

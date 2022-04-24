@@ -53,15 +53,15 @@ namespace IqraCommerce.API.Data.Services
             return result;
         }
 
-        public async Task<bool> ValidateAsync(RegisterDto register)
+        public async Task<bool> ValidateAsync(IAuthCustomer authCustomer)
         {
-           var registerFromRepo = await _unitOfWork.Repository<Register>().GetByIdAsync(register.RequestId);
+           var registerFromRepo = await _unitOfWork.Repository<Register>().GetByIdAsync(authCustomer.RequestId);
 
            var timeSpan = (registerFromRepo.CreatedAt - DateTime.Now).TotalMinutes;
 
-           return registerFromRepo.OTP == register.OTP
-                && registerFromRepo.Phone == register.Phone
-                && register.Password == registerFromRepo.Password
+           return registerFromRepo.OTP == authCustomer.OTP
+                && registerFromRepo.Phone == authCustomer.Phone
+                && authCustomer.Password == registerFromRepo.Password
                 && timeSpan <= 5.00
                 && !registerFromRepo.IsPassed;
         } 

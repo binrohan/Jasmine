@@ -10,6 +10,6 @@ namespace IqraCommerce.API.Data.IServices
     public interface IOTPService
     {
         OTPSentResult SentSMS(string phone);
-        Task<bool> ValidateAsync(RegisterDto register);
+        Task<bool> ValidateAsync(IAuthCustomer authCustomer);
     }
 }

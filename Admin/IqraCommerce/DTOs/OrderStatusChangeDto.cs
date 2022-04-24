@@ -9,7 +9,7 @@ namespace IqraCommerce.DTOs
     public class OrderStatusChangeDto
     {
         public Guid Id { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public string Remarks { get; set; }
         public Guid ActivityId { get; set; }
 

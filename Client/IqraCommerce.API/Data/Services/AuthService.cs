@@ -77,5 +77,18 @@ namespace IqraCommerce.API.Data.Services
 
             return customerToReturn;
         }
+
+        public async Task<int> ResetPasswordAsync(string phone, string password)
+        {
+            var customerFromRepo = await _repo.FindByPhoneAsync(phone);
+
+            if(customerFromRepo is null) return -1;
+
+            customerFromRepo.Password = password;
+
+            var result = await _unitOfWork.Complete();
+
+            return result;
+        }
     }
 }

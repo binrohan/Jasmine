@@ -53,7 +53,7 @@ namespace IqraCommerce.Services.OrderArea
 
                 if (orderFromRepo != null)
                 {
-                    orderFromRepo.OrderStatus = order.Status;
+                    orderFromRepo.OrderStatus = order.OrderStatus;
                     orderFromRepo.UpdatedAt = DateTime.Now;
                     orderFromRepo.UpdatedBy = userId;
 
@@ -65,8 +65,9 @@ namespace IqraCommerce.Services.OrderArea
                         CreatedBy = userId,
                         Remarks = order.Remarks,
                         OrderId = order.Id,
-                        TypeOfAction = order.Status == OrderStatus.CancelledByAdmin ? OrderAction.CancelledByAdmin : OrderAction.CancelledByAdmin,
-                        Name = OrderHistoryHelper.GenerateHistoryMessage(prevStatus, order.Status)
+                        TypeOfAction = order.OrderStatus
+                        == OrderStatus.CancelledByAdmin ? OrderAction.CancelledByAdmin : OrderAction.StatusChanged,
+                        Name = OrderHistoryHelper.GenerateHistoryMessage(prevStatus, order.OrderStatus)
                     };
 
                     GetEntity<OrderHistory>().Add(history);
