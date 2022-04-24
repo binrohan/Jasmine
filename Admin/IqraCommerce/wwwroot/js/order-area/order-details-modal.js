@@ -202,7 +202,6 @@ var Controller = new function () {
                             { field: 'Discount', filter: true, add: false },
                             { field: 'PackSize', filter: true, add: false },
                             { field: 'UnitName', title: 'Unit', filter: true, add: false },
-                            { field: 'BrandName', title: 'Brand', filter: true, add: false },
                             { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 1 }, position: 16, },
                             { field: 'CreatedBy', title: 'Creator', add: false },
                             { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

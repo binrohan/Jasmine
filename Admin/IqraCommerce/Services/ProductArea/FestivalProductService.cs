@@ -81,13 +81,10 @@ namespace IqraCommerce.Services.ProductArea
 		            product.DiscountedPercentage,
 		            product.StockUnit,
 		            product.PackSize,
-		            product.BrandId,
 		            product.UnitId,
-		            brand.Name [BrandName],
 		            unit.Name [UnitName]
 	            FROM [dbo].[Product] product
 	            INNER JOIN FestivalProduct festivalproduct ON product.Id = festivalproduct.ProductId
-	            LEFT JOIN Brand brand ON brand.Id = product.BrandId
 	            LEFT JOIN Unit unit ON unit.Id = product.UnitId";
         }
 

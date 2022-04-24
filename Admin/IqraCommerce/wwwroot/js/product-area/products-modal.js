@@ -64,7 +64,6 @@ var Controller = new function () {
                             { field: 'StockUnit', title: 'Stock', filter: true, position: 7 },
                             { field: 'PackSize', title: 'Pack Size', filter: true, position: 9 },
                             { field: 'UnitName', title: 'Unit', filter: true, add: false },
-                            { field: 'BrandName', title: 'Brand', filter: true, add: false },
                         ],
                         Url: '/Product/Get/' + callerOptions.productId,
                         filter: [...filter],

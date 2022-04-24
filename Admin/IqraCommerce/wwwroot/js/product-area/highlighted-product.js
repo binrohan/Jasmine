@@ -23,7 +23,6 @@ import { imageBound, url } from '../utils.js';
         { field: 'StockUnit', title: 'Stock', filter: true, position: 7 },
         { field: 'PackSize', title: 'Pack Size', filter: true, position: 9 },
         { field: 'UnitName', title: 'Unit', filter: true, add: false },
-        { field: 'BrandName', title: 'Brand', filter: true, add: false },
         { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 1 }, position: 16, },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

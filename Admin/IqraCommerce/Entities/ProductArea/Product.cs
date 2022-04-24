@@ -9,7 +9,7 @@ namespace IqraCommerce.Entities.ProductArea
     public class Product : DropDownBaseEntity
     {
         public string DisplayName { get; set; }
-        public string Excerpt { get; set; } 
+        public string Excerpt { get; set; }
         public string PackSize { get; set; }
 
 
@@ -35,9 +35,8 @@ namespace IqraCommerce.Entities.ProductArea
         public double Rating { get; set; }
         public int RatingCount { get; set; }
 
-        public Guid BrandId { get; set; }
 
-        public bool IsUpComming { get; set; }
+        //public bool IsUpComming { get; set; }
 
         public Guid UnitId { get; set; }
 
@@ -50,7 +49,6 @@ namespace IqraCommerce.Entities.ProductArea
         public string DescriptionFileURL { get; set; }
 
         public Unit Unit { get; set; }
-        public Brand Brand { get; set; }
 
     }
 }

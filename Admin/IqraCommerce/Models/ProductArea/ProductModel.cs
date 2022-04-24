@@ -39,8 +39,6 @@ namespace IqraCommerce.Entities.ProductArea
 
         public bool IsUpComming { get; set; }
 
-        public Guid BrandId { get; set; }
-
         public Guid UnitId { get; set; }
 
         public string Remarks { get; set; }

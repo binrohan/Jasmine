@@ -64,11 +64,9 @@ namespace IqraCommerce.Services.OrderArea
                   ,orderproduct.[Amount]
                   ,orderproduct.[Discount]
                   ,orderproduct.[Quantity]
-	              ,ISNULL(brand.Name, '' ) BrandName
 	              ,ISNULL(unit.Name, '' ) UnitName
               FROM [dbo].[OrderProduct] orderproduct
               LEFT JOIN Product product ON orderproduct.RefProductId = product.Id
-              LEFT JOIN Brand brand ON brand.Id = product.BrandId
               LEFT JOIN Unit unit ON unit.Id = product.UnitId";
         }
     }

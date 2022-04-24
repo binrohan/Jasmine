@@ -53,11 +53,11 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
     };
 
     function add() {
-        popup({ title: 'New Brand', action: 'add' });
+        popup({ title: 'New Unit', action: 'add' });
     };
 
     function edit(model) {
-        popup({ data: model, title: 'Edit Brand', action: 'edit' });
+        popup({ data: model, title: 'Edit Unit', action: 'edit' });
     };
 
     //Tab config

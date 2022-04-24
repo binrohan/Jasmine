@@ -32,9 +32,9 @@ namespace IqraCommerce.Controllers.ProductArea
             return Json(await __service.Get(page));
         }
 
-        public override ActionResult Create([FromForm]UnitModel brandToCreate)
+        public override ActionResult Create([FromForm]UnitModel unitToCreate)
         {
-            return Json( __service.OnCreate(brandToCreate, Guid.Empty, true));
+            return Json( __service.OnCreate(unitToCreate, Guid.Empty, true));
         }
 
         public override ActionResult Edit([FromForm]UnitModel recordToUpdate)

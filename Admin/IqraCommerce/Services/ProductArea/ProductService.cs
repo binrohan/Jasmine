@@ -33,9 +33,6 @@ namespace IqraCommerce.Services.ProductArea
                 case "unitname":
                     name = "unit.[Name]";
                     break;
-                case "brandname":
-                    name = "brand.[Name]";
-                    break;
                 default:
                     name = "product." + name;
                     break;
@@ -168,16 +165,13 @@ namespace IqraCommerce.Services.ProductArea
               ,product.[Rank]
               ,product.[Rating]
               ,product.[RatingCount]
-              ,product.[BrandId]
               ,product.[IsUpComming]
               ,product.[SearchQuery]
               ,product.[UnitId]
               ,product.[IsHighlighted]
               ,ISNULL('/wwwroot/Images/Products/Highlights/Icon/' + product.[HighlightedImageURL], '') [HighlightedImageURL]
-              ,ISNULL(brand.Name, '' ) BrandName
 	          ,ISNULL(unit.Name, '' ) UnitName
               FROM [dbo].[Product] product
-              LEFT JOIN Brand brand ON brand.Id = product.BrandId
               LEFT JOIN Unit unit ON unit.Id = product.UnitId";
         }
     }
