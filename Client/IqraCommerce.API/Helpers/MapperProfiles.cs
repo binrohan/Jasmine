@@ -21,11 +21,7 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => "New"));
             CreateMap<Contact, ContactReturnDto>();
             #endregion Contact
-
-            #region Brand
-            CreateMap<Brand, BrandReturnDto>();
-            #endregion Brand
-
+            
             #region Unit
             CreateMap<Unit, UnitReturnDto>();
             #endregion Unit

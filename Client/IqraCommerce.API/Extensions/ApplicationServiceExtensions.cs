@@ -32,7 +32,6 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IPromotionRepository, PromotionRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IFestivalRepository, FestivalRepository>();
             services.AddScoped<IWishlistRepository, WishlistRepository>();
             services.AddScoped<IProvinceRepository, ProvinceRepository>();

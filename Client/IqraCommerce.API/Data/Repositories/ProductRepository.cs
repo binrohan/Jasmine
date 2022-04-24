@@ -23,7 +23,6 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<Product> GetProductAsync(Guid productId)
         {
             return await _context.Product.Include(p => p.Unit)
-                                         .Include(p => p.Brand)
                                          .FirstOrDefaultAsync(p => !p.IsDeleted
                                                                     && p.IsVisible
                                                                     && p.Id == productId);

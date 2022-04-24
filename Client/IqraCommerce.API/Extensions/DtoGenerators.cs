@@ -8,39 +8,6 @@ namespace IqraCommerce.API.Extensions
 {
     public static class DtoGenerators
     {
-        public static IDictionary<char, IList<BrandReturnDto>> CreateDict(this IEnumerable<Brand> list)
-        {
-            Dictionary<char, IList<BrandReturnDto>> dict = new();
-
-            // Pushing a to z in dictionary
-            for (int i = 97; i <= 122; i++)
-            {
-                dict.Add((char)i, new List<BrandReturnDto>());
-            }
-
-            // Pushing 0 to 9 in dictionary
-            for (int i = 48; i <= 57; i++)
-            {
-                dict.Add((char)i, new List<BrandReturnDto>());
-            }
-
-            foreach (var item in list)
-            {
-                var c = item.Name.ToLower()[0];
-                if (dict.ContainsKey(c))
-                {
-                    dict[c].Add(new BrandReturnDto()
-                    {
-                        Id = item.Id,
-                        Name = item.Name
-                    });
-                }
-            }
-
-
-            return dict;
-        }
-
         public static IList<CategoryDto> CreateHierarchicalOrder(this IEnumerable<Category> list)
         {
             IList<CategoryDto> categories = new List<CategoryDto>();
