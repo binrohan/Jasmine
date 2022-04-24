@@ -33,7 +33,6 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Promotion> Promotion { get; set; } // ** Using
         public virtual DbSet<Festival> Festival { get; set; } // ** Using
         public virtual DbSet<FestivalProduct> FestivalProduct { get; set; } // ** Using
-        public virtual DbSet<Wishlist> Wishlist { get; set; } // ** Using
          public virtual DbSet<Order> Order { get; set; } // Used
         public virtual DbSet<OrderProduct> OrderProduct { get; set; } // Used
         public virtual DbSet<OrderHistory> OrderHistory { get; set; } // Used

@@ -67,7 +67,6 @@ namespace IqraCommerce.Entities
         #region UserArea
         public virtual DbSet<Customer> Customer { get; set; } // Used
         public virtual DbSet<CustomerAddress> Address { get; set; } // Used
-        public virtual DbSet<Wishlist> Wishlist { get; set; } // Used
 
         #endregion UserArea
 
