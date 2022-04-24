@@ -29,16 +29,16 @@ namespace IqraCommerce.API.AppData
 
                 output = SetWebAppData(data, path, categories);
 
-                var bytes = File.ReadAllBytes(path + @"wwwroot/StaticGenerated/AppData.html");
+                var bytes = File.ReadAllBytes(path + @"wwwroot/generated-static/AppData.html");
 
-                using (FileStream fs = new FileStream(path + @"wwwroot/StaticGenerated/AppData.zip", FileMode.Create))
+                using (FileStream fs = new FileStream(path + @"wwwroot/generated-static/AppData.zip", FileMode.Create))
                 {
                     using (GZipStream zipStream = new GZipStream(fs, CompressionMode.Compress, false))
                     {
                         zipStream.Write(bytes, 0, bytes.Length);
                     }
                 }
-                using (FileStream fs = new FileStream(path + @"wwwroot/StaticGenerated/AppData.Iqra", FileMode.Create))
+                using (FileStream fs = new FileStream(path + @"wwwroot/generated-static/AppData.Iqra", FileMode.Create))
                 {
                     using (DeflateStream zipStream = new DeflateStream(fs, CompressionMode.Compress, false))
                     {
@@ -61,10 +61,10 @@ namespace IqraCommerce.API.AppData
             var appDataJSON = JsonConvert.SerializeObject(Data);
             var dataStr = "var APP_DATA = " + appDataJSON +";";
 
-            System.IO.File.WriteAllText(path + @"wwwroot/StaticGenerated/appdata.json", appDataJSON);
+            System.IO.File.WriteAllText(path + @"wwwroot/generated-static/appdata.json", appDataJSON);
 
-            var firstPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/FirstPart.html");
-            var lastPart = System.IO.File.ReadAllText(path + @"wwwroot/StaticGenerated/LastPart.html");
+            var firstPart = System.IO.File.ReadAllText(path + @"wwwroot/generated-static/FirstPart.html");
+            var lastPart = System.IO.File.ReadAllText(path + @"wwwroot/generated-static/LastPart.html");
             dataStr = firstPart + dataStr + lastPart;
             System.IO.File.WriteAllText(path + @"wwwroot/index.html", dataStr);
 

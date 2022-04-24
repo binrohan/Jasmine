@@ -63,7 +63,7 @@ namespace IqraCommerce.API.Controllers
             return Ok(new ApiResponse(201, customer, "Registration Successed"));
         }
 
-        [HttpPost("Register")]
+        [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             var result = await _otpService.ValidateAsync(resetPasswordDto);
