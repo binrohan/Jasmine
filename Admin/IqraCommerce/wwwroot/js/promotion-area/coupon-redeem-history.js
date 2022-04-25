@@ -45,7 +45,7 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
                     position: 7,
                 },
                 {
-                    title: 'Is Limited Coupon?',
+                    title: 'Limited',
                     Id: 'IsLimited',
                     dataSource: [
                         { text: 'Yes', value: true },
