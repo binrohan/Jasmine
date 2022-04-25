@@ -38,16 +38,8 @@ namespace IqraCommerce.API.Data.Services
 
             using (WebClient wc = new WebClient())
             {
-                try
-                {
-                    var serviceURL = SMSURL(phone, result.Code);
-                    result.Response = wc.UploadString(serviceURL, "");
-                }
-                catch (Exception e)
-                {
-
-                    throw e;
-                }
+                var serviceURL = SMSURL(phone, result.Code);
+                result.Response = wc.UploadString(serviceURL, "");
             }
 
             return result;
@@ -55,16 +47,16 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task<bool> ValidateAsync(IAuthCustomer authCustomer)
         {
-           var registerFromRepo = await _unitOfWork.Repository<Register>().GetByIdAsync(authCustomer.RequestId);
+            var registerFromRepo = await _unitOfWork.Repository<Register>().GetByIdAsync(authCustomer.RequestId);
 
-           var timeSpan = (registerFromRepo.CreatedAt - DateTime.Now).TotalMinutes;
+            var timeSpan = (registerFromRepo.CreatedAt - DateTime.Now).TotalMinutes;
 
-           return registerFromRepo.OTP == authCustomer.OTP
-                && registerFromRepo.Phone == authCustomer.Phone
-                && authCustomer.Password == registerFromRepo.Password
-                && timeSpan <= 5.00
-                && !registerFromRepo.IsPassed;
-        } 
+            return registerFromRepo.OTP == authCustomer.OTP
+                 && registerFromRepo.Phone == authCustomer.Phone
+                 && authCustomer.Password == registerFromRepo.Password
+                 && timeSpan <= 5.00
+                 && !registerFromRepo.IsPassed;
+        }
 
         private string SMSURL(string phone, string code)
         {

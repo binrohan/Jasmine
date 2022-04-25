@@ -4,7 +4,7 @@ using IqraCommerce.API.Data;
 
 namespace IqraCommerce.API.Entities
 {
-    public class CouponRedeemHistoy : BaseEntity
+    public class CouponRedeemHistory : BaseEntity
     {
         public Guid CouponId { get; set; }
         public Guid CustomerId { get; set; }

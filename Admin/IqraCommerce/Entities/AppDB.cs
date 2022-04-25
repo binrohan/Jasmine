@@ -1,5 +1,6 @@
 ﻿using EBonik.Data.Entities.AddressArea;
 using EBonik.Data.Entities.ContactArea;
+using EBonik.Data.Entities.EmployeeArea;
 using EBonik.Data.Entities.HistoryArea;
 using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UserArea;
@@ -73,6 +74,8 @@ namespace IqraCommerce.Entities
         #region Promotion
         public virtual DbSet<Promotion> Promotion { get; set; } // Used
         public virtual DbSet<Coupon> Coupon { get; set; } // Used
+        public virtual DbSet<Cashback> Cashback { get; set; } // Used
+        public virtual DbSet<CashbackHistory> CashbackHistory { get; set; } // Used
         public virtual DbSet<CouponRedeemHistory> CouponRedeemHistory { get; set; } // Used
         #endregion Promotion
 
@@ -94,7 +97,11 @@ namespace IqraCommerce.Entities
         public virtual DbSet<ChangeHistory> ChangeHistory { get; set; }
         #endregion
 
-  
+        #region EmployeeArea
+        public virtual DbSet<Employee> Employee { get; set; } // Used
+        #endregion EmployeeArea
+
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

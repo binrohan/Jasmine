@@ -26,7 +26,7 @@ namespace IqraCommerce.API.Data
 
     public enum ComplainStatus
     {
-        New, Read, XXX, OnHold
+        New, Seen, OnHold
     }
 
     public enum PromotionType
@@ -46,7 +46,7 @@ namespace IqraCommerce.API.Data
 
     public enum PaymentStatus
     {
-        Pending, PartiallyPaid, Paid, PartiallyRefunded, Refunded
+        Pending, InitialFromCashback, PartiallyPaid, Paid, PartiallyRefunded, Refunded 
     }
 
     public enum OrderAction

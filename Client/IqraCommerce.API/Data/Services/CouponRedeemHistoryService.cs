@@ -26,7 +26,7 @@ namespace IqraCommerce.API.Data.Services
         {
             var coupon = await _unitOfWork.Repository<Coupon>().GetByIdAsync(payment.Coupon.Id);
 
-            var history = new CouponRedeemHistoy()
+            var history = new CouponRedeemHistory()
             {
                 ActivityId = Guid.Empty,
                 CouponId = payment.Coupon.Id,
@@ -42,7 +42,7 @@ namespace IqraCommerce.API.Data.Services
             };
 
             if(payment.Coupon.IsLegit)
-            _unitOfWork.Repository<CouponRedeemHistoy>().Add(history);
+            _unitOfWork.Repository<CouponRedeemHistory>().Add(history);
         }
 
         private string GenerateHistoryMessage(double percentage,

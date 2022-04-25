@@ -17,7 +17,7 @@ namespace IqraCommerce.API.Data.Repositories
             _context = context;
         }
 
-        public async Task<CouponRedeemHistoy> GetCouponHistoryByCustomer(Guid couponId, Guid customerId)
+        public async Task<CouponRedeemHistory> GetCouponHistoryByCustomer(Guid couponId, Guid customerId)
         {
             return await _context
                         .CouponRedeemHistory

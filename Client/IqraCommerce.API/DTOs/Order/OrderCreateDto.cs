@@ -12,5 +12,6 @@ namespace IqraCommerce.API.DTOs
         public OrderPaymentDto Payment { get; set; }
         public Guid ActivityId { get; set; }
         public string Remarks { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

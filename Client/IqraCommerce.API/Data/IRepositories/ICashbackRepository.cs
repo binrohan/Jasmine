@@ -5,8 +5,8 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface ICouponRedeemHistoryRepository
+    public interface ICashbackRepository
     {
-         Task<CouponRedeemHistory> GetCouponHistoryByCustomer(Guid couponId, Guid customerId);
+         
     }
 }

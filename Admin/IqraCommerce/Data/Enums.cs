@@ -43,7 +43,7 @@ namespace IqraCommerce.Data
 
     public enum PaymentStatus
     {
-        Pending, PartiallyPaid, Paid, PartiallyRefunded, Refunded 
+        Pending, InitialFromCashback, PartiallyPaid, Paid, PartiallyRefunded, Refunded 
     }
 
     public enum OrderAction
