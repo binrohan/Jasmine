@@ -48,7 +48,7 @@ namespace IqraCommerce.API.Data.Services
             if(orderValue !>= coupon.MinOrderValue) return redemtion.SetDiscount(0.0, "Minimum order value condition not meet");
 
             var discount = orderValue * (coupon.Discount / 100);
-            discount = discount > coupon.MaxDiscount ? coupon.MaxDiscount : discount;
+            discount = (discount > coupon.MaxDiscount && coupon.MaxDiscount!= 0) ? coupon.MaxDiscount : discount;
             discount = discount < coupon.MinDiscount ? coupon.MinDiscount : discount;
 
             return redemtion.SetDiscount(discount, "Coupon Redeemed");

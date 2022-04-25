@@ -24,6 +24,8 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<IFestivalService, FestivalService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICouponRedeemHistoryService, CouponRedeemHistoryService>();
+            services.AddScoped<ICouponService, CouponService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -40,6 +42,7 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IDeviceRepository, DeviceRepository>();
             services.AddScoped<ICouponRepository, CouponRepository>();
+            services.AddScoped<ICouponRedeemHistoryRepository, CouponRedeemHistoryRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -1,20 +1,18 @@
-﻿using IqraBase.Data.Entities;
+﻿using IqraBase.Data.Models;
 using IqraCommerce.Data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IqraCommerce.Entities.PromotionArea
+namespace IqraCommerce.Models.PromotionArea
 {
-    [Table("CouponRedeemHistory")]
-    [Alias("Couponredeemhistory")]
-    public class CouponRedeemHistory : DropDownBaseEntity
+    public class CouponRedeemHistoryModel : DropDownBaseModel
     {
         public Guid CouponId { get; set; }
         public Guid CustomerId { get; set; }
         public double Value { get; set; }
         public Guid OrderId { get; set; }
+        public string Remarks { get; set; }
     }
 }

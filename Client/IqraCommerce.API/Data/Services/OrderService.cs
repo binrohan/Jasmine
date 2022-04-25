@@ -29,6 +29,7 @@ namespace IqraCommerce.API.Data.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAddressRepository _addressRepo;
         private readonly ICouponService _couponService;
+        private readonly ICouponRedeemHistoryService _couponHistoryService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -36,7 +37,8 @@ namespace IqraCommerce.API.Data.Services
                             IProductRepository productRepo,
                             IUnitOfWork unitOfWork,
                             IAddressRepository addressRepo,
-                            ICouponService couponService)
+                            ICouponService couponService,
+                            ICouponRedeemHistoryService couponHistoryService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -45,6 +47,7 @@ namespace IqraCommerce.API.Data.Services
             _mapper = mapper;
             _config = config;
             _couponService = couponService;
+            _couponHistoryService = couponHistoryService;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
         }
 
@@ -108,6 +111,8 @@ namespace IqraCommerce.API.Data.Services
             var shippingAddress = _mapper.Map<ShippingAddress>(addressFromRepo);
             shippingAddress.OrderId = order.Id;
             _unitOfWork.Repository<ShippingAddress>().Add(shippingAddress);
+
+            await _couponHistoryService.AddHistoryAsync(payment, customerId, order.Id);
 
             var result = await _unitOfWork.Complete();
 
