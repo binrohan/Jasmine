@@ -126,7 +126,9 @@ namespace IqraCommerce.API.Extensions
                                                 IEnumerable<OrderProductDto> orderedProducts,
                                                 Guid orderId)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, OrderProduct>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, OrderProduct>()
+                                                            .ForMember(dest => dest.Id,
+                                                                        opt => opt.Ignore()));
             IMapper _mapper =  new Mapper(config);
 
             var orderProducts = new List<OrderProduct>();
@@ -137,11 +139,11 @@ namespace IqraCommerce.API.Extensions
 
                 orderProduct.OrderId = orderId;
 
-                var orderedPRoduct = orderedProducts.First(p => p.Id == product.Id);
+                var orderedProduct = orderedProducts.First(p => p.Id == product.Id);
 
-                orderProduct.Quantity = orderedPRoduct.Quantity;
-                orderProduct.Amount = orderedPRoduct.Quantity * product.CurrentPrice;
-                orderProduct.Discount = orderedPRoduct.Quantity * product.DiscountedPrice;
+                orderProduct.Quantity = orderedProduct.Quantity;
+                orderProduct.Amount = orderedProduct.Quantity * product.CurrentPrice;
+                orderProduct.Discount = orderedProduct.Quantity * product.DiscountedPrice;
 
                 orderProducts.Add(orderProduct);
             }

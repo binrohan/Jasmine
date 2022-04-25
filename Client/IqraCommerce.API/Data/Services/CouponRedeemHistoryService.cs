@@ -41,6 +41,7 @@ namespace IqraCommerce.API.Data.Services
                 OrderId = orderId
             };
 
+            if(payment.Coupon.IsLegit)
             _unitOfWork.Repository<CouponRedeemHistoy>().Add(history);
         }
 
@@ -49,7 +50,7 @@ namespace IqraCommerce.API.Data.Services
                                               double discount,
                                               string code)
         {
-            return $"Redeemed {percentage}Tk Discount Of Over Value {orderValue} as {discount} from code {code}";
+            return $"Redeemed {percentage}% Discount Of Over Value {orderValue} as {discount}TK from code {code}";
         }
     }
 }

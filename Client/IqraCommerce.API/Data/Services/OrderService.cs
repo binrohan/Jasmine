@@ -114,6 +114,8 @@ namespace IqraCommerce.API.Data.Services
 
             await _couponHistoryService.AddHistoryAsync(payment, customerId, order.Id);
 
+            await _couponService.RedeemAsync(payment.Coupon.Id);
+
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return null;

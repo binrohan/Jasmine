@@ -31,10 +31,6 @@ namespace IqraCommerce.API.Entities
         public double Rating { get; set; }
         public int RatingCount { get; set; }
 
-        public Guid BrandId { get; set; }
-
-        public bool IsUpComming { get; set; }
-
         public Guid UnitId { get; set; }
 
         public string SearchQuery { get; set; }

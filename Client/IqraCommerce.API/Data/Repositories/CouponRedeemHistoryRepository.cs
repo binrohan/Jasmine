@@ -20,9 +20,9 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<CouponRedeemHistoy> GetCouponHistoryByCustomer(Guid couponId, Guid customerId)
         {
             return await _context
-                        .CouponRedeemHistoy
-                        .FirstOrDefaultAsync(crh => crh.CustomerId == couponId
-                                                    && crh.CustomerId == customerId);
+                        .CouponRedeemHistory
+                        .FirstOrDefaultAsync(crh => crh.CustomerId == customerId
+                                                    && crh.CouponId == couponId);
         }
     }
 }

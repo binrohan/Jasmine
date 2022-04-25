@@ -9,17 +9,19 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
     });
 
     const columns = () => [
-        { field: 'Code', title: 'Code', position: 1 },
-        { field: 'IsLimited', title: 'Limited', add: false, bound: isLimitedBound},
-        { field: 'MinOrderValue', title: 'Min OrderValue', position: 1 },
-        { field: 'Count', title: 'Available', position: 1 },
-        { field: 'Redeemed', title: 'Used', position: 1 },
-        { field: 'Redeemed', title: 'Left', position: 1, bound: leftOverBound },
-        { field: 'MaxDiscount', title: 'Max Discount', position: 1 },
-        { field: 'MinDiscount', title: 'Min Discount', position: 1 },
-        { field: 'StartingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Starting', position: 5 },
-        { field: 'EndingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Ending', position: 6 },
-        { field: 'Remarks', title: 'Remarks', position: 8 },
+        { field: 'Code', title: 'Code', position: 1, add: {sibling: 2} },
+        { field: 'IsLimited', title: 'Limited', add: false, bound: isLimitedBound },
+        { field: 'IsPublished', title: 'Publish', add: false, bound: isPublishedBound },
+        { field: 'MinOrderValue', title: 'Min Order Value', position: 3, add: {sibling: 4} },
+        { field: 'Count', title: 'Available', position: 6 },
+        { field: 'Redeemed', title: 'Used', add: false },
+        { field: 'Redeemed', title: 'Left', add: false, bound: leftOverBound },
+        { field: 'Discount', title: 'Max Discount (%)', position: 4, add: {sibling: 4} },
+        { field: 'MaxDiscount', title: 'Max Discount (TK)', position: 4, add: {sibling: 4} },
+        { field: 'MinDiscount', title: 'Min Discount (TK)', position: 5, add: {sibling: 4} },
+        { field: 'StartingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Starting', position: 8 },
+        { field: 'EndingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Ending', position: 9 },
+        { field: 'Remarks', title: 'Remarks', position: 10, add: {sibling: 1} },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedBy', title: 'Updator', add: false },
@@ -41,18 +43,16 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
                         { text: 'Yes', value: true },
                         { text: 'No', value: false },
                     ],
-                    add: { sibling: 2 },
-                    position: 7,
+                    position: 2
                 },
                 {
-                    title: 'Is Limited Coupon?',
+                    title: 'Limited',
                     Id: 'IsLimited',
                     dataSource: [
                         { text: 'Yes', value: true },
                         { text: 'No', value: false },
                     ],
-                    add: { sibling: 2 },
-                    position: 7,
+                    position: 5
                 },
             ],
             additionalField: [],
@@ -80,7 +80,11 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
         td.html(this.IsLimited ? 'Yes' : 'No');
     }
 
-    function leftOverBound(td){
+    function isPublishedBound(td) {
+        td.html(this.IsPublished ? 'Yes' : 'No');
+    }
+
+    function leftOverBound(td) {
         td.html(this.Count - this.Redeemed);
     }
 

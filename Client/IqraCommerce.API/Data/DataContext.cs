@@ -39,7 +39,7 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<OrderAquiredOffer> OrderAquiredOffer { get; set; } // Used
         public virtual DbSet<Device> Device { get; set; } // Used
         public virtual DbSet<Coupon> Coupon { get; set; } // Used
-        public virtual DbSet<CouponRedeemHistoy> CouponRedeemHistoy { get; set; } // Used
+        public virtual DbSet<CouponRedeemHistoy> CouponRedeemHistory { get; set; } // Used
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

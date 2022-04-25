@@ -24,7 +24,8 @@ namespace IqraCommerce.API.Data.Repositories
                         .FirstOrDefaultAsync(c => c.IsPublished
                                                   && !c.IsDeleted
                                                   && c.StartingAt <= DateTime.Now
-                                                  && c.EndingAt >= DateTime.Now);
+                                                  && c.EndingAt >= DateTime.Now
+                                                  && c.Code == code);
         }
     }
 }

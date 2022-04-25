@@ -45,13 +45,20 @@ namespace IqraCommerce.API.Data.Services
 
             if(couponHistory is not null) return redemtion.SetDiscount( 0.0, "Already redeemed");
 
-            if(orderValue !>= coupon.MinOrderValue) return redemtion.SetDiscount(0.0, "Minimum order value condition not meet");
+            if(orderValue - coupon.MinOrderValue <= 0) return redemtion.SetDiscount(0.0, "Minimum order value condition not meet");
 
             var discount = orderValue * (coupon.Discount / 100);
             discount = (discount > coupon.MaxDiscount && coupon.MaxDiscount!= 0) ? coupon.MaxDiscount : discount;
             discount = discount < coupon.MinDiscount ? coupon.MinDiscount : discount;
 
             return redemtion.SetDiscount(discount, "Coupon Redeemed");
+        }
+
+        public async Task RedeemAsync(Guid id)
+        {
+           var coupon = await _unitOfWork.Repository<Coupon>().GetByIdAsync(id);
+
+            ++coupon.Redeemed;
         }
     }
 }
