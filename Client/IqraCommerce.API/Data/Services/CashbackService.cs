@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using IqraCommerce.API.Data.IRepositories;
@@ -20,6 +21,13 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public async Task<CashbackServiceDto> CalculateAsync(double payAmount)
+        {
+            var cashbacks = (await _repo.GetCashbacksAsync()).ToList();
+
+            return null;
         }
     }
 }

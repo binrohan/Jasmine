@@ -22,7 +22,6 @@ namespace IqraCommerce.API.Data.Services
     public class OrderService : IOrderService
     {
         private readonly IConfiguration _config;
-        private readonly SymmetricSecurityKey _key;
         private readonly IMapper _mapper;
         private readonly IOrderRepository _repo;
         private readonly IProductRepository _productRepo;
@@ -30,6 +29,8 @@ namespace IqraCommerce.API.Data.Services
         private readonly IAddressRepository _addressRepo;
         private readonly ICouponService _couponService;
         private readonly ICouponRedeemHistoryService _couponHistoryService;
+        private readonly ICashbackService _cashbackService;
+        private readonly ICashbackHistoryService _cashbackHistoryService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -38,7 +39,9 @@ namespace IqraCommerce.API.Data.Services
                             IUnitOfWork unitOfWork,
                             IAddressRepository addressRepo,
                             ICouponService couponService,
-                            ICouponRedeemHistoryService couponHistoryService)
+                            ICouponRedeemHistoryService couponHistoryService,
+                            ICashbackService cashbackService,
+                            ICashbackHistoryService cashbackHistoryService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -48,7 +51,8 @@ namespace IqraCommerce.API.Data.Services
             _config = config;
             _couponService = couponService;
             _couponHistoryService = couponHistoryService;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
+            _cashbackService = cashbackService;
+            _cashbackHistoryService = cashbackHistoryService;
         }
 
         public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
@@ -68,6 +72,8 @@ namespace IqraCommerce.API.Data.Services
                                         await _couponService.DiscountAsync(orderValue,
                                                                             orderToCalcPayment.CouponCode,
                                                                             customerId);
+            var cashback = await _cashbackService.CalculateAsync(orderValue - couponRedeemtion.Discount);
+
 
             return new OrderPaymentDto(orderValue,
                                        productAmount,

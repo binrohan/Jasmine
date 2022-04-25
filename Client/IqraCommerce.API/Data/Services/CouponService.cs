@@ -58,6 +58,8 @@ namespace IqraCommerce.API.Data.Services
         {
            var coupon = await _unitOfWork.Repository<Coupon>().GetByIdAsync(id);
 
+            if(coupon is null) return;
+
             ++coupon.Redeemed;
         }
     }

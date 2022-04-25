@@ -24,6 +24,9 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task AddHistoryAsync(OrderPaymentDto payment, Guid customerId, Guid orderId)
         {
+            if(!payment.Coupon.IsLegit)
+                return;
+
             var coupon = await _unitOfWork.Repository<Coupon>().GetByIdAsync(payment.Coupon.Id);
 
             var history = new CouponRedeemHistory()
@@ -41,7 +44,6 @@ namespace IqraCommerce.API.Data.Services
                 OrderId = orderId
             };
 
-            if(payment.Coupon.IsLegit)
             _unitOfWork.Repository<CouponRedeemHistory>().Add(history);
         }
 

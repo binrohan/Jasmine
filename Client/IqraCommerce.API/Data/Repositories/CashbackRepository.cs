@@ -16,5 +16,17 @@ namespace IqraCommerce.API.Data.Repositories
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Cashback>> GetCashbacksAsync()
+        {
+            return await _context
+                                .Cashback
+                                .Where(c => c.IsPublished
+                                            && !c.IsDeleted
+                                            && c.StartingAt <= DateTime.Now
+                                            && c.EndingAt >= DateTime.Now)
+                                .OrderBy(c => c.MinOrderValue)
+                                .ToListAsync();
+        }
     }
 }

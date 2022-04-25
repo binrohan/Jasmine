@@ -7,6 +7,6 @@ namespace IqraCommerce.API.Data.IRepositories
 {
     public interface ICashbackRepository
     {
-         
+         Task<IEnumerable<Cashback>> GetCashbacksAsync();
     }
 }
