@@ -29,7 +29,7 @@ namespace IqraCommerce.API.Data.Services
 
             if(cashback is null) return new CashbackServiceDto(0.0);
 
-            return new CashbackServiceDto(cashback.Amount, cashback.Id);
+            return new CashbackServiceDto(cashback.Amount, cashback.Id, payAmount);
         }
 
         public async Task RedeemAsync(double cashback, Guid customerId)

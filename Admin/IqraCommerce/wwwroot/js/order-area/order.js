@@ -74,9 +74,9 @@ import { url } from '../utils.js';
             columns: [],
             dropdownList: [],
             additionalField: [
-                { field: 'Amount', title: 'Amount', position: 1, add: {sibling: 2} },
-                { field: 'Reference', title: 'Reference', position: 2, add: {sibling: 2} }, 
-                { field: 'Remarks', title: 'Remarks', position: 3, add: {sibling: 1} }
+                { field: 'Amount', title: 'Amount', position: 1, add: { sibling: 2 } },
+                { field: 'Reference', title: 'Reference', position: 2, add: { sibling: 2 } },
+                { field: 'Remarks', title: 'Remarks', position: 3, add: { sibling: 1 } }
             ],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
@@ -102,6 +102,10 @@ import { url } from '../utils.js';
         switch (this.OrderStatus) {
             case orderStatus.pending:
                 td.html('Pending');
+                break;
+
+            case orderStatus.confirmed:
+                td.html('Confirmed');
                 break;
 
             case orderStatus.processing:

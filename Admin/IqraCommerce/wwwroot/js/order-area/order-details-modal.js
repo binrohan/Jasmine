@@ -263,6 +263,26 @@ var Controller = new function () {
                     }],
                 },
                 {
+                    title: 'Payment History',
+                    Grid: [{
+                        Header: 'Payment History',
+                        Columns: [
+                            { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', Width: '200px', title: 'Created On', add: false },
+                            { field: 'Reference', title: 'Reference' },
+                            { field: 'Amount', title: 'Amount' },
+                            { field: 'Remarks', Width: '400px', title: 'Remarks' },
+                            { field: 'CreatedBy', title: 'Created By' },
+                        ],
+                        Url: 'PaymentHistory/Get/',
+                        filter: [...filter, orderFilter],
+                        onDataBinding: () => { },
+                        selector: false,
+                        Printable: {
+                            container: $('void')
+                        }
+                    }],
+                },
+                {
                     title: 'Aquired Offers',
                     Grid: [{
                         Header: 'Aquired-Offers',

@@ -86,7 +86,21 @@ namespace IqraCommerce.API.Extensions
                 );
             }
 
-            // TODO: CASHBACK
+            if(payment.Cashback.CashbackAmount > 0)
+            {
+                aquiredOffers.Add
+                (
+                    new OrderAquiredOffer()
+                    {
+                        OrderId = orderId,
+                        Description = $"Cashback {payment.Cashback.CashbackAmount}Tk for Payment {payment.Cashback.OrderPayment}",
+                        IsRedeemed = false,
+                        RefOfferId = payment.Cashback.Id,
+                        TypeOfOffer = OrderAquiredOfferType.Cashback,
+                        Discount = payment.Cashback.CashbackAmount
+                    }
+                );
+            }
             
             if(payment.Coupon.IsLegit)
             {
