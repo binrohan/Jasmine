@@ -4,7 +4,7 @@
 // TODO: Category select
 // TODO: Remove vat [X]
 
-import { editBtn, imageBtn, menuBtn, fileBtn, eyeBtn, flashBtn } from "../buttons.js";
+import { editBtn, imageBtn, menuBtn, fileBtn, eyeBtn, flashBtn, cashBtn } from "../buttons.js";
 import { orderStatus } from "../dictionaries.js";
 import { filter, liveRecord, trashRecord } from "../filters.js";
 import { url } from '../utils.js';
@@ -62,6 +62,30 @@ import { url } from '../utils.js';
                 tabs.gridModel?.Reload();
             },
             saveChange: `/${controller}/ChangeStatus`,
+        });
+    };
+
+    function makePayment(row) {
+        row.Remarks = '';
+        Global.Add({
+            name: 'add-payment-cash-in-order',
+            title: 'Payment Entry',
+            model: row,
+            columns: [],
+            dropdownList: [],
+            additionalField: [
+                { field: 'Amount', title: 'Amount', position: 1, add: {sibling: 2} },
+                { field: 'Reference', title: 'Reference', position: 2, add: {sibling: 2} }, 
+                { field: 'Remarks', title: 'Remarks', position: 3, add: {sibling: 1} }
+            ],
+            onSubmit: function (formModel, data, model) {
+                formModel.Id = model.Id
+                formModel.ActivityId = window.ActivityId;
+            },
+            onSaveSuccess: function () {
+                tabs.gridModel?.Reload();
+            },
+            saveChange: `/${controller}/PaymentEntry`,
         });
     };
 
@@ -133,6 +157,13 @@ import { url } from '../utils.js';
         html: flashBtn()
     }
 
+    const makePaymentAction = {
+        click: makePayment,
+        html: cashBtn()
+    }
+
+    const actions = [detailsAction, changeStatusAction, makePaymentAction];
+
     //Tabs config
     const tabs = {
         container: $('#page_container'),
@@ -140,11 +171,11 @@ import { url } from '../utils.js';
             Url: `/${controller}/`,
         },
         items: [
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB75', 'Pending', [detailsAction, changeStatusAction], orderStatus.pending),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB76', 'Confirmed', [detailsAction, changeStatusAction], orderStatus.confirmed),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB77', 'Processing', [detailsAction, changeStatusAction], orderStatus.processing),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Delivering', [detailsAction, changeStatusAction], orderStatus.delivering),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Delivered', [detailsAction, changeStatusAction], orderStatus.delivered),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB75', 'Pending', [...actions], orderStatus.pending),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB76', 'Confirmed', [...actions], orderStatus.confirmed),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB77', 'Processing', [...actions], orderStatus.processing),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Delivering', [...actions], orderStatus.delivering),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Delivered', [...actions], orderStatus.delivered),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB70', 'Cancelled-Customer', [detailsAction], orderStatus.cancelledByCustomer),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB71', 'Cancelled-Admin', [detailsAction], orderStatus.cancelledByCustomer),
         ],

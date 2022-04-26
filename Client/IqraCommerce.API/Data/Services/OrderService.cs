@@ -75,7 +75,8 @@ namespace IqraCommerce.API.Data.Services
                                         await _couponService.DiscountAsync(orderValue,
                                                                             orderToCalcPayment.CouponCode,
                                                                             customerId);
-            var cashback = await _cashbackService.CalculateAsync(orderValue - couponRedeemtion.Discount);
+            var cashback = await _cashbackService.CalculateAsync(orderValue
+                                                                 - couponRedeemtion.Discount);
 
 
             return new OrderPaymentDto(orderValue,
@@ -192,9 +193,9 @@ namespace IqraCommerce.API.Data.Services
 
             var orderDetails = _mapper.Map<OrderDetailsDto>(order);
 
-            orderDetails.Cashback = cashbackRegister.Amount;
-            orderDetails.CashbackStatus = cashbackRegister.Status;
-            orderDetails.Coupon = couponHistory.Value;
+            orderDetails.Cashback = cashbackRegister?.Amount ?? 0;
+            orderDetails.CashbackStatus = cashbackRegister?.Status ?? CashbackRegisterStatus.Null;
+            orderDetails.Coupon = couponHistory?.Value ?? 0;
 
             return orderDetails;
         }

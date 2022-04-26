@@ -48,7 +48,7 @@ namespace IqraCommerce.Data
 
     public enum OrderAction
     {
-        Created, StatusChanged, PaymentStatusChanged, CancelledByAdmin, CancelledByCustomer
+        Created, StatusChanged, PaymentStatusChanged, CancelledByAdmin, CancelledByCustomer, PaymentEntry
     }
 
     public enum PaymentMethod
@@ -70,4 +70,10 @@ namespace IqraCommerce.Data
     {
         Pending, Added, Cancelled
     }
+
+    public enum PaymentMedium
+    {
+        Cash
+    }
+
 }

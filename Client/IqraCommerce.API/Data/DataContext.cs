@@ -43,6 +43,7 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<Cashback> Cashback { get; set; } // Used
         public virtual DbSet<CashbackHistory> CashbackHistory { get; set; } // Used
         public virtual DbSet<CashbackRegister> CashbackRegister { get; set; } // Used
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; } // Used
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

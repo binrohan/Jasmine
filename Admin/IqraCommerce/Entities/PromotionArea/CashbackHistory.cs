@@ -17,5 +17,6 @@ namespace IqraCommerce.Entities.PromotionArea
         public Guid CustomerId { get; set; }
         public Guid OrderId { get; set; }
         public Guid CashbackId { get; set; }
+        public Guid RegisterId { get; set; }
     }
 }

@@ -10,3 +10,4 @@ export const crossBtn = (text = 'Remove From List') => `<a class="action-button 
 export const fileBtn = (text = 'Edit Description') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-file" title="${text}"></i></a>`;
 export const warnBtn = (text = 'Send Notification') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-warning-sign" title="${text}"></i></a>`;
 export const flashBtn = (text = 'Change Status') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-flash" title="${text}"></i></a>`;
+export const cashBtn = (text = 'Make payment') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-usd" title="${text}"></i></a>`;

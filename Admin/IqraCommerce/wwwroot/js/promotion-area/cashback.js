@@ -9,16 +9,9 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
     });
 
     const columns = () => [
-        { field: 'Code', title: 'Code', position: 1, add: {sibling: 2} },
-        { field: 'IsLimited', title: 'Limited', add: false, bound: isLimitedBound },
         { field: 'IsPublished', title: 'Publish', add: false, bound: isPublishedBound },
         { field: 'MinOrderValue', title: 'Min Order Value', position: 3, add: {sibling: 4} },
-        { field: 'Count', title: 'Available', position: 6 },
-        { field: 'Redeemed', title: 'Used', add: false },
-        { field: 'Redeemed', title: 'Left', add: false, bound: leftOverBound },
-        { field: 'Discount', title: 'Max Discount (%)', position: 4, add: {sibling: 4} },
-        { field: 'MaxDiscount', title: 'Max Discount (TK)', position: 4, add: {sibling: 4} },
-        { field: 'MinDiscount', title: 'Min Discount (TK)', position: 5, add: {sibling: 4} },
+        { field: 'Amount', title: 'Cashback', position: 4, add: {sibling: 4} },
         { field: 'StartingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Starting', position: 8 },
         { field: 'EndingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Ending', position: 9 },
         { field: 'Remarks', title: 'Remarks', position: 10, add: {sibling: 1} },
@@ -44,16 +37,7 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
                         { text: 'No', value: false },
                     ],
                     position: 2
-                },
-                {
-                    title: 'Limited',
-                    Id: 'IsLimited',
-                    dataSource: [
-                        { text: 'Yes', value: true },
-                        { text: 'No', value: false },
-                    ],
-                    position: 5
-                },
+                }
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -76,16 +60,8 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
         popup({ data: model, title: 'Edit Promotion', action: 'edit' });
     };
 
-    function isLimitedBound(td) {
-        td.html(this.IsLimited ? 'Yes' : 'No');
-    }
-
     function isPublishedBound(td) {
         td.html(this.IsPublished ? 'Yes' : 'No');
-    }
-
-    function leftOverBound(td) {
-        td.html(this.Count - this.Redeemed);
     }
 
     //Tab config

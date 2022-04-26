@@ -1,7 +1,9 @@
-﻿using IqraBase.Service;
+﻿using EBonik.Data.Entities.UserArea;
+using IqraBase.Service;
 using IqraCommerce.Data;
 using IqraCommerce.DTOs;
 using IqraCommerce.Entities.OrderArea;
+using IqraCommerce.Entities.PromotionArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.OrderArea;
 using IqraService.Search;
@@ -83,7 +85,77 @@ namespace IqraCommerce.Services.OrderArea
             });
         }
 
+        public async Task<ResponseJson> PaymentEntry(PaymentEntryDto payment, Guid userId)
+        {
+            return await CallbackAsync((response) =>
+            {
+                var orderFromRepo = GetById(payment.Id);
+                var customer = GetEntity<Customer>().Find(orderFromRepo.CustomerId);
+
+                var prevStatus = orderFromRepo.PaymentStatus;
+                var prevPaid = orderFromRepo.PaidAmount;
+
+                if (orderFromRepo != null)
+                {
+                    orderFromRepo.UpdatedAt = DateTime.Now;
+                    orderFromRepo.UpdatedBy = userId;
+
+                    orderFromRepo.PaidAmount += payment.Amount;
+                    orderFromRepo.PaymentLeft = orderFromRepo.PayableAmount - orderFromRepo.PaidAmount;
+                    orderFromRepo.PaymentStatus = orderFromRepo.PaymentLeft > 0 ? PaymentStatus.PartiallyPaid : PaymentStatus.Paid;
+
+
+                    OrderHistory history = new OrderHistory()
+                    {
+                        ActivityId = payment.ActivityId,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = userId,
+                        Remarks = payment.Remarks,
+                        OrderId = payment.Id,
+                        TypeOfAction = prevStatus == orderFromRepo.PaymentStatus ? OrderAction.PaymentEntry : OrderAction.PaymentStatusChanged,
+                        Name = prevStatus != orderFromRepo.PaymentStatus ?
+                        $"Payment status changed from {prevStatus} To {orderFromRepo.PaymentStatus} after payment {payment.Amount}Tk"
+                        : $"Paid amount updated from {prevPaid}Tk to {orderFromRepo.PaidAmount}Tk"
+                    };
+
+
+                    PaymentHistory paymentHistory = new PaymentHistory()
+                    {
+                        ActivityId = payment.ActivityId,
+                        Amount = payment.Amount,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = userId,
+                        CustomerId = orderFromRepo.CustomerId,
+                        Medium = PaymentMedium.Cash,
+                        ActionIsRefunding = false,
+                        OrderId = orderFromRepo.Id,
+                        Reference = payment.Reference,
+                    };
+
+                    if(orderFromRepo.PaymentStatus == PaymentStatus.Paid && orderFromRepo.OrderStatus == OrderStatus.Delivered)
+                    {
+                        var cashbackRegister = GetEntity<CashbackRegister>().FirstOrDefault(c => c.OrderId == orderFromRepo.Id && c.CustomerId == customer.Id);
+
+                        customer.Cashback += cashbackRegister.Amount;
+                    }
+
+                    customer.DueAmount -= payment.Amount;
+
+                    GetEntity<PaymentHistory>().Add(paymentHistory);
+                    GetEntity<OrderHistory>().Add(history);
+
+                    SaveChange();
+                }
+                else
+                {
+                    response.IsError = true;
+                    response.Id = -4;
+                    response.Msg = "Order not found.";
+                }
+            });
+        }
     }
+
 
     public class OrderQuery
     {

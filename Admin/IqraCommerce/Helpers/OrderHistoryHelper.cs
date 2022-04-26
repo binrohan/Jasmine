@@ -13,11 +13,11 @@ namespace IqraCommerce.Helpers
             return $"Status changed from {status(prevStatus)} to {status(nextStatus)}";
         }
 
-        private static string status(OrderStatus prevStatus)
+        private static string status(OrderStatus status)
         {
             string statusString;
 
-            switch (prevStatus)
+            switch (status)
             {
                 case OrderStatus.Pending:
                     statusString = "Pending";

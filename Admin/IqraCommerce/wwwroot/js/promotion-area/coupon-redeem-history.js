@@ -14,8 +14,6 @@
         { field: 'CouponRemarks', title: 'CouponRemarks' },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
-        { field: 'UpdatedBy', title: 'Updator', add: false },
-        { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
     //Tab config

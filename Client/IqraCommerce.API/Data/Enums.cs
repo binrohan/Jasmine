@@ -71,6 +71,10 @@ namespace IqraCommerce.API.Data
 
     public enum CashbackRegisterStatus
     {
-        Pending, Added, Cancelled
+        Pending, Added, Cancelled, Null
+    }
+    public enum PaymentMedium
+    {
+        Cash
     }
 }

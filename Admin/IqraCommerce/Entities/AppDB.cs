@@ -86,6 +86,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<OrderHistory> OrderHistory { get; set; } // Used
         public virtual DbSet<ShippingAddress> ShippingAddress { get; set; } // Used
         public virtual DbSet<OrderAquiredOffer> OrderAquiredOffer { get; set; } // Used
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; } // Used
 
         #endregion Order
 

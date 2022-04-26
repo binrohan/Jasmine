@@ -60,19 +60,21 @@ namespace IqraCommerce.Services.UI
                   ,[cashbackhistory].[UpdatedAt]
                   ,[cashbackhistory].[UpdatedBy]
                   ,[cashbackhistory].[IsDeleted]
-                  ,ISNULL([cashbackhistory].[Remarks], '') [Remarks]
                   ,[cashbackhistory].[ActivityId]
+
                   ,ISNULL([cashbackhistory].[Name], '') [Name]
                   ,[cashbackhistory].[CashbackId]
-	              ,[cashback].Remarks [CouponRemarks]
-	              ,[cashback].Amount [CashbackAmount]
+
+                  ,ISNULL([cashbackhistory].[Remarks], '') [Remarks]
+	              
                   ,[cashbackhistory].[CustomerId]
 	              ,[customer].Phone [CustomerPhone]
 	              ,ISNULL([customer].Name, '') [CustomerName]
                   ,[cashbackhistory].Amount
 	              ,[order].OrderNumber [OrderNumber]
 	              ,[order].OrderStatus [OrderStatus]
-	              ,[order].OrderValue [OrderValue]
+	              ,[order].PayableAmount [PayableAmount]
+				  
               FROM [dbo].[CashbackHistory] [cashbackhistory]
               LEFT JOIN [dbo].[Cashback] [cashback] ON [cashback].Id = [cashbackhistory].CashbackId
               LEFT JOIN [dbo].[Customer] [customer] ON [customer].Id = [cashbackhistory].CustomerId
