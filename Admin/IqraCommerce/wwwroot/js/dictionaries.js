@@ -39,7 +39,7 @@ export const paymentStatus =
 
 export const orderAction =
 {
-    Created: 0, StatusChanged: 1, PaymentStatusChanged: 2, CancelledByAdmin: 3, CancelledByCustomer: 4
+    Created: 0, StatusChanged: 1, PaymentStatusChanged: 2, CancelledByAdmin: 3, CancelledByCustomer: 4, paymentEntry: 5
 }
 
 export const paymentMethod =

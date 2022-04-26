@@ -130,6 +130,7 @@ namespace IqraCommerce.Services.OrderArea
                         ActionIsRefunding = false,
                         OrderId = orderFromRepo.Id,
                         Reference = payment.Reference,
+                        Remarks = payment.Remarks
                     };
 
                     if(orderFromRepo.PaymentStatus == PaymentStatus.Paid && orderFromRepo.OrderStatus == OrderStatus.Delivered)
@@ -137,6 +138,9 @@ namespace IqraCommerce.Services.OrderArea
                         var cashbackRegister = GetEntity<CashbackRegister>().FirstOrDefault(c => c.OrderId == orderFromRepo.Id && c.CustomerId == customer.Id);
 
                         customer.Cashback += cashbackRegister.Amount;
+
+                        var aquiredOffer = GetEntity<OrderAquiredOffer>().FirstOrDefault(o => o.OrderId == orderFromRepo.Id && o.TypeOfOffer == OrderAquiredOfferType.Cashback);
+                        aquiredOffer.IsRedeemed = true;
                     }
 
                     customer.DueAmount -= payment.Amount;

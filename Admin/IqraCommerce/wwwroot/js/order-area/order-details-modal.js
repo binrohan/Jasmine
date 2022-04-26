@@ -10,7 +10,7 @@ var Controller = new function () {
     }
     const orderAction =
     {
-        created: 0, statusChanged: 1, paymentStatusChanged: 2, cancelledByAdmin: 3, cancelledByCustomer: 4
+        created: 0, statusChanged: 1, paymentStatusChanged: 2, cancelledByAdmin: 3, cancelledByCustomer: 4, paymentEntry: 5
     }
     const orderAquiredOfferType =
     {
@@ -69,6 +69,10 @@ var Controller = new function () {
 
             case orderAction.cancelledByAdmin:
                 td.html('Cancelled By Admin');
+                break;
+
+            case orderAction.paymentEntry:
+                td.html('Payment Entry');
                 break;
 
             default:
