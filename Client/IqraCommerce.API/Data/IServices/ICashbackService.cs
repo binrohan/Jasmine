@@ -9,5 +9,6 @@ namespace IqraCommerce.API.Data.IServices
     public interface ICashbackService
     {
         Task<CashbackServiceDto> CalculateAsync(double payAmount);
+        Task RedeemAsync(double cashback, Guid customerId);
     }
 }

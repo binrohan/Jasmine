@@ -37,6 +37,9 @@ namespace IqraCommerce.API.Controllers.ProductArea
         public async Task<IActionResult> GetProduct(Guid productId)
         {
             var productFromRepo = await _repo.GetProductAsync(productId);
+
+            if(productFromRepo is null) return NotFound(new ApiResponse(404));
+
             var categoriesFromRepo = await _categoryRepo.GetCategoriesByProductAsync(productId);
 
             var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);

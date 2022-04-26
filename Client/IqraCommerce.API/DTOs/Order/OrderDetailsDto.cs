@@ -19,6 +19,9 @@ namespace IqraCommerce.API.DTOs
         public double PaymentLeft { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Remarks { get; set; }
+        public double Cashback { get; set; }
+        public CashbackRegisterStatus CashbackStatus { get; set; }
+        public double Coupon { get; set; }
         public ShippingAddressDto Address { get; set; }
         public IReadOnlyList<OrderProductReturnDto> Products { get; set; }
     }

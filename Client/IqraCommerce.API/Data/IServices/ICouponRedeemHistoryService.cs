@@ -9,5 +9,6 @@ namespace IqraCommerce.API.Data.IServices
     public interface ICouponRedeemHistoryService
     {
         Task AddHistoryAsync(OrderPaymentDto payment, Guid customerId, Guid orderId);
+        Task<CouponRedeemHistory> GetByOrderIdAsync(Guid id);
     }
 }

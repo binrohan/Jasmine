@@ -24,5 +24,12 @@ namespace IqraCommerce.API.Data.Repositories
                         .FirstOrDefaultAsync(crh => crh.CustomerId == customerId
                                                     && crh.CouponId == couponId);
         }
+
+         public async Task<CouponRedeemHistory> GetByOrderIdAsync(Guid id)
+        {
+            return await _context
+                                .CouponRedeemHistory
+                                .FirstOrDefaultAsync(c => c.OrderId == id);
+        }
     }
 }

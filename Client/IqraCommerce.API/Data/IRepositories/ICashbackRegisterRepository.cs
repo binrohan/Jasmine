@@ -5,8 +5,8 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface ICashbackRepository
+    public interface ICashbackRegisterRepository
     {
-         Task<Cashback> GetCashbackByOrderValueAsync(double payAmount);
+         Task<CashbackRegister> GetByOrderIdAsync(Guid id);
     }
 }

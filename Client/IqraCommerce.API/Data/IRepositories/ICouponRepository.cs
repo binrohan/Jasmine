@@ -8,5 +8,6 @@ namespace IqraCommerce.API.Data.IRepositories
     public interface ICouponRepository
     {
          Task<Coupon> GetCouponByCodeAsync(string code);
+        
     }
 }

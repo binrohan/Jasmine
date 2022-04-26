@@ -68,4 +68,9 @@ namespace IqraCommerce.API.Data
     {
         Cashback, Coupon, Delivery, Product
     }
+
+    public enum CashbackRegisterStatus
+    {
+        Pending, Added, Cancelled
+    }
 }

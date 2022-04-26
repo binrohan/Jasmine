@@ -9,8 +9,8 @@ namespace IqraCommerce.API.DTOs
         public OrderPaymentDto(double orderValue,
                                double productAmount,
                                double productDiscount,
-                               CouponRedemtionDto coupon,
-                               double cashback,
+                               CouponServiceDto coupon,
+                               CashbackServiceDto cashback,
                                double[] shippingCharges)
         {
             OrderValue = orderValue;
@@ -26,8 +26,8 @@ namespace IqraCommerce.API.DTOs
         public double OrderValue { get; set; }
         public double ProductAmount { get; set; }
         public double ProductDiscount { get; set; }
-        public CouponRedemtionDto Coupon { get; set; }
-        public double Cashback { get; set; }
+        public CouponServiceDto Coupon { get; set; }
+        public CashbackServiceDto Cashback { get; set; }
         public double ShippingCharge { get; set; }
         public double OriginalShippingCharge { get; set; }
         public double PayableAmount { get; set; }

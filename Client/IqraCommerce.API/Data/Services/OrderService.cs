@@ -31,6 +31,7 @@ namespace IqraCommerce.API.Data.Services
         private readonly ICouponRedeemHistoryService _couponHistoryService;
         private readonly ICashbackService _cashbackService;
         private readonly ICashbackHistoryService _cashbackHistoryService;
+        private readonly ICashbackRegisterService _cashbackRegisterService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -41,7 +42,8 @@ namespace IqraCommerce.API.Data.Services
                             ICouponService couponService,
                             ICouponRedeemHistoryService couponHistoryService,
                             ICashbackService cashbackService,
-                            ICashbackHistoryService cashbackHistoryService)
+                            ICashbackHistoryService cashbackHistoryService,
+                            ICashbackRegisterService cashbackRegisterService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -53,6 +55,7 @@ namespace IqraCommerce.API.Data.Services
             _couponHistoryService = couponHistoryService;
             _cashbackService = cashbackService;
             _cashbackHistoryService = cashbackHistoryService;
+            _cashbackRegisterService = cashbackRegisterService;
         }
 
         public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
@@ -68,7 +71,7 @@ namespace IqraCommerce.API.Data.Services
             var orderValue = products.Value(orderToCalcPayment.Products);
             var shippingCharges = address.ShippingCharge(orderValue);
             var couponRedeemtion = String.IsNullOrEmpty(orderToCalcPayment.CouponCode) ? 
-                                        new CouponRedemtionDto().SetDiscount(0.0, "No Coupon") : 
+                                        new CouponServiceDto().SetDiscount(0.0, "No Coupon") : 
                                         await _couponService.DiscountAsync(orderValue,
                                                                             orderToCalcPayment.CouponCode,
                                                                             customerId);
@@ -79,21 +82,23 @@ namespace IqraCommerce.API.Data.Services
                                        productAmount,
                                        productDiscount,
                                        couponRedeemtion,
-                                       0,
+                                       cashback,
                                        shippingCharges);
         }
 
         public async Task<OrderReturnDto> PlaceOrder(OrderCreateDto orderCreateDto, Guid customerId)
         {
-            var payment = await CalculatePaymentAsync(orderCreateDto, customerId);
+            var orderPayment = await CalculatePaymentAsync(orderCreateDto, customerId);
+
+            var payment = _mapper.Map<PaymentDto>(orderPayment);
 
             var matched = payment
-               .PublicInstancePropertiesEqual<OrderPaymentDto>(orderCreateDto.Payment);
+               .PublicInstancePropertiesEqual<PaymentDto>(orderCreateDto.Payment);
 
             if (!matched) return null;
 
 
-            var order = orderCreateDto.GenerateNewOrder(payment,
+            var order = orderCreateDto.GenerateNewOrder(orderPayment,
                                                         customerId,
                                                         await GenerateOrderNumberAsync());
 
@@ -104,10 +109,10 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
 
 
-            var aquiredOffers = payment.AquiredOffers(order.Id);
+            var aquiredOffers = orderPayment.AquiredOffers(order.Id);
             _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
 
-            var history = order.OrderInitiateHistory(payment, customerId, "Order Placed");
+            var history = order.OrderInitiateHistory(orderPayment, customerId, "Order Placed");
             _unitOfWork.Repository<OrderHistory>().Add(history);
 
             var addressFromRepo = await _unitOfWork
@@ -118,9 +123,11 @@ namespace IqraCommerce.API.Data.Services
             shippingAddress.OrderId = order.Id;
             _unitOfWork.Repository<ShippingAddress>().Add(shippingAddress);
 
-            await _couponHistoryService.AddHistoryAsync(payment, customerId, order.Id);
+            await _couponHistoryService.AddHistoryAsync(orderPayment, customerId, order.Id);
 
-            await _couponService.RedeemAsync(payment.Coupon.Id);
+            await _couponService.RedeemAsync(orderPayment.Coupon.Id);
+
+            _cashbackRegisterService.Register(orderPayment.Cashback, customerId, order.Id);
 
             var result = await _unitOfWork.Complete();
 
@@ -171,6 +178,25 @@ namespace IqraCommerce.API.Data.Services
             };
 
             _unitOfWork.Repository<OrderHistory>().Add(history);
+        }
+
+        public async Task<OrderDetailsDto> GetOrderAsync(Guid customerId, Guid id)
+        {
+            var order = await _repo.GetOrderAsync(customerId, id);
+
+            if(order is null) return null;
+
+            var couponHistory = await _couponHistoryService.GetByOrderIdAsync(id);
+
+            var cashbackRegister = await _cashbackRegisterService.GetByOrderIdAsync(id);
+
+            var orderDetails = _mapper.Map<OrderDetailsDto>(order);
+
+            orderDetails.Cashback = cashbackRegister.Amount;
+            orderDetails.CashbackStatus = cashbackRegister.Status;
+            orderDetails.Coupon = couponHistory.Value;
+
+            return orderDetails;
         }
     }
 }

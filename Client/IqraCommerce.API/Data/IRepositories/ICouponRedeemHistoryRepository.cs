@@ -8,5 +8,6 @@ namespace IqraCommerce.API.Data.IRepositories
     public interface ICouponRedeemHistoryRepository
     {
          Task<CouponRedeemHistory> GetCouponHistoryByCustomer(Guid couponId, Guid customerId);
+          Task<CouponRedeemHistory> GetByOrderIdAsync(Guid id);
     }
 }

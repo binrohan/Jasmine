@@ -8,7 +8,7 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface ICouponService
     {
-        Task<CouponRedemtionDto> DiscountAsync(double orderValue, string code, Guid customerId);
+        Task<CouponServiceDto> DiscountAsync(double orderValue, string code, Guid customerId);
         Task RedeemAsync(Guid id);
     }
 }

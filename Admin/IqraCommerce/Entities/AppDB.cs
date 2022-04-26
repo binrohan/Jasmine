@@ -77,6 +77,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Cashback> Cashback { get; set; } // Used
         public virtual DbSet<CashbackHistory> CashbackHistory { get; set; } // Used
         public virtual DbSet<CouponRedeemHistory> CouponRedeemHistory { get; set; } // Used
+        public virtual DbSet<CashbackRegister> CashbackRegister { get; set; } // Used
         #endregion Promotion
 
         #region Order

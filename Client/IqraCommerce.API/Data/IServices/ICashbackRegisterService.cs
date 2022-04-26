@@ -6,8 +6,9 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IServices
 {
-    public interface ICashbackHistoryService
+    public interface ICashbackRegisterService
     {
-        Task AddHistoryAsync(OrderPaymentDto payment, Guid customerId, Guid orderId);
+        void Register(CashbackServiceDto cashback, Guid customerId, Guid orderId);
+        Task<CashbackRegister> GetByOrderIdAsync(Guid id); 
     }
 }

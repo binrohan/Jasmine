@@ -27,9 +27,9 @@ namespace IqraCommerce.API.Data.Services
             _couponHistoryRepo = couponHistoryRepo;
         }
 
-        public async Task<CouponRedemtionDto> DiscountAsync(double orderValue, string code, Guid customerId)
+        public async Task<CouponServiceDto> DiscountAsync(double orderValue, string code, Guid customerId)
         {
-            var redemtion = new CouponRedemtionDto(code);
+            var redemtion = new CouponServiceDto(code);
 
             var coupon = await _repo.GetCouponByCodeAsync(code);
 
@@ -51,7 +51,7 @@ namespace IqraCommerce.API.Data.Services
             discount = (discount > coupon.MaxDiscount && coupon.MaxDiscount!= 0) ? coupon.MaxDiscount : discount;
             discount = discount < coupon.MinDiscount ? coupon.MinDiscount : discount;
 
-            return redemtion.SetDiscount(discount, "Coupon Redeemed");
+            return redemtion.SetDiscount(discount, $"Coupon discount {coupon.Discount}% hence {discount}Taka", coupon.Discount);
         }
 
         public async Task RedeemAsync(Guid id)

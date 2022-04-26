@@ -47,6 +47,11 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork.Repository<CouponRedeemHistory>().Add(history);
         }
 
+        public async Task<CouponRedeemHistory> GetByOrderIdAsync(Guid id)
+        {
+            return await _repo.GetByOrderIdAsync(id);
+        }
+
         private string GenerateHistoryMessage(double percentage,
                                               double orderValue,
                                               double discount,

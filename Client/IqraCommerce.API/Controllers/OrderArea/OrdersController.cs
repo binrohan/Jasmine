@@ -43,7 +43,9 @@ namespace IqraCommerce.API.Controllers.ProductArea
 
             if (paymentInfo is null) return BadRequest(new ApiResponse(404, "Address Not Found"));
 
-            return Ok(new ApiResponse(200, paymentInfo));
+            var payment = _mapper.Map<PaymentDto>(paymentInfo);
+
+            return Ok(new ApiResponse(200, payment));
         }
 
         [HttpPost]
@@ -73,13 +75,11 @@ namespace IqraCommerce.API.Controllers.ProductArea
         {
             var userId = User.RetrieveIdFromPrincipal();
 
-            var order = await _repo.GetOrderAsync(userId, id);
+            var order = await _service.GetOrderAsync(userId, id);
 
             if (order is null) return NotFound(new ApiResponse(404, id, "Order not found"));
 
-            var orderToReturn = _mapper.Map<OrderDetailsDto>(order);
-
-            return Ok(new ApiResponse(200, orderToReturn));
+            return Ok(new ApiResponse(200, order));
         }
 
 

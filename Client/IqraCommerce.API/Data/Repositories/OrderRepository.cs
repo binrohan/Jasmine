@@ -34,6 +34,9 @@ namespace IqraCommerce.API.Data.Repositories
                         .Order
                         .Where(o => o.Id == id && o.CustomerId == userId)
                         .Include(o => o.Address)
+                        .Include(o => o.Address.Province)
+                        .Include(o => o.Address.District)
+                        .Include(o => o.Address.Upazila)
                         .Include(o => o.Products)
                         .FirstOrDefaultAsync();
         }
@@ -44,6 +47,9 @@ namespace IqraCommerce.API.Data.Repositories
                             .Order
                             .Where(o => !o.IsDeleted)
                             .Include(o => o.Address)
+                            .ThenInclude(a => a.Province)
+                            .Include(o => o.Address.District)
+                            .Include(o => o.Address.Upazila)
                             .AsQueryable();
 
             query = string.IsNullOrEmpty(param.Search)

@@ -163,6 +163,15 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Order, OrderShortDto>();
             CreateMap<Order, OrderDetailsDto>();
             CreateMap<Order, OrderReturnDto>();
+            CreateMap<OrderPaymentDto, PaymentDto>()
+            .ForMember(dest => dest.Cashback,
+                            opt => opt.MapFrom(src => src.Cashback.CashbackAmount))
+            .ForMember(dest => dest.CouponDiscount,
+                            opt => opt.MapFrom(src => src.Coupon.Discount))
+            .ForMember(dest => dest.CouponValue,
+                            opt => opt.MapFrom(src => src.Coupon.Value))
+            .ForMember(dest => dest.CouponMessage,
+                            opt => opt.MapFrom(src => src.Coupon.Message));
             #endregion Order
 
             #region ShippingAddress

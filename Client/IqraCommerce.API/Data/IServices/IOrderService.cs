@@ -12,6 +12,7 @@ namespace IqraCommerce.API.Data.IServices
         Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId);
         Task<OrderReturnDto> PlaceOrder(OrderCreateDto orderCreateDto, Guid customerId);
         Task<Pagination<OrderShortDto>> GetOrdersAsync(OrderParamsDto paramDto, Guid customerId);
+        Task<OrderDetailsDto> GetOrderAsync(Guid customerId, Guid id);
         void AddOrderCancelHistory(Order order);
     }
 }

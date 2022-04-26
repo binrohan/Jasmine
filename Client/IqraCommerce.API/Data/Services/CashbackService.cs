@@ -25,9 +25,20 @@ namespace IqraCommerce.API.Data.Services
 
         public async Task<CashbackServiceDto> CalculateAsync(double payAmount)
         {
-            var cashbacks = (await _repo.GetCashbacksAsync()).ToList();
+            var cashback = await _repo.GetCashbackByOrderValueAsync(payAmount);
 
-            return null;
+            if(cashback is null) return new CashbackServiceDto(0.0);
+
+            return new CashbackServiceDto(cashback.Amount, cashback.Id);
+        }
+
+        public async Task RedeemAsync(double cashback, Guid customerId)
+        {
+            if(cashback == 0.0) return;
+
+            var customer = await _unitOfWork.Repository<Customer>().GetByIdAsync(customerId);
+
+            customer.Cashback += cashback;
         }
     }
 }

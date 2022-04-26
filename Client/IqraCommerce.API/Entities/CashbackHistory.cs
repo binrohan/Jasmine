@@ -10,5 +10,6 @@ namespace IqraCommerce.API.Entities
         public double Amount { get; set; }
         public Guid CustomerId { get; set; }
         public Guid OrderId { get; set; }
+        public Guid CashbackId { get; set; }
     }
 }
