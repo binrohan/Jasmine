@@ -23,6 +23,6 @@ namespace IqraCommerce.API.Entities
         public ShippingAddress Address { get; set; }
         public IEnumerable<OrderProduct> Products { get; set; }
         public OrderHistory OrderHistory { get; set; }
-        public OrderAquiredOffer AquiredOffers { get; set; }
+        public IEnumerable<OrderAquiredOffer> AquiredOffers { get; set; }
     }
 }

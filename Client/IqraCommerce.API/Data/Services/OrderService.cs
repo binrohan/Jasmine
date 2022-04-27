@@ -35,6 +35,7 @@ namespace IqraCommerce.API.Data.Services
         private readonly IAquiredOfferService _aquiredOfferService;
         private readonly IPaymentHistoryService _paymentHistoryService;
         private readonly ICustomerService _customerService;
+        private readonly IOrderProductService _orderProductService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -49,7 +50,8 @@ namespace IqraCommerce.API.Data.Services
                             ICashbackRegisterService cashbackRegisterService,
                             IAquiredOfferService aquiredOfferService,
                             IPaymentHistoryService paymentHistoryService,
-                            ICustomerService customerService)
+                            ICustomerService customerService,
+                            IOrderProductService orderProductService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -65,7 +67,7 @@ namespace IqraCommerce.API.Data.Services
             _aquiredOfferService = aquiredOfferService;
             _paymentHistoryService = paymentHistoryService;
             _customerService = customerService;
-            
+            _orderProductService = orderProductService;
         }
 
         public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
@@ -117,9 +119,7 @@ namespace IqraCommerce.API.Data.Services
 
             await _customerService.AddDueAsync(order.PayableAmount, customerId);
 
-            var productsFromRepo = await GetProductsByListOfIdAsync(orderCreateDto.Products);
-            var orderProducts = productsFromRepo.Order(orderCreateDto.Products, order.Id);
-            _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
+            await _orderProductService.AddAsync(orderCreateDto.Products, order.Id);
 
             _aquiredOfferService.AddAquiredOffer(orderPayment, order.Id);
 

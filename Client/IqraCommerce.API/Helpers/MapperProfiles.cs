@@ -88,6 +88,9 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Id,
                             opt => opt.Ignore());
+            CreateMap<Product, OrderProduct>()
+                .ForMember(dest => dest.Id,
+                            opt => opt.Ignore());
             #endregion Product
         
             #region Address
