@@ -52,6 +52,11 @@ namespace IqraCommerce.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
+            if (await _repo.FindByPhoneAsync(registerDto.Phone) is not null)
+            {
+                return BadRequest(new ApiResponse(400, registerDto, "Phone already used"));
+            }
+
             var result = await _otpService.ValidateAsync(registerDto);
 
             if(!result) return BadRequest(new ApiResponse(406, registerDto, "Wrong OTP"));
@@ -113,11 +118,6 @@ namespace IqraCommerce.API.Controllers
         [HttpPost("RequestOTP")]
         public async Task<IActionResult> RequestOTP(RequestOTPDto requestDto)
         {
-            if (await _repo.FindByPhoneAsync(requestDto.Phone) is not null)
-            {
-                return BadRequest(new ApiResponse(400, requestDto, "Phone already used"));
-            }
-
            var resullt = _otpService.SentSMS(requestDto.Phone);
 
            var register = new Register
