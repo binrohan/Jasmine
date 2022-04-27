@@ -165,7 +165,6 @@ namespace IqraCommerce.Services.ProductArea
               ,product.[Rank]
               ,product.[Rating]
               ,product.[RatingCount]
-              ,product.[IsUpComming]
               ,product.[SearchQuery]
               ,product.[UnitId]
               ,product.[IsHighlighted]

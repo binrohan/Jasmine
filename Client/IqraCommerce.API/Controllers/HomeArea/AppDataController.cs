@@ -30,8 +30,7 @@ namespace IqraCommerce.API.Controllers.HomeArea
             
             var data = await FileCreator.CreateAppData("", categoriesToReturn);
 
-            return Ok(new ApiResponse(201, data, "App data created!"));
-
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         [HttpGet("WebRootPath")]
