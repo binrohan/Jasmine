@@ -32,6 +32,7 @@ namespace IqraCommerce.API.Data.Services
         private readonly ICashbackService _cashbackService;
         private readonly ICashbackHistoryService _cashbackHistoryService;
         private readonly ICashbackRegisterService _cashbackRegisterService;
+        private readonly IAquiredOfferService _aquiredOfferService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -43,7 +44,8 @@ namespace IqraCommerce.API.Data.Services
                             ICouponRedeemHistoryService couponHistoryService,
                             ICashbackService cashbackService,
                             ICashbackHistoryService cashbackHistoryService,
-                            ICashbackRegisterService cashbackRegisterService)
+                            ICashbackRegisterService cashbackRegisterService,
+                            IAquiredOfferService aquiredOfferService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -56,6 +58,7 @@ namespace IqraCommerce.API.Data.Services
             _cashbackService = cashbackService;
             _cashbackHistoryService = cashbackHistoryService;
             _cashbackRegisterService = cashbackRegisterService;
+            _aquiredOfferService = aquiredOfferService;
         }
 
         public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
@@ -110,8 +113,7 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
 
 
-            var aquiredOffers = orderPayment.AquiredOffers(order.Id);
-            _unitOfWork.Repository<OrderAquiredOffer>().AddRange(aquiredOffers);
+            _aquiredOfferService.AddAquiredOffer(orderPayment, order.Id);
 
             var history = order.OrderInitiateHistory(orderPayment, customerId, "Order Placed");
             _unitOfWork.Repository<OrderHistory>().Add(history);

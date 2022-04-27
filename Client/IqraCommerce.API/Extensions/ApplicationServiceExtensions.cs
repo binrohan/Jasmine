@@ -29,6 +29,7 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<ICashbackService, CashbackService>();
             services.AddScoped<ICashbackHistoryService, CashbackHistoryService>();
             services.AddScoped<ICashbackRegisterService, CashbackRegisterService>();
+            services.AddScoped<IAquiredOfferService, AquiredOfferService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductRepository, ProductRepository>();

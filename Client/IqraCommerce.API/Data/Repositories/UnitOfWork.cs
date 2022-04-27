@@ -22,6 +22,11 @@ namespace IqraCommerce.API.Data.Repositories
             return await _context.SaveChangesAsync();
         }
 
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             _context.Dispose();

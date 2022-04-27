@@ -66,61 +66,6 @@ namespace IqraCommerce.API.Extensions
             };
         }
     
-        public static IEnumerable<OrderAquiredOffer> AquiredOffers(this OrderPaymentDto payment, Guid orderId)
-        {
-            IList<OrderAquiredOffer> aquiredOffers = new List<OrderAquiredOffer>();
-
-            if(payment.ProductDiscount > 0)
-            {
-                aquiredOffers.Add
-                (
-                    new OrderAquiredOffer()
-                    {
-                        OrderId = orderId,
-                        Description = "Product discounted price",
-                        IsRedeemed = true,
-                        RefOfferId = Guid.Empty,
-                        TypeOfOffer = OrderAquiredOfferType.Product,
-                        Discount = payment.ProductDiscount
-                    }
-                );
-            }
-
-            if(payment.Cashback.CashbackAmount > 0)
-            {
-                aquiredOffers.Add
-                (
-                    new OrderAquiredOffer()
-                    {
-                        OrderId = orderId,
-                        Description = $"Cashback {payment.Cashback.CashbackAmount}Tk for Payment {payment.Cashback.OrderPayment}",
-                        IsRedeemed = false,
-                        RefOfferId = payment.Cashback.Id,
-                        TypeOfOffer = OrderAquiredOfferType.Cashback,
-                        Discount = payment.Cashback.CashbackAmount
-                    }
-                );
-            }
-            
-            if(payment.Coupon.IsLegit)
-            {
-                aquiredOffers.Add
-                (
-                    new OrderAquiredOffer()
-                    {
-                        OrderId = orderId,
-                        Description = $"Coupon Code Redemmed: {payment.Coupon.Code}",
-                        IsRedeemed = true,
-                        RefOfferId = payment.Coupon.Id,
-                        TypeOfOffer = OrderAquiredOfferType.Coupon,
-                        Discount = payment.Coupon.Discount
-                    }
-                );
-            }
-
-            return aquiredOffers;
-        }
-    
         public static OrderHistory OrderInitiateHistory(this Order order,
                                              OrderPaymentDto payment,
                                              Guid customerId,

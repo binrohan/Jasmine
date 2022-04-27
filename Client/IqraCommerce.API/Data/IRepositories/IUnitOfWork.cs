@@ -9,6 +9,7 @@ namespace IqraCommerce.API.Data.IRepositories
     {
         IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
         Task<int> Complete();
+        int SaveChanges();
     }
 
 }
