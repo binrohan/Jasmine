@@ -75,6 +75,6 @@ namespace IqraCommerce.API.Data
     }
     public enum PaymentMedium
     {
-        Cash
+        Cash, Cashback
     }
 }

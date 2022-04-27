@@ -11,5 +11,6 @@ namespace IqraCommerce.API.Data.IServices
         Task<IEnumerable<AddressReturnDto>> GetAddressesAsync(Guid customerId);
         Task<AddressReturnDto> GetAddressesAsync(Guid customerId, AddressType addressType);
         Task<int> UpdateAddressAsync(Guid customerId, AddressUpdateDto addressToUpdate);
+        Task AddDueAsync(double amount, Guid customerId);
     }
 }

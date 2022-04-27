@@ -51,5 +51,14 @@ namespace IqraCommerce.API.Data.Services
 
             return await _unitOfWork.Complete();
         }
+
+        public async Task AddDueAsync(double amount, Guid customerId)
+        {
+            var customer = await _unitOfWork.Repository<Customer>().GetByIdAsync(customerId);
+
+            if(customer is null) return;
+            
+            customer.DueAmount += amount;
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace IqraCommerce.Services.OrderArea
             return await CallbackAsync((response) =>
             {
                 var orderFromRepo = GetById(order.Id);
+                var customer = GetEntity<Customer>().Find(orderFromRepo.CustomerId);
 
                 var prevStatus = orderFromRepo.OrderStatus;
 
@@ -71,6 +72,18 @@ namespace IqraCommerce.Services.OrderArea
                         == OrderStatus.CancelledByAdmin ? OrderAction.CancelledByAdmin : OrderAction.StatusChanged,
                         Name = OrderHistoryHelper.GenerateHistoryMessage(prevStatus, order.OrderStatus)
                     };
+
+                    if (orderFromRepo.PaymentStatus == PaymentStatus.Paid && orderFromRepo.OrderStatus == OrderStatus.Delivered)
+                    {
+                        var cashbackRegister = GetEntity<CashbackRegister>().FirstOrDefault(c => c.OrderId == orderFromRepo.Id && c.CustomerId == customer.Id && c.Status == CashbackRegisterStatus.Pending);
+                        var aquiredOffer = GetEntity<OrderAquiredOffer>().FirstOrDefault(o => o.OrderId == orderFromRepo.Id && o.TypeOfOffer == OrderAquiredOfferType.Cashback && !o.IsRedeemed);
+
+                        if (cashbackRegister != null && aquiredOffer != null)
+                        {
+                            customer.Cashback += cashbackRegister.Amount;
+                            aquiredOffer.IsRedeemed = true;
+                        }
+                    }
 
                     GetEntity<OrderHistory>().Add(history);
 
@@ -135,12 +148,14 @@ namespace IqraCommerce.Services.OrderArea
 
                     if(orderFromRepo.PaymentStatus == PaymentStatus.Paid && orderFromRepo.OrderStatus == OrderStatus.Delivered)
                     {
-                        var cashbackRegister = GetEntity<CashbackRegister>().FirstOrDefault(c => c.OrderId == orderFromRepo.Id && c.CustomerId == customer.Id);
+                        var cashbackRegister = GetEntity<CashbackRegister>().FirstOrDefault(c => c.OrderId == orderFromRepo.Id && c.CustomerId == customer.Id && c.Status == CashbackRegisterStatus.Pending);
+                        var aquiredOffer = GetEntity<OrderAquiredOffer>().FirstOrDefault(o => o.OrderId == orderFromRepo.Id && o.TypeOfOffer == OrderAquiredOfferType.Cashback && !o.IsRedeemed);
 
-                        customer.Cashback += cashbackRegister.Amount;
-
-                        var aquiredOffer = GetEntity<OrderAquiredOffer>().FirstOrDefault(o => o.OrderId == orderFromRepo.Id && o.TypeOfOffer == OrderAquiredOfferType.Cashback);
-                        aquiredOffer.IsRedeemed = true;
+                        if(cashbackRegister != null && aquiredOffer != null)
+                        {
+                            customer.Cashback += cashbackRegister.Amount;
+                            aquiredOffer.IsRedeemed = true;
+                        }
                     }
 
                     customer.DueAmount -= payment.Amount;

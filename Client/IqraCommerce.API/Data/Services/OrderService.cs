@@ -33,6 +33,8 @@ namespace IqraCommerce.API.Data.Services
         private readonly ICashbackHistoryService _cashbackHistoryService;
         private readonly ICashbackRegisterService _cashbackRegisterService;
         private readonly IAquiredOfferService _aquiredOfferService;
+        private readonly IPaymentHistoryService _paymentHistoryService;
+        private readonly ICustomerService _customerService;
 
         public OrderService(IConfiguration config,
                             IMapper mapper,
@@ -45,7 +47,9 @@ namespace IqraCommerce.API.Data.Services
                             ICashbackService cashbackService,
                             ICashbackHistoryService cashbackHistoryService,
                             ICashbackRegisterService cashbackRegisterService,
-                            IAquiredOfferService aquiredOfferService)
+                            IAquiredOfferService aquiredOfferService,
+                            IPaymentHistoryService paymentHistoryService,
+                            ICustomerService customerService)
         {
             _addressRepo = addressRepo;
             _unitOfWork = unitOfWork;
@@ -59,6 +63,9 @@ namespace IqraCommerce.API.Data.Services
             _cashbackHistoryService = cashbackHistoryService;
             _cashbackRegisterService = cashbackRegisterService;
             _aquiredOfferService = aquiredOfferService;
+            _paymentHistoryService = paymentHistoryService;
+            _customerService = customerService;
+            
         }
 
         public async Task<OrderPaymentDto> CalculatePaymentAsync(IOrderToCalcPaymentDto orderToCalcPayment, Guid customerId)
@@ -108,10 +115,11 @@ namespace IqraCommerce.API.Data.Services
 
             _unitOfWork.Repository<Order>().Add(order);
 
+            await _customerService.AddDueAsync(order.PayableAmount, customerId);
+
             var productsFromRepo = await GetProductsByListOfIdAsync(orderCreateDto.Products);
             var orderProducts = productsFromRepo.Order(orderCreateDto.Products, order.Id);
             _unitOfWork.Repository<OrderProduct>().AddRange(orderProducts);
-
 
             _aquiredOfferService.AddAquiredOffer(orderPayment, order.Id);
 
@@ -131,6 +139,8 @@ namespace IqraCommerce.API.Data.Services
             await _couponService.RedeemAsync(orderPayment.Coupon.Id);
 
             _cashbackRegisterService.Register(orderPayment.Cashback, customerId, order.Id);
+
+            await _paymentHistoryService.AddCashbackPayment(order);
 
             var result = await _unitOfWork.Complete();
 

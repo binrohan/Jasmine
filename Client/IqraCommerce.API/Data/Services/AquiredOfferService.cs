@@ -22,14 +22,12 @@ namespace IqraCommerce.API.Data.Services
 
         public void AddAquiredOffer(OrderPaymentDto payment, Guid orderId)
         {
-            var offers = new List<OrderAquiredOffer>();
             if (payment.ProductDiscount > 0)
             {
-                offers.Add
+                _unitOfWork.Repository<OrderAquiredOffer>().Add
                (
                    new OrderAquiredOffer()
                    {
-                       Id = Guid.NewGuid(),
                        OrderId = orderId,
                        Description = "Product discounted price",
                        IsRedeemed = true,
@@ -42,11 +40,10 @@ namespace IqraCommerce.API.Data.Services
 
             if (payment.Cashback.CashbackAmount > 0)
             {
-                offers.Add
+               _unitOfWork.Repository<OrderAquiredOffer>().Add
                 (
                     new OrderAquiredOffer()
                     {
-                        Id = Guid.NewGuid(),
                         OrderId = orderId,
                         Description = $"Cashback {payment.Cashback.CashbackAmount}Tk for Payment {payment.OrderValue - payment.Coupon.Discount}",
                         IsRedeemed = false,
@@ -59,11 +56,10 @@ namespace IqraCommerce.API.Data.Services
 
             if (payment.Coupon.IsLegit)
             {
-                offers.Add
+                _unitOfWork.Repository<OrderAquiredOffer>().Add
                  (
                      new OrderAquiredOffer()
                      {
-                         Id = Guid.NewGuid(),
                          OrderId = orderId,
                          Description = $"Coupon Code Redemmed: {payment.Coupon.Code}",
                          IsRedeemed = true,
@@ -74,7 +70,7 @@ namespace IqraCommerce.API.Data.Services
                  );
             }
 
-            _unitOfWork.Repository<OrderAquiredOffer>().AddRange(offers);
+            
         }
     }
 }
