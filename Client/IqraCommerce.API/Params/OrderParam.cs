@@ -10,9 +10,14 @@ namespace IqraCommerce.API.Params
         {
 
         }
-        public OrderParam(Guid customerId, int index = 1, string search = null, bool isDecending = true)
+        public OrderParam(Guid customerId,
+                          int index = 1,
+                          string search = null,
+                          bool isDecending = true,
+                          OrderStatus status = OrderStatus.Pending)
         {
             IsDecending = isDecending;
+            Status = status;
             Search = search;
             Index = index;
             CustomerId = customerId;
@@ -49,5 +54,7 @@ namespace IqraCommerce.API.Params
         public bool IsDecending { get; set; }
 
         public Guid CustomerId { get; set; } = Guid.Empty;
+
+        public OrderStatus Status { get; set; }
     }
 }

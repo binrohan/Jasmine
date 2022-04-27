@@ -45,7 +45,7 @@ namespace IqraCommerce.API.Data.Repositories
         {
             var query = _context
                             .Order
-                            .Where(o => !o.IsDeleted)
+                            .Where(o => !o.IsDeleted && o.OrderStatus == param.Status)
                             .Include(o => o.Address)
                             .ThenInclude(a => a.Province)
                             .Include(o => o.Address.District)
