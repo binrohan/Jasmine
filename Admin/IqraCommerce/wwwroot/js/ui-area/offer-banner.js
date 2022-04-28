@@ -1,6 +1,6 @@
 import { editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
 import { bannerType } from "../dictionaries.js";
-import { url } from '../utils.js';
+import { imageBound, url } from '../utils.js';
 
 (function () {
     const controller = 'Banner';
@@ -88,10 +88,6 @@ import { url } from '../utils.js';
 
             }
         });
-    }
-
-    function imageBound(td) {
-        td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
     }
 
 

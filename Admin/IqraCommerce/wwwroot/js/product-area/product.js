@@ -118,7 +118,7 @@ import { url } from '../utils.js';
     const uploadImage = (row) => {
         Global.Add({
             name: 'add-product-image',
-            url: '/js/utils/file-uploader.js',
+            url: '/js/utils/files-uploader.js',
             save: `/${controller}/UploadImage`,
             model: row,
             ItemId: row.Id,

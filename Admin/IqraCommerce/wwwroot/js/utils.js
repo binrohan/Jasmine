@@ -1,3 +1,5 @@
+import { READ_URL } from "./site.js";
+
 export const visibleFieldDropdown = (position, sibling = 2 ) => ({
     title: 'Show in client',
     Id: 'IsVisible',
@@ -19,5 +21,5 @@ export function dateBound(el, date) {
 }
 
 export function imageBound(td) {
-    td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
+    td.html(`<img src="${READ_URL}${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
 }

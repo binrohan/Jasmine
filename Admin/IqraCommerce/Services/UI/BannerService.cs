@@ -9,6 +9,7 @@ using IqraCommerce.Helpers;
 using IqraCommerce.Models.ProductArea;
 using IqraCommerce.Services.HistoryArea;
 using IqraService.Search;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,7 +88,7 @@ namespace IqraCommerce.Services.UI
                   ,[ActivityId]
                   ,[Rank]
                   ,[Size]
-                  ,ISNULL('/Images/Product/Icon/'+banner.[ImageURL], '') [ImageURL]
+                  ,ISNULL('/images/banners/icon/'+banner.[ImageURL], '') [ImageURL]
                   ,[IsVisible]
                   ,ISNULL(banner.[Link], '') [Link]
                   ,[TypeOfBanner]

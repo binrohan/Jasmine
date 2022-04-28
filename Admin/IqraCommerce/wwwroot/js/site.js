@@ -3,3 +3,4 @@
 
 // Write your JavaScript code.
 
+export const READ_URL = "https://jasmine.boniksoftware.com";
