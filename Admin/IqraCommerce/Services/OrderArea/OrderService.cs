@@ -52,10 +52,11 @@ namespace IqraCommerce.Services.OrderArea
                 var orderFromRepo = GetById(order.Id);
                 var customer = GetEntity<Customer>().Find(orderFromRepo.CustomerId);
 
-                var prevStatus = orderFromRepo.OrderStatus;
 
                 if (orderFromRepo != null)
                 {
+                    var prevStatus = orderFromRepo.OrderStatus;
+
                     orderFromRepo.OrderStatus = order.OrderStatus;
                     orderFromRepo.UpdatedAt = DateTime.Now;
                     orderFromRepo.UpdatedBy = userId;
@@ -173,6 +174,23 @@ namespace IqraCommerce.Services.OrderArea
                 }
             });
         }
+
+        public async Task<ResponseList<Dictionary<string, object>>> InvoiceData(Guid id)
+        {
+            using (var db = new DBService(this))
+            {
+                var data = await db.MultiList(OrderQuery.InvoiceData(id));
+                
+                return new ResponseList<Dictionary<string, object>>()
+                {
+                    Data = new Dictionary<string, object>() 
+                    {
+                        {"Order", data.Data[0][0] },
+                        {"Products", data.Data[1] }
+                    }
+                };
+            }
+        }
     }
 
 
@@ -201,14 +219,51 @@ namespace IqraCommerce.Services.OrderArea
                   ,[order].[TotalQuantity]
                   ,[order].[PaymentMethod]
                   ,[order].[TypeOfPlatForm]
+                  ,shippingaddress.Name [ContactPerson]
+				  ,shippingaddress.Phone [ContactPhone]
 	              ,customer.Phone [CustomerPhone]
-	              ,('Area: ' + ISNULL(upazila.Name, 'Not Selected') + ', District: ' + ISNULL(district.Name, 'Not Selected') + ', Province: ' + ISNULL(province.Name, 'Not Selected') + ', Local: ' + ISNULL(shippingaddress.Remarks, 'Not Provided')) [Address]
+                  ,ISNULL(CouponRedeemHistory.Value, 0) [CouponDiscount]
+	              ,(ISNULL(shippingaddress.Remarks, '_') + ', ' + ISNULL(upazila.Name, '_') + ', ' + ISNULL(district.Name, '_') + ', ' + ISNULL(province.Name, '_')) [Address]
               FROM [dbo].[Order] AS [order]
               LEFT JOIN [dbo].[Customer] customer ON customer.Id = [order].CustomerId
               LEFT JOIN [dbo].[ShippingAddress] shippingaddress ON shippingaddress.OrderId = [order].Id
               LEFT JOIN [dbo].[Province] province ON province.Id = shippingaddress.ProvinceId
               LEFT JOIN [dbo].District district ON district.Id = shippingaddress.DistrictId
-              LEFT JOIN [dbo].Upazila upazila ON upazila.Id = shippingaddress.UpazilaId";
+              LEFT JOIN [dbo].Upazila upazila ON upazila.Id = shippingaddress.UpazilaId
+              LEFT JOIN [dbo].CouponRedeemHistory ON CouponRedeemHistory.OrderId = [order].Id";
+        }
+
+        public static string InvoiceData(Guid id)
+        {
+            return @"SELECT " + Get() + @" WHERE [order].Id = '" + id +
+
+                  @"'SELECT  orderproduct.[Id]
+                  ,orderproduct.[CreatedAt]
+                  ,orderproduct.[CreatedBy]
+                  ,orderproduct.[UpdatedAt]
+                  ,orderproduct.[UpdatedBy]
+                  ,orderproduct.[IsDeleted]
+                  ,ISNULL(orderproduct.[Remarks], ' ') [Remarks]
+                  ,orderproduct.[ActivityId]
+                  ,ISNULL(orderproduct.[Name], ' ') [Name]
+                  ,orderproduct.[OrderId]
+                  ,orderproduct.[RefProductId]
+                  ,ISNULL(orderproduct.[DisplayName], ' ') [DisplayName]
+                  ,orderproduct.[PackSize]
+                  ,orderproduct.[CurrentPrice]
+                  ,orderproduct.[OriginalPrice]
+                  ,orderproduct.[DiscountedPrice]
+                  ,orderproduct.[DiscountedPercentage]
+                  ,orderproduct.[Amount]
+                  ,orderproduct.[Discount]
+                  ,orderproduct.[Quantity]
+	              ,ISNULL(unit.Name, '' ) UnitName
+                  FROM [dbo].[OrderProduct] orderproduct
+                  LEFT JOIN Product product ON orderproduct.RefProductId = product.Id
+                  LEFT JOIN Unit unit ON unit.Id = product.UnitId 
+                  Where orderproduct.OrderId = '" + id + @"'
+
+            ";
         }
     }
 }

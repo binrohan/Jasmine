@@ -37,5 +37,10 @@ namespace IqraCommerce.Controllers.MiscellaneousArea
         {
             return Json(await ___service.PaymentEntry(payment, Guid.Empty));
         }
+
+        public async Task<IActionResult> InvoiceData([FromForm] IdDto idDto)
+        {
+            return Json(await ___service.InvoiceData(idDto.Id));
+        }
     }
 }

@@ -134,8 +134,8 @@ import { url } from '../utils.js';
         }
     }
 
-    const printInvoice = () => {
-        window.open("/Report/Invoice", "_blank");
+    const printInvoice = (row) => {
+        window.open("/Report/Invoice?id=" + row.Id, "_blank");
     }
 
     //Tab config
