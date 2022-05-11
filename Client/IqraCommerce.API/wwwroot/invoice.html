@@ -98,7 +98,7 @@
       border-collapse: collapse;
     }
     .invoice-mid table tr th {
-      text-align: left;
+      /* text-align: center; */
       font-weight: 500;
       padding: 0.25rem 1rem;
     }
@@ -198,7 +198,7 @@
           <thead>
             <tr>
               <th class="center">sl</th>
-              <th>Product</th>
+              <th style="text-align: left;">Product</th>
               <th class="right">Price(Tk)</th>
               <th class="center">Quantity</th>
               <th class="right">Discount(Tk)</th>
@@ -311,13 +311,13 @@
         );
         DOM("#products tbody").innerHTML = productRows.join("");
 
-        DOM("#sub-total").innerText = data.subTotal.toFixed(2) + "Tk";
+        DOM("#sub-total").innerText = data.subTotal.toFixed(2) + " Tk";
         DOM("#coupon-discount").innerText =
-          data.couponDiscount.toFixed(2) + "Tk";
-        DOM("#order-value").innerText = data.subTotal.toFixed(2) + "Tk";
+          data.couponDiscount.toFixed(2) + " Tk";
+        DOM("#order-value").innerText = data.subTotal.toFixed(2) + " Tk";
         DOM("#delivery-charge").innerText =
           data.deliveryChange.toFixed(2) + "Tk";
-        DOM("#payable").innerText = data.payable.toFixed(2) + "Tk";
+        DOM("#payable").innerText = data.payable.toFixed(2) + " Tk";
       };
 
       window.onload = () => {
