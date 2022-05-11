@@ -97,18 +97,5 @@ namespace IqraCommerce.API.Controllers
 
              return Ok(new ApiResponse(200, address));
         }
-
-        [HttpPut("Address")]
-        public async Task<IActionResult> UpdateAddress(AddressUpdateDto address)
-        {
-             var customerId = User.RetrieveIdFromPrincipal();
-
-             var result = await _service.UpdateAddressAsync(customerId, address);
-
-             if(result == 0) return BadRequest(400);
-
-             return Ok(new ApiResponse(204, address));
-        }
-
     }
 }

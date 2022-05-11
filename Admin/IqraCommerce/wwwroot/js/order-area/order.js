@@ -181,7 +181,7 @@ import { url } from '../utils.js';
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Delivering', [...actions], orderStatus.delivering),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Delivered', [...actions], orderStatus.delivered),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB70', 'Cancelled-Customer', [detailsAction], orderStatus.cancelledByCustomer),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB71', 'Cancelled-Admin', [detailsAction], orderStatus.cancelledByCustomer),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB71', 'Cancelled-Admin', [detailsAction], orderStatus.cancelledByAdmin),
         ],
         periodic: {
             container: '.filter_container',

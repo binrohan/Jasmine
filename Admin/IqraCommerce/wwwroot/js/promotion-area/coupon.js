@@ -16,7 +16,7 @@ import { filter, liveRecord, operationType, trashRecord } from '../filters.js';
         { field: 'Count', title: 'Available', position: 6 },
         { field: 'Redeemed', title: 'Used', add: false },
         { field: 'Redeemed', title: 'Left', add: false, bound: leftOverBound },
-        { field: 'Discount', title: 'Max Discount (%)', position: 4, add: {sibling: 4} },
+        { field: 'Discount', title: 'Discount (%)', position: 4, add: {sibling: 4} },
         { field: 'MaxDiscount', title: 'Max Discount (TK)', position: 4, add: {sibling: 4} },
         { field: 'MinDiscount', title: 'Min Discount (TK)', position: 5, add: {sibling: 4} },
         { field: 'StartingAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Starting', position: 8 },

@@ -61,7 +61,7 @@ namespace IqraCommerce.API.Controllers
             return Ok(new ApiResponse(200, address));
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdateAddress(AddressUpdateDto addressUpdateDto)
         {
             var customerId = User.RetrieveIdFromPrincipal();

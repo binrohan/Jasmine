@@ -14,7 +14,7 @@ import { imageBound, url } from '../utils.js';
         { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
         { field: 'Size', title: 'View Port', filter: true, add: false},
         { field: 'Rank', title: 'Rank', filter: true, position: 1 },
-        { field: 'Link', title: 'Link', filter: true, add: { sibling: 2 }, position: 2 },
+        { field: 'Link', title: 'Link', filter: true, add: { sibling: 2 }, position: 2, required: false },
         { field: 'Remarks', title: 'Remarks', Width: '255px', add: { sibling: 1 }, position: 5, },
         { field: 'CreatedBy', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

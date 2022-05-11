@@ -12,7 +12,7 @@ export const visibleFieldDropdown = (position, sibling = 2 ) => ({
 })
 
 export const url = (endpoint) => {
-    return endpoint ? window.location.origin + endpoint : null;
+    return endpoint ? `${READ_URL}${endpoint}` : null;
 }
 
 export function dateBound(el, date) {
@@ -21,5 +21,5 @@ export function dateBound(el, date) {
 }
 
 export function imageBound(td) {
-    td.html(`<img src="${READ_URL}${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
+    td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
 }

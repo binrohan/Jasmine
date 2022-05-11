@@ -17,7 +17,7 @@ import { url } from '../utils.js';
     const columns = () => [
         { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
         { field: 'Name', title: 'Name', filter: true, position: 1 },
-        { field: 'CurrentPrice', title: 'Current Price', filter: true, position: 3 },
+        { field: 'CurrentPrice', title: 'Current Price(Tk)', filter: true, position: 3 },
         { field: 'StockUnit', title: 'Stock', filter: true, position: 7 },
         { field: 'PackSize', title: 'Pack Size', filter: true, position: 9 },
         { field: 'UnitName', title: 'Unit', filter: true, add: false },
@@ -44,28 +44,8 @@ import { url } from '../utils.js';
                         { text: 'Yes', value: true },
                         { text: 'No', value: false },
                     ],
-                    add: { sibling: 3 },
-                    position: 13,
-                },
-                {
-                    title: 'Display on Home Page',
-                    Id: 'IsInHomePage',
-                    dataSource: [
-                        { text: 'Yes', value: true },
-                        { text: 'No', value: false },
-                    ],
-                    add: { sibling: 3 },
-                    position: 14
-                },
-                {
-                    title: 'Is upcomming product',
-                    Id: 'IsUpComming',
-                    dataSource: [
-                        { text: 'Yes', value: true },
-                        { text: 'No', value: false },
-                    ],
-                    add: { sibling: 3 },
-                    position: 15
+                    add: { sibling: 2 },
+                    position: 12,
                 },
                 {
                     Id: 'UnitId',
@@ -78,13 +58,13 @@ import { url } from '../utils.js';
             ],
             additionalField: [
                 { field: 'DisplayName', title: 'Display Name', position: 2 },
-                { field: 'OriginalPrice', title: 'Original Price', position: 3 },
-                { field: 'DiscountedPrice', title: 'Dicounted Price', position: 4 },
-                { field: 'DiscountedPercentage', title: 'Discounted Percentage', position: 5 },
+                { field: 'OriginalPrice', title: 'Original Price(Tk)', position: 3 },
+                { field: 'DiscountedPrice', title: 'Dicounted Price(Tk)', position: 4 },
+                { field: 'DiscountedPercentage', title: 'Discounted Percentage(%)', position: 5 },
                 { field: 'TradePrice', title: 'Trade Price', position: 6 },
                 { field: 'Rank', title: 'Rank', position: 11 },
-                { field: 'Excerpt', title: 'Excerpt', Type: 'textarea', position: 12, add: { sibling: 1 } },
-                { field: 'SearchQuery', title: 'Search Query', position: 12, add: { sibling: 1 } },
+                { field: 'Excerpt', title: 'Excerpt', Type: 'textarea', position: 13, add: { sibling: 1 } },
+                { field: 'SearchQuery', title: 'Search Query', position: 14, add: { sibling: 1 } },
 
             ],
             onSubmit: function (formModel, data, model) {

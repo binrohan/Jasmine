@@ -29,7 +29,7 @@ namespace IqraCommerce.Entities.ProductArea
 
         public bool IsVisible { get; set; }
 
-        public bool IsInHomePage { get; set; }
+        public bool IsInHomePage { get; set; } // Remove it leter
         public int Rank { get; set; }
 
         public double Rating { get; set; }
