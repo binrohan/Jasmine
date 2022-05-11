@@ -4,7 +4,7 @@
 // TODO: Category select
 // TODO: Remove vat [X]
 
-import { editBtn, imageBtn, menuBtn, fileBtn, eyeBtn, flashBtn, cashBtn } from "../buttons.js";
+import { editBtn, imageBtn, menuBtn, fileBtn, eyeBtn, flashBtn, cashBtn, printBtn } from "../buttons.js";
 import { orderStatus } from "../dictionaries.js";
 import { filter, liveRecord, trashRecord } from "../filters.js";
 import { url } from '../utils.js';
@@ -134,6 +134,10 @@ import { url } from '../utils.js';
         }
     }
 
+    const printInvoice = () => {
+        window.open("/Report/Invoice", "_blank");
+    }
+
     //Tab config
     const tab = (id, title, actions = [], status) => {
         return {
@@ -166,7 +170,12 @@ import { url } from '../utils.js';
         html: cashBtn()
     }
 
-    const actions = [detailsAction, changeStatusAction, makePaymentAction];
+    const printInvoiceAction = {
+        click: printInvoice,
+        html: printBtn()
+    }
+
+    const actions = [detailsAction, changeStatusAction, makePaymentAction, printInvoiceAction];
 
     //Tabs config
     const tabs = {
@@ -180,8 +189,8 @@ import { url } from '../utils.js';
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB77', 'Processing', [...actions], orderStatus.processing),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Delivering', [...actions], orderStatus.delivering),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Delivered', [...actions], orderStatus.delivered),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB70', 'Cancelled-Customer', [detailsAction], orderStatus.cancelledByCustomer),
-            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB71', 'Cancelled-Admin', [detailsAction], orderStatus.cancelledByAdmin),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB70', 'Cancelled-Customer', [detailsAction, printInvoiceAction], orderStatus.cancelledByCustomer),
+            tab('014D50FD-18CA-4CE8-951B-35ECAB91CB71', 'Cancelled-Admin', [detailsAction, printInvoiceAction], orderStatus.cancelledByAdmin),
         ],
         periodic: {
             container: '.filter_container',
