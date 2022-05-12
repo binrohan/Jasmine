@@ -168,7 +168,7 @@ namespace IqraCommerce.Services.ProductArea
               ,product.[SearchQuery]
               ,product.[UnitId]
               ,product.[IsHighlighted]
-              ,ISNULL('/wwwroot/Images/Products/Highlights/Icon/' + product.[HighlightedImageURL], '') [HighlightedImageURL]
+              ,ISNULL('/images/products/highlights/icon/' + product.[HighlightedImageURL], '') [HighlightedImageURL]
 	          ,ISNULL(unit.Name, '' ) UnitName
               FROM [dbo].[Product] product
               LEFT JOIN Unit unit ON unit.Id = product.UnitId";

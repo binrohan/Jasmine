@@ -93,7 +93,7 @@ namespace IqraCommerce.Services.UI
                   ,[Content]
                   ,[StartingAt]
                   ,[EndingAt]
-                  ,ISNULL('/Images/Promotion/Icon/' + [ImageURL], '') [ImageURL]
+                  ,ISNULL('/images/promotion/icon/' + [ImageURL], '') [ImageURL]
                   ,[IsVisible]
                   ,[Rank]
               FROM [dbo].[Promotion] promotion";

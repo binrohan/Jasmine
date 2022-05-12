@@ -11,7 +11,7 @@ import { imageBound, url } from '../utils.js';
 
     const columns = () => [
         { field: 'HighlightedImageURL', title: 'Cover Image', filter: false, add: false, bound: imageBound },
-        { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
+        { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound.bind('HighlightedImageURL') },
         { field: 'Name', title: 'Name', filter: true, position: 1 },
         { field: 'CurrentPrice', title: 'Current Price', filter: true, position: 3 },
         { field: 'StockUnit', title: 'Stock', filter: true, position: 7 },

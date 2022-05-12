@@ -1,9 +1,3 @@
-// TODO: Search Content [X]
-// TODO: Dropdown not loading
-// TODO: Add textarea for excerpt
-// TODO: Category select
-// TODO: Remove vat [X]
-
 import { editBtn, imageBtn, menuBtn, fileBtn } from "../buttons.js";
 import { url } from '../utils.js';
 
@@ -17,7 +11,7 @@ import { url } from '../utils.js';
     const columns = () => [
         { field: 'ImageURL', title: 'Image', filter: false, add: false, bound: imageBound },
         { field: 'Name', title: 'Name', filter: true, position: 1 },
-        { field: 'CurrentPrice', title: 'Current Price(Tk)', filter: true, position: 3 },
+        { field: 'CurrentPrice', title: 'Current Price(Tk)', filter: true, position: 3,add:{datatype:'float'} },
         { field: 'StockUnit', title: 'Stock', filter: true, position: 7 },
         { field: 'PackSize', title: 'Pack Size', filter: true, position: 9 },
         { field: 'UnitName', title: 'Unit', filter: true, add: false },
@@ -67,6 +61,12 @@ import { url } from '../utils.js';
                 { field: 'SearchQuery', title: 'Search Query', position: 14, add: { sibling: 1 } },
 
             ],
+            onviewcreated:(windowModel, formInputs, dropDownList, IsNew, formModel)=>{
+                formInputs['CurrentPrice'].addEventListener('input', currentPriceInputHandler.bind(null, formModel));
+                formInputs['OriginalPrice'].addEventListener('input', originalPriceInputHandler.bind(null, formModel));
+                formInputs['DiscountedPrice'].addEventListener('input', discountedPriceInputHandler.bind(null, formModel));
+                formInputs['DiscountedPercentage'].addEventListener('input', discountedPercentageInputHandler.bind(null, formModel));
+            },
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
@@ -117,6 +117,26 @@ import { url } from '../utils.js';
 
     const gotProductEditor = (row) => {
         window.open(`/Product/Description?id=${row.Id}`, "_blank");
+    }
+
+    const currentPriceInputHandler = (values) => {
+        values.DiscountedPrice = values.OriginalPrice - values.CurrentPrice;
+        values.DiscountedPercentage = ((1 - values.CurrentPrice/values.OriginalPrice)*100).toFixed(4);
+    }
+
+    const originalPriceInputHandler = (values) => {
+        values.DiscountedPrice = values.OriginalPrice - values.CurrentPrice;
+        values.DiscountedPercentage = ((1 - values.CurrentPrice/values.OriginalPrice)*100).toFixed(4);
+    }
+    
+    const discountedPriceInputHandler = (values) => {
+        values.CurrentPrice = values.OriginalPrice - values.DiscountedPrice;
+        values.DiscountedPercentage = ((1 - values.CurrentPrice/values.OriginalPrice)*100).toFixed(4);
+    }
+
+    const discountedPercentageInputHandler = (values) => {
+        values.DiscountedPrice = (values.OriginalPrice * values.DiscountedPercentage/100).toFixed(4);
+        values.CurrentPrice = values.OriginalPrice - values.DiscountedPrice;
     }
 
 

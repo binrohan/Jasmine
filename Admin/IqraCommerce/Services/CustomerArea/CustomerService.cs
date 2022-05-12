@@ -122,7 +122,7 @@ namespace IqraCommerce.Services.UserArea
                       ,customer.[Cashback]
                       ,customer.[Password]
                       ,customer.[DueAmount]
-                      ,ISNULL('/Contents/Images/Customer/Profile/Icon/'+customer.[ImageURL], '') [ImageURL]
+                      ,ISNULL('/images/customer/profile/icon/'+customer.[ImageURL], '') [ImageURL]
                       ,customer.[RegistrationBy]
                   FROM [dbo].[Customer] customer";
         }

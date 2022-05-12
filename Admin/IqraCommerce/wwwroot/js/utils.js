@@ -20,6 +20,7 @@ export function dateBound(el, date) {
     el.html(new Date(date).toLocaleString('en-US'));
 }
 
-export function imageBound(td) {
-    td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
+export function imageBound(td, x, prop) {
+    console.log(prop);
+    td.html(`<img src="${url(this[prop.field])}" style="max-height: 80px; max-width: 100%;" />`);
 }
