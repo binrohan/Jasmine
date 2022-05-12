@@ -1,9 +1,3 @@
-// TODO: Search Content [X]
-// TODO: Dropdown not loading
-// TODO: Add textarea for excerpt
-// TODO: Category select
-// TODO: Remove vat [X]
-
 import { crossBtn, editBtn, imageBtn, menuBtn, plusBtn } from "../buttons.js";
 import { filter, liveRecord, trashRecord } from "../filters.js";
 import { imageBound, url } from '../utils.js';
@@ -113,10 +107,7 @@ import { imageBound, url } from '../utils.js';
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB79', 'Visibile', true),
             tab('014D50FD-18CA-4CE8-951B-35ECAB91CB78', 'Invisibile', false)
         ],
-        periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
+        periodic: false
     };
 
     //Initialize Tabs

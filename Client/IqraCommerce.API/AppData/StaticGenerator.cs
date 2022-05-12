@@ -56,6 +56,7 @@ namespace IqraCommerce.API.AppData
                 categories, // Display
                 data.Data.Data[0], // Notice
                 homeDisplay, // Home Display
+                data.Data.Data[2] // Highlighted Products
             };
 
             var appDataJSON = JsonConvert.SerializeObject(Data);
@@ -78,7 +79,7 @@ namespace IqraCommerce.API.AppData
             get
             {
                 return @"
-                    -- ### Banners ### [0]
+                    -- ### Banners ###
                     SELECT [Id]
                         ,[Rank]
                         ,[Size]
@@ -88,7 +89,7 @@ namespace IqraCommerce.API.AppData
                     WHERE IsDeleted = 0 AND IsVisible = 1 AND TypeOfBanner = " + (int)BannerType.MainBanner + @"
                     ORDER BY [Rank]
 
-                    -- ### Home Page Display With Product ### [2]
+                    -- ### Home Page Display With Product ###
                     SELECT D.[Id]
                     ,D.[Name] [DisplayName]
                     ,P.[Id] [DisplayId]
@@ -110,7 +111,25 @@ namespace IqraCommerce.API.AppData
                             DP.IsDeleted = 0
                     ORDER BY D.[Rank], P.Rank
 
-                
+                    -- ### Highlighted Products ###
+                    SELECT P.[Id] [DisplayId]
+                    ,P.[DisplayName] [ProductDisplayName]
+                    ,P.[PackSize]
+                    ,'PRIMARY IMAGE URL GOES HERE' [ImageURL]
+                    ,P.[CurrentPrice]
+                    ,P.[OriginalPrice]
+                    ,P.[DiscountedPrice]
+                    ,P.[DiscountedPercentage]
+                    ,P.[StockUnit]
+                    ,P.[UnitId] [UnitId]
+					,U.Name [UnitName]
+					,'" + Config.AppSetting(Supdirs.directories, Subdirs.productHighlight, Key.original) + @"' + P.[HighlightedImageURL] [HighlightedImageURL]
+                    FROM [dbo].[Product] P
+                    LEFT JOIN [Unit] U ON U.Id = P.UnitId
+                    WHERE P.[IsHighlighted] = 1 AND 
+						  P.IsDeleted = 0 AND 
+						  P.IsVisible = 1
+                    ORDER BY P.Rank, P.DisplayName            
                 ";
             }
         }

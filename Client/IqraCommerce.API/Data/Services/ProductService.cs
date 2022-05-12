@@ -27,18 +27,6 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<HighlightedProductDto>> GetHighlightedProductsAsync()
-        {
-            ProductParam param = new ProductParam(OrderBy.Rank)
-            {
-                IsHighlighted = true
-            };
-
-            var productsFromrepo = await _repo.GetProductsAsync(param);
-
-            return _mapper.Map<IEnumerable<HighlightedProductDto>>(productsFromrepo);
-        }
-
         public async Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync()
         {
             ProductParam param = new ProductParam(OrderBy.Discount, 10, true);

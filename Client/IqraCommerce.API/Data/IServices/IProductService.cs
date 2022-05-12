@@ -7,7 +7,6 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface IProductService
     {
-         Task<IEnumerable<HighlightedProductDto>> GetHighlightedProductsAsync();
          Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync();
     }
 }
