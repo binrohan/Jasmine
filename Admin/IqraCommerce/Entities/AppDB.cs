@@ -4,6 +4,7 @@ using EBonik.Data.Entities.EmployeeArea;
 using EBonik.Data.Entities.HistoryArea;
 using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UserArea;
+using IqraCommerce.Entities.NotificationArea;
 using IqraCommerce.Entities.OrderArea;
 using IqraCommerce.Entities.ProductArea;
 using IqraCommerce.Entities.PromotionArea;
@@ -102,6 +103,11 @@ namespace IqraCommerce.Entities
         #region EmployeeArea
         public virtual DbSet<Employee> Employee { get; set; } // Used
         #endregion EmployeeArea
+
+        #region NotificationArea
+        public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<CustomerNotification> CustomerNotification { get; set; }
+        #endregion NotificationArea
 
 
 

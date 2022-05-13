@@ -77,4 +77,15 @@ namespace IqraCommerce.API.Data
     {
         Cash, Cashback
     }
+
+    public enum NotificationType
+    {
+        OrderPlacedByAdmin,
+        OrderPlacedByCustomer, 
+        OrderStatusChanged, 
+        OrderCancelledByAdmin, 
+        OrderCancelledByCustomer, 
+        CustomForAll, 
+        CustomForSpecific
+    }
 }

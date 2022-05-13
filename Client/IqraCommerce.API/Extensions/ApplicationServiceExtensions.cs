@@ -32,6 +32,7 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<IAquiredOfferService, AquiredOfferService>();
             services.AddScoped<IPaymentHistoryService, PaymentHistoryService>();
             services.AddScoped<IOrderProductService, OrderProductService>();
+            services.AddScoped<INotificationService, NotificationService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -52,6 +53,8 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<ICashbackRepository, CashbackRepository>();
             services.AddScoped<ICashbackHistoryRepository, CashbackHistoryRepository>();
             services.AddScoped<ICashbackRegisterRepository, CashbackRegisterRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

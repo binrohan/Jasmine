@@ -75,5 +75,15 @@ namespace IqraCommerce.Data
     {
         Cash
     }
+    public enum NotificationType
+    {
+        OrderPlacedByAdmin, 
+        OrderPlacedByCustomer, 
+        OrderStatusChanged, 
+        OrderCancelledByAdmin,
+        OrderCancelledByCustomer,
+        CustomForAll, 
+        CustomForSpecific
+    }
 
 }
