@@ -5,8 +5,8 @@ using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.Data.IRepositories
 {
-    public interface INotificationRepository
+    public interface ICustomerNotificationRepository
     {
-        Task<int> GetUnseenNotificationCountAsync(Guid userId);
+         
     }
 }

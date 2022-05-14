@@ -8,6 +8,6 @@ namespace IqraCommerce.API.Data.IServices
 {
     public interface INotificationService
     {
-        
+        Task<int> MarkNotificationAsSeenAsync(IList<Guid> ids, Guid customerId);
     }
 }

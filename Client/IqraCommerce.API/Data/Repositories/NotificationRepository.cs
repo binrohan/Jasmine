@@ -15,5 +15,13 @@ namespace IqraCommerce.API.Data.Repositories
         {
             _context = context;
         }
+
+        public async Task<int> GetUnseenNotificationCountAsync(Guid customerId)
+        {
+            return await _context
+                        .CustomerNotification
+                        .Where(cn => cn.CustomerId == customerId && !cn.IsRead)
+                        .CountAsync();
+        }
     }
 }

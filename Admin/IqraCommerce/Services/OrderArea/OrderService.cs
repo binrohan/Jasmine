@@ -6,6 +6,7 @@ using IqraCommerce.Entities.OrderArea;
 using IqraCommerce.Entities.PromotionArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.OrderArea;
+using IqraCommerce.Services.UserArea;
 using IqraService.Search;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ namespace IqraCommerce.Services.OrderArea
 {
     public class OrderService : IqraCommerce.Services.AppBaseService<Order>
     {
+        private readonly NotificationService notificationService;
+        public OrderService()
+        {
+            notificationService = new NotificationService();
+        }
         public override string GetName(string name)
         {
             switch (name.ToLower())
@@ -83,8 +89,22 @@ namespace IqraCommerce.Services.OrderArea
                         {
                             customer.Cashback += cashbackRegister.Amount;
                             aquiredOffer.IsRedeemed = true;
+
+                            var cashbackNotification = notificationService.CashbackAquired(orderFromRepo.Id,
+                                                                                           orderFromRepo.OrderNumber,
+                                                                                           cashbackRegister.Amount,
+                                                                                           customer.Cashback);
+
+                            notificationService.AssignCustomer(orderFromRepo.CustomerId, cashbackNotification.Id);
                         }
                     }
+
+                    var notification  = notificationService.StatusChanged(orderFromRepo.Id,
+                                                                          orderFromRepo.OrderNumber,
+                                                                          prevStatus,
+                                                                          orderFromRepo.OrderStatus);
+
+                    var customerNotification = notificationService.AssignCustomer(orderFromRepo.CustomerId, notification.Id);
 
                     GetEntity<OrderHistory>().Add(history);
 

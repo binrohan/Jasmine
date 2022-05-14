@@ -81,11 +81,15 @@ namespace IqraCommerce.API.Data
     public enum NotificationType
     {
         OrderPlacedByAdmin,
-        OrderPlacedByCustomer, 
         OrderStatusChanged, 
         OrderCancelledByAdmin, 
         OrderCancelledByCustomer, 
         CustomForAll, 
         CustomForSpecific
+    }
+
+    public enum NotificationPurpose
+    {
+        Order, Offer, Product
     }
 }

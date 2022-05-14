@@ -12,6 +12,9 @@ namespace IqraCommerce.Entities.NotificationArea
     [Alias("notification")]
     public class Notification : DropDownBaseEntity
     {
-       
+        public NotificationType TypeOfNotification { get; set; }
+        public Guid ReferenceId { get; set; }
+        public string IconURL { get; set; }
+        public string Content { get; set; }
     }
 }
