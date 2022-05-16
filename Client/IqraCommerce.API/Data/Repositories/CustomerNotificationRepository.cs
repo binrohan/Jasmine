@@ -17,6 +17,12 @@ namespace IqraCommerce.API.Data.Repositories
             _context = context;
         }
 
-        
+        public async Task<IEnumerable<CustomerNotification>> GetCustomerNotificationAsync(IList<Guid> ids, Guid customerId)
+        {
+            return await _context
+                            .CustomerNotification
+                            .Where(cn => ids.Contains(cn.NotificationId) && cn.CustomerId == customerId)
+                            .ToListAsync();
+        }
     }
 }

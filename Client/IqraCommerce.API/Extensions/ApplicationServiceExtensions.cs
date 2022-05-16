@@ -54,6 +54,7 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<ICashbackHistoryRepository, CashbackHistoryRepository>();
             services.AddScoped<ICashbackRegisterRepository, CashbackRegisterRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<ICustomerNotificationRepository, CustomerNotificationRepository>();
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -42,14 +42,26 @@ namespace IqraCommerce.API.Controllers
             return Ok(new ApiResponse(200, count));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> MarksAsSeen(IList<Guid> ids)
+        [HttpGet("MarkAsUnseen")]
+        public async Task<IActionResult> MarksAsSeen([FromQuery]IList<Guid> ids)
         {
             var userId = User.RetrieveIdFromPrincipal();
 
-            var unseenCount = _service.MarkNotificationAsSeenAsync(ids, userId);
+            var result = await _service.MarkNotificationAsSeenAsync(ids, userId);
+
+            if(result <= 0) return BadRequest(new ApiResponse(400));
             
             return Ok(new ApiResponse(200, "Successfully marked as seen"));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNotifications([FromQuery]NotificationParamsDto param)
+        {
+            var userId = User.RetrieveIdFromPrincipal();
+
+            var notifications = await _service.GetNotificationsAsync(param, userId);
+
+            return Ok(new ApiResponse(200, notifications));
         }
     }
 }

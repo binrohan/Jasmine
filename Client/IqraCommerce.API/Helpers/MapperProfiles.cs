@@ -189,6 +189,14 @@ namespace IqraCommerce.API.Helpers
             CreateMap<Device, DeviceReturnDto>();
             CreateMap<DeviceSetDto, Device>();
             #endregion Device
+
+            #region Notificaion
+            CreateMap<Notification, NotificationReturnDto>()
+            .ForMember(dest => dest.IsRead,
+                            opt => opt.MapFrom(src => src.CustomerNotifications.IsReadOnly))
+            .ForMember(dest => dest.IconURL,
+                            opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.Notification, Key.original) + src.IconURL));
+            #endregion Notificaion
         }
     }
 }
