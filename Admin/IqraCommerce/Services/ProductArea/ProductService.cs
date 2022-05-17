@@ -152,6 +152,45 @@ namespace IqraCommerce.Services.ProductArea
 
             return new Response(200, productFromRepo, false, "Successed");
         }
+
+        public Response Images(Guid productId)
+        {
+            var images = GetEntity<ProductImage>().Where(pi => pi.ProductId == productId && !pi.IsDeleted).ToList();
+
+            return new Response(200, images, false, "Successed");
+        }
+
+        public Response MarkImageAsPrimary(Guid productId, Guid imageId)
+        {
+            var images = GetEntity<ProductImage>().Where(pi => pi.ProductId == productId && !pi.IsDeleted).ToList();
+
+            foreach (var image in images)
+            {
+                if (image.Id == imageId)
+                    image.IsPrimary = true;
+                else
+                    image.IsPrimary = false;
+            }
+
+            SaveChange();
+
+            return new Response(200, images, false, "Successed");
+        }
+
+        public Response Remove(Guid productId, Guid imageId)
+        {
+            var images = GetEntity<ProductImage>().Where(pi => pi.ProductId == productId && !pi.IsDeleted).ToList();
+
+            foreach (var image in images)
+            {
+                if (image.Id == imageId)
+                    image.IsDeleted = true;
+            }
+
+            SaveChange();
+
+            return new Response(200, images.Where(i => !i.IsDeleted), false, "Successed");
+        }
     }
 
     public class ProductQuery
@@ -194,6 +233,27 @@ namespace IqraCommerce.Services.ProductArea
 	          ,ISNULL(unit.Name, '' ) UnitName
               FROM [dbo].[Product] product
               LEFT JOIN Unit unit ON unit.Id = product.UnitId";
+        }
+
+        public static string GetImages()
+        {
+            return @"[Id]
+                  ,[CreatedAt]
+                  ,[CreatedBy]
+                  ,[UpdatedAt]
+                  ,[UpdatedBy]
+                  ,[IsDeleted]
+                  ,[Remarks]
+                  ,[ActivityId]
+                  ,[Name]
+                  ,[ProductId]
+                  ,[ImageURL]
+                  ,[IsPrimary]
+                  ,[IconURL]
+                  ,[MimeType]
+                  ,[ReferenceId]
+                  ,[Size]
+              FROM [dbo].[ProductImage]";
         }
     }
 }

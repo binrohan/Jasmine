@@ -6,28 +6,28 @@
 <link href="~/css/product-images.css" rel="stylesheet" />
 <script type="module" defer src="~/js/product-area/product-images.js"></script>
 
-<section class="row loader-parent">
-    <h4 class="hide">No Images uploaded yet</h4>
-    <div class="gallery col-md-8 hide">
+<h4 id="no-image-text" class="text-center" style="display: none">No Image uploaded yet</h4>
+<section class="row loader-parent" id="gallery-container" style="display: none">
+    <div class="gallery col-md-8" id="gallery">
         <template id="template--thumbnail">
-            <div class="thumbnail">
+            <div class="thumbnail" data-id="{{elementId}}">
                 <div class="thumbnail__image">
-                    <img src="~/images/p1.jpg" alt="Alternate Text" />
+                    <img src="{{imageURL}}" alt="{{AlterText}}" />
                 </div>
                 <div class="thumbnail__actions">
-                    <button class="btn btn-primary btn-sm disabled" id="primary" style="display: none">Primary</button>
-                    <button class="btn btn-primary btn-sm" id="set-as-primary" style="display: block">Set As Primary</button>
-                    <button class="btn btn-danger btn-sm">Remove</button>
+                    <button class="btn btn-primary btn-sm disabled button-primay" style="display: none">Primary</button>
+                    <button class="btn btn-primary btn-sm button-set-as-primary" style="display: none">Set As Primary</button>
+                    <button class="btn btn-danger btn-sm button-remove-image">Remove</button>
                 </div>
             </div>
         </template>
     </div>
-    <div class="show col-md-4 hide">
+    <div class="show col-md-4">
         <div class="thumbnail">
             <img id="showcase" src="" alt="Product Images" />
         </div>
     </div>
-    <div class="loader" id="loader-gallery">
+    <div class="loader" id="loader-gallery" style="display: none">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
 </section>
@@ -52,7 +52,7 @@
             <button class="btn btn-danger" id="button-cancel">Cancel</button>
         </div>
     </div>
-    <div class="loader" id="upload-loader">
+    <div class="loader" id="upload-loader" style="display: none">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
 </section>

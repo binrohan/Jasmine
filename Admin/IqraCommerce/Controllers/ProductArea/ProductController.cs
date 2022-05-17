@@ -82,5 +82,20 @@ namespace IqraCommerce.Controllers.ProductArea
 
             return Json(___service.UploadImages(fileNames, productImageDto.Id, Guid.Empty, productImageDto.ActivityId));
         }
+
+        public ActionResult GetImages([FromForm] IdDto idDto)
+        {
+            return Json(___service.Images(idDto.Id));
+        }
+
+        public ActionResult MarkImageAsPrimary([FromForm] MarkImageAsPrimaryDto dto)
+        {
+            return Json(___service.MarkImageAsPrimary(dto.ProductId, dto.ImageId));
+        }
+
+        public ActionResult RemoveImage([FromForm] MarkImageAsPrimaryDto dto)
+        {
+            return Json(___service.Remove(dto.ProductId, dto.ImageId));
+        }
     }
 }
