@@ -105,6 +105,28 @@ namespace IqraCommerce.Services.ProductArea
             return new Response(200, null, false, "successed");
         }
 
+        public Response UploadImages(IList<string> filenames, Guid id, Guid userId, Guid activityId)
+        {
+            foreach (var filename in filenames)
+            {
+                ProductImage productImage = new ProductImage
+                {
+                    ActivityId = activityId,
+                    CreatedBy = userId,
+                    CreatedAt = DateTime.Now,
+                    ImageURL = filename,
+                    ProductId = id,
+                };
+
+
+                GetEntity<ProductImage>().Add(productImage);
+            }
+            
+            SaveChange();
+
+            return new Response(200, null, false, "successed");
+        }
+
         public Response Description(Guid productId)
         {
             var productFromRepo = Entity.Find(productId);

@@ -68,6 +68,18 @@ namespace IqraCommerce.Helpers
             return imageName;
         }
 
+        public IList<string> Store(IList<IFormFile> images, string directory)
+        {
+            IList<string> filenames = new List<string>();
+
+            foreach (var image in images)
+            {
+                filenames.Add(Store(image, directory));
+            }
+
+            return filenames;
+        }
+
         public object GetImageUrls(string imageName, string path)
         {
             return new

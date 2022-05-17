@@ -40,6 +40,11 @@ namespace IqraCommerce.Controllers.ProductArea
             return View();
         }
 
+        public ActionResult Images()
+        {
+            return View();
+        }
+
         public ActionResult UploadHighlightedImage([FromForm] ImageUploadDto imageUpload)
         {
             ImageManager imageManager = new ImageManager(_config);
@@ -67,6 +72,15 @@ namespace IqraCommerce.Controllers.ProductArea
         public ActionResult SaveDescription([FromForm] SaveDescriptionDto product)
         {
             return Json(___service.SaveDescription(product));
+        }
+
+        public ActionResult UploadImages([FromForm] ProductImageDto productImageDto)
+        {
+            ImageManager imageManager = new ImageManager(_config);
+
+            var fileNames = imageManager.Store(productImageDto.Images, "Product");
+
+            return Json(___service.UploadImages(fileNames, productImageDto.Id, Guid.Empty, productImageDto.ActivityId));
         }
     }
 }

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "Product Images";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/product-images.css" rel="stylesheet" />
+<script type="module" defer src="~/js/product-area/product-images.js"></script>
+
+<section class="row loader-parent">
+    <h4 class="hide">No Images uploaded yet</h4>
+    <div class="gallery col-md-8 hide">
+        <template id="template--thumbnail">
+            <div class="thumbnail">
+                <div class="thumbnail__image">
+                    <img src="~/images/p1.jpg" alt="Alternate Text" />
+                </div>
+                <div class="thumbnail__actions">
+                    <button class="btn btn-primary btn-sm disabled" id="primary" style="display: none">Primary</button>
+                    <button class="btn btn-primary btn-sm" id="set-as-primary" style="display: block">Set As Primary</button>
+                    <button class="btn btn-danger btn-sm">Remove</button>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="show col-md-4 hide">
+        <div class="thumbnail">
+            <img id="showcase" src="" alt="Product Images" />
+        </div>
+    </div>
+    <div class="loader" id="loader-gallery">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+</section>
+<section class="loader-parent">
+    <h4>Upload Product Images</h4>
+    <div class="previews" id="previews">
+        <template id="template--preview-thumbnail">
+            <div class="thumbnail">
+                <div class="thumbnail__image">
+                    <img src="{{imageURL}}" alt="Alternate Text" />
+                </div>
+                <div class="thumbnail__actions">
+                    <button class="btn btn-danger btn-sm preview-remove"  data-id="{{element-id}}">Remove</button>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="actions">
+        <input type="file" name="name" multiple id="input-images" />
+        <div>
+            <button class="btn btn-primary" id="button-save">Save</button>
+            <button class="btn btn-danger" id="button-cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="loader" id="upload-loader">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+</section>
+
+

@@ -95,27 +95,15 @@ import { url } from '../utils.js';
         });
     }
 
-    const uploadImage = (row) => {
-        Global.Add({
-            name: 'add-product-image',
-            url: '/js/utils/files-uploader.js',
-            save: `/${controller}/UploadImage`,
-            model: row,
-            ItemId: row.Id,
-            onAdd: function () {
-                tabs.gridModel?.Reload();
-            },
-            onDelete: function () {
-
-            }
-        });
+    const gotoImages = (row) => {
+        window.open(`/Product/Images?id=${row.Id}`, "_blank");
     }
 
     function imageBound(td) {
         td.html(`<img src="${url(this.ImageURL)}" style="max-height: 80px; max-width: 100%;" />`);
     }
 
-    const gotProductEditor = (row) => {
+    const gotoProductEditor = (row) => {
         window.open(`/Product/Description?id=${row.Id}`, "_blank");
     }
 
@@ -160,10 +148,10 @@ import { url } from '../utils.js';
                     click: edit,
                     html: editBtn()
                 }, {
-                    click: uploadImage,
+                    click: gotoImages,
                     html: imageBtn()
                 }, {
-                    click: gotProductEditor,
+                    click: gotoProductEditor,
                     html: fileBtn("Edit Product Description")
                 }],
             onDataBinding: () => { },
