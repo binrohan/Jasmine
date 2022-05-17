@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using IqraCommerce.API.Constants;
 using IqraCommerce.API.Data;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Category;
 using IqraCommerce.API.Entities;
+using IqraCommerce.API.Helpers;
 
 namespace IqraCommerce.API.Extensions
 {
@@ -108,6 +110,15 @@ namespace IqraCommerce.API.Extensions
             }
 
             return orderProducts;
+        }
+
+        public static string PrimaryImageURL(this IList<ProductImage> images)
+        {
+            if(images.Count <= 0 ) return null;
+
+            var image = images.FirstOrDefault(i => i.IsPrimary) ?? images[0];
+
+            return Config.AppSetting(Supdirs.directories, Subdirs.productHighlight, Key.small) + image.ImageURL;
         }
     }
 }

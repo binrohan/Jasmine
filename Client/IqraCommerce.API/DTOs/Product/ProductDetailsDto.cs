@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using IqraCommerce.API.DTOs.Category;
+using IqraCommerce.API.Entities;
 
 namespace IqraCommerce.API.DTOs
 {
@@ -31,5 +32,6 @@ namespace IqraCommerce.API.DTOs
 
         public UnitReturnDto Unit { get; set; }
         public IEnumerable<CategoryShortDto> Categories { get; set; }
+        public IEnumerable<ProductImageDto> Images  { get; set; }
     }
 }

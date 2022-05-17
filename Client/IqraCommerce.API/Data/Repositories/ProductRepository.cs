@@ -23,6 +23,7 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<Product> GetProductAsync(Guid productId)
         {
             return await _context.Product.Include(p => p.Unit)
+                                         .Include(p => p.Images.Where(i => !i.IsDeleted))
                                          .FirstOrDefaultAsync(p => !p.IsDeleted
                                                                     && p.IsVisible
                                                                     && p.Id == productId);
@@ -32,6 +33,7 @@ namespace IqraCommerce.API.Data.Repositories
         public async Task<IEnumerable<Product>> GetProductsAsync(ProductParam param)
         {
             var query = _context.Product
+                                 .Include(p => p.Images.Where(i => !i.IsDeleted))
                                  .Where(p => p.IsDeleted == param.IsDeleted
                                              && p.IsVisible == param.IsVisible)
                                  .AsQueryable();
