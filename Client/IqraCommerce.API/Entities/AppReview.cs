@@ -8,6 +8,8 @@ namespace IqraCommerce.API.Entities
     {
         public string Content { get; set; }
         public ReviewState StateOfReview { get; set; }
+        public Guid CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }
 

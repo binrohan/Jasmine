@@ -14,5 +14,6 @@ namespace IqraCommerce.Entities.Miscellaneous
     {
         public string Content { get; set; }
         public ReviewState StateOfReview { get; set; }
+        public Guid CustomerId { get; set; }
     }
 }

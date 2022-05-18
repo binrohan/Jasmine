@@ -6,6 +6,8 @@ using IqraCommerce.API.Data.IRepositories;
 using IqraCommerce.API.Data.IServices;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.Entities;
+using IqraCommerce.API.Helpers;
+using IqraCommerce.API.Params;
 
 namespace IqraCommerce.API.Data.Services
 {
@@ -20,6 +22,22 @@ namespace IqraCommerce.API.Data.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _repo = repo;
+        }
+
+        public async Task<Pagination<AppReviewReturnDto>> GetAppReivewsAsync(AppReviewParamDto paramDto)
+        {
+            AppReviewParam param = new AppReviewParam(paramDto.CustomerId, paramDto.Take, paramDto.Index);
+
+            var reviewCount = await _repo.CountAsync(param);
+
+            var reviews = await _repo.GetAppReviewsAsync(param);
+
+            var reviewsToReturn = _mapper.Map<IReadOnlyList<AppReviewReturnDto>>(reviews);
+
+            return new Pagination<AppReviewReturnDto>(param.Index,
+                                                param.Take,
+                                                reviewCount,
+                                                reviewsToReturn);
         }
     }
 }

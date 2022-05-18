@@ -31,7 +31,7 @@ namespace IqraCommerce.API.Helpers
             return statusCode switch
             {
                 200 => "Success",
-                201 => "Creat Success",
+                201 => "Post Success",
                 204 => "Update Success",
                 205 => "Patch Success",
                 400 => "Bad Request",

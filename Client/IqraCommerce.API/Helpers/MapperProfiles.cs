@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using IqraCommerce.API.Constants;
+using IqraCommerce.API.Data;
 using IqraCommerce.API.DTOs;
 using IqraCommerce.API.DTOs.Banner;
 using IqraCommerce.API.DTOs.Category;
@@ -207,7 +208,14 @@ namespace IqraCommerce.API.Helpers
                             opt => opt.MapFrom(src => Config.AppSetting(Supdirs.directories, Subdirs.Notification, Key.original) + src.IconURL));
             #endregion Notificaion
 
-
+            #region AppReview
+            CreateMap<AppReviewCreateDto, AppReview>()
+            .ForMember(dest => dest.StateOfReview,
+                            opt => opt.MapFrom(src => ReviewState.Pending));
+            CreateMap<AppReview, AppReviewReturnDto>()
+            .ForMember(dest => dest.CustomerName,
+                            opt => opt.MapFrom(src => src.Customer.Name ?? "Customer" ));
+            #endregion AppReview
         }
     }
 }

@@ -160,9 +160,9 @@ namespace IqraCommerce.API.Data.Services
             var ordersToReturn = _mapper.Map<IReadOnlyList<OrderShortDto>>(ordersFromRepo);
 
             return new Pagination<OrderShortDto>(param.Index,
-                                                                param.Take,
-                                                                totalOrders,
-                                                                ordersToReturn);
+                                                param.Take,
+                                                totalOrders,
+                                                ordersToReturn);
         }
 
         private async Task<string> GenerateOrderNumberAsync()
