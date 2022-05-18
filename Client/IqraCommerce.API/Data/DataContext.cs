@@ -46,6 +46,8 @@ namespace IqraCommerce.API.Data
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; } // Used
         public virtual DbSet<Notification> Notification { get; set; } // Used
         public virtual DbSet<CustomerNotification> CustomerNotification { get; set; } // Used
+        public virtual DbSet<AppReview> AppReview { get; set; } 
+        public virtual DbSet<Review> Review { get; set; } 
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

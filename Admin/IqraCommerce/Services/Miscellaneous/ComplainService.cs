@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IqraCommerce.Services.ContactArea
+namespace IqraCommerce.Services.Misi
 {
     public class ComplainService : IqraCommerce.Services.AppBaseService<Complain>
     {

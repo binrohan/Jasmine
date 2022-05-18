@@ -4,6 +4,7 @@ using EBonik.Data.Entities.EmployeeArea;
 using EBonik.Data.Entities.HistoryArea;
 using EBonik.Data.Entities.UI;
 using EBonik.Data.Entities.UserArea;
+using IqraCommerce.Entities.Miscellaneous;
 using IqraCommerce.Entities.NotificationArea;
 using IqraCommerce.Entities.OrderArea;
 using IqraCommerce.Entities.ProductArea;
@@ -45,6 +46,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<ProductCategory> ProductCategory { get; set; } // Used
         public virtual DbSet<ProductImage> ProductImage { get; set; } // Used
         public virtual DbSet<Festival> Festival { get; set; } // Used
+        public virtual DbSet<Review> Review { get; set; } // Used
         public virtual DbSet<FestivalProduct> FestivalProduct { get; set; } // Used
         #endregion
 
@@ -52,6 +54,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Contact> Contact { get; set; } // Used
         public virtual DbSet<Register> Register { get; set; } // Used
         public virtual DbSet<Complain> Complain { get; set; } // Used
+        public virtual DbSet<AppReview> AppReview { get; set; } // Used
         #endregion
 
         #region UI

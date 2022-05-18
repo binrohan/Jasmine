@@ -33,6 +33,8 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<IPaymentHistoryService, PaymentHistoryService>();
             services.AddScoped<IOrderProductService, OrderProductService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IAppReviewService, AppReviewService>();
+            services.AddScoped<IReviewService, ReviewService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -55,13 +57,10 @@ namespace IqraCommerce.API.Extensions
             services.AddScoped<ICashbackRegisterRepository, CashbackRegisterRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<ICustomerNotificationRepository, CustomerNotificationRepository>();
-
+            services.AddScoped<IAppReviewRepository, AppReviewRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            // services.AddScoped<IProductRepository, ProductRepository>();
-            // services.AddScoped<IBrandRepository, BrandRepository>();
-            // services.AddScoped<IBasketRepository, BasketRepository>();
 
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 

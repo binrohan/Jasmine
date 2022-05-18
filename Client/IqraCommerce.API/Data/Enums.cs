@@ -73,6 +73,7 @@ namespace IqraCommerce.API.Data
     {
         Pending, Added, Cancelled, Null
     }
+    
     public enum PaymentMedium
     {
         Cash, Cashback
@@ -88,8 +89,8 @@ namespace IqraCommerce.API.Data
         CustomForSpecific
     }
 
-    public enum NotificationPurpose
+    public enum ReviewState
     {
-        Order, Offer, Product
+        Pending, Accepted, Denied
     }
 }

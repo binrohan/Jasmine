@@ -93,4 +93,9 @@ namespace IqraCommerce.Data
         Order, Offer, Product
     }
 
+    public enum ReviewState
+    {
+        Pending, Accepted, Denied
+    }
+
 }
