@@ -51,10 +51,10 @@ namespace IqraCommerce.API.Controllers.ProductArea
             return Ok(new ApiResponse(200, productToReturn));
         }
 
-        [HttpGet("TopDiscounted")]
-        public async Task<IActionResult> GetTopDiscountedProducts()
+        [HttpGet("Discounted")]
+        public async Task<IActionResult> GetTopDiscountedProducts([FromQuery]ProductParamDto param)
         {
-            var products = await _service.GetTopDiscountedProductsAsync();
+            var products = await _service.GetDiscountedProductsAsync(param);
 
             return Ok(new ApiResponse(200, products));
         }

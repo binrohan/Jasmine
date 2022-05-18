@@ -30,15 +30,59 @@ namespace IqraCommerce.API.Data.Repositories
 
         }
 
+        public async Task<int> CountAsync(ProductParam param)
+        {
+            return await ParamExvaluator(param).CountAsync();
+        }
+
         public async Task<IEnumerable<Product>> GetProductsAsync(ProductParam param)
         {
-            var query = _context.Product
-                                 .Include(p => p.Images.Where(i => !i.IsDeleted))
-                                 .Where(p => p.IsDeleted == param.IsDeleted
-                                             && p.IsVisible == param.IsVisible)
-                                 .AsQueryable();
-            
-            query = param.IsHighlighted is null ? query : query.Where(p => p.IsHighlighted == param.IsHighlighted);
+            return await ParamExvaluator(param).Skip(param.Skip).Take(param.Take).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId)
+        {
+            return await _context.ProductCategory
+                                 .Where(pc => !pc.IsDeleted && pc.CategoryId == categoryId)
+                                 .Join(_context.Product
+                                               .Where(p => !p.IsDeleted && p.IsVisible),
+                                      pc => pc.ProductId,
+                                      p => p.Id,
+                                      (pc, p) => p)
+                                 .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoriesAsync(int take, IList<Guid> listOfCategoriesId)
+        {
+            return await _context.ProductCategory
+                                .Where(pc => !pc.IsDeleted && listOfCategoriesId.Contains(pc.CategoryId))
+                                .Join(_context.Product
+                                              .Where(p => !p.IsDeleted && p.IsVisible),
+                                     pc => pc.ProductId,
+                                     p => p.Id,
+                                     (pc, p) => p)
+                                .Take(take)
+                                .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<Guid> ListOfProductId)
+        {
+            return await _context.Product
+                                 .Where(p => !p.IsDeleted
+                                             && p.IsVisible
+                                             && ListOfProductId.Contains(p.Id))
+                                 .OrderBy(p => p.CreatedAt)
+                                 .ToArrayAsync();
+        }
+
+
+        private IQueryable<Product> ParamExvaluator(ProductParam param)
+        {
+            var query = _context
+                            .Product
+                            .Where(p => p.IsDeleted == param.IsDeleted && p.IsVisible == param.IsVisible)
+                            .Include(p => p.Images.Where(i => !i.IsDeleted))
+                            .AsQueryable();
 
             switch (param.OrderBy)
             {
@@ -73,60 +117,7 @@ namespace IqraCommerce.API.Data.Repositories
                         break;
             }
 
-            var products = await query.Take(param.Take).ToListAsync();
-
-            return products;
-        }
-
-        public async Task<IEnumerable<Product>> GetHighlightedProductsAsync()
-        {
-            return await _context.Product
-                                 .Where(p => !p.IsDeleted && p.IsVisible && p.IsHighlighted)
-                                 .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId)
-        {
-            return await _context.ProductCategory
-                                 .Where(pc => !pc.IsDeleted && pc.CategoryId == categoryId)
-                                 .Join(_context.Product
-                                               .Where(p => !p.IsDeleted && p.IsVisible),
-                                      pc => pc.ProductId,
-                                      p => p.Id,
-                                      (pc, p) => p)
-                                 .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsByCategoriesAsync(int take, IList<Guid> listOfCategoriesId)
-        {
-            return await _context.ProductCategory
-                                .Where(pc => !pc.IsDeleted && listOfCategoriesId.Contains(pc.CategoryId))
-                                .Join(_context.Product
-                                              .Where(p => !p.IsDeleted && p.IsVisible),
-                                     pc => pc.ProductId,
-                                     p => p.Id,
-                                     (pc, p) => p)
-                                .Take(take)
-                                .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<Product>> GetLatestProducts(int take)
-        {
-            return await _context.Product
-                                 .Where(p => !p.IsDeleted && p.IsVisible)
-                                 .OrderBy(p => p.CreatedAt)
-                                 .Take(take)
-                                 .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<Guid> ListOfProductId)
-        {
-            return await _context.Product
-                                 .Where(p => !p.IsDeleted
-                                             && p.IsVisible
-                                             && ListOfProductId.Contains(p.Id))
-                                 .OrderBy(p => p.CreatedAt)
-                                 .ToArrayAsync();
-        }
+            return query;
+        } 
     }
 }

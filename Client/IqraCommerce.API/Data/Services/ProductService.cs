@@ -45,13 +45,20 @@ namespace IqraCommerce.API.Data.Services
             return _mapper.Map<IEnumerable<ProductShortDto>>(uniqueProducts);
         }
 
-        public async Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync()
+        public async Task<Pagination<ProductShortDto>> GetDiscountedProductsAsync(ProductParamDto paramDto)
         {
-            ProductParam param = new ProductParam(OrderBy.Discount, 10, true);
+            ProductParam param = new ProductParam(OrderBy.Discount, paramDto.Take, paramDto.Index, true);
 
             var productsFromrepo = await _repo.GetProductsAsync(param);
 
-            return _mapper.Map<IEnumerable<ProductShortDto>>(productsFromrepo);
+            var productsCount = await _repo.CountAsync(param);
+
+            var productsToReturn = _mapper.Map<IReadOnlyList<ProductShortDto>>(productsFromrepo);
+
+            return new Pagination<ProductShortDto>(param.Index,
+                                                    param.Take,
+                                                    productsCount,
+                                                    productsToReturn);
         }
     }
 }
