@@ -74,7 +74,8 @@ namespace IqraCommerce.API.Controllers.Miscellaneous
         [HttpGet]
         public async Task<IActionResult> GetReviews([FromQuery]AppReviewParamDto param)
         {
-            param.CustomerId = User.RetrieveIdFromPrincipal();
+            if(User.Identity.IsAuthenticated)
+                param.CustomerId = User.RetrieveIdFromPrincipal();
 
             var reviews = await _service.GetAppReivewsAsync(param);
 

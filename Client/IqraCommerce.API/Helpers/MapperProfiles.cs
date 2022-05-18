@@ -216,6 +216,15 @@ namespace IqraCommerce.API.Helpers
             .ForMember(dest => dest.CustomerName,
                             opt => opt.MapFrom(src => src.Customer.Name ?? "Customer" ));
             #endregion AppReview
+
+            #region Review
+            CreateMap<ReviewCreateDto, Review>()
+            .ForMember(dest => dest.StateOfReview,
+                            opt => opt.MapFrom(src => ReviewState.Pending));
+            CreateMap<Review, ReviewReturnDto>()
+            .ForMember(dest => dest.CustomerName,
+                            opt => opt.MapFrom(src => src.Customer.Name ?? "Customer" ));
+            #endregion Review
         }
     }
 }

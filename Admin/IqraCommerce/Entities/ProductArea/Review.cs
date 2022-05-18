@@ -12,5 +12,6 @@ namespace IqraCommerce.Entities.ProductArea
         public string Content { get; set; }
         public Guid ProductId { get; set; }
         public ReviewState StateOfReview { get; set; }
+        public Guid CustomerId { get; set; }
     }
 }
