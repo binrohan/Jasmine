@@ -33,5 +33,6 @@ namespace IqraCommerce.API.DTOs
         public UnitReturnDto Unit { get; set; }
         public IEnumerable<CategoryShortDto> Categories { get; set; }
         public IEnumerable<ProductImageDto> Images  { get; set; }
+        public IEnumerable<ProductShortDto> RelatedProducts { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using IqraCommerce.API.Entities;
 using IqraCommerce.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using IqraCommerce.API.Data.IServices;
+using System.Linq;
 
 namespace IqraCommerce.API.Controllers.ProductArea
 {
@@ -45,6 +46,8 @@ namespace IqraCommerce.API.Controllers.ProductArea
             var productToReturn = _mapper.Map<ProductDetailsDto>(productFromRepo);
             productToReturn.Categories = _mapper.Map<IEnumerable<CategoryShortDto>>(categoriesFromRepo);
 
+            productToReturn.RelatedProducts = await _service.GetRelatedProductsAsync(productToReturn);
+            
             return Ok(new ApiResponse(200, productToReturn));
         }
 

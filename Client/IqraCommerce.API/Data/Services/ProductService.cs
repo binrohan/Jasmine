@@ -27,6 +27,24 @@ namespace IqraCommerce.API.Data.Services
             _repo = repo;
         }
 
+        public async Task<IEnumerable<ProductShortDto>> GetRelatedProductsAsync(ProductDetailsDto product)
+        {
+            var categories = product.Categories;
+            var relatedProducts = new List<Product>();
+
+            foreach (var category in categories)
+            {
+                var products = await _repo.GetProductsByCategoryAsync(category.Id);
+                relatedProducts.AddRange(products);
+
+                if(relatedProducts.Count >= 10)
+                    break;
+            }
+
+            var uniqueProducts  = relatedProducts.Select(p => p).Distinct().Where(p => p.Id != product.Id);
+            return _mapper.Map<IEnumerable<ProductShortDto>>(uniqueProducts);
+        }
+
         public async Task<IEnumerable<ProductShortDto>> GetTopDiscountedProductsAsync()
         {
             ProductParam param = new ProductParam(OrderBy.Discount, 10, true);
