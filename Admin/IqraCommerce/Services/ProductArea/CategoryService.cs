@@ -100,6 +100,39 @@ namespace IqraCommerce.Services.ProductArea
             return new Response(201, categoryToCreate, false, "Created");
         }
 
+        public Response Delete(Guid id)
+        {
+            var categoryFromRepo = Entity.Find(id);
+
+            if (categoryFromRepo is null) return new Response(404, null, true, "Category Not Found");
+
+            categoryFromRepo.IsDeleted = true;
+
+            UpdateChildrenAfterDelete(categoryFromRepo);
+
+            SaveChange();
+
+            return new Response(204, null, false, "Deleted");
+        }
+
+        private void UpdateChildrenAfterDelete(Category parentCategory)
+        {
+            var categories = Entity.Where(c => c.ParentId == parentCategory.Id).ToList();
+            var superCategory = Entity.Find(parentCategory.ParentId);
+
+            foreach (var category in categories)
+            {
+                category.ParentId = parentCategory.ParentId;
+
+                category.Hierarchy = superCategory.Hierarchy + ">>" + category.Name;
+                category.Level = superCategory.Level + "/" + category.Rank.ToString();
+                category.Depth = superCategory.Depth + 1;
+
+                UpdateChildrenAfterDelete(category);
+            }
+
+        }
+
         public Response Update(CategoryModel categoryToUpdate, Guid userId)
         {
             var categoryFromRepo = Entity.Find(categoryToUpdate.Id);
@@ -108,7 +141,6 @@ namespace IqraCommerce.Services.ProductArea
             categoryFromRepo.Name = categoryToUpdate.Name;
             categoryFromRepo.Remarks = categoryToUpdate.Remarks;
             categoryFromRepo.IsVisible = categoryToUpdate.IsVisible;
-            categoryFromRepo.IsVisibleInHome = categoryToUpdate.IsVisibleInHome;
 
             if (!categoryFromRepo.IsRoot && categoryToUpdate.ParentId == Guid.Empty)
                 return new Response(-406, null, true, "Non root category without parent not acceptable");
@@ -122,9 +154,11 @@ namespace IqraCommerce.Services.ProductArea
                 if (parentCategory is null) return new Response(404, null, true, "Parent category not found");
 
                 categoryFromRepo.Level = parentCategory.Level + "/" + categoryToUpdate.Rank.ToString();
-                categoryFromRepo.ParentName = parentCategory.Name;
+                categoryFromRepo.Hierarchy = parentCategory.Hierarchy + ">>" + categoryToUpdate.Name;
                 categoryFromRepo.ParentId = parentCategory.ParentId;
                 categoryFromRepo.Depth = parentCategory.Depth + 1;
+
+                UpdateChildren(categoryFromRepo);
             }
             else
             {
@@ -136,6 +170,20 @@ namespace IqraCommerce.Services.ProductArea
             SaveChange();
 
             return new Response(204, categoryToUpdate, false, "Updated");
+        }
+
+        private void UpdateChildren(Category parentCategory)
+        {
+            var categories = Entity.Where(c => c.ParentId == parentCategory.Id).ToList();
+
+            foreach (var category in categories)
+            {
+                category.Hierarchy = parentCategory.Hierarchy + ">>" + category.Name;
+                category.Level = parentCategory.Level + "/" + category.Rank.ToString();
+                category.Depth = parentCategory.Depth + 1;
+
+                UpdateChildren(category);
+            }
         }
     }
 

@@ -34,5 +34,10 @@ namespace IqraCommerce.Controllers.ProductArea
         {
             return Json(___service.GetExceptByProduct(page, productId));
         }
+
+        public override JsonResult Remove([FromBody] DeleteDto deleteDto)
+        {
+            return Json(___service.Delete(deleteDto.Id));
+        }
     }
 }
